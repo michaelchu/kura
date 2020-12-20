@@ -1,0 +1,7 @@
+<div class="flex-fill d-flex flex-column justify-content-center">
+  <div class="container-tight py-6">
+    <%= render "partials/_form.html", Map.put(assigns, :action, Routes.user_registration_path(@conn, :create)) %>
+    <div class="text-center text-muted">
+        Already have account? <a href="<%= Routes.user_session_path(@conn, :create) %>" tabindex="-1">Sign in</a>
+    </div>
+</div>

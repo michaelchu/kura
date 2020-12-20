@@ -1,0 +1,22 @@
+<header class="navbar navbar-expand-md navbar-light">
+    <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="<%= Routes.page_url(@conn, :index) %>" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
+            <img src="/images/logo.png" alt="Tabler" class="navbar-brand-image">
+        </a>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+                <%= if is_public_page?(@conn) do %>
+                    <%= render "partials/_public_nav.html", conn: @conn %>
+                <% else %>
+                <ul class="navbar-nav">
+                    <%= render "partials/_private_nav.html", conn: @conn %>
+                </ul>
+                <% end %>
+            </div>
+        </div>
+        <%= render "partials/_user_dropdown.html", conn: @conn %>
+    </div>
+</header>

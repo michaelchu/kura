@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Rentsy - Apartments and Houses for Rent</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <meta name="msapplication-TileColor" content="#206bc4"/>
+    <meta name="theme-color" content="#206bc4"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="robots" content="noindex,nofollow,noarchive"/>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <style>
+      body {
+      	display: none;
+      }
+    </style>
+  </head>
+   <body class="antialiased">
+    <div class="page">
+      <%= if not is_session_page?(@conn) do %>
+        <%= render "partials/_header.html", conn: @conn %>
+      <% end %>
+      <div class="content">
+        <%= @inner_content %>
+        <%= if not is_session_page?(@conn) do %>
+          <%= render "partials/_footer.html" %>
+        <% end %>
+      </div>
+    </div>
+    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script>
+      document.body.style.display = "block"
+    </script>
+    </div>
+  </body>
+</html>

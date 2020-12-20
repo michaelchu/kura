@@ -1,0 +1,21 @@
+ <%= if @conn.assigns.current_user do %>
+    <%= if is_public_page?(@conn) do %>
+        <div class="navbar-nav flex-row order-md-last">
+            <li class="nav-item">
+                <span class="nav-link-title">
+                    <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "btn btn-cyan btn-block" %>
+                </span>
+            </li>
+        </div>
+    <% else %>
+        <%= render "partials/_dropdown.html", conn: @conn %>
+    <% end %>
+<% else %>
+    <div class="navbar-nav order-md-last">
+        <li class="nav-item">
+            <span class="nav-link-title">
+                <%= link "Sign in / Register", to: Routes.user_session_path(@conn, :new), class: "btn btn-cyan btn-block" %>
+            </span>
+        </li>
+    </div>
+<% end %>

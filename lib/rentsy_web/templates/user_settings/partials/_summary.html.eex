@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">My Profile</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-auto">
+                <span class="avatar avatar-lg" style="background-image: url(static/avatars/004f.jpg)">
+                <span class="badge bg-green"></span></span>
+            </div>
+            <div class="col">
+                <div class="mb-2">
+                    <h2><%= @current_user.first_name %> <%= @current_user.last_name %></h3>
+                    <%= if @current_user.type == "business" do %>
+                        <p class="text-muted"><%= @current_user.title %> at <%= @current_user.firm_name %></p>
+                    <% else %>
+                        <p class="text-muted">Individual Expert</p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<%= form_for @changeset, @action, [class: "card card-md"], fn f -> %>
+  <div class="card-body">
+    <h1 class="mb-2 text-center">Create a free account</h1>
+
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong!</p>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= label f, :email, class: "form-label" %>
+      <%= email_input f, :email, required: true, placeholder: "Email", class: "form-control" %>
+      <%= error_tag f, :email %>
+    </div>
+    <div class="mb-3">
+        <%= label f, :password, class: "form-label" %>
+        <%= password_input f, :password, required: true, placeholder: "Password", class: "form-control" %>
+        <%= error_tag f, :password %>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Confirm Password</label>
+      <div class="input-group input-group-flat">
+        <%= password_input f, :password_confirmation, required: true, placeholder: "Confirm Password", class: "form-control" %>
+      </div>
+        <%= error_tag f, :password_confirmation %>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row rows-sm mb-3">
+      <div class="col-sm-6">
+        <%= label f, :first_name, class: "form-label" %>
+        <%= text_input f, :first_name, class: "form-control", placeholder: "Required..." %>
+        <%= error_tag f, :first_name %>
+      </div>
+      <div class="col-sm-6">
+        <%= label f, :last_name, class: "form-label" %>
+        <%= text_input f, :last_name, class: "form-control", placeholder: "Required..." %>
+        <%= error_tag f, :last_name %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">What brings you to Rentsy?</label>
+      <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
+        <label class="form-selectgroup-item flex-fill">
+            <%= radio_button f, :type, "individual", class: "form-selectgroup-input", checked: true %>
+            <div class="form-selectgroup-label d-flex align-items-center p-3">
+                <div class="mr-3">
+                    <span class="form-selectgroup-check"></span>
+                </div>
+                <div>
+                    I want to find housing
+                </div>
+            </div>
+        </label>
+        <label class="form-selectgroup-item flex-fill">
+          <%= radio_button f, :type, "landlord", class: "form-selectgroup-input" %>
+          <div class="form-selectgroup-label d-flex align-items-center p-3">
+            <div class="mr-3">
+              <span class="form-selectgroup-check"></span>
+            </div>
+            <div>
+                I want to list and manage my properties
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-check">
+        <input type="checkbox" class="form-check-input"/>
+        <span class="form-check-label">Agree the <a href="./terms-of-service.html" tabindex="-1">terms and policy</a>.</span>
+      </label>
+    </div>
+    <div class="form-footer">
+      <%= submit "Create new account", class: "btn btn-cyan btn-block"%>
+    </div>
+  </div>
+<% end %>

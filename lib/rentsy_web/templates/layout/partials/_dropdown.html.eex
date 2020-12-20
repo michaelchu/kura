@@ -1,0 +1,17 @@
+<div class="navbar-nav flex-row order-md-last">
+    <div class="nav-item dropdown">
+        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
+            <div class="d-none d-xl-block pl-2">
+                <div><%= get_full_name(@conn) %></div>
+                <div class="mt-1 small text-muted"><%= get_user_label(@conn) %></div>
+            </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="<%= Routes.user_settings_path(@conn, :edit) %>">
+                Settings
+            </a>
+            <div class="dropdown-divider"></div>
+            <%= link "Logout", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
+        </div>
+    </div>
+</div>

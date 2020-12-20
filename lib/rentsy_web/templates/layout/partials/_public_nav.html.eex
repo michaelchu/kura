@@ -1,0 +1,28 @@
+<ul class="navbar-nav">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" >
+            <span class="nav-link-title">
+                Solutions
+            </span>
+        </a>
+        <ul class="dropdown-menu">
+            <li >
+                <a class="dropdown-item" href="./invoice.html" >
+                Platform Overview
+                </a>
+            </li>
+            <li >
+                <a class="dropdown-item" href="./blog.html" >
+                Expert Marketplace
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link" href="./#" >
+            <span class="nav-link-title">
+                Pricing
+            </span>
+        </a>
+    </li>
+</ul>

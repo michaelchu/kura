@@ -1,0 +1,15 @@
+<div class="container-xl">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="row">
+                <div class="col-lg-4">
+                    <%= render "partials/_summary.html", current_user: @current_user %>
+                </div>
+                <div class="col-lg-8">
+                    <%= render "partials/_email_form.html", conn: @conn, email_changeset: @email_changeset %>
+                    <%= render "partials/_password_form.html", conn: @conn, password_changeset: @password_changeset %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
