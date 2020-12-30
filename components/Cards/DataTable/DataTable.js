@@ -1,6 +1,5 @@
 import DataTableBody from "./DataTableBody";
 import DataTableHeader from "./DataTableHeader";
-import DataTableControls from "./DataTableControls";
 import DataTableFooter from "./DataTableFooter";
 
 const DataTable = ({ data, title, headers }) => (
