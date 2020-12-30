@@ -1,3 +1,5 @@
+const accounting = require("accounting");
+
 const DataTableBody = ({ data, headers }) => (
   <tbody>
     {data &&
@@ -5,8 +7,10 @@ const DataTableBody = ({ data, headers }) => (
         row = flattenObject(row);
         return (
           <tr>
-            {headers.map((heading) => (
-              <td>{row[heading]}</td>
+            {Object.entries(headers).map(([key, value]) => (
+              <td>
+                {value.format ? accounting.formatMoney(row[key]) : row[key]}
+              </td>
             ))}
             <td class="text-end">
               <span class="dropdown">

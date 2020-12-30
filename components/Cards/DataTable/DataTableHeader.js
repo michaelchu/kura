@@ -4,8 +4,8 @@ const DataTableHeader = ({ headers }) => {
   return (
     <thead>
       <tr>
-        {headers.map((heading) => (
-          <th>{humanizeString(heading)}</th>
+        {Object.entries(headers).map(([_, value]) => (
+          <th>{value.label}</th>
         ))}
         <th></th>
       </tr>

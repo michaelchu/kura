@@ -16,3 +16,29 @@ SELECT DATE_TRUNC('year', trade_date)             as year,
 from transactions
 WHERE option_type is not null
 GROUP BY underlying_symbol, DATE_TRUNC('year', trade_date), account_id;
+
+CREATE OR REPLACE VIEW transactions_by_account as
+SELECT a.name                       as Account,
+       action,
+       commission,
+       expiration,
+       option_type,
+       quantity,
+       strike,
+       price,
+       trade_date,
+       underlying_symbol            as "symbol",
+       CASE
+           WHEN option_type IS NOT NULL THEN
+               price * quantity * 100
+           ELSE
+               price * quantity end as amount,
+       CASE
+           WHEN option_type is not null THEN
+               price * quantity * 100 + commission
+           ELSE
+               price * quantity + commission
+           END                      as amount_with_comm
+from transactions
+         INNER JOIN accounts a on transactions.account_id = a.id
+ORDER BY trade_date DESC;
