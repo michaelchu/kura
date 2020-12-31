@@ -4,7 +4,7 @@ import withData from "../config";
 
 import DataTable from "../components/Cards/DataTable/DataTable";
 import Layout from "../components/layout";
-import TransModal from "../components/Modals/TransModal"
+import TransModal from "../components/Modals/TransModal";
 
 const query = gql`
   query {
@@ -121,7 +121,7 @@ const Transactions = ({ transactions }) => {
           );
         }}
       </Query>
-      <TransModal/>
+      <TransModal />
     </Layout>
   );
 };

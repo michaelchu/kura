@@ -4,7 +4,6 @@ const DataTableBody = ({ data, headers }) => (
   <tbody>
     {data &&
       data.map((row) => {
-        row = flattenObject(row);
         return (
           <tr>
             {Object.entries(headers).map(([key, value]) => (
@@ -36,19 +35,5 @@ const DataTableBody = ({ data, headers }) => (
       })}
   </tbody>
 );
-
-export const flattenObject = (obj) => {
-  const flattened = {};
-
-  Object.keys(obj).forEach((key) => {
-    if (typeof obj[key] === "object" && obj[key] !== null) {
-      Object.assign(flattened, flattenObject(obj[key]));
-    } else {
-      flattened[key] = obj[key];
-    }
-  });
-
-  return flattened;
-};
 
 export default DataTableBody;
