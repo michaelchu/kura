@@ -4,7 +4,8 @@ import withData from "../config";
 
 import DataTable from "../components/Cards/DataTable/DataTable";
 import Layout from "../components/layout";
-import TransModal from "../components/Modals/TransModal";
+import AddTransModal from "../components/Modals/AddTransModal";
+import EditTransModal from "../components/Modals/EditTransModal";
 
 const query = gql`
   query {
@@ -53,7 +54,7 @@ const Transactions = ({ transactions }) => {
                 href="#"
                 class="btn btn-primary d-none d-sm-inline-block"
                 data-bs-toggle="modal"
-                data-bs-target="#modal-report"
+                data-bs-target="#modal-new-trans"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +122,8 @@ const Transactions = ({ transactions }) => {
           );
         }}
       </Query>
-      <TransModal />
+      <AddTransModal />
+      <EditTransModal />
     </Layout>
   );
 };

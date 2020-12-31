@@ -1,7 +1,7 @@
-const TransModal = () => (
+const AddTransModal = () => (
   <div
     class="modal modal-blur fade"
-    id="modal-report"
+    id="modal-new-trans"
     tabindex="-1"
     role="dialog"
     aria-hidden="true"
@@ -35,4 +35,4 @@ const TransModal = () => (
   </div>
 );
 
-export default TransModal;
+export default AddTransModal;

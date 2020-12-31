@@ -21,7 +21,12 @@ const DataTableBody = ({ data, headers }) => (
                   Actions
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item" href="#">
+                  <a
+                    href="#"
+                    class="dropdown-item"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-edit-trans"
+                  >
                     Edit
                   </a>
                   <a class="dropdown-item" href="#">

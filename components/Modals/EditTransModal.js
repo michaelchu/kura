@@ -1,7 +1,7 @@
 const EditTransModal = () => (
   <div
     class="modal modal-blur fade"
-    id="modal-report"
+    id="modal-edit-trans"
     tabindex="-1"
     role="dialog"
     aria-hidden="true"
