@@ -1,4 +1,4 @@
-const DataTableFooter = ({ data }) => (
+const TransactionTableFooter = ({ data }) => (
   <div class="card-footer d-flex align-items-center">
     <p class="m-0 text-muted">
       Showing <span>1</span> to <span>8</span> of <span>16</span> entries
@@ -73,4 +73,4 @@ const DataTableFooter = ({ data }) => (
   </div>
 );
 
-export default DataTableFooter;
+export default TransactionTableFooter;

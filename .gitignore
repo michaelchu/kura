@@ -2,3 +2,5 @@ package-lock.json
 node_modules
 .next
 .DS_Store
+#idea folder
+.idea/

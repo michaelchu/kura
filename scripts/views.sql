@@ -18,7 +18,8 @@ WHERE option_type is not null
 GROUP BY underlying_symbol, DATE_TRUNC('year', trade_date), account_id;
 
 CREATE OR REPLACE VIEW transactions_by_account as
-SELECT a.name                       as Account,
+SELECT transactions.id,
+       a.name                       as Account,
        action,
        commission,
        expiration,

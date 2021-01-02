@@ -1,21 +1,23 @@
-const DataTableFilter = ({ limit }) => (
-  <div class="d-flex">
-    <div class="text-muted">
+import React from "react";
+
+const TransactionTableFilter = () => (
+  <div className="d-flex">
+    <div className="text-muted">
       Show
-      <div class="mx-2 d-inline-block">
+      <div className="mx-2 d-inline-block">
         <input
           type="text"
           className="form-control form-control-sm"
           value="8"
-          size="3"
+          size={3}
           aria-label="Transactions count"
         />
       </div>
       entries
     </div>
-    <div class="ms-auto text-muted">
+    <div className="ms-auto text-muted">
       Search:
-      <div class="ms-2 d-inline-block">
+      <div className="ms-2 d-inline-block">
         <input
           type="text"
           className="form-control form-control-sm"
@@ -26,4 +28,4 @@ const DataTableFilter = ({ limit }) => (
   </div>
 );
 
-export default DataTableFilter;
+export default TransactionTableFilter;

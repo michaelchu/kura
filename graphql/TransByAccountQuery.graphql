@@ -1,0 +1,16 @@
+query {
+    transactions_by_account {
+        id
+        account
+        trade_date
+        symbol
+        action
+        quantity
+        price
+        commission
+        option_type
+        strike
+        expiration
+        amount_with_comm
+    }
+}
