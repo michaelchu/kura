@@ -5,7 +5,7 @@ import moment from "moment";
 import { Button } from "react-bootstrap";
 
 import Layout from "../components/Layout";
-import TransactionModal from "../components/Modals/TransactionModal";
+import TransactionModal from "../components/Modals/AddTransactionModal";
 import TransactionTable from "../components/TransactionTable/TransactionTable";
 
 import QUERY_TRANS_BY_ACCT from "../graphql/TransByAccountQuery.graphql";
@@ -13,6 +13,8 @@ import QUERY_TRANS_BY_ACCT from "../graphql/TransByAccountQuery.graphql";
 export default function Transactions() {
   const [show, setShow] = useState(false);
   const [trade, setTrade] = useState({});
+
+  // TODO: add variable for user ID to query
   const { data, loading, error } = useQuery(QUERY_TRANS_BY_ACCT);
 
   const handleClose = () => {

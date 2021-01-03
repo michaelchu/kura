@@ -11,6 +11,10 @@ const TransactionTable = ({
   hiddenCols,
   onClick,
 }) => {
+  const onDelete = (row) => {
+    console.log(row);
+  };
+
   return (
     <div className="card">
       <div className="card-header">
@@ -49,9 +53,27 @@ const TransactionTable = ({
                 }
               })}
               <td className="text-end">
-                <a href="#" onClick={onClick}>
-                  Edit
-                </a>
+                <span className="dropdown">
+                  <button
+                    className="btn dropdown-toggle align-text-top btn-sm"
+                    data-bs-boundary="viewport"
+                    data-bs-toggle="dropdown"
+                  >
+                    Actions
+                  </button>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <a className="dropdown-item" href="#" onClick={onClick}>
+                      Edit
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      onClick={() => onDelete(row)}
+                    >
+                      Delete
+                    </a>
+                  </div>
+                </span>
               </td>
             </tr>
           ))}
