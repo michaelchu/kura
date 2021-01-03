@@ -9,12 +9,9 @@ const TransactionTable = ({
   title,
   formattedCols,
   hiddenCols,
-  onClick,
+  onEdit,
+  onDelete,
 }) => {
-  const onDelete = (row) => {
-    console.log(row);
-  };
-
   return (
     <div className="card">
       <div className="card-header">
@@ -33,18 +30,18 @@ const TransactionTable = ({
         <thead>
           <tr>
             {cols.map((col) => (
-              <th>{col}</th>
+              <th key={col}>{col}</th>
             ))}
             <th />
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <tr>
+          {rows.map((row, i) => (
+            <tr key={i}>
               {Object.entries(row).map(([key, value]) => {
                 if (!hiddenCols.includes(key)) {
                   return (
-                    <td>
+                    <td key={key}>
                       {formattedCols.includes(key)
                         ? accounting.formatMoney(value)
                         : value}
@@ -62,7 +59,11 @@ const TransactionTable = ({
                     Actions
                   </button>
                   <div className="dropdown-menu dropdown-menu-end">
-                    <a className="dropdown-item" href="#" onClick={onClick}>
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      onClick={() => onEdit(row)}
+                    >
                       Edit
                     </a>
                     <a

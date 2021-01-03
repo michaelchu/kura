@@ -5,25 +5,45 @@ import moment from "moment";
 import { Button } from "react-bootstrap";
 
 import Layout from "../components/Layout";
-import TransactionModal from "../components/Modals/AddTransactionModal";
+import AddTransactionModal from "../components/Modals/AddTransactionModal";
+import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal";
+import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import TransactionTable from "../components/TransactionTable/TransactionTable";
 
 import QUERY_TRANS_BY_ACCT from "../graphql/TransByAccountQuery.graphql";
 
 export default function Transactions() {
-  const [show, setShow] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const [trade, setTrade] = useState({});
 
   // TODO: add variable for user ID to query
   const { data, loading, error } = useQuery(QUERY_TRANS_BY_ACCT);
 
-  const handleClose = () => {
-    setShow(false);
+  const handleShowAdd = () => {
+    setShowAdd(true);
+  };
+  const handleShowEdit = (row) => {
+    setTrade(row);
+    setShowEdit(true);
+  };
+  const handleShowDelete = (row) => {
+    setTrade(row);
+    setShowDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setShowDelete(false);
     setTrade({});
   };
-  const handleShow = (row) => {
-    setShow(true);
-    setTrade(row);
+  const handleCloseEdit = () => {
+    setShowEdit(false);
+    setTrade({});
+  };
+  const handleCloseAdd = () => {
+    setShowAdd(false);
+    setTrade({});
   };
 
   const cols = [
@@ -61,7 +81,7 @@ export default function Transactions() {
           </div>
           <div className="col-auto ms-auto d-print-none">
             <div className="btn-list">
-              <Button variant={"primary"} onClick={handleShow}>
+              <Button variant={"primary"} onClick={handleShowAdd}>
                 Add Transaction
               </Button>
             </div>
@@ -72,15 +92,30 @@ export default function Transactions() {
       <div className="col-12">
         <TransactionTable
           cols={cols}
-          rows={data ? data.transactions_by_account : []}
+          rows={data.transactions_by_account}
           title={"Transactions"}
           formattedCols={formattedCols}
           hiddenCols={hiddenCols}
-          onClick={handleShow}
+          onEdit={handleShowEdit}
+          onDelete={handleShowDelete}
         />
       </div>
 
-      <TransactionModal show={show} trade={trade} handleClose={handleClose} />
+      <AddTransactionModal
+        show={showAdd}
+        trade={trade}
+        handleClose={handleCloseAdd}
+      />
+      <EditTransactionModal
+        show={showEdit}
+        trade={trade}
+        handleClose={handleCloseEdit}
+      />
+      <DeleteTransactionModal
+        show={showDelete}
+        trade={trade}
+        handleClose={handleCloseDelete}
+      />
     </Layout>
   );
 }
