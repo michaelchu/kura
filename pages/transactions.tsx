@@ -1,6 +1,5 @@
-// @refresh reset
-import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import useTransactions from "../api";
 import moment from "moment";
 import { Button } from "react-bootstrap";
 
@@ -9,8 +8,6 @@ import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import TransactionTable from "../components/TransactionTable/TransactionTable";
-
-import QUERY_TRANS_BY_ACCT from "../graphql/TransByAccountQuery.graphql";
 
 export default function Transactions() {
   const emptyTrans = {
@@ -32,45 +29,8 @@ export default function Transactions() {
   const [showDelete, setShowDelete] = useState(false);
   const [transaction, setTransaction] = useState(emptyTrans);
 
-  // TODO: add variable for user ID to query
-  const { data, loading, error } = useQuery(QUERY_TRANS_BY_ACCT);
-
-  const handleShowAdd = () => {
-    setShowAdd(true);
-  };
-  const handleShowEdit = (row) => {
-    console.log(row);
-    setTransaction(row);
-    setShowEdit(true);
-  };
-
-  const handleShowDelete = (row) => {
-    setShowDelete(true);
-  };
-
-  const handleCloseDelete = () => {
-    setShowDelete(false);
-    setTransaction(emptyTrans);
-  };
-  const handleCloseAndDelete = (transId) => {
-    // mutation DeleteTransaction($id: uuid) {
-    //   delete_transactions(where: {id: {_eq: $id}}) {
-    //     affected_rows
-    //   }
-    // }
-
-    setShowDelete(false);
-    setTransaction(emptyTrans);
-  };
-  const handleCloseEdit = () => {
-    setShowEdit(false);
-    setTransaction(emptyTrans);
-  };
-  const handleCloseAdd = () => {
-    setShowAdd(false);
-    setTransaction(emptyTrans);
-  };
-
+  const formattedCols = ["price", "commission", "amount_with_comm"];
+  const hiddenCols = ["id"];
   const cols = [
     "Account",
     "Trade Date",
@@ -85,10 +45,40 @@ export default function Transactions() {
     "Amount",
   ];
 
-  const formattedCols = ["price", "commission", "amount_with_comm"];
-  const hiddenCols = ["id"];
+  // TODO: add variable for user ID to query
+  const { data, error, isFetching } = useTransactions();
 
-  if (loading) {
+  const handleShowAdd = () => {
+    setShowAdd(true);
+  };
+  const handleShowEdit = (row) => {
+    setTransaction(row);
+    setShowEdit(true);
+  };
+
+  const handleShowDelete = (row) => {
+    setTransaction(row);
+    setShowDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setShowDelete(false);
+    setTransaction(emptyTrans);
+  };
+  const handleCloseAndDelete = (transId) => {
+    setShowDelete(false);
+    setTransaction(emptyTrans);
+  };
+  const handleCloseEdit = () => {
+    setShowEdit(false);
+    setTransaction(emptyTrans);
+  };
+  const handleCloseAdd = () => {
+    setShowAdd(false);
+    setTransaction(emptyTrans);
+  };
+
+  if (isFetching) {
     return <div>Loading..</div>;
   }
 
@@ -117,7 +107,7 @@ export default function Transactions() {
       <div className="col-12">
         <TransactionTable
           cols={cols}
-          rows={data.transactions_by_account}
+          rows={data.fetch_transactions}
           title={"Transactions"}
           formattedCols={formattedCols}
           hiddenCols={hiddenCols}

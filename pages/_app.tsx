@@ -2,23 +2,14 @@ import "../assets/css/tabler.min.css";
 import React from "react";
 
 import type { AppProps } from "next/app";
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from "@apollo/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-const client = new ApolloClient({
-  ssrMode: true,
-  link: createHttpLink({ uri: "https://profital.hasura.app/v1/graphql" }),
-  cache: new InMemoryCache({ addTypename: false }),
-});
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ApolloProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />
-    </ApolloProvider>
+    </QueryClientProvider>
   );
 }

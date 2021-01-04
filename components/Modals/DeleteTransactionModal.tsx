@@ -8,7 +8,6 @@ const DeleteTransactionModal = ({
   handleClose,
   handleCloseAndDelete,
 }: DeleteModalProps) => {
-  // mutation to handle deletion of trade
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>

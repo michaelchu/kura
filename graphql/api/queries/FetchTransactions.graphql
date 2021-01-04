@@ -1,5 +1,9 @@
-query {
-    transactions_by_account {
+query FetchTransactions {
+    accounts {
+        name
+        id
+    }
+    fetch_transactions {
         id
         account
         trade_date
