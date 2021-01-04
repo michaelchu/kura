@@ -18,11 +18,6 @@ const Header = () => (
       type="text/javascript"
       src="js/libs/jquery/dist/jquery.slim.min.js"
     />
-    <script type="text/javascript" src="js/tabler.min.js" />
-    {/*<script*/}
-    {/*  type="text/javascript"*/}
-    {/*  src="js/libs/apexcharts/dist/apexcharts.min.js"*/}
-    {/*></script>*/}
   </Head>
 );
 
