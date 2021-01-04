@@ -61,20 +61,14 @@ export default function Transactions() {
     setShowDelete(true);
   };
 
-  const handleCloseDelete = () => {
-    setShowDelete(false);
-    setTransaction(emptyTrans);
-  };
   const handleCloseAndDelete = (transId) => {
     setShowDelete(false);
     setTransaction(emptyTrans);
   };
-  const handleCloseEdit = () => {
-    setShowEdit(false);
-    setTransaction(emptyTrans);
-  };
-  const handleCloseAdd = () => {
+  const handleClose = () => {
     setShowAdd(false);
+    setShowEdit(false);
+    setShowDelete(false);
     setTransaction(emptyTrans);
   };
 
@@ -119,17 +113,17 @@ export default function Transactions() {
       <AddTransactionModal
         show={showAdd}
         trans={transaction}
-        handleClose={handleCloseAdd}
+        handleClose={handleClose}
       />
       <EditTransactionModal
         show={showEdit}
         trans={transaction}
-        handleClose={handleCloseEdit}
+        handleClose={handleClose}
       />
       <DeleteTransactionModal
         show={showDelete}
         trans={transaction}
-        handleClose={handleCloseDelete}
+        handleClose={handleClose}
         handleCloseAndDelete={handleCloseAndDelete}
       />
     </Layout>

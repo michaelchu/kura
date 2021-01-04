@@ -1,12 +1,12 @@
 import Link from "next/link";
-import NavDropDown from "./NavDropDown";
 import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Nav from "react-bootstrap/Nav";
 
 const NavBar = () => {
-  const dropdownItems = {};
-
   return (
-    <header className="navbar navbar-expand-md navbar-dark navbar-overlap d-print-none">
+    <Navbar variant="dark" className="navbar-overlap d-print-none">
       <div className="container-xl">
         <button
           className="navbar-toggler"
@@ -28,40 +28,38 @@ const NavBar = () => {
           </a>
         </h1>
         <div className="navbar-nav flex-row order-md-last">
-          <NavDropDown
-            image={`url("/avatars/002m.jpg")`}
-            dropDownItems={dropdownItems}
-          />
+          <NavDropdown
+            title="Michael Chu"
+            id="basic-nav-dropdown"
+            className="nav-item dropdown"
+          >
+            <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="#">Settings</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#">Logout</NavDropdown.Item>
+          </NavDropdown>
         </div>
-        <div className="collapse navbar-collapse" id="navbar-menu">
+        <Nav className="collapse navbar-collapse">
           <div className="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link href="/">
-                  <a className="nav-link">
-                    <span className="nav-link-title">Dashboard</span>
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/schedule">
-                  <a className="nav-link" href="./form-elements.html">
-                    <span className="nav-link-title">Schedules</span>
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/transactions">
-                  <a className="nav-link">
-                    <span className="nav-link-title">Transactions</span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
+            <Link href="/">
+              <a className="nav-link">
+                <span className="nav-link-title">Dashboard</span>
+              </a>
+            </Link>
+            <Link href="/schedule">
+              <a className="nav-link">
+                <span className="nav-link-title">Schedule</span>
+              </a>
+            </Link>
+            <Link href="/transactions">
+              <a className="nav-link">
+                <span className="nav-link-title">Transactions</span>
+              </a>
+            </Link>
           </div>
-        </div>
+        </Nav>
       </div>
-    </header>
+    </Navbar>
   );
 };
 

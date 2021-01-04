@@ -1,5 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 import TransactionTableFilter from "./TransactionTableFilter";
 const accounting = require("accounting");
 
@@ -50,31 +52,20 @@ const TransactionTable = ({
                 }
               })}
               <td className="text-end">
-                <span className="dropdown">
-                  <button
-                    className="btn dropdown-toggle align-text-top btn-sm"
-                    data-bs-boundary="viewport"
-                    data-bs-toggle="dropdown"
-                  >
-                    Actions
-                  </button>
-                  <div className="dropdown-menu dropdown-menu-end">
-                    <a
-                      className="dropdown-item"
-                      href="#"
-                      onClick={() => onEdit(row)}
-                    >
-                      Edit
-                    </a>
-                    <a
-                      className="dropdown-item"
-                      href="#"
-                      onClick={() => onDelete(row)}
-                    >
-                      Delete
-                    </a>
-                  </div>
-                </span>
+                <DropdownButton
+                  id="dropdown-basic-button"
+                  title="Action"
+                  size="sm"
+                  variant="light"
+                >
+                  <Dropdown.Item onClick={() => onEdit(row)}>
+                    Edit
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => onDelete(row)}>
+                    {" "}
+                    Delete{" "}
+                  </Dropdown.Item>
+                </DropdownButton>
               </td>
             </tr>
           ))}
