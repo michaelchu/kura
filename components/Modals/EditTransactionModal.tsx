@@ -2,15 +2,20 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import StockTab from "./StockTab";
 import OptionTab from "./OptionTab";
+import { ModalProps } from "../../interfaces/app_interfaces";
 
-const EditTransactionModal = ({ show, trade, handleClose }) => {
+const EditTransactionModal = ({ show, trans, handleClose }: ModalProps) => {
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>
         <Modal.Title>Edit Transaction</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {trade.option_type ? <OptionTab /> : <StockTab />}
+        {trans && trans.option_type ? (
+          <OptionTab trans={trans} />
+        ) : (
+          <StockTab trans={trans} />
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Button

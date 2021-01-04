@@ -1,7 +1,14 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import { DeleteModalProps } from "../../interfaces/app_interfaces";
 
-const DeleteTransactionModal = ({ show, trade, handleClose }) => {
+const DeleteTransactionModal = ({
+  show,
+  trans,
+  handleClose,
+  handleCloseAndDelete,
+}: DeleteModalProps) => {
+  // mutation to handle deletion of trade
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>
@@ -20,10 +27,10 @@ const DeleteTransactionModal = ({ show, trade, handleClose }) => {
         />
         <Button
           as="input"
-          variant="primary"
-          onClick={handleClose}
+          variant="danger"
+          onClick={() => handleCloseAndDelete(trans.id)}
           type="submit"
-          value="Delete"
+          value="Yes, delete all my data"
         />
       </Modal.Footer>
     </Modal>

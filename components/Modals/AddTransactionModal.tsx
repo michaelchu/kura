@@ -5,7 +5,7 @@ import Tab from "react-bootstrap/Tab";
 import StockTab from "./StockTab";
 import OptionTab from "./OptionTab";
 
-const AddTransactionModal = ({ show, trade, handleClose }) => {
+const AddTransactionModal = ({ show, trans, handleClose }) => {
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>
@@ -23,10 +23,10 @@ const AddTransactionModal = ({ show, trade, handleClose }) => {
           </Nav>
           <Tab.Content>
             <Tab.Pane eventKey={"stocks"}>
-              <StockTab trade={trade} />
+              <StockTab trans={trans} />
             </Tab.Pane>
             <Tab.Pane eventKey={"options"}>
-              <OptionTab trade={trade} />
+              <OptionTab trans={trans} />
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>

@@ -13,10 +13,24 @@ import TransactionTable from "../components/TransactionTable/TransactionTable";
 import QUERY_TRANS_BY_ACCT from "../graphql/TransByAccountQuery.graphql";
 
 export default function Transactions() {
+  const emptyTrans = {
+    id: "",
+    account: "",
+    trade_date: "",
+    symbol: "",
+    action: "",
+    quantity: 0,
+    price: 0,
+    commission: 0,
+    option_type: "",
+    strike: 0,
+    expiration: "",
+    amount: 0,
+  };
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [trade, setTrade] = useState({});
+  const [transaction, setTransaction] = useState(emptyTrans);
 
   // TODO: add variable for user ID to query
   const { data, loading, error } = useQuery(QUERY_TRANS_BY_ACCT);
@@ -25,25 +39,36 @@ export default function Transactions() {
     setShowAdd(true);
   };
   const handleShowEdit = (row) => {
-    setTrade(row);
+    console.log(row);
+    setTransaction(row);
     setShowEdit(true);
   };
+
   const handleShowDelete = (row) => {
-    setTrade(row);
     setShowDelete(true);
   };
 
   const handleCloseDelete = () => {
     setShowDelete(false);
-    setTrade({});
+    setTransaction(emptyTrans);
+  };
+  const handleCloseAndDelete = (transId) => {
+    // mutation DeleteTransaction($id: uuid) {
+    //   delete_transactions(where: {id: {_eq: $id}}) {
+    //     affected_rows
+    //   }
+    // }
+
+    setShowDelete(false);
+    setTransaction(emptyTrans);
   };
   const handleCloseEdit = () => {
     setShowEdit(false);
-    setTrade({});
+    setTransaction(emptyTrans);
   };
   const handleCloseAdd = () => {
     setShowAdd(false);
-    setTrade({});
+    setTransaction(emptyTrans);
   };
 
   const cols = [
@@ -103,18 +128,19 @@ export default function Transactions() {
 
       <AddTransactionModal
         show={showAdd}
-        trade={trade}
+        trans={transaction}
         handleClose={handleCloseAdd}
       />
       <EditTransactionModal
         show={showEdit}
-        trade={trade}
+        trans={transaction}
         handleClose={handleCloseEdit}
       />
       <DeleteTransactionModal
         show={showDelete}
-        trade={trade}
+        trans={transaction}
         handleClose={handleCloseDelete}
+        handleCloseAndDelete={handleCloseAndDelete}
       />
     </Layout>
   );

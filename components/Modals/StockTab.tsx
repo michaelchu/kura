@@ -1,12 +1,13 @@
 import React from "react";
+import ActionSelect from "../Selections/ActionSelect";
 
-const StockTab = (trade) => (
+const StockTab = ({ trans }) => (
   <div>
     <div className="col-lg-12">
       <div className="mt-2">
         <label className="form-label">Account</label>
         <select className="form-select">
-          <option defaultValue={trade.account}>{trade.account}</option>
+          <option defaultValue={trans.account}>{trans.account}</option>
           <option value="2">US TFSA</option>
           <option value="2">US Margin</option>
         </select>
@@ -20,20 +21,14 @@ const StockTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.symbol ? trade.symbol : ""}
+            defaultValue={trans.symbol}
             required
           />
         </div>
       </div>
       <div className="col-lg-6">
         <div className="mt-2">
-          <label className="form-label">Action</label>
-          <select className="form-select">
-            <option defaultValue={trade.action}>{trade.action}</option>
-            <option value="BTC">BTC</option>
-            <option value="STO">STO</option>
-            <option value="STC">STC</option>
-          </select>
+          <ActionSelect defaultValue={trans.action} />
         </div>
       </div>
     </div>
@@ -43,7 +38,7 @@ const StockTab = (trade) => (
         <input
           type="date"
           className="form-control"
-          defaultValue={trade.trade_date ? trade.trade_date : ""}
+          defaultValue={trans.trade_date}
         />
       </div>
     </div>
@@ -58,7 +53,7 @@ const StockTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.quantity ? trade.quantity : ""}
+            defaultValue={trans.quantity}
             required
           />
         </div>
@@ -70,7 +65,7 @@ const StockTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.price ? trade.price : ""}
+            defaultValue={trans.price}
             required
           />
         </div>
@@ -82,7 +77,7 @@ const StockTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.commission ? trade.commission : ""}
+            defaultValue={trans.commission}
             required
           />
         </div>

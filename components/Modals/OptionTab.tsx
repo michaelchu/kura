@@ -1,12 +1,13 @@
 import React from "react";
+import ActionSelect from "../Selections/ActionSelect";
 
-const OptionTab = (trade) => (
+const OptionTab = ({ trans }) => (
   <div>
     <div className="col-lg-12">
       <div className="mt-2">
         <label className="form-label">Account</label>
         <select className="form-select">
-          <option defaultValue={trade.account}>{trade.account}</option>
+          <option defaultValue={trans.account}>{trans.account}</option>
           <option value="2">US TFSA</option>
           <option value="2">US Margin</option>
         </select>
@@ -20,22 +21,14 @@ const OptionTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.symbol ? trade.symbol : ""}
+            defaultValue={trans.symbol}
             required
           />
         </div>
       </div>
       <div className="col-lg-6">
         <div className="mt-2">
-          <label className="form-label">Action</label>
-          <select className="form-select">
-            <option defaultValue="BTO">
-              {trade.action ? trade.action : "BTO"}
-            </option>
-            <option value="BTC">BTC</option>
-            <option value="STO">STO</option>
-            <option value="STC">STC</option>
-          </select>
+          <ActionSelect defaultValue={trans.action} />
         </div>
       </div>
     </div>
@@ -46,7 +39,7 @@ const OptionTab = (trade) => (
           <input
             type="date"
             className="form-control"
-            defaultValue={trade.trade_date ? trade.trade_date : ""}
+            defaultValue={trans.trade_date}
           />
         </div>
       </div>
@@ -54,8 +47,8 @@ const OptionTab = (trade) => (
         <div className="mt-2">
           <label className="form-label">Option Type</label>
           <select className="form-select">
-            <option defaultValue={trade.option_type}>
-              {trade.option_type}
+            <option defaultValue={trans.option_type}>
+              {trans.option_type}
             </option>
             <option value="C">Call</option>
             <option value="P">Put</option>
@@ -74,7 +67,7 @@ const OptionTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.quantity ? trade.quantity : ""}
+            defaultValue={trans.quantity ? trans.quantity : ""}
             required
           />
         </div>
@@ -86,7 +79,7 @@ const OptionTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.price ? trade.price : ""}
+            defaultValue={trans.price ? trans.price : ""}
             required
           />
         </div>
@@ -98,7 +91,7 @@ const OptionTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.commission ? trade.commission : ""}
+            defaultValue={trans.commission ? trans.commission : ""}
             required
           />
         </div>
@@ -112,7 +105,7 @@ const OptionTab = (trade) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trade.strike ? trade.strike : ""}
+            defaultValue={trans.strike ? trans.strike : ""}
             required
           />
         </div>
@@ -123,7 +116,7 @@ const OptionTab = (trade) => (
           <input
             type="date"
             className="form-control"
-            defaultValue={trade.expiration ? trade.expiration : ""}
+            defaultValue={trans.expiration ? trans.expiration : ""}
           />
         </div>
       </div>
