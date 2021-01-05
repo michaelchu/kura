@@ -1,13 +1,32 @@
-import { useQuery, useMutation } from "react-query";
+import { useQuery } from "react-query";
 import { request } from "graphql-request";
-import FETCH_TRANSACTIONS from "./graphql/api/queries/FetchTransactions.graphql";
 
-const endpoint = "https://profital.hasura.app/v1/graphql";
+export const endpoint = "https://profital.hasura.app/v1/graphql";
 
-const useTransactions = () => {
-  return useQuery("transactions", async () => {
-    return await request(endpoint, FETCH_TRANSACTIONS);
-  });
-};
+// when including user ID param in the future, include it in the query key
+export function useProfitalQuery(queryKey, query, variables = {}) {
+  const { data, error, isError, isLoading } = useQuery(
+    [queryKey, variables],
+    async () => {
+      return await request(endpoint, query, variables);
+    }
+  );
 
-export default useTransactions;
+  if (isLoading) {
+    return {
+      status: "loading",
+    };
+  }
+
+  if (isError) {
+    return {
+      status: "error",
+      error: error["message"],
+    };
+  }
+
+  return {
+    status: "ok",
+    data,
+  };
+}

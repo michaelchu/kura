@@ -1,13 +1,13 @@
 import React from "react";
 import ActionSelect from "../Selections/ActionSelect";
 
-const OptionTab = ({ trans }) => (
+const OptionTab = ({ row }) => (
   <div>
     <div className="col-lg-12">
       <div className="mt-2">
         <label className="form-label">Account</label>
         <select className="form-select">
-          <option defaultValue={trans.account}>{trans.account}</option>
+          <option defaultValue={row.account}>{row.account}</option>
           <option value="2">US TFSA</option>
           <option value="2">US Margin</option>
         </select>
@@ -21,14 +21,14 @@ const OptionTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.symbol}
+            defaultValue={row.symbol}
             required
           />
         </div>
       </div>
       <div className="col-lg-6">
         <div className="mt-2">
-          <ActionSelect defaultValue={trans.action} />
+          <ActionSelect defaultValue={row.action} />
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@ const OptionTab = ({ trans }) => (
           <input
             type="date"
             className="form-control"
-            defaultValue={trans.trade_date}
+            defaultValue={row.trade_date}
           />
         </div>
       </div>
@@ -47,9 +47,7 @@ const OptionTab = ({ trans }) => (
         <div className="mt-2">
           <label className="form-label">Option Type</label>
           <select className="form-select">
-            <option defaultValue={trans.option_type}>
-              {trans.option_type}
-            </option>
+            <option defaultValue={row.option_type}>{row.option_type}</option>
             <option value="C">Call</option>
             <option value="P">Put</option>
           </select>
@@ -67,7 +65,7 @@ const OptionTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.quantity ? trans.quantity : ""}
+            defaultValue={row.quantity ? row.quantity : ""}
             required
           />
         </div>
@@ -79,7 +77,7 @@ const OptionTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.price ? trans.price : ""}
+            defaultValue={row.price ? row.price : ""}
             required
           />
         </div>
@@ -91,7 +89,7 @@ const OptionTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.commission ? trans.commission : ""}
+            defaultValue={row.commission ? row.commission : ""}
             required
           />
         </div>
@@ -105,7 +103,7 @@ const OptionTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.strike ? trans.strike : ""}
+            defaultValue={row.strike ? row.strike : ""}
             required
           />
         </div>
@@ -116,7 +114,7 @@ const OptionTab = ({ trans }) => (
           <input
             type="date"
             className="form-control"
-            defaultValue={trans.expiration ? trans.expiration : ""}
+            defaultValue={row.expiration ? row.expiration : ""}
           />
         </div>
       </div>

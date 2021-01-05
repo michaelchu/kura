@@ -4,7 +4,7 @@ import { DeleteModalProps } from "../../interfaces/app_interfaces";
 
 const DeleteTransactionModal = ({
   show,
-  trans,
+  row,
   handleClose,
   handleCloseAndDelete,
 }: DeleteModalProps) => {
@@ -27,7 +27,7 @@ const DeleteTransactionModal = ({
         <Button
           as="input"
           variant="danger"
-          onClick={() => handleCloseAndDelete(trans.id)}
+          onClick={() => handleCloseAndDelete(row.id)}
           type="submit"
           value="Yes, delete all my data"
         />

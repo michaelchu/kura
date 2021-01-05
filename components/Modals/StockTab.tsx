@@ -1,13 +1,13 @@
 import React from "react";
 import ActionSelect from "../Selections/ActionSelect";
 
-const StockTab = ({ trans }) => (
+const StockTab = ({ row }) => (
   <div>
     <div className="col-lg-12">
       <div className="mt-2">
         <label className="form-label">Account</label>
         <select className="form-select">
-          <option defaultValue={trans.account}>{trans.account}</option>
+          <option defaultValue={row.account}>{row.account}</option>
           <option value="2">US TFSA</option>
           <option value="2">US Margin</option>
         </select>
@@ -21,14 +21,14 @@ const StockTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.symbol}
+            defaultValue={row.symbol}
             required
           />
         </div>
       </div>
       <div className="col-lg-6">
         <div className="mt-2">
-          <ActionSelect defaultValue={trans.action} />
+          <ActionSelect defaultValue={row.action} />
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@ const StockTab = ({ trans }) => (
         <input
           type="date"
           className="form-control"
-          defaultValue={trans.trade_date}
+          defaultValue={row.trade_date}
         />
       </div>
     </div>
@@ -53,7 +53,7 @@ const StockTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.quantity}
+            defaultValue={row.quantity}
             required
           />
         </div>
@@ -65,7 +65,7 @@ const StockTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.price}
+            defaultValue={row.price}
             required
           />
         </div>
@@ -77,7 +77,7 @@ const StockTab = ({ trans }) => (
             type="text"
             className="form-control"
             name="example-text-input"
-            defaultValue={trans.commission}
+            defaultValue={row.commission}
             required
           />
         </div>

@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import useTransactions from "../api";
+import {
+  useQuery,
+  useMutation,
+  QueryClient,
+  useQueryClient,
+} from "react-query";
+import { endpoint } from "../api";
+import { request } from "graphql-request";
 import moment from "moment";
 import { Button } from "react-bootstrap";
+import { dehydrate } from "react-query/hydration";
 
 import Layout from "../components/Layout";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
@@ -9,7 +17,22 @@ import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal"
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import TransactionTable from "../components/TransactionTable/TransactionTable";
 
-export default function Transactions() {
+import FETCH_TRANSACTIONS from "../graphql/api/queries/FetchTransactions.graphql";
+import DELETE_TRANSACTION from "../graphql/api/mutations/DeleteTransaction.graphql";
+
+const queryClient = new QueryClient();
+
+export async function getStaticProps() {
+  await queryClient.prefetchQuery("fetch_transactions", () => getTrans());
+  return { props: { dehydratedState: dehydrate(queryClient) } };
+}
+
+async function getTrans() {
+  return await request(endpoint, FETCH_TRANSACTIONS);
+}
+
+export default function Transactions(props) {
+  const queryClient = useQueryClient();
   const emptyTrans = {
     id: "",
     account: "",
@@ -27,7 +50,7 @@ export default function Transactions() {
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [transaction, setTransaction] = useState(emptyTrans);
+  const [row, setRow] = useState(emptyTrans);
 
   const formattedCols = ["price", "commission", "amount_with_comm"];
   const hiddenCols = ["id"];
@@ -45,40 +68,24 @@ export default function Transactions() {
     "Amount",
   ];
 
-  // TODO: add variable for user ID to query
-  const { data, error, isFetching } = useTransactions();
+  const { data } = useQuery("fetch_transactions", getTrans);
 
-  const handleShowAdd = () => {
-    setShowAdd(true);
-  };
-  const handleShowEdit = (row) => {
-    setTransaction(row);
-    setShowEdit(true);
-  };
+  const deleteRow = useMutation(
+    (variables) => {
+      return request(endpoint, DELETE_TRANSACTION, variables);
+    },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries("fetch_transactions");
+          setShowDelete(false);
+          setRow(emptyTrans);
+        },
+      }
+  );
 
-  const handleShowDelete = (row) => {
-    setTransaction(row);
-    setShowDelete(true);
+  const handleCloseAndDelete = (transId: string) => {
+    deleteRow.mutate({id: transId} as any);
   };
-
-  const handleCloseAndDelete = (transId) => {
-    setShowDelete(false);
-    setTransaction(emptyTrans);
-  };
-  const handleClose = () => {
-    setShowAdd(false);
-    setShowEdit(false);
-    setShowDelete(false);
-    setTransaction(emptyTrans);
-  };
-
-  if (isFetching) {
-    return <div>Loading..</div>;
-  }
-
-  if (error) {
-    return <div>Error..</div>;
-  }
 
   return (
     <Layout>
@@ -90,7 +97,13 @@ export default function Transactions() {
           </div>
           <div className="col-auto ms-auto d-print-none">
             <div className="btn-list">
-              <Button variant={"primary"} onClick={handleShowAdd}>
+              <Button
+                variant={"primary"}
+                onClick={() => {
+                  setRow(emptyTrans);
+                  setShowAdd(true);
+                }}
+              >
                 Add Transaction
               </Button>
             </div>
@@ -105,25 +118,39 @@ export default function Transactions() {
           title={"Transactions"}
           formattedCols={formattedCols}
           hiddenCols={hiddenCols}
-          onEdit={handleShowEdit}
-          onDelete={handleShowDelete}
+          onEdit={(row) => {
+            setRow(row);
+            setShowEdit(true);
+          }}
+          onDelete={(row) => {
+            setRow(row);
+            setShowDelete(true);
+          }}
         />
       </div>
 
       <AddTransactionModal
         show={showAdd}
-        trans={transaction}
-        handleClose={handleClose}
+        row={row}
+        handleClose={() => {
+          setShowAdd(false);
+        }}
       />
       <EditTransactionModal
         show={showEdit}
-        trans={transaction}
-        handleClose={handleClose}
+        row={row}
+        handleClose={() => {
+          setShowEdit(false);
+          setRow(emptyTrans);
+        }}
       />
       <DeleteTransactionModal
         show={showDelete}
-        trans={transaction}
-        handleClose={handleClose}
+        row={row}
+        handleClose={() => {
+          setShowDelete(false);
+          setRow(emptyTrans);
+        }}
         handleCloseAndDelete={handleCloseAndDelete}
       />
     </Layout>

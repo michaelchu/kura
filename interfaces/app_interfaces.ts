@@ -23,13 +23,13 @@ type Transaction = {
 
 interface ModalProps {
   show: boolean;
-  trans: Transaction;
+  row: Transaction;
   handleClose: any;
 }
 
 interface DeleteModalProps {
   show: boolean;
-  trans: Transaction;
+  row: Transaction;
   handleClose: any;
   handleCloseAndDelete: any;
 }
