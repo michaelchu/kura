@@ -1,5 +1,5 @@
 mutation DeleteTransaction($id: uuid!) {
-    delete_transactions_by_pk(id: $id){
-        id
-    }
+  delete_transactions_by_pk(id: $id) {
+    id
+  }
 }

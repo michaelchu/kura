@@ -1,0 +1,5 @@
+mutation MyMutation($object: transactions_insert_input!) {
+  insert_transactions_one(object: $object) {
+    id
+  }
+}

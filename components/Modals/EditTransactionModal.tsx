@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
-import StockTab from "./StockTab";
-import OptionTab from "./OptionTab";
-import { ModalProps } from "../../interfaces/app_interfaces";
+import TabInputs from "./TabInputs";
 
-const EditTransactionModal = ({ show, row, handleClose }: ModalProps) => {
+const EditTransactionModal = ({ show, trans, accounts, handleClose }) => {
+  const emptyTrans = {
+    id: "",
+    account_id: "",
+    trade_date: "",
+    symbol: "",
+    action: "",
+    quantity: 0,
+    price: 0,
+    commission: 0,
+    option_type: "",
+    strike: 0,
+    expiration: "",
+  };
+  const [transaction, setTransaction] = useState(emptyTrans);
+
+  useEffect(() => {
+    console.log(transaction);
+  }, [transaction]);
+
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>
         <Modal.Title>Edit Transaction</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {row && row.option_type ? (
-          <OptionTab row={row} />
+        {trans && trans.option_type ? (
+          <TabInputs
+            transaction={trans}
+            accounts={accounts}
+            handleChange={setTransaction}
+            isOption={true}
+          />
         ) : (
-          <StockTab row={row} />
+          <TabInputs
+            transaction={trans}
+            accounts={accounts}
+            handleChange={setTransaction}
+            isOption={false}
+          />
         )}
       </Modal.Body>
       <Modal.Footer>

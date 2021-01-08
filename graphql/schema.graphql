@@ -1,2174 +1,2179 @@
 # This file was generated based on ".graphqlconfig". Do not edit manually.
 
 schema {
-    query: query_root
-    mutation: mutation_root
-    subscription: subscription_root
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
 }
 
 "columns and relationships of \"accounts\""
 type accounts {
-    cash_balance: numeric!
-    currency: String!
-    id: uuid!
-    name: String!
-    "An array relationship"
-    transactions(
-        "distinct select on columns"
-        distinct_on: [transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [transactions_order_by!],
-        "filter the rows returned"
-        where: transactions_bool_exp
-    ): [transactions!]!
-    "An aggregated array relationship"
-    transactions_aggregate(
-        "distinct select on columns"
-        distinct_on: [transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [transactions_order_by!],
-        "filter the rows returned"
-        where: transactions_bool_exp
-    ): transactions_aggregate!
-    "An object relationship"
-    user: users!
-    user_id: String!
+  cash_balance: numeric!
+  currency: String!
+  id: uuid!
+  name: String!
+  "An array relationship"
+  transactions(
+    "distinct select on columns"
+    distinct_on: [transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [transactions_order_by!]
+    "filter the rows returned"
+    where: transactions_bool_exp
+  ): [transactions!]!
+  "An aggregated array relationship"
+  transactions_aggregate(
+    "distinct select on columns"
+    distinct_on: [transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [transactions_order_by!]
+    "filter the rows returned"
+    where: transactions_bool_exp
+  ): transactions_aggregate!
+  "An object relationship"
+  user: users!
+  user_id: String!
 }
 
 "aggregated selection of \"accounts\""
 type accounts_aggregate {
-    aggregate: accounts_aggregate_fields
-    nodes: [accounts!]!
+  aggregate: accounts_aggregate_fields
+  nodes: [accounts!]!
 }
 
 "aggregate fields of \"accounts\""
 type accounts_aggregate_fields {
-    avg: accounts_avg_fields
-    count(columns: [accounts_select_column!], distinct: Boolean): Int
-    max: accounts_max_fields
-    min: accounts_min_fields
-    stddev: accounts_stddev_fields
-    stddev_pop: accounts_stddev_pop_fields
-    stddev_samp: accounts_stddev_samp_fields
-    sum: accounts_sum_fields
-    var_pop: accounts_var_pop_fields
-    var_samp: accounts_var_samp_fields
-    variance: accounts_variance_fields
+  avg: accounts_avg_fields
+  count(columns: [accounts_select_column!], distinct: Boolean): Int
+  max: accounts_max_fields
+  min: accounts_min_fields
+  stddev: accounts_stddev_fields
+  stddev_pop: accounts_stddev_pop_fields
+  stddev_samp: accounts_stddev_samp_fields
+  sum: accounts_sum_fields
+  var_pop: accounts_var_pop_fields
+  var_samp: accounts_var_samp_fields
+  variance: accounts_variance_fields
 }
 
 "aggregate avg on columns"
 type accounts_avg_fields {
-    cash_balance: Float
+  cash_balance: Float
 }
 
 "aggregate max on columns"
 type accounts_max_fields {
-    cash_balance: numeric
-    currency: String
-    id: uuid
-    name: String
-    user_id: String
+  cash_balance: numeric
+  currency: String
+  id: uuid
+  name: String
+  user_id: String
 }
 
 "aggregate min on columns"
 type accounts_min_fields {
-    cash_balance: numeric
-    currency: String
-    id: uuid
-    name: String
-    user_id: String
+  cash_balance: numeric
+  currency: String
+  id: uuid
+  name: String
+  user_id: String
 }
 
 "response of any mutation on the table \"accounts\""
 type accounts_mutation_response {
-    "number of affected rows by the mutation"
-    affected_rows: Int!
-    "data of the affected rows by the mutation"
-    returning: [accounts!]!
+  "number of affected rows by the mutation"
+  affected_rows: Int!
+  "data of the affected rows by the mutation"
+  returning: [accounts!]!
 }
 
 "aggregate stddev on columns"
 type accounts_stddev_fields {
-    cash_balance: Float
+  cash_balance: Float
 }
 
 "aggregate stddev_pop on columns"
 type accounts_stddev_pop_fields {
-    cash_balance: Float
+  cash_balance: Float
 }
 
 "aggregate stddev_samp on columns"
 type accounts_stddev_samp_fields {
-    cash_balance: Float
+  cash_balance: Float
 }
 
 "aggregate sum on columns"
 type accounts_sum_fields {
-    cash_balance: numeric
+  cash_balance: numeric
 }
 
 "aggregate var_pop on columns"
 type accounts_var_pop_fields {
-    cash_balance: Float
+  cash_balance: Float
 }
 
 "aggregate var_samp on columns"
 type accounts_var_samp_fields {
-    cash_balance: Float
+  cash_balance: Float
 }
 
 "aggregate variance on columns"
 type accounts_variance_fields {
-    cash_balance: Float
+  cash_balance: Float
 }
 
 "columns and relationships of \"fetch_transactions\""
 type fetch_transactions {
-    account: String
-    action: String
-    amount: numeric
-    amount_with_comm: numeric
-    commission: numeric
-    expiration: date
-    id: uuid
-    option_type: String
-    price: numeric
-    quantity: Int
-    strike: numeric
-    symbol: String
-    trade_date: date
+  account: String
+  action: String
+  amount: numeric
+  amount_with_comm: numeric
+  commission: numeric
+  expiration: date
+  id: uuid
+  option_type: String
+  price: numeric
+  quantity: Int
+  strike: numeric
+  symbol: String
+  trade_date: date
 }
 
 "aggregated selection of \"fetch_transactions\""
 type fetch_transactions_aggregate {
-    aggregate: fetch_transactions_aggregate_fields
-    nodes: [fetch_transactions!]!
+  aggregate: fetch_transactions_aggregate_fields
+  nodes: [fetch_transactions!]!
 }
 
 "aggregate fields of \"fetch_transactions\""
 type fetch_transactions_aggregate_fields {
-    avg: fetch_transactions_avg_fields
-    count(columns: [fetch_transactions_select_column!], distinct: Boolean): Int
-    max: fetch_transactions_max_fields
-    min: fetch_transactions_min_fields
-    stddev: fetch_transactions_stddev_fields
-    stddev_pop: fetch_transactions_stddev_pop_fields
-    stddev_samp: fetch_transactions_stddev_samp_fields
-    sum: fetch_transactions_sum_fields
-    var_pop: fetch_transactions_var_pop_fields
-    var_samp: fetch_transactions_var_samp_fields
-    variance: fetch_transactions_variance_fields
+  avg: fetch_transactions_avg_fields
+  count(columns: [fetch_transactions_select_column!], distinct: Boolean): Int
+  max: fetch_transactions_max_fields
+  min: fetch_transactions_min_fields
+  stddev: fetch_transactions_stddev_fields
+  stddev_pop: fetch_transactions_stddev_pop_fields
+  stddev_samp: fetch_transactions_stddev_samp_fields
+  sum: fetch_transactions_sum_fields
+  var_pop: fetch_transactions_var_pop_fields
+  var_samp: fetch_transactions_var_samp_fields
+  variance: fetch_transactions_variance_fields
 }
 
 "aggregate avg on columns"
 type fetch_transactions_avg_fields {
-    amount: Float
-    amount_with_comm: Float
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  amount: Float
+  amount_with_comm: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate max on columns"
 type fetch_transactions_max_fields {
-    account: String
-    action: String
-    amount: numeric
-    amount_with_comm: numeric
-    commission: numeric
-    expiration: date
-    id: uuid
-    option_type: String
-    price: numeric
-    quantity: Int
-    strike: numeric
-    symbol: String
-    trade_date: date
+  account: String
+  action: String
+  amount: numeric
+  amount_with_comm: numeric
+  commission: numeric
+  expiration: date
+  id: uuid
+  option_type: String
+  price: numeric
+  quantity: Int
+  strike: numeric
+  symbol: String
+  trade_date: date
 }
 
 "aggregate min on columns"
 type fetch_transactions_min_fields {
-    account: String
-    action: String
-    amount: numeric
-    amount_with_comm: numeric
-    commission: numeric
-    expiration: date
-    id: uuid
-    option_type: String
-    price: numeric
-    quantity: Int
-    strike: numeric
-    symbol: String
-    trade_date: date
+  account: String
+  action: String
+  amount: numeric
+  amount_with_comm: numeric
+  commission: numeric
+  expiration: date
+  id: uuid
+  option_type: String
+  price: numeric
+  quantity: Int
+  strike: numeric
+  symbol: String
+  trade_date: date
 }
 
 "aggregate stddev on columns"
 type fetch_transactions_stddev_fields {
-    amount: Float
-    amount_with_comm: Float
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  amount: Float
+  amount_with_comm: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate stddev_pop on columns"
 type fetch_transactions_stddev_pop_fields {
-    amount: Float
-    amount_with_comm: Float
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  amount: Float
+  amount_with_comm: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate stddev_samp on columns"
 type fetch_transactions_stddev_samp_fields {
-    amount: Float
-    amount_with_comm: Float
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  amount: Float
+  amount_with_comm: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate sum on columns"
 type fetch_transactions_sum_fields {
-    amount: numeric
-    amount_with_comm: numeric
-    commission: numeric
-    price: numeric
-    quantity: Int
-    strike: numeric
+  amount: numeric
+  amount_with_comm: numeric
+  commission: numeric
+  price: numeric
+  quantity: Int
+  strike: numeric
 }
 
 "aggregate var_pop on columns"
 type fetch_transactions_var_pop_fields {
-    amount: Float
-    amount_with_comm: Float
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  amount: Float
+  amount_with_comm: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate var_samp on columns"
 type fetch_transactions_var_samp_fields {
-    amount: Float
-    amount_with_comm: Float
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  amount: Float
+  amount_with_comm: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate variance on columns"
 type fetch_transactions_variance_fields {
-    amount: Float
-    amount_with_comm: Float
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  amount: Float
+  amount_with_comm: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "mutation root"
 type mutation_root {
-    "delete data from the table: \"accounts\""
-    delete_accounts(
-        "filter the rows which have to be deleted"
-        where: accounts_bool_exp!
-    ): accounts_mutation_response
-    "delete single row from the table: \"accounts\""
-    delete_accounts_by_pk(id: uuid!): accounts
-    "delete data from the table: \"transactions\""
-    delete_transactions(
-        "filter the rows which have to be deleted"
-        where: transactions_bool_exp!
-    ): transactions_mutation_response
-    "delete single row from the table: \"transactions\""
-    delete_transactions_by_pk(id: uuid!): transactions
-    "delete data from the table: \"users\""
-    delete_users(
-        "filter the rows which have to be deleted"
-        where: users_bool_exp!
-    ): users_mutation_response
-    "delete single row from the table: \"users\""
-    delete_users_by_pk(auth0_id: String!): users
-    "insert data into the table: \"accounts\""
-    insert_accounts(
-        "the rows to be inserted"
-        objects: [accounts_insert_input!]!,
-        "on conflict condition"
-        on_conflict: accounts_on_conflict
-    ): accounts_mutation_response
-    "insert a single row into the table: \"accounts\""
-    insert_accounts_one(
-        "the row to be inserted"
-        object: accounts_insert_input!,
-        "on conflict condition"
-        on_conflict: accounts_on_conflict
-    ): accounts
-    "insert data into the table: \"transactions\""
-    insert_transactions(
-        "the rows to be inserted"
-        objects: [transactions_insert_input!]!,
-        "on conflict condition"
-        on_conflict: transactions_on_conflict
-    ): transactions_mutation_response
-    "insert a single row into the table: \"transactions\""
-    insert_transactions_one(
-        "the row to be inserted"
-        object: transactions_insert_input!,
-        "on conflict condition"
-        on_conflict: transactions_on_conflict
-    ): transactions
-    "insert data into the table: \"users\""
-    insert_users(
-        "the rows to be inserted"
-        objects: [users_insert_input!]!,
-        "on conflict condition"
-        on_conflict: users_on_conflict
-    ): users_mutation_response
-    "insert a single row into the table: \"users\""
-    insert_users_one(
-        "the row to be inserted"
-        object: users_insert_input!,
-        "on conflict condition"
-        on_conflict: users_on_conflict
-    ): users
-    "update data of the table: \"accounts\""
-    update_accounts(
-        "increments the integer columns with given value of the filtered values"
-        _inc: accounts_inc_input,
-        "sets the columns of the filtered rows to the given values"
-        _set: accounts_set_input,
-        "filter the rows which have to be updated"
-        where: accounts_bool_exp!
-    ): accounts_mutation_response
-    "update single row of the table: \"accounts\""
-    update_accounts_by_pk(
-        "increments the integer columns with given value of the filtered values"
-        _inc: accounts_inc_input,
-        "sets the columns of the filtered rows to the given values"
-        _set: accounts_set_input,
-        pk_columns: accounts_pk_columns_input!
-    ): accounts
-    "update data of the table: \"transactions\""
-    update_transactions(
-        "increments the integer columns with given value of the filtered values"
-        _inc: transactions_inc_input,
-        "sets the columns of the filtered rows to the given values"
-        _set: transactions_set_input,
-        "filter the rows which have to be updated"
-        where: transactions_bool_exp!
-    ): transactions_mutation_response
-    "update single row of the table: \"transactions\""
-    update_transactions_by_pk(
-        "increments the integer columns with given value of the filtered values"
-        _inc: transactions_inc_input,
-        "sets the columns of the filtered rows to the given values"
-        _set: transactions_set_input,
-        pk_columns: transactions_pk_columns_input!
-    ): transactions
-    "update data of the table: \"users\""
-    update_users(
-        "sets the columns of the filtered rows to the given values"
-        _set: users_set_input,
-        "filter the rows which have to be updated"
-        where: users_bool_exp!
-    ): users_mutation_response
-    "update single row of the table: \"users\""
-    update_users_by_pk(
-        "sets the columns of the filtered rows to the given values"
-        _set: users_set_input,
-        pk_columns: users_pk_columns_input!
-    ): users
+  "delete data from the table: \"accounts\""
+  delete_accounts(
+    "filter the rows which have to be deleted"
+    where: accounts_bool_exp!
+  ): accounts_mutation_response
+  "delete single row from the table: \"accounts\""
+  delete_accounts_by_pk(id: uuid!): accounts
+  "delete data from the table: \"transactions\""
+  delete_transactions(
+    "filter the rows which have to be deleted"
+    where: transactions_bool_exp!
+  ): transactions_mutation_response
+  "delete single row from the table: \"transactions\""
+  delete_transactions_by_pk(id: uuid!): transactions
+  "delete data from the table: \"users\""
+  delete_users(
+    "filter the rows which have to be deleted"
+    where: users_bool_exp!
+  ): users_mutation_response
+  "delete single row from the table: \"users\""
+  delete_users_by_pk(auth0_id: String!): users
+  "insert data into the table: \"accounts\""
+  insert_accounts(
+    "the rows to be inserted"
+    objects: [accounts_insert_input!]!
+    "on conflict condition"
+    on_conflict: accounts_on_conflict
+  ): accounts_mutation_response
+  "insert a single row into the table: \"accounts\""
+  insert_accounts_one(
+    "the row to be inserted"
+    object: accounts_insert_input!
+    "on conflict condition"
+    on_conflict: accounts_on_conflict
+  ): accounts
+  "insert data into the table: \"transactions\""
+  insert_transactions(
+    "the rows to be inserted"
+    objects: [transactions_insert_input!]!
+    "on conflict condition"
+    on_conflict: transactions_on_conflict
+  ): transactions_mutation_response
+  "insert a single row into the table: \"transactions\""
+  insert_transactions_one(
+    "the row to be inserted"
+    object: transactions_insert_input!
+    "on conflict condition"
+    on_conflict: transactions_on_conflict
+  ): transactions
+  "insert data into the table: \"users\""
+  insert_users(
+    "the rows to be inserted"
+    objects: [users_insert_input!]!
+    "on conflict condition"
+    on_conflict: users_on_conflict
+  ): users_mutation_response
+  "insert a single row into the table: \"users\""
+  insert_users_one(
+    "the row to be inserted"
+    object: users_insert_input!
+    "on conflict condition"
+    on_conflict: users_on_conflict
+  ): users
+  "update data of the table: \"accounts\""
+  update_accounts(
+    "increments the integer columns with given value of the filtered values"
+    _inc: accounts_inc_input
+    "sets the columns of the filtered rows to the given values"
+    _set: accounts_set_input
+    "filter the rows which have to be updated"
+    where: accounts_bool_exp!
+  ): accounts_mutation_response
+  "update single row of the table: \"accounts\""
+  update_accounts_by_pk(
+    "increments the integer columns with given value of the filtered values"
+    _inc: accounts_inc_input
+    "sets the columns of the filtered rows to the given values"
+    _set: accounts_set_input
+    pk_columns: accounts_pk_columns_input!
+  ): accounts
+  "update data of the table: \"transactions\""
+  update_transactions(
+    "increments the integer columns with given value of the filtered values"
+    _inc: transactions_inc_input
+    "sets the columns of the filtered rows to the given values"
+    _set: transactions_set_input
+    "filter the rows which have to be updated"
+    where: transactions_bool_exp!
+  ): transactions_mutation_response
+  "update single row of the table: \"transactions\""
+  update_transactions_by_pk(
+    "increments the integer columns with given value of the filtered values"
+    _inc: transactions_inc_input
+    "sets the columns of the filtered rows to the given values"
+    _set: transactions_set_input
+    pk_columns: transactions_pk_columns_input!
+  ): transactions
+  "update data of the table: \"users\""
+  update_users(
+    "sets the columns of the filtered rows to the given values"
+    _set: users_set_input
+    "filter the rows which have to be updated"
+    where: users_bool_exp!
+  ): users_mutation_response
+  "update single row of the table: \"users\""
+  update_users_by_pk(
+    "sets the columns of the filtered rows to the given values"
+    _set: users_set_input
+    pk_columns: users_pk_columns_input!
+  ): users
 }
 
 "columns and relationships of \"options_income_by_symbol_month\""
 type options_income_by_symbol_month {
-    amount: numeric
-    month: timestamptz
-    underlying_symbol: String
+  amount: numeric
+  month: timestamptz
+  underlying_symbol: String
 }
 
 "aggregated selection of \"options_income_by_symbol_month\""
 type options_income_by_symbol_month_aggregate {
-    aggregate: options_income_by_symbol_month_aggregate_fields
-    nodes: [options_income_by_symbol_month!]!
+  aggregate: options_income_by_symbol_month_aggregate_fields
+  nodes: [options_income_by_symbol_month!]!
 }
 
 "aggregate fields of \"options_income_by_symbol_month\""
 type options_income_by_symbol_month_aggregate_fields {
-    avg: options_income_by_symbol_month_avg_fields
-    count(columns: [options_income_by_symbol_month_select_column!], distinct: Boolean): Int
-    max: options_income_by_symbol_month_max_fields
-    min: options_income_by_symbol_month_min_fields
-    stddev: options_income_by_symbol_month_stddev_fields
-    stddev_pop: options_income_by_symbol_month_stddev_pop_fields
-    stddev_samp: options_income_by_symbol_month_stddev_samp_fields
-    sum: options_income_by_symbol_month_sum_fields
-    var_pop: options_income_by_symbol_month_var_pop_fields
-    var_samp: options_income_by_symbol_month_var_samp_fields
-    variance: options_income_by_symbol_month_variance_fields
+  avg: options_income_by_symbol_month_avg_fields
+  count(
+    columns: [options_income_by_symbol_month_select_column!]
+    distinct: Boolean
+  ): Int
+  max: options_income_by_symbol_month_max_fields
+  min: options_income_by_symbol_month_min_fields
+  stddev: options_income_by_symbol_month_stddev_fields
+  stddev_pop: options_income_by_symbol_month_stddev_pop_fields
+  stddev_samp: options_income_by_symbol_month_stddev_samp_fields
+  sum: options_income_by_symbol_month_sum_fields
+  var_pop: options_income_by_symbol_month_var_pop_fields
+  var_samp: options_income_by_symbol_month_var_samp_fields
+  variance: options_income_by_symbol_month_variance_fields
 }
 
 "aggregate avg on columns"
 type options_income_by_symbol_month_avg_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate max on columns"
 type options_income_by_symbol_month_max_fields {
-    amount: numeric
-    month: timestamptz
-    underlying_symbol: String
+  amount: numeric
+  month: timestamptz
+  underlying_symbol: String
 }
 
 "aggregate min on columns"
 type options_income_by_symbol_month_min_fields {
-    amount: numeric
-    month: timestamptz
-    underlying_symbol: String
+  amount: numeric
+  month: timestamptz
+  underlying_symbol: String
 }
 
 "aggregate stddev on columns"
 type options_income_by_symbol_month_stddev_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate stddev_pop on columns"
 type options_income_by_symbol_month_stddev_pop_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate stddev_samp on columns"
 type options_income_by_symbol_month_stddev_samp_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate sum on columns"
 type options_income_by_symbol_month_sum_fields {
-    amount: numeric
+  amount: numeric
 }
 
 "aggregate var_pop on columns"
 type options_income_by_symbol_month_var_pop_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate var_samp on columns"
 type options_income_by_symbol_month_var_samp_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate variance on columns"
 type options_income_by_symbol_month_variance_fields {
-    amount: Float
+  amount: Float
 }
 
 "columns and relationships of \"options_income_by_symbol_year\""
 type options_income_by_symbol_year {
-    amount: numeric
-    underlying_symbol: String
-    year: timestamptz
+  amount: numeric
+  underlying_symbol: String
+  year: timestamptz
 }
 
 "aggregated selection of \"options_income_by_symbol_year\""
 type options_income_by_symbol_year_aggregate {
-    aggregate: options_income_by_symbol_year_aggregate_fields
-    nodes: [options_income_by_symbol_year!]!
+  aggregate: options_income_by_symbol_year_aggregate_fields
+  nodes: [options_income_by_symbol_year!]!
 }
 
 "aggregate fields of \"options_income_by_symbol_year\""
 type options_income_by_symbol_year_aggregate_fields {
-    avg: options_income_by_symbol_year_avg_fields
-    count(columns: [options_income_by_symbol_year_select_column!], distinct: Boolean): Int
-    max: options_income_by_symbol_year_max_fields
-    min: options_income_by_symbol_year_min_fields
-    stddev: options_income_by_symbol_year_stddev_fields
-    stddev_pop: options_income_by_symbol_year_stddev_pop_fields
-    stddev_samp: options_income_by_symbol_year_stddev_samp_fields
-    sum: options_income_by_symbol_year_sum_fields
-    var_pop: options_income_by_symbol_year_var_pop_fields
-    var_samp: options_income_by_symbol_year_var_samp_fields
-    variance: options_income_by_symbol_year_variance_fields
+  avg: options_income_by_symbol_year_avg_fields
+  count(
+    columns: [options_income_by_symbol_year_select_column!]
+    distinct: Boolean
+  ): Int
+  max: options_income_by_symbol_year_max_fields
+  min: options_income_by_symbol_year_min_fields
+  stddev: options_income_by_symbol_year_stddev_fields
+  stddev_pop: options_income_by_symbol_year_stddev_pop_fields
+  stddev_samp: options_income_by_symbol_year_stddev_samp_fields
+  sum: options_income_by_symbol_year_sum_fields
+  var_pop: options_income_by_symbol_year_var_pop_fields
+  var_samp: options_income_by_symbol_year_var_samp_fields
+  variance: options_income_by_symbol_year_variance_fields
 }
 
 "aggregate avg on columns"
 type options_income_by_symbol_year_avg_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate max on columns"
 type options_income_by_symbol_year_max_fields {
-    amount: numeric
-    underlying_symbol: String
-    year: timestamptz
+  amount: numeric
+  underlying_symbol: String
+  year: timestamptz
 }
 
 "aggregate min on columns"
 type options_income_by_symbol_year_min_fields {
-    amount: numeric
-    underlying_symbol: String
-    year: timestamptz
+  amount: numeric
+  underlying_symbol: String
+  year: timestamptz
 }
 
 "aggregate stddev on columns"
 type options_income_by_symbol_year_stddev_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate stddev_pop on columns"
 type options_income_by_symbol_year_stddev_pop_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate stddev_samp on columns"
 type options_income_by_symbol_year_stddev_samp_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate sum on columns"
 type options_income_by_symbol_year_sum_fields {
-    amount: numeric
+  amount: numeric
 }
 
 "aggregate var_pop on columns"
 type options_income_by_symbol_year_var_pop_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate var_samp on columns"
 type options_income_by_symbol_year_var_samp_fields {
-    amount: Float
+  amount: Float
 }
 
 "aggregate variance on columns"
 type options_income_by_symbol_year_variance_fields {
-    amount: Float
+  amount: Float
 }
 
 "query root"
 type query_root {
-    "fetch data from the table: \"accounts\""
-    accounts(
-        "distinct select on columns"
-        distinct_on: [accounts_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [accounts_order_by!],
-        "filter the rows returned"
-        where: accounts_bool_exp
-    ): [accounts!]!
-    "fetch aggregated fields from the table: \"accounts\""
-    accounts_aggregate(
-        "distinct select on columns"
-        distinct_on: [accounts_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [accounts_order_by!],
-        "filter the rows returned"
-        where: accounts_bool_exp
-    ): accounts_aggregate!
-    "fetch data from the table: \"accounts\" using primary key columns"
-    accounts_by_pk(id: uuid!): accounts
-    "fetch data from the table: \"fetch_transactions\""
-    fetch_transactions(
-        "distinct select on columns"
-        distinct_on: [fetch_transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [fetch_transactions_order_by!],
-        "filter the rows returned"
-        where: fetch_transactions_bool_exp
-    ): [fetch_transactions!]!
-    "fetch aggregated fields from the table: \"fetch_transactions\""
-    fetch_transactions_aggregate(
-        "distinct select on columns"
-        distinct_on: [fetch_transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [fetch_transactions_order_by!],
-        "filter the rows returned"
-        where: fetch_transactions_bool_exp
-    ): fetch_transactions_aggregate!
-    "fetch data from the table: \"options_income_by_symbol_month\""
-    options_income_by_symbol_month(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_month_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_month_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_month_bool_exp
-    ): [options_income_by_symbol_month!]!
-    "fetch aggregated fields from the table: \"options_income_by_symbol_month\""
-    options_income_by_symbol_month_aggregate(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_month_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_month_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_month_bool_exp
-    ): options_income_by_symbol_month_aggregate!
-    "fetch data from the table: \"options_income_by_symbol_year\""
-    options_income_by_symbol_year(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_year_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_year_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_year_bool_exp
-    ): [options_income_by_symbol_year!]!
-    "fetch aggregated fields from the table: \"options_income_by_symbol_year\""
-    options_income_by_symbol_year_aggregate(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_year_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_year_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_year_bool_exp
-    ): options_income_by_symbol_year_aggregate!
-    "fetch data from the table: \"transactions\""
-    transactions(
-        "distinct select on columns"
-        distinct_on: [transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [transactions_order_by!],
-        "filter the rows returned"
-        where: transactions_bool_exp
-    ): [transactions!]!
-    "fetch aggregated fields from the table: \"transactions\""
-    transactions_aggregate(
-        "distinct select on columns"
-        distinct_on: [transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [transactions_order_by!],
-        "filter the rows returned"
-        where: transactions_bool_exp
-    ): transactions_aggregate!
-    "fetch data from the table: \"transactions\" using primary key columns"
-    transactions_by_pk(id: uuid!): transactions
-    "fetch data from the table: \"users\""
-    users(
-        "distinct select on columns"
-        distinct_on: [users_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [users_order_by!],
-        "filter the rows returned"
-        where: users_bool_exp
-    ): [users!]!
-    "fetch aggregated fields from the table: \"users\""
-    users_aggregate(
-        "distinct select on columns"
-        distinct_on: [users_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [users_order_by!],
-        "filter the rows returned"
-        where: users_bool_exp
-    ): users_aggregate!
-    "fetch data from the table: \"users\" using primary key columns"
-    users_by_pk(auth0_id: String!): users
+  "fetch data from the table: \"accounts\""
+  accounts(
+    "distinct select on columns"
+    distinct_on: [accounts_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [accounts_order_by!]
+    "filter the rows returned"
+    where: accounts_bool_exp
+  ): [accounts!]!
+  "fetch aggregated fields from the table: \"accounts\""
+  accounts_aggregate(
+    "distinct select on columns"
+    distinct_on: [accounts_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [accounts_order_by!]
+    "filter the rows returned"
+    where: accounts_bool_exp
+  ): accounts_aggregate!
+  "fetch data from the table: \"accounts\" using primary key columns"
+  accounts_by_pk(id: uuid!): accounts
+  "fetch data from the table: \"fetch_transactions\""
+  fetch_transactions(
+    "distinct select on columns"
+    distinct_on: [fetch_transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [fetch_transactions_order_by!]
+    "filter the rows returned"
+    where: fetch_transactions_bool_exp
+  ): [fetch_transactions!]!
+  "fetch aggregated fields from the table: \"fetch_transactions\""
+  fetch_transactions_aggregate(
+    "distinct select on columns"
+    distinct_on: [fetch_transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [fetch_transactions_order_by!]
+    "filter the rows returned"
+    where: fetch_transactions_bool_exp
+  ): fetch_transactions_aggregate!
+  "fetch data from the table: \"options_income_by_symbol_month\""
+  options_income_by_symbol_month(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_month_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_month_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_month_bool_exp
+  ): [options_income_by_symbol_month!]!
+  "fetch aggregated fields from the table: \"options_income_by_symbol_month\""
+  options_income_by_symbol_month_aggregate(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_month_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_month_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_month_bool_exp
+  ): options_income_by_symbol_month_aggregate!
+  "fetch data from the table: \"options_income_by_symbol_year\""
+  options_income_by_symbol_year(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_year_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_year_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_year_bool_exp
+  ): [options_income_by_symbol_year!]!
+  "fetch aggregated fields from the table: \"options_income_by_symbol_year\""
+  options_income_by_symbol_year_aggregate(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_year_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_year_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_year_bool_exp
+  ): options_income_by_symbol_year_aggregate!
+  "fetch data from the table: \"transactions\""
+  transactions(
+    "distinct select on columns"
+    distinct_on: [transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [transactions_order_by!]
+    "filter the rows returned"
+    where: transactions_bool_exp
+  ): [transactions!]!
+  "fetch aggregated fields from the table: \"transactions\""
+  transactions_aggregate(
+    "distinct select on columns"
+    distinct_on: [transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [transactions_order_by!]
+    "filter the rows returned"
+    where: transactions_bool_exp
+  ): transactions_aggregate!
+  "fetch data from the table: \"transactions\" using primary key columns"
+  transactions_by_pk(id: uuid!): transactions
+  "fetch data from the table: \"users\""
+  users(
+    "distinct select on columns"
+    distinct_on: [users_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [users_order_by!]
+    "filter the rows returned"
+    where: users_bool_exp
+  ): [users!]!
+  "fetch aggregated fields from the table: \"users\""
+  users_aggregate(
+    "distinct select on columns"
+    distinct_on: [users_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [users_order_by!]
+    "filter the rows returned"
+    where: users_bool_exp
+  ): users_aggregate!
+  "fetch data from the table: \"users\" using primary key columns"
+  users_by_pk(auth0_id: String!): users
 }
 
 "subscription root"
 type subscription_root {
-    "fetch data from the table: \"accounts\""
-    accounts(
-        "distinct select on columns"
-        distinct_on: [accounts_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [accounts_order_by!],
-        "filter the rows returned"
-        where: accounts_bool_exp
-    ): [accounts!]!
-    "fetch aggregated fields from the table: \"accounts\""
-    accounts_aggregate(
-        "distinct select on columns"
-        distinct_on: [accounts_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [accounts_order_by!],
-        "filter the rows returned"
-        where: accounts_bool_exp
-    ): accounts_aggregate!
-    "fetch data from the table: \"accounts\" using primary key columns"
-    accounts_by_pk(id: uuid!): accounts
-    "fetch data from the table: \"fetch_transactions\""
-    fetch_transactions(
-        "distinct select on columns"
-        distinct_on: [fetch_transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [fetch_transactions_order_by!],
-        "filter the rows returned"
-        where: fetch_transactions_bool_exp
-    ): [fetch_transactions!]!
-    "fetch aggregated fields from the table: \"fetch_transactions\""
-    fetch_transactions_aggregate(
-        "distinct select on columns"
-        distinct_on: [fetch_transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [fetch_transactions_order_by!],
-        "filter the rows returned"
-        where: fetch_transactions_bool_exp
-    ): fetch_transactions_aggregate!
-    "fetch data from the table: \"options_income_by_symbol_month\""
-    options_income_by_symbol_month(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_month_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_month_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_month_bool_exp
-    ): [options_income_by_symbol_month!]!
-    "fetch aggregated fields from the table: \"options_income_by_symbol_month\""
-    options_income_by_symbol_month_aggregate(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_month_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_month_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_month_bool_exp
-    ): options_income_by_symbol_month_aggregate!
-    "fetch data from the table: \"options_income_by_symbol_year\""
-    options_income_by_symbol_year(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_year_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_year_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_year_bool_exp
-    ): [options_income_by_symbol_year!]!
-    "fetch aggregated fields from the table: \"options_income_by_symbol_year\""
-    options_income_by_symbol_year_aggregate(
-        "distinct select on columns"
-        distinct_on: [options_income_by_symbol_year_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [options_income_by_symbol_year_order_by!],
-        "filter the rows returned"
-        where: options_income_by_symbol_year_bool_exp
-    ): options_income_by_symbol_year_aggregate!
-    "fetch data from the table: \"transactions\""
-    transactions(
-        "distinct select on columns"
-        distinct_on: [transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [transactions_order_by!],
-        "filter the rows returned"
-        where: transactions_bool_exp
-    ): [transactions!]!
-    "fetch aggregated fields from the table: \"transactions\""
-    transactions_aggregate(
-        "distinct select on columns"
-        distinct_on: [transactions_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [transactions_order_by!],
-        "filter the rows returned"
-        where: transactions_bool_exp
-    ): transactions_aggregate!
-    "fetch data from the table: \"transactions\" using primary key columns"
-    transactions_by_pk(id: uuid!): transactions
-    "fetch data from the table: \"users\""
-    users(
-        "distinct select on columns"
-        distinct_on: [users_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [users_order_by!],
-        "filter the rows returned"
-        where: users_bool_exp
-    ): [users!]!
-    "fetch aggregated fields from the table: \"users\""
-    users_aggregate(
-        "distinct select on columns"
-        distinct_on: [users_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [users_order_by!],
-        "filter the rows returned"
-        where: users_bool_exp
-    ): users_aggregate!
-    "fetch data from the table: \"users\" using primary key columns"
-    users_by_pk(auth0_id: String!): users
+  "fetch data from the table: \"accounts\""
+  accounts(
+    "distinct select on columns"
+    distinct_on: [accounts_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [accounts_order_by!]
+    "filter the rows returned"
+    where: accounts_bool_exp
+  ): [accounts!]!
+  "fetch aggregated fields from the table: \"accounts\""
+  accounts_aggregate(
+    "distinct select on columns"
+    distinct_on: [accounts_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [accounts_order_by!]
+    "filter the rows returned"
+    where: accounts_bool_exp
+  ): accounts_aggregate!
+  "fetch data from the table: \"accounts\" using primary key columns"
+  accounts_by_pk(id: uuid!): accounts
+  "fetch data from the table: \"fetch_transactions\""
+  fetch_transactions(
+    "distinct select on columns"
+    distinct_on: [fetch_transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [fetch_transactions_order_by!]
+    "filter the rows returned"
+    where: fetch_transactions_bool_exp
+  ): [fetch_transactions!]!
+  "fetch aggregated fields from the table: \"fetch_transactions\""
+  fetch_transactions_aggregate(
+    "distinct select on columns"
+    distinct_on: [fetch_transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [fetch_transactions_order_by!]
+    "filter the rows returned"
+    where: fetch_transactions_bool_exp
+  ): fetch_transactions_aggregate!
+  "fetch data from the table: \"options_income_by_symbol_month\""
+  options_income_by_symbol_month(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_month_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_month_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_month_bool_exp
+  ): [options_income_by_symbol_month!]!
+  "fetch aggregated fields from the table: \"options_income_by_symbol_month\""
+  options_income_by_symbol_month_aggregate(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_month_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_month_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_month_bool_exp
+  ): options_income_by_symbol_month_aggregate!
+  "fetch data from the table: \"options_income_by_symbol_year\""
+  options_income_by_symbol_year(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_year_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_year_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_year_bool_exp
+  ): [options_income_by_symbol_year!]!
+  "fetch aggregated fields from the table: \"options_income_by_symbol_year\""
+  options_income_by_symbol_year_aggregate(
+    "distinct select on columns"
+    distinct_on: [options_income_by_symbol_year_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [options_income_by_symbol_year_order_by!]
+    "filter the rows returned"
+    where: options_income_by_symbol_year_bool_exp
+  ): options_income_by_symbol_year_aggregate!
+  "fetch data from the table: \"transactions\""
+  transactions(
+    "distinct select on columns"
+    distinct_on: [transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [transactions_order_by!]
+    "filter the rows returned"
+    where: transactions_bool_exp
+  ): [transactions!]!
+  "fetch aggregated fields from the table: \"transactions\""
+  transactions_aggregate(
+    "distinct select on columns"
+    distinct_on: [transactions_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [transactions_order_by!]
+    "filter the rows returned"
+    where: transactions_bool_exp
+  ): transactions_aggregate!
+  "fetch data from the table: \"transactions\" using primary key columns"
+  transactions_by_pk(id: uuid!): transactions
+  "fetch data from the table: \"users\""
+  users(
+    "distinct select on columns"
+    distinct_on: [users_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [users_order_by!]
+    "filter the rows returned"
+    where: users_bool_exp
+  ): [users!]!
+  "fetch aggregated fields from the table: \"users\""
+  users_aggregate(
+    "distinct select on columns"
+    distinct_on: [users_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [users_order_by!]
+    "filter the rows returned"
+    where: users_bool_exp
+  ): users_aggregate!
+  "fetch data from the table: \"users\" using primary key columns"
+  users_by_pk(auth0_id: String!): users
 }
 
 "columns and relationships of \"transactions\""
 type transactions {
-    "An object relationship"
-    account: accounts!
-    account_id: uuid!
-    action: String!
-    commission: numeric
-    expiration: date
-    id: uuid!
-    option_type: String
-    price: numeric!
-    quantity: Int!
-    strike: numeric
-    trade_date: date!
-    underlying_symbol: String!
+  "An object relationship"
+  account: accounts!
+  account_id: uuid!
+  action: String!
+  commission: numeric
+  expiration: date
+  id: uuid!
+  option_type: String
+  price: numeric!
+  quantity: Int!
+  strike: numeric
+  trade_date: date!
+  underlying_symbol: String!
 }
 
 "aggregated selection of \"transactions\""
 type transactions_aggregate {
-    aggregate: transactions_aggregate_fields
-    nodes: [transactions!]!
+  aggregate: transactions_aggregate_fields
+  nodes: [transactions!]!
 }
 
 "aggregate fields of \"transactions\""
 type transactions_aggregate_fields {
-    avg: transactions_avg_fields
-    count(columns: [transactions_select_column!], distinct: Boolean): Int
-    max: transactions_max_fields
-    min: transactions_min_fields
-    stddev: transactions_stddev_fields
-    stddev_pop: transactions_stddev_pop_fields
-    stddev_samp: transactions_stddev_samp_fields
-    sum: transactions_sum_fields
-    var_pop: transactions_var_pop_fields
-    var_samp: transactions_var_samp_fields
-    variance: transactions_variance_fields
+  avg: transactions_avg_fields
+  count(columns: [transactions_select_column!], distinct: Boolean): Int
+  max: transactions_max_fields
+  min: transactions_min_fields
+  stddev: transactions_stddev_fields
+  stddev_pop: transactions_stddev_pop_fields
+  stddev_samp: transactions_stddev_samp_fields
+  sum: transactions_sum_fields
+  var_pop: transactions_var_pop_fields
+  var_samp: transactions_var_samp_fields
+  variance: transactions_variance_fields
 }
 
 "aggregate avg on columns"
 type transactions_avg_fields {
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate max on columns"
 type transactions_max_fields {
-    account_id: uuid
-    action: String
-    commission: numeric
-    expiration: date
-    id: uuid
-    option_type: String
-    price: numeric
-    quantity: Int
-    strike: numeric
-    trade_date: date
-    underlying_symbol: String
+  account_id: uuid
+  action: String
+  commission: numeric
+  expiration: date
+  id: uuid
+  option_type: String
+  price: numeric
+  quantity: Int
+  strike: numeric
+  trade_date: date
+  underlying_symbol: String
 }
 
 "aggregate min on columns"
 type transactions_min_fields {
-    account_id: uuid
-    action: String
-    commission: numeric
-    expiration: date
-    id: uuid
-    option_type: String
-    price: numeric
-    quantity: Int
-    strike: numeric
-    trade_date: date
-    underlying_symbol: String
+  account_id: uuid
+  action: String
+  commission: numeric
+  expiration: date
+  id: uuid
+  option_type: String
+  price: numeric
+  quantity: Int
+  strike: numeric
+  trade_date: date
+  underlying_symbol: String
 }
 
 "response of any mutation on the table \"transactions\""
 type transactions_mutation_response {
-    "number of affected rows by the mutation"
-    affected_rows: Int!
-    "data of the affected rows by the mutation"
-    returning: [transactions!]!
+  "number of affected rows by the mutation"
+  affected_rows: Int!
+  "data of the affected rows by the mutation"
+  returning: [transactions!]!
 }
 
 "aggregate stddev on columns"
 type transactions_stddev_fields {
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate stddev_pop on columns"
 type transactions_stddev_pop_fields {
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate stddev_samp on columns"
 type transactions_stddev_samp_fields {
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate sum on columns"
 type transactions_sum_fields {
-    commission: numeric
-    price: numeric
-    quantity: Int
-    strike: numeric
+  commission: numeric
+  price: numeric
+  quantity: Int
+  strike: numeric
 }
 
 "aggregate var_pop on columns"
 type transactions_var_pop_fields {
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate var_samp on columns"
 type transactions_var_samp_fields {
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "aggregate variance on columns"
 type transactions_variance_fields {
-    commission: Float
-    price: Float
-    quantity: Float
-    strike: Float
+  commission: Float
+  price: Float
+  quantity: Float
+  strike: Float
 }
 
 "columns and relationships of \"users\""
 type users {
-    auth0_id: String!
-    created_at: timestamptz!
-    id: uuid!
-    last_seen: timestamptz!
-    name: String!
-    "An array relationship"
-    portfolios(
-        "distinct select on columns"
-        distinct_on: [accounts_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [accounts_order_by!],
-        "filter the rows returned"
-        where: accounts_bool_exp
-    ): [accounts!]!
-    "An aggregated array relationship"
-    portfolios_aggregate(
-        "distinct select on columns"
-        distinct_on: [accounts_select_column!],
-        "limit the number of rows returned"
-        limit: Int,
-        "skip the first n rows. Use only with order_by"
-        offset: Int,
-        "sort the rows by one or more columns"
-        order_by: [accounts_order_by!],
-        "filter the rows returned"
-        where: accounts_bool_exp
-    ): accounts_aggregate!
+  auth0_id: String!
+  created_at: timestamptz!
+  id: uuid!
+  last_seen: timestamptz!
+  name: String!
+  "An array relationship"
+  portfolios(
+    "distinct select on columns"
+    distinct_on: [accounts_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [accounts_order_by!]
+    "filter the rows returned"
+    where: accounts_bool_exp
+  ): [accounts!]!
+  "An aggregated array relationship"
+  portfolios_aggregate(
+    "distinct select on columns"
+    distinct_on: [accounts_select_column!]
+    "limit the number of rows returned"
+    limit: Int
+    "skip the first n rows. Use only with order_by"
+    offset: Int
+    "sort the rows by one or more columns"
+    order_by: [accounts_order_by!]
+    "filter the rows returned"
+    where: accounts_bool_exp
+  ): accounts_aggregate!
 }
 
 "aggregated selection of \"users\""
 type users_aggregate {
-    aggregate: users_aggregate_fields
-    nodes: [users!]!
+  aggregate: users_aggregate_fields
+  nodes: [users!]!
 }
 
 "aggregate fields of \"users\""
 type users_aggregate_fields {
-    count(columns: [users_select_column!], distinct: Boolean): Int
-    max: users_max_fields
-    min: users_min_fields
+  count(columns: [users_select_column!], distinct: Boolean): Int
+  max: users_max_fields
+  min: users_min_fields
 }
 
 "aggregate max on columns"
 type users_max_fields {
-    auth0_id: String
-    created_at: timestamptz
-    id: uuid
-    last_seen: timestamptz
-    name: String
+  auth0_id: String
+  created_at: timestamptz
+  id: uuid
+  last_seen: timestamptz
+  name: String
 }
 
 "aggregate min on columns"
 type users_min_fields {
-    auth0_id: String
-    created_at: timestamptz
-    id: uuid
-    last_seen: timestamptz
-    name: String
+  auth0_id: String
+  created_at: timestamptz
+  id: uuid
+  last_seen: timestamptz
+  name: String
 }
 
 "response of any mutation on the table \"users\""
 type users_mutation_response {
-    "number of affected rows by the mutation"
-    affected_rows: Int!
-    "data of the affected rows by the mutation"
-    returning: [users!]!
+  "number of affected rows by the mutation"
+  affected_rows: Int!
+  "data of the affected rows by the mutation"
+  returning: [users!]!
 }
 
 "unique or primary key constraints on table \"accounts\""
 enum accounts_constraint {
-    "unique or primary key constraint"
-    portfolios_name_key
-    "unique or primary key constraint"
-    portfolios_pkey
+  "unique or primary key constraint"
+  portfolios_name_key
+  "unique or primary key constraint"
+  portfolios_pkey
 }
 
 "select columns of table \"accounts\""
 enum accounts_select_column {
-    "column name"
-    cash_balance
-    "column name"
-    currency
-    "column name"
-    id
-    "column name"
-    name
-    "column name"
-    user_id
+  "column name"
+  cash_balance
+  "column name"
+  currency
+  "column name"
+  id
+  "column name"
+  name
+  "column name"
+  user_id
 }
 
 "update columns of table \"accounts\""
 enum accounts_update_column {
-    "column name"
-    cash_balance
-    "column name"
-    currency
-    "column name"
-    id
-    "column name"
-    name
-    "column name"
-    user_id
+  "column name"
+  cash_balance
+  "column name"
+  currency
+  "column name"
+  id
+  "column name"
+  name
+  "column name"
+  user_id
 }
 
 "select columns of table \"fetch_transactions\""
 enum fetch_transactions_select_column {
-    "column name"
-    account
-    "column name"
-    action
-    "column name"
-    amount
-    "column name"
-    amount_with_comm
-    "column name"
-    commission
-    "column name"
-    expiration
-    "column name"
-    id
-    "column name"
-    option_type
-    "column name"
-    price
-    "column name"
-    quantity
-    "column name"
-    strike
-    "column name"
-    symbol
-    "column name"
-    trade_date
+  "column name"
+  account
+  "column name"
+  action
+  "column name"
+  amount
+  "column name"
+  amount_with_comm
+  "column name"
+  commission
+  "column name"
+  expiration
+  "column name"
+  id
+  "column name"
+  option_type
+  "column name"
+  price
+  "column name"
+  quantity
+  "column name"
+  strike
+  "column name"
+  symbol
+  "column name"
+  trade_date
 }
 
 "select columns of table \"options_income_by_symbol_month\""
 enum options_income_by_symbol_month_select_column {
-    "column name"
-    amount
-    "column name"
-    month
-    "column name"
-    underlying_symbol
+  "column name"
+  amount
+  "column name"
+  month
+  "column name"
+  underlying_symbol
 }
 
 "select columns of table \"options_income_by_symbol_year\""
 enum options_income_by_symbol_year_select_column {
-    "column name"
-    amount
-    "column name"
-    underlying_symbol
-    "column name"
-    year
+  "column name"
+  amount
+  "column name"
+  underlying_symbol
+  "column name"
+  year
 }
 
 "column ordering options"
 enum order_by {
-    "in the ascending order, nulls last"
-    asc
-    "in the ascending order, nulls first"
-    asc_nulls_first
-    "in the ascending order, nulls last"
-    asc_nulls_last
-    "in the descending order, nulls first"
-    desc
-    "in the descending order, nulls first"
-    desc_nulls_first
-    "in the descending order, nulls last"
-    desc_nulls_last
+  "in the ascending order, nulls last"
+  asc
+  "in the ascending order, nulls first"
+  asc_nulls_first
+  "in the ascending order, nulls last"
+  asc_nulls_last
+  "in the descending order, nulls first"
+  desc
+  "in the descending order, nulls first"
+  desc_nulls_first
+  "in the descending order, nulls last"
+  desc_nulls_last
 }
 
 "unique or primary key constraints on table \"transactions\""
 enum transactions_constraint {
-    "unique or primary key constraint"
-    transactions_pkey
+  "unique or primary key constraint"
+  transactions_pkey
 }
 
 "select columns of table \"transactions\""
 enum transactions_select_column {
-    "column name"
-    account_id
-    "column name"
-    action
-    "column name"
-    commission
-    "column name"
-    expiration
-    "column name"
-    id
-    "column name"
-    option_type
-    "column name"
-    price
-    "column name"
-    quantity
-    "column name"
-    strike
-    "column name"
-    trade_date
-    "column name"
-    underlying_symbol
+  "column name"
+  account_id
+  "column name"
+  action
+  "column name"
+  commission
+  "column name"
+  expiration
+  "column name"
+  id
+  "column name"
+  option_type
+  "column name"
+  price
+  "column name"
+  quantity
+  "column name"
+  strike
+  "column name"
+  trade_date
+  "column name"
+  underlying_symbol
 }
 
 "update columns of table \"transactions\""
 enum transactions_update_column {
-    "column name"
-    account_id
-    "column name"
-    action
-    "column name"
-    commission
-    "column name"
-    expiration
-    "column name"
-    id
-    "column name"
-    option_type
-    "column name"
-    price
-    "column name"
-    quantity
-    "column name"
-    strike
-    "column name"
-    trade_date
-    "column name"
-    underlying_symbol
+  "column name"
+  account_id
+  "column name"
+  action
+  "column name"
+  commission
+  "column name"
+  expiration
+  "column name"
+  id
+  "column name"
+  option_type
+  "column name"
+  price
+  "column name"
+  quantity
+  "column name"
+  strike
+  "column name"
+  trade_date
+  "column name"
+  underlying_symbol
 }
 
 "unique or primary key constraints on table \"users\""
 enum users_constraint {
-    "unique or primary key constraint"
-    users_id_key
-    "unique or primary key constraint"
-    users_pkey
+  "unique or primary key constraint"
+  users_id_key
+  "unique or primary key constraint"
+  users_pkey
 }
 
 "select columns of table \"users\""
 enum users_select_column {
-    "column name"
-    auth0_id
-    "column name"
-    created_at
-    "column name"
-    id
-    "column name"
-    last_seen
-    "column name"
-    name
+  "column name"
+  auth0_id
+  "column name"
+  created_at
+  "column name"
+  id
+  "column name"
+  last_seen
+  "column name"
+  name
 }
 
 "update columns of table \"users\""
 enum users_update_column {
-    "column name"
-    auth0_id
-    "column name"
-    created_at
-    "column name"
-    id
-    "column name"
-    last_seen
-    "column name"
-    name
+  "column name"
+  auth0_id
+  "column name"
+  created_at
+  "column name"
+  id
+  "column name"
+  last_seen
+  "column name"
+  name
 }
 
 "expression to compare columns of type Int. All fields are combined with logical 'AND'."
 input Int_comparison_exp {
-    _eq: Int
-    _gt: Int
-    _gte: Int
-    _in: [Int!]
-    _is_null: Boolean
-    _lt: Int
-    _lte: Int
-    _neq: Int
-    _nin: [Int!]
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
 }
 
 "expression to compare columns of type String. All fields are combined with logical 'AND'."
 input String_comparison_exp {
-    _eq: String
-    _gt: String
-    _gte: String
-    _ilike: String
-    _in: [String!]
-    _is_null: Boolean
-    _like: String
-    _lt: String
-    _lte: String
-    _neq: String
-    _nilike: String
-    _nin: [String!]
-    _nlike: String
-    _nsimilar: String
-    _similar: String
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
 }
 
 "order by aggregate values of table \"accounts\""
 input accounts_aggregate_order_by {
-    avg: accounts_avg_order_by
-    count: order_by
-    max: accounts_max_order_by
-    min: accounts_min_order_by
-    stddev: accounts_stddev_order_by
-    stddev_pop: accounts_stddev_pop_order_by
-    stddev_samp: accounts_stddev_samp_order_by
-    sum: accounts_sum_order_by
-    var_pop: accounts_var_pop_order_by
-    var_samp: accounts_var_samp_order_by
-    variance: accounts_variance_order_by
+  avg: accounts_avg_order_by
+  count: order_by
+  max: accounts_max_order_by
+  min: accounts_min_order_by
+  stddev: accounts_stddev_order_by
+  stddev_pop: accounts_stddev_pop_order_by
+  stddev_samp: accounts_stddev_samp_order_by
+  sum: accounts_sum_order_by
+  var_pop: accounts_var_pop_order_by
+  var_samp: accounts_var_samp_order_by
+  variance: accounts_variance_order_by
 }
 
 "input type for inserting array relation for remote table \"accounts\""
 input accounts_arr_rel_insert_input {
-    data: [accounts_insert_input!]!
-    on_conflict: accounts_on_conflict
+  data: [accounts_insert_input!]!
+  on_conflict: accounts_on_conflict
 }
 
 "order by avg() on columns of table \"accounts\""
 input accounts_avg_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "Boolean expression to filter rows from the table \"accounts\". All fields are combined with a logical 'AND'."
 input accounts_bool_exp {
-    _and: [accounts_bool_exp]
-    _not: accounts_bool_exp
-    _or: [accounts_bool_exp]
-    cash_balance: numeric_comparison_exp
-    currency: String_comparison_exp
-    id: uuid_comparison_exp
-    name: String_comparison_exp
-    transactions: transactions_bool_exp
-    user: users_bool_exp
-    user_id: String_comparison_exp
+  _and: [accounts_bool_exp]
+  _not: accounts_bool_exp
+  _or: [accounts_bool_exp]
+  cash_balance: numeric_comparison_exp
+  currency: String_comparison_exp
+  id: uuid_comparison_exp
+  name: String_comparison_exp
+  transactions: transactions_bool_exp
+  user: users_bool_exp
+  user_id: String_comparison_exp
 }
 
 "input type for incrementing integer column in table \"accounts\""
 input accounts_inc_input {
-    cash_balance: numeric
+  cash_balance: numeric
 }
 
 "input type for inserting data into table \"accounts\""
 input accounts_insert_input {
-    cash_balance: numeric
-    currency: String
-    id: uuid
-    name: String
-    transactions: transactions_arr_rel_insert_input
-    user: users_obj_rel_insert_input
-    user_id: String
+  cash_balance: numeric
+  currency: String
+  id: uuid
+  name: String
+  transactions: transactions_arr_rel_insert_input
+  user: users_obj_rel_insert_input
+  user_id: String
 }
 
 "order by max() on columns of table \"accounts\""
 input accounts_max_order_by {
-    cash_balance: order_by
-    currency: order_by
-    id: order_by
-    name: order_by
-    user_id: order_by
+  cash_balance: order_by
+  currency: order_by
+  id: order_by
+  name: order_by
+  user_id: order_by
 }
 
 "order by min() on columns of table \"accounts\""
 input accounts_min_order_by {
-    cash_balance: order_by
-    currency: order_by
-    id: order_by
-    name: order_by
-    user_id: order_by
+  cash_balance: order_by
+  currency: order_by
+  id: order_by
+  name: order_by
+  user_id: order_by
 }
 
 "input type for inserting object relation for remote table \"accounts\""
 input accounts_obj_rel_insert_input {
-    data: accounts_insert_input!
-    on_conflict: accounts_on_conflict
+  data: accounts_insert_input!
+  on_conflict: accounts_on_conflict
 }
 
 "on conflict condition type for table \"accounts\""
 input accounts_on_conflict {
-    constraint: accounts_constraint!
-    update_columns: [accounts_update_column!]!
-    where: accounts_bool_exp
+  constraint: accounts_constraint!
+  update_columns: [accounts_update_column!]!
+  where: accounts_bool_exp
 }
 
 "ordering options when selecting data from \"accounts\""
 input accounts_order_by {
-    cash_balance: order_by
-    currency: order_by
-    id: order_by
-    name: order_by
-    transactions_aggregate: transactions_aggregate_order_by
-    user: users_order_by
-    user_id: order_by
+  cash_balance: order_by
+  currency: order_by
+  id: order_by
+  name: order_by
+  transactions_aggregate: transactions_aggregate_order_by
+  user: users_order_by
+  user_id: order_by
 }
 
 "primary key columns input for table: \"accounts\""
 input accounts_pk_columns_input {
-    id: uuid!
+  id: uuid!
 }
 
 "input type for updating data in table \"accounts\""
 input accounts_set_input {
-    cash_balance: numeric
-    currency: String
-    id: uuid
-    name: String
-    user_id: String
+  cash_balance: numeric
+  currency: String
+  id: uuid
+  name: String
+  user_id: String
 }
 
 "order by stddev() on columns of table \"accounts\""
 input accounts_stddev_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "order by stddev_pop() on columns of table \"accounts\""
 input accounts_stddev_pop_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "order by stddev_samp() on columns of table \"accounts\""
 input accounts_stddev_samp_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "order by sum() on columns of table \"accounts\""
 input accounts_sum_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "order by var_pop() on columns of table \"accounts\""
 input accounts_var_pop_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "order by var_samp() on columns of table \"accounts\""
 input accounts_var_samp_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "order by variance() on columns of table \"accounts\""
 input accounts_variance_order_by {
-    cash_balance: order_by
+  cash_balance: order_by
 }
 
 "expression to compare columns of type date. All fields are combined with logical 'AND'."
 input date_comparison_exp {
-    _eq: date
-    _gt: date
-    _gte: date
-    _in: [date!]
-    _is_null: Boolean
-    _lt: date
-    _lte: date
-    _neq: date
-    _nin: [date!]
+  _eq: date
+  _gt: date
+  _gte: date
+  _in: [date!]
+  _is_null: Boolean
+  _lt: date
+  _lte: date
+  _neq: date
+  _nin: [date!]
 }
 
 "order by aggregate values of table \"fetch_transactions\""
 input fetch_transactions_aggregate_order_by {
-    avg: fetch_transactions_avg_order_by
-    count: order_by
-    max: fetch_transactions_max_order_by
-    min: fetch_transactions_min_order_by
-    stddev: fetch_transactions_stddev_order_by
-    stddev_pop: fetch_transactions_stddev_pop_order_by
-    stddev_samp: fetch_transactions_stddev_samp_order_by
-    sum: fetch_transactions_sum_order_by
-    var_pop: fetch_transactions_var_pop_order_by
-    var_samp: fetch_transactions_var_samp_order_by
-    variance: fetch_transactions_variance_order_by
+  avg: fetch_transactions_avg_order_by
+  count: order_by
+  max: fetch_transactions_max_order_by
+  min: fetch_transactions_min_order_by
+  stddev: fetch_transactions_stddev_order_by
+  stddev_pop: fetch_transactions_stddev_pop_order_by
+  stddev_samp: fetch_transactions_stddev_samp_order_by
+  sum: fetch_transactions_sum_order_by
+  var_pop: fetch_transactions_var_pop_order_by
+  var_samp: fetch_transactions_var_samp_order_by
+  variance: fetch_transactions_variance_order_by
 }
 
 "order by avg() on columns of table \"fetch_transactions\""
 input fetch_transactions_avg_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "Boolean expression to filter rows from the table \"fetch_transactions\". All fields are combined with a logical 'AND'."
 input fetch_transactions_bool_exp {
-    _and: [fetch_transactions_bool_exp]
-    _not: fetch_transactions_bool_exp
-    _or: [fetch_transactions_bool_exp]
-    account: String_comparison_exp
-    action: String_comparison_exp
-    amount: numeric_comparison_exp
-    amount_with_comm: numeric_comparison_exp
-    commission: numeric_comparison_exp
-    expiration: date_comparison_exp
-    id: uuid_comparison_exp
-    option_type: String_comparison_exp
-    price: numeric_comparison_exp
-    quantity: Int_comparison_exp
-    strike: numeric_comparison_exp
-    symbol: String_comparison_exp
-    trade_date: date_comparison_exp
+  _and: [fetch_transactions_bool_exp]
+  _not: fetch_transactions_bool_exp
+  _or: [fetch_transactions_bool_exp]
+  account: String_comparison_exp
+  action: String_comparison_exp
+  amount: numeric_comparison_exp
+  amount_with_comm: numeric_comparison_exp
+  commission: numeric_comparison_exp
+  expiration: date_comparison_exp
+  id: uuid_comparison_exp
+  option_type: String_comparison_exp
+  price: numeric_comparison_exp
+  quantity: Int_comparison_exp
+  strike: numeric_comparison_exp
+  symbol: String_comparison_exp
+  trade_date: date_comparison_exp
 }
 
 "order by max() on columns of table \"fetch_transactions\""
 input fetch_transactions_max_order_by {
-    account: order_by
-    action: order_by
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    expiration: order_by
-    id: order_by
-    option_type: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
-    symbol: order_by
-    trade_date: order_by
+  account: order_by
+  action: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  expiration: order_by
+  id: order_by
+  option_type: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
+  symbol: order_by
+  trade_date: order_by
 }
 
 "order by min() on columns of table \"fetch_transactions\""
 input fetch_transactions_min_order_by {
-    account: order_by
-    action: order_by
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    expiration: order_by
-    id: order_by
-    option_type: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
-    symbol: order_by
-    trade_date: order_by
+  account: order_by
+  action: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  expiration: order_by
+  id: order_by
+  option_type: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
+  symbol: order_by
+  trade_date: order_by
 }
 
 "ordering options when selecting data from \"fetch_transactions\""
 input fetch_transactions_order_by {
-    account: order_by
-    action: order_by
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    expiration: order_by
-    id: order_by
-    option_type: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
-    symbol: order_by
-    trade_date: order_by
+  account: order_by
+  action: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  expiration: order_by
+  id: order_by
+  option_type: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
+  symbol: order_by
+  trade_date: order_by
 }
 
 "order by stddev() on columns of table \"fetch_transactions\""
 input fetch_transactions_stddev_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by stddev_pop() on columns of table \"fetch_transactions\""
 input fetch_transactions_stddev_pop_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by stddev_samp() on columns of table \"fetch_transactions\""
 input fetch_transactions_stddev_samp_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by sum() on columns of table \"fetch_transactions\""
 input fetch_transactions_sum_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by var_pop() on columns of table \"fetch_transactions\""
 input fetch_transactions_var_pop_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by var_samp() on columns of table \"fetch_transactions\""
 input fetch_transactions_var_samp_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by variance() on columns of table \"fetch_transactions\""
 input fetch_transactions_variance_order_by {
-    amount: order_by
-    amount_with_comm: order_by
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  amount: order_by
+  amount_with_comm: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "expression to compare columns of type numeric. All fields are combined with logical 'AND'."
 input numeric_comparison_exp {
-    _eq: numeric
-    _gt: numeric
-    _gte: numeric
-    _in: [numeric!]
-    _is_null: Boolean
-    _lt: numeric
-    _lte: numeric
-    _neq: numeric
-    _nin: [numeric!]
+  _eq: numeric
+  _gt: numeric
+  _gte: numeric
+  _in: [numeric!]
+  _is_null: Boolean
+  _lt: numeric
+  _lte: numeric
+  _neq: numeric
+  _nin: [numeric!]
 }
 
 "order by aggregate values of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_aggregate_order_by {
-    avg: options_income_by_symbol_month_avg_order_by
-    count: order_by
-    max: options_income_by_symbol_month_max_order_by
-    min: options_income_by_symbol_month_min_order_by
-    stddev: options_income_by_symbol_month_stddev_order_by
-    stddev_pop: options_income_by_symbol_month_stddev_pop_order_by
-    stddev_samp: options_income_by_symbol_month_stddev_samp_order_by
-    sum: options_income_by_symbol_month_sum_order_by
-    var_pop: options_income_by_symbol_month_var_pop_order_by
-    var_samp: options_income_by_symbol_month_var_samp_order_by
-    variance: options_income_by_symbol_month_variance_order_by
+  avg: options_income_by_symbol_month_avg_order_by
+  count: order_by
+  max: options_income_by_symbol_month_max_order_by
+  min: options_income_by_symbol_month_min_order_by
+  stddev: options_income_by_symbol_month_stddev_order_by
+  stddev_pop: options_income_by_symbol_month_stddev_pop_order_by
+  stddev_samp: options_income_by_symbol_month_stddev_samp_order_by
+  sum: options_income_by_symbol_month_sum_order_by
+  var_pop: options_income_by_symbol_month_var_pop_order_by
+  var_samp: options_income_by_symbol_month_var_samp_order_by
+  variance: options_income_by_symbol_month_variance_order_by
 }
 
 "order by avg() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_avg_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "Boolean expression to filter rows from the table \"options_income_by_symbol_month\". All fields are combined with a logical 'AND'."
 input options_income_by_symbol_month_bool_exp {
-    _and: [options_income_by_symbol_month_bool_exp]
-    _not: options_income_by_symbol_month_bool_exp
-    _or: [options_income_by_symbol_month_bool_exp]
-    amount: numeric_comparison_exp
-    month: timestamptz_comparison_exp
-    underlying_symbol: String_comparison_exp
+  _and: [options_income_by_symbol_month_bool_exp]
+  _not: options_income_by_symbol_month_bool_exp
+  _or: [options_income_by_symbol_month_bool_exp]
+  amount: numeric_comparison_exp
+  month: timestamptz_comparison_exp
+  underlying_symbol: String_comparison_exp
 }
 
 "order by max() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_max_order_by {
-    amount: order_by
-    month: order_by
-    underlying_symbol: order_by
+  amount: order_by
+  month: order_by
+  underlying_symbol: order_by
 }
 
 "order by min() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_min_order_by {
-    amount: order_by
-    month: order_by
-    underlying_symbol: order_by
+  amount: order_by
+  month: order_by
+  underlying_symbol: order_by
 }
 
 "ordering options when selecting data from \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_order_by {
-    amount: order_by
-    month: order_by
-    underlying_symbol: order_by
+  amount: order_by
+  month: order_by
+  underlying_symbol: order_by
 }
 
 "order by stddev() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_stddev_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by stddev_pop() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_stddev_pop_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by stddev_samp() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_stddev_samp_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by sum() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_sum_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by var_pop() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_var_pop_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by var_samp() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_var_samp_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by variance() on columns of table \"options_income_by_symbol_month\""
 input options_income_by_symbol_month_variance_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by aggregate values of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_aggregate_order_by {
-    avg: options_income_by_symbol_year_avg_order_by
-    count: order_by
-    max: options_income_by_symbol_year_max_order_by
-    min: options_income_by_symbol_year_min_order_by
-    stddev: options_income_by_symbol_year_stddev_order_by
-    stddev_pop: options_income_by_symbol_year_stddev_pop_order_by
-    stddev_samp: options_income_by_symbol_year_stddev_samp_order_by
-    sum: options_income_by_symbol_year_sum_order_by
-    var_pop: options_income_by_symbol_year_var_pop_order_by
-    var_samp: options_income_by_symbol_year_var_samp_order_by
-    variance: options_income_by_symbol_year_variance_order_by
+  avg: options_income_by_symbol_year_avg_order_by
+  count: order_by
+  max: options_income_by_symbol_year_max_order_by
+  min: options_income_by_symbol_year_min_order_by
+  stddev: options_income_by_symbol_year_stddev_order_by
+  stddev_pop: options_income_by_symbol_year_stddev_pop_order_by
+  stddev_samp: options_income_by_symbol_year_stddev_samp_order_by
+  sum: options_income_by_symbol_year_sum_order_by
+  var_pop: options_income_by_symbol_year_var_pop_order_by
+  var_samp: options_income_by_symbol_year_var_samp_order_by
+  variance: options_income_by_symbol_year_variance_order_by
 }
 
 "order by avg() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_avg_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "Boolean expression to filter rows from the table \"options_income_by_symbol_year\". All fields are combined with a logical 'AND'."
 input options_income_by_symbol_year_bool_exp {
-    _and: [options_income_by_symbol_year_bool_exp]
-    _not: options_income_by_symbol_year_bool_exp
-    _or: [options_income_by_symbol_year_bool_exp]
-    amount: numeric_comparison_exp
-    underlying_symbol: String_comparison_exp
-    year: timestamptz_comparison_exp
+  _and: [options_income_by_symbol_year_bool_exp]
+  _not: options_income_by_symbol_year_bool_exp
+  _or: [options_income_by_symbol_year_bool_exp]
+  amount: numeric_comparison_exp
+  underlying_symbol: String_comparison_exp
+  year: timestamptz_comparison_exp
 }
 
 "order by max() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_max_order_by {
-    amount: order_by
-    underlying_symbol: order_by
-    year: order_by
+  amount: order_by
+  underlying_symbol: order_by
+  year: order_by
 }
 
 "order by min() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_min_order_by {
-    amount: order_by
-    underlying_symbol: order_by
-    year: order_by
+  amount: order_by
+  underlying_symbol: order_by
+  year: order_by
 }
 
 "ordering options when selecting data from \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_order_by {
-    amount: order_by
-    underlying_symbol: order_by
-    year: order_by
+  amount: order_by
+  underlying_symbol: order_by
+  year: order_by
 }
 
 "order by stddev() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_stddev_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by stddev_pop() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_stddev_pop_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by stddev_samp() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_stddev_samp_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by sum() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_sum_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by var_pop() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_var_pop_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by var_samp() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_var_samp_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "order by variance() on columns of table \"options_income_by_symbol_year\""
 input options_income_by_symbol_year_variance_order_by {
-    amount: order_by
+  amount: order_by
 }
 
 "expression to compare columns of type timestamptz. All fields are combined with logical 'AND'."
 input timestamptz_comparison_exp {
-    _eq: timestamptz
-    _gt: timestamptz
-    _gte: timestamptz
-    _in: [timestamptz!]
-    _is_null: Boolean
-    _lt: timestamptz
-    _lte: timestamptz
-    _neq: timestamptz
-    _nin: [timestamptz!]
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
 }
 
 "order by aggregate values of table \"transactions\""
 input transactions_aggregate_order_by {
-    avg: transactions_avg_order_by
-    count: order_by
-    max: transactions_max_order_by
-    min: transactions_min_order_by
-    stddev: transactions_stddev_order_by
-    stddev_pop: transactions_stddev_pop_order_by
-    stddev_samp: transactions_stddev_samp_order_by
-    sum: transactions_sum_order_by
-    var_pop: transactions_var_pop_order_by
-    var_samp: transactions_var_samp_order_by
-    variance: transactions_variance_order_by
+  avg: transactions_avg_order_by
+  count: order_by
+  max: transactions_max_order_by
+  min: transactions_min_order_by
+  stddev: transactions_stddev_order_by
+  stddev_pop: transactions_stddev_pop_order_by
+  stddev_samp: transactions_stddev_samp_order_by
+  sum: transactions_sum_order_by
+  var_pop: transactions_var_pop_order_by
+  var_samp: transactions_var_samp_order_by
+  variance: transactions_variance_order_by
 }
 
 "input type for inserting array relation for remote table \"transactions\""
 input transactions_arr_rel_insert_input {
-    data: [transactions_insert_input!]!
-    on_conflict: transactions_on_conflict
+  data: [transactions_insert_input!]!
+  on_conflict: transactions_on_conflict
 }
 
 "order by avg() on columns of table \"transactions\""
 input transactions_avg_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "Boolean expression to filter rows from the table \"transactions\". All fields are combined with a logical 'AND'."
 input transactions_bool_exp {
-    _and: [transactions_bool_exp]
-    _not: transactions_bool_exp
-    _or: [transactions_bool_exp]
-    account: accounts_bool_exp
-    account_id: uuid_comparison_exp
-    action: String_comparison_exp
-    commission: numeric_comparison_exp
-    expiration: date_comparison_exp
-    id: uuid_comparison_exp
-    option_type: String_comparison_exp
-    price: numeric_comparison_exp
-    quantity: Int_comparison_exp
-    strike: numeric_comparison_exp
-    trade_date: date_comparison_exp
-    underlying_symbol: String_comparison_exp
+  _and: [transactions_bool_exp]
+  _not: transactions_bool_exp
+  _or: [transactions_bool_exp]
+  account: accounts_bool_exp
+  account_id: uuid_comparison_exp
+  action: String_comparison_exp
+  commission: numeric_comparison_exp
+  expiration: date_comparison_exp
+  id: uuid_comparison_exp
+  option_type: String_comparison_exp
+  price: numeric_comparison_exp
+  quantity: Int_comparison_exp
+  strike: numeric_comparison_exp
+  trade_date: date_comparison_exp
+  underlying_symbol: String_comparison_exp
 }
 
 "input type for incrementing integer column in table \"transactions\""
 input transactions_inc_input {
-    commission: numeric
-    price: numeric
-    quantity: Int
-    strike: numeric
+  commission: numeric
+  price: numeric
+  quantity: Int
+  strike: numeric
 }
 
 "input type for inserting data into table \"transactions\""
 input transactions_insert_input {
-    account: accounts_obj_rel_insert_input
-    account_id: uuid
-    action: String
-    commission: numeric
-    expiration: date
-    id: uuid
-    option_type: String
-    price: numeric
-    quantity: Int
-    strike: numeric
-    trade_date: date
-    underlying_symbol: String
+  account: accounts_obj_rel_insert_input
+  account_id: uuid
+  action: String
+  commission: numeric
+  expiration: date
+  id: uuid
+  option_type: String
+  price: numeric
+  quantity: Int
+  strike: numeric
+  trade_date: date
+  underlying_symbol: String
 }
 
 "order by max() on columns of table \"transactions\""
 input transactions_max_order_by {
-    account_id: order_by
-    action: order_by
-    commission: order_by
-    expiration: order_by
-    id: order_by
-    option_type: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
-    trade_date: order_by
-    underlying_symbol: order_by
+  account_id: order_by
+  action: order_by
+  commission: order_by
+  expiration: order_by
+  id: order_by
+  option_type: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
+  trade_date: order_by
+  underlying_symbol: order_by
 }
 
 "order by min() on columns of table \"transactions\""
 input transactions_min_order_by {
-    account_id: order_by
-    action: order_by
-    commission: order_by
-    expiration: order_by
-    id: order_by
-    option_type: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
-    trade_date: order_by
-    underlying_symbol: order_by
+  account_id: order_by
+  action: order_by
+  commission: order_by
+  expiration: order_by
+  id: order_by
+  option_type: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
+  trade_date: order_by
+  underlying_symbol: order_by
 }
 
 "input type for inserting object relation for remote table \"transactions\""
 input transactions_obj_rel_insert_input {
-    data: transactions_insert_input!
-    on_conflict: transactions_on_conflict
+  data: transactions_insert_input!
+  on_conflict: transactions_on_conflict
 }
 
 "on conflict condition type for table \"transactions\""
 input transactions_on_conflict {
-    constraint: transactions_constraint!
-    update_columns: [transactions_update_column!]!
-    where: transactions_bool_exp
+  constraint: transactions_constraint!
+  update_columns: [transactions_update_column!]!
+  where: transactions_bool_exp
 }
 
 "ordering options when selecting data from \"transactions\""
 input transactions_order_by {
-    account: accounts_order_by
-    account_id: order_by
-    action: order_by
-    commission: order_by
-    expiration: order_by
-    id: order_by
-    option_type: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
-    trade_date: order_by
-    underlying_symbol: order_by
+  account: accounts_order_by
+  account_id: order_by
+  action: order_by
+  commission: order_by
+  expiration: order_by
+  id: order_by
+  option_type: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
+  trade_date: order_by
+  underlying_symbol: order_by
 }
 
 "primary key columns input for table: \"transactions\""
 input transactions_pk_columns_input {
-    id: uuid!
+  id: uuid!
 }
 
 "input type for updating data in table \"transactions\""
 input transactions_set_input {
-    account_id: uuid
-    action: String
-    commission: numeric
-    expiration: date
-    id: uuid
-    option_type: String
-    price: numeric
-    quantity: Int
-    strike: numeric
-    trade_date: date
-    underlying_symbol: String
+  account_id: uuid
+  action: String
+  commission: numeric
+  expiration: date
+  id: uuid
+  option_type: String
+  price: numeric
+  quantity: Int
+  strike: numeric
+  trade_date: date
+  underlying_symbol: String
 }
 
 "order by stddev() on columns of table \"transactions\""
 input transactions_stddev_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by stddev_pop() on columns of table \"transactions\""
 input transactions_stddev_pop_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by stddev_samp() on columns of table \"transactions\""
 input transactions_stddev_samp_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by sum() on columns of table \"transactions\""
 input transactions_sum_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by var_pop() on columns of table \"transactions\""
 input transactions_var_pop_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by var_samp() on columns of table \"transactions\""
 input transactions_var_samp_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by variance() on columns of table \"transactions\""
 input transactions_variance_order_by {
-    commission: order_by
-    price: order_by
-    quantity: order_by
-    strike: order_by
+  commission: order_by
+  price: order_by
+  quantity: order_by
+  strike: order_by
 }
 
 "order by aggregate values of table \"users\""
 input users_aggregate_order_by {
-    count: order_by
-    max: users_max_order_by
-    min: users_min_order_by
+  count: order_by
+  max: users_max_order_by
+  min: users_min_order_by
 }
 
 "input type for inserting array relation for remote table \"users\""
 input users_arr_rel_insert_input {
-    data: [users_insert_input!]!
-    on_conflict: users_on_conflict
+  data: [users_insert_input!]!
+  on_conflict: users_on_conflict
 }
 
 "Boolean expression to filter rows from the table \"users\". All fields are combined with a logical 'AND'."
 input users_bool_exp {
-    _and: [users_bool_exp]
-    _not: users_bool_exp
-    _or: [users_bool_exp]
-    auth0_id: String_comparison_exp
-    created_at: timestamptz_comparison_exp
-    id: uuid_comparison_exp
-    last_seen: timestamptz_comparison_exp
-    name: String_comparison_exp
-    portfolios: accounts_bool_exp
+  _and: [users_bool_exp]
+  _not: users_bool_exp
+  _or: [users_bool_exp]
+  auth0_id: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  last_seen: timestamptz_comparison_exp
+  name: String_comparison_exp
+  portfolios: accounts_bool_exp
 }
 
 "input type for inserting data into table \"users\""
 input users_insert_input {
-    auth0_id: String
-    created_at: timestamptz
-    id: uuid
-    last_seen: timestamptz
-    name: String
-    portfolios: accounts_arr_rel_insert_input
+  auth0_id: String
+  created_at: timestamptz
+  id: uuid
+  last_seen: timestamptz
+  name: String
+  portfolios: accounts_arr_rel_insert_input
 }
 
 "order by max() on columns of table \"users\""
 input users_max_order_by {
-    auth0_id: order_by
-    created_at: order_by
-    id: order_by
-    last_seen: order_by
-    name: order_by
+  auth0_id: order_by
+  created_at: order_by
+  id: order_by
+  last_seen: order_by
+  name: order_by
 }
 
 "order by min() on columns of table \"users\""
 input users_min_order_by {
-    auth0_id: order_by
-    created_at: order_by
-    id: order_by
-    last_seen: order_by
-    name: order_by
+  auth0_id: order_by
+  created_at: order_by
+  id: order_by
+  last_seen: order_by
+  name: order_by
 }
 
 "input type for inserting object relation for remote table \"users\""
 input users_obj_rel_insert_input {
-    data: users_insert_input!
-    on_conflict: users_on_conflict
+  data: users_insert_input!
+  on_conflict: users_on_conflict
 }
 
 "on conflict condition type for table \"users\""
 input users_on_conflict {
-    constraint: users_constraint!
-    update_columns: [users_update_column!]!
-    where: users_bool_exp
+  constraint: users_constraint!
+  update_columns: [users_update_column!]!
+  where: users_bool_exp
 }
 
 "ordering options when selecting data from \"users\""
 input users_order_by {
-    auth0_id: order_by
-    created_at: order_by
-    id: order_by
-    last_seen: order_by
-    name: order_by
-    portfolios_aggregate: accounts_aggregate_order_by
+  auth0_id: order_by
+  created_at: order_by
+  id: order_by
+  last_seen: order_by
+  name: order_by
+  portfolios_aggregate: accounts_aggregate_order_by
 }
 
 "primary key columns input for table: \"users\""
 input users_pk_columns_input {
-    auth0_id: String!
+  auth0_id: String!
 }
 
 "input type for updating data in table \"users\""
 input users_set_input {
-    auth0_id: String
-    created_at: timestamptz
-    id: uuid
-    last_seen: timestamptz
-    name: String
+  auth0_id: String
+  created_at: timestamptz
+  id: uuid
+  last_seen: timestamptz
+  name: String
 }
 
 "expression to compare columns of type uuid. All fields are combined with logical 'AND'."
 input uuid_comparison_exp {
-    _eq: uuid
-    _gt: uuid
-    _gte: uuid
-    _in: [uuid!]
-    _is_null: Boolean
-    _lt: uuid
-    _lte: uuid
-    _neq: uuid
-    _nin: [uuid!]
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _is_null: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
 }
-
 
 scalar date
 

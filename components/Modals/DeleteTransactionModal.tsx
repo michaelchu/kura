@@ -1,20 +1,19 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import { DeleteModalProps } from "../../interfaces/app_interfaces";
 
 const DeleteTransactionModal = ({
   show,
-  row,
+  trans,
   handleClose,
   handleCloseAndDelete,
-}: DeleteModalProps) => {
+}) => {
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>
         <Modal.Title>Are you sure?</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>If you proceed, you will permanently delete the trade.</p>
+        <p>If you proceed, you will permanently delete this transaction.</p>
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -27,9 +26,9 @@ const DeleteTransactionModal = ({
         <Button
           as="input"
           variant="danger"
-          onClick={() => handleCloseAndDelete(row.id)}
+          onClick={() => handleCloseAndDelete(trans.id)}
           type="submit"
-          value="Yes, delete all my data"
+          value="Yes, delete this transaction"
         />
       </Modal.Footer>
     </Modal>

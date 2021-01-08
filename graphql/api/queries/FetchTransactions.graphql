@@ -1,20 +1,21 @@
 query FetchTransactions {
-    accounts {
-        name
-        id
-    }
-    fetch_transactions {
-        id
-        account
-        trade_date
-        symbol
-        action
-        quantity
-        price
-        commission
-        option_type
-        strike
-        expiration
-        amount_with_comm
-    }
+  accounts {
+    value: id
+    label: name
+  }
+  fetch_transactions {
+    id
+    account
+    account_id
+    trade_date
+    symbol
+    action
+    quantity
+    price
+    commission
+    option_type
+    strike
+    expiration
+    amount_with_comm
+  }
 }
