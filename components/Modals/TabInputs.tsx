@@ -2,7 +2,13 @@ import React from "react";
 import Select from "react-select";
 const merge = require("deepmerge");
 
-const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
+const TabInputs = ({
+  transaction,
+  accounts,
+  handleChange,
+  isOption,
+  cache,
+}) => {
   const actionTypes = [
     { value: "BTO", label: "Buy to Open" },
     { value: "BTC", label: "Buy to Close" },
@@ -31,9 +37,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
             options={accounts}
             name="account-selection"
             onChange={(e) =>
-              handleChange(
-                merge(transaction, { object: { account_id: e.value } })
-              )
+              handleChange(merge(cache, { object: { account_id: e.value } }))
             }
             defaultValue={getOptionByValue(accounts, transaction.account_id)}
           />
@@ -49,7 +53,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               defaultValue={transaction.symbol}
               onChange={(e) => {
                 handleChange(
-                  merge(transaction, { object: { symbol: e.target.value } })
+                  merge(cache, { object: { symbol: e.target.value } })
                 );
               }}
               required
@@ -64,9 +68,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               name="action-selection"
               defaultValue={getOptionByValue(actionTypes, transaction.action)}
               onChange={(e) =>
-                handleChange(
-                  merge(transaction, { object: { action: e.value } })
-                )
+                handleChange(merge(cache, { object: { action: e.value } }))
               }
             />
           </div>
@@ -82,7 +84,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               defaultValue={transaction.trade_date}
               onChange={(e) => {
                 handleChange(
-                  merge(transaction, { object: { trade_date: e.target.value } })
+                  merge(cache, { object: { trade_date: e.target.value } })
                 );
               }}
             />
@@ -101,7 +103,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
                 )}
                 onChange={(e) =>
                   handleChange(
-                    merge(transaction, { object: { option_type: e.value } })
+                    merge(cache, { object: { option_type: e.value } })
                   )
                 }
               />
@@ -122,7 +124,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               defaultValue={transaction.quantity}
               onChange={(e) => {
                 handleChange(
-                  merge(transaction, {
+                  merge(cache, {
                     object: { quantity: parseInt(e.target.value) },
                   })
                 );
@@ -140,7 +142,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               defaultValue={transaction.price}
               onChange={(e) => {
                 handleChange(
-                  merge(transaction, {
+                  merge(cache, {
                     object: { price: parseFloat(e.target.value) },
                   })
                 );
@@ -158,7 +160,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               defaultValue={transaction.commission}
               onChange={(e) => {
                 handleChange(
-                  merge(transaction, {
+                  merge(cache, {
                     object: { commission: parseFloat(e.target.value) },
                   })
                 );
@@ -179,7 +181,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
                 defaultValue={transaction.strike}
                 onChange={(e) => {
                   handleChange(
-                    merge(transaction, {
+                    merge(cache, {
                       object: { strike: parseFloat(e.target.value) },
                     })
                   );
@@ -197,7 +199,7 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
                 defaultValue={transaction.expiration}
                 onChange={(e) => {
                   handleChange(
-                    merge(transaction, {
+                    merge(cache, {
                       object: { expiration: e.target.value },
                     })
                   );

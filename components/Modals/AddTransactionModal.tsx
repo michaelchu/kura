@@ -12,7 +12,7 @@ const AddTransactionModal = ({
   handleCloseAndAdd,
 }) => {
   const [activeTab, setActiveTab] = useState("stocks");
-  const [transaction, setTransaction] = useState({ object: {} });
+  const [cache, setCache] = useState({ object: {} });
 
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
@@ -23,9 +23,10 @@ const AddTransactionModal = ({
       </Modal.Header>
       <Modal.Body>
         <TabInputs
-          transaction={transaction}
+          transaction={cache}
+          cache={cache}
           accounts={accounts}
-          handleChange={setTransaction}
+          handleChange={setCache}
           isOption={isOption}
         />
       </Modal.Body>
@@ -36,7 +37,7 @@ const AddTransactionModal = ({
         <Button
           variant="primary"
           onClick={() => {
-            handleCloseAndAdd(transaction);
+            handleCloseAndAdd(cache);
           }}
           type="button"
         >

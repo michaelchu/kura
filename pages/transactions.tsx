@@ -21,6 +21,7 @@ import TransactionTable from "../components/TransactionTable/TransactionTable";
 import FETCH_TRANSACTIONS from "../graphql/api/queries/FetchTransactions.graphql";
 import DELETE_TRANSACTION from "../graphql/api/mutations/DeleteTransaction.graphql";
 import ADD_TRANSACTION from "../graphql/api/mutations/AddTransaction.graphql";
+import UPDATE_TRANSACTION from "../graphql/api/mutations/UpdateTransactions.graphql";
 
 const queryClient = new QueryClient();
 
@@ -35,19 +36,6 @@ async function getTrans() {
 
 export default function Transactions(props) {
   const queryClient = useQueryClient();
-  const emptyTrans = {
-    id: "",
-    account_id: "",
-    trade_date: "",
-    symbol: "",
-    action: "",
-    quantity: 0,
-    price: 0,
-    commission: 0,
-    option_type: "",
-    strike: 0,
-    expiration: "",
-  };
   const { isShowing: isAddModalShowing, toggle: addModalToggle } = useModal();
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
   const {
@@ -57,7 +45,7 @@ export default function Transactions(props) {
 
   const [isOption, setIsOption] = useState(false);
 
-  const [transaction, setTransaction] = useState(emptyTrans);
+  const [transaction, setTransaction] = useState({});
 
   const formattedCols = ["price", "commission", "amount_with_comm"];
   const hiddenCols = ["id", "account_id"];
@@ -85,7 +73,7 @@ export default function Transactions(props) {
       onSuccess: () => {
         queryClient.invalidateQueries("fetch_transactions");
         deleteModalToggle();
-        setTransaction(emptyTrans);
+        setTransaction({});
       },
     }
   );
@@ -98,6 +86,18 @@ export default function Transactions(props) {
       onSuccess: () => {
         queryClient.invalidateQueries("fetch_transactions");
         addModalToggle();
+      },
+    }
+  );
+
+  const updateTrans = useMutation(
+    (variables) => {
+      return request(endpoint, UPDATE_TRANSACTION, variables);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("fetch_transactions");
+        editModalToggle();
       },
     }
   );
@@ -116,7 +116,7 @@ export default function Transactions(props) {
                 variant={"light"}
                 onClick={() => {
                   setIsOption(false);
-                  setTransaction(emptyTrans);
+                  setTransaction({});
                   addModalToggle();
                 }}
               >
@@ -126,7 +126,7 @@ export default function Transactions(props) {
                 variant={"primary"}
                 onClick={() => {
                   setIsOption(true);
-                  setTransaction(emptyTrans);
+                  setTransaction({});
                   addModalToggle();
                 }}
               >
@@ -145,7 +145,6 @@ export default function Transactions(props) {
           formattedCols={formattedCols}
           hiddenCols={hiddenCols}
           onEdit={(trans) => {
-            delete trans.account;
             setTransaction(trans);
             editModalToggle();
           }}
@@ -162,20 +161,20 @@ export default function Transactions(props) {
         isOption={isOption}
         handleClose={() => {
           addModalToggle();
-          setTransaction(emptyTrans);
         }}
         handleCloseAndAdd={(data) => {
-          console.log(data);
           addTrans.mutate(data);
         }}
       />
       <EditTransactionModal
         show={isEditModalShowing}
-        trans={transaction}
+        selectedTrans={transaction}
         accounts={data.accounts}
         handleClose={() => {
           editModalToggle();
-          setTransaction(emptyTrans);
+        }}
+        handleCloseAndUpdate={(data) => {
+          updateTrans.mutate(data);
         }}
       />
       <DeleteTransactionModal
@@ -183,7 +182,6 @@ export default function Transactions(props) {
         trans={transaction}
         handleClose={() => {
           deleteModalToggle();
-          setTransaction(emptyTrans);
         }}
         handleCloseAndDelete={(transId) => {
           deleteTrans.mutate({ id: transId } as any);
