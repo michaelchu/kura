@@ -54,6 +54,9 @@ export default function Transactions(props) {
     isShowing: isDeleteModalShowing,
     toggle: deleteModalToggle,
   } = useModal();
+
+  const [isOption, setIsOption] = useState(false);
+
   const [transaction, setTransaction] = useState(emptyTrans);
 
   const formattedCols = ["price", "commission", "amount_with_comm"];
@@ -93,7 +96,7 @@ export default function Transactions(props) {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("add_transactions");
+        queryClient.invalidateQueries("fetch_transactions");
         addModalToggle();
       },
     }
@@ -110,13 +113,24 @@ export default function Transactions(props) {
           <div className="col-auto ms-auto d-print-none">
             <div className="btn-list">
               <Button
-                variant={"primary"}
+                variant={"light"}
                 onClick={() => {
+                  setIsOption(false);
                   setTransaction(emptyTrans);
                   addModalToggle();
                 }}
               >
-                Add Transaction
+                Add Stock
+              </Button>
+              <Button
+                variant={"primary"}
+                onClick={() => {
+                  setIsOption(true);
+                  setTransaction(emptyTrans);
+                  addModalToggle();
+                }}
+              >
+                Add Option
               </Button>
             </div>
           </div>
@@ -145,10 +159,13 @@ export default function Transactions(props) {
       <AddTransactionModal
         show={isAddModalShowing}
         accounts={data.accounts}
+        isOption={isOption}
         handleClose={() => {
           addModalToggle();
+          setTransaction(emptyTrans);
         }}
         handleCloseAndAdd={(data) => {
+          console.log(data);
           addTrans.mutate(data);
         }}
       />

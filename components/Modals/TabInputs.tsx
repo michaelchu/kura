@@ -1,5 +1,6 @@
 import React from "react";
 import Select from "react-select";
+const merge = require("deepmerge");
 
 const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
   const actionTypes = [
@@ -28,8 +29,11 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
           <label className="form-label">Accounts</label>
           <Select
             options={accounts}
+            name="account-selection"
             onChange={(e) =>
-              handleChange({ ...transaction, account_id: e.value })
+              handleChange(
+                merge(transaction, { object: { account_id: e.value } })
+              )
             }
             defaultValue={getOptionByValue(accounts, transaction.account_id)}
           />
@@ -44,7 +48,9 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               className="form-control"
               defaultValue={transaction.symbol}
               onChange={(e) => {
-                handleChange({ ...transaction, symbol: e.target.value });
+                handleChange(
+                  merge(transaction, { object: { symbol: e.target.value } })
+                );
               }}
               required
             />
@@ -55,9 +61,12 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
             <label className="form-label">Action</label>
             <Select
               options={actionTypes}
+              name="action-selection"
               defaultValue={getOptionByValue(actionTypes, transaction.action)}
               onChange={(e) =>
-                handleChange({ ...transaction, action: e.value })
+                handleChange(
+                  merge(transaction, { object: { action: e.value } })
+                )
               }
             />
           </div>
@@ -72,7 +81,9 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               className="form-control"
               defaultValue={transaction.trade_date}
               onChange={(e) => {
-                handleChange({ ...transaction, trade_date: e.target.value });
+                handleChange(
+                  merge(transaction, { object: { trade_date: e.target.value } })
+                );
               }}
             />
           </div>
@@ -83,12 +94,15 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               <label className="form-label">Option Type</label>
               <Select
                 options={optionTypes}
+                name="option-type-selection"
                 defaultValue={getOptionByValue(
                   optionTypes,
                   transaction.option_type
                 )}
                 onChange={(e) =>
-                  handleChange({ ...transaction, option_type: e.value })
+                  handleChange(
+                    merge(transaction, { object: { option_type: e.value } })
+                  )
                 }
               />
             </div>
@@ -107,7 +121,11 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               className="form-control"
               defaultValue={transaction.quantity}
               onChange={(e) => {
-                handleChange({ ...transaction, quantity: e.target.value });
+                handleChange(
+                  merge(transaction, {
+                    object: { quantity: parseInt(e.target.value) },
+                  })
+                );
               }}
               required
             />
@@ -121,7 +139,11 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               className="form-control"
               defaultValue={transaction.price}
               onChange={(e) => {
-                handleChange({ ...transaction, price: e.target.value });
+                handleChange(
+                  merge(transaction, {
+                    object: { price: parseFloat(e.target.value) },
+                  })
+                );
               }}
               required
             />
@@ -135,7 +157,11 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
               className="form-control"
               defaultValue={transaction.commission}
               onChange={(e) => {
-                handleChange({ ...transaction, commission: e.target.value });
+                handleChange(
+                  merge(transaction, {
+                    object: { commission: parseFloat(e.target.value) },
+                  })
+                );
               }}
               required
             />
@@ -152,7 +178,11 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
                 className="form-control"
                 defaultValue={transaction.strike}
                 onChange={(e) => {
-                  handleChange({ ...transaction, strike: e.target.value });
+                  handleChange(
+                    merge(transaction, {
+                      object: { strike: parseFloat(e.target.value) },
+                    })
+                  );
                 }}
                 required
               />
@@ -166,7 +196,11 @@ const TabInputs = ({ transaction, accounts, handleChange, isOption }) => {
                 className="form-control"
                 defaultValue={transaction.expiration}
                 onChange={(e) => {
-                  handleChange({ ...transaction, expiration: e.target.value });
+                  handleChange(
+                    merge(transaction, {
+                      object: { expiration: e.target.value },
+                    })
+                  );
                 }}
               />
             </div>
