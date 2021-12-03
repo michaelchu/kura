@@ -1,0 +1,5 @@
+mutation UpdateTransactionOption($id: uuid!, $object: transactions_option_set_input!) {
+  update_transactions_option_by_pk(pk_columns: { id: $id }, _set: $object) {
+    id
+  }
+}

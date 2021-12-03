@@ -9,11 +9,6 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {/*<script type="text/javascript" src="js/tabler.min.js" />*/}
-          {/*<script*/}
-          {/*  type="text/javascript"*/}
-          {/*  src="js/libs/apexcharts/dist/apexcharts.min.js"*/}
-          {/*></script>*/}
         </body>
       </Html>
     );

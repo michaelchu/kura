@@ -41,19 +41,24 @@ const NavBar = () => {
         </div>
         <Nav className="collapse navbar-collapse">
           <div className="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
-            <Link href="/">
+            <Link href="/transactions">
               <a className="nav-link">
-                <span className="nav-link-title">Dashboard</span>
+                <span className="nav-link-title">Import Trades</span>
               </a>
             </Link>
-            <Link href="/schedule">
+            <Link href="/">
               <a className="nav-link">
-                <span className="nav-link-title">Schedule</span>
+                <span className="nav-link-title">Open Positions</span>
               </a>
             </Link>
             <Link href="/transactions">
               <a className="nav-link">
-                <span className="nav-link-title">Transactions</span>
+                <span className="nav-link-title">Closed Positions</span>
+              </a>
+            </Link>
+            <Link href="/analysis">
+              <a className="nav-link">
+                <span className="nav-link-title">Analysis</span>
               </a>
             </Link>
           </div>

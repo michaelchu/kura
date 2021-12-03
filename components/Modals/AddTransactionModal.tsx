@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Nav } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import Tab from "react-bootstrap/Tab";
 import TabInputs from "./TabInputs";
 
 const AddTransactionModal = ({
@@ -11,7 +10,6 @@ const AddTransactionModal = ({
   handleClose,
   handleCloseAndAdd,
 }) => {
-  const [activeTab, setActiveTab] = useState("stocks");
   const [cache, setCache] = useState({ object: {} });
 
   return (

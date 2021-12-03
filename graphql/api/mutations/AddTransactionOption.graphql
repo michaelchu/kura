@@ -1,0 +1,5 @@
+mutation AddTransactionOption($object: transaction_option_insert_input!) {
+  insert_transactions_option_one(object: $object) {
+    id
+  }
+}

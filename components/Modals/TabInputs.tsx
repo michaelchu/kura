@@ -10,10 +10,10 @@ const TabInputs = ({
   cache,
 }) => {
   const actionTypes = [
-    { value: "BTO", label: "Buy to Open" },
-    { value: "BTC", label: "Buy to Close" },
-    { value: "STO", label: "Sell to Open" },
-    { value: "STC", label: "Sell to Close" },
+    { value: "buy_to_open", label: "Buy to Open" },
+    { value: "buy_to_close", label: "Buy to Close" },
+    { value: "sell_to_open", label: "Sell to Open" },
+    { value: "sell_to_close", label: "Sell to Close" },
   ];
 
   const optionTypes = [
@@ -153,15 +153,15 @@ const TabInputs = ({
         </div>
         <div className="col-lg-4">
           <div className="mt-2">
-            <label className="form-label">Commission</label>
+            <label className="form-label">Fee</label>
             <input
               type="text"
               className="form-control"
-              defaultValue={transaction.commission}
+              defaultValue={transaction.fee}
               onChange={(e) => {
                 handleChange(
                   merge(cache, {
-                    object: { commission: parseFloat(e.target.value) },
+                    object: { fee: parseFloat(e.target.value) },
                   })
                 );
               }}
@@ -200,7 +200,7 @@ const TabInputs = ({
                 onChange={(e) => {
                   handleChange(
                     merge(cache, {
-                      object: { expiration: e.target.value },
+                      object: { expiration_date: e.target.value },
                     })
                   );
                 }}

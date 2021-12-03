@@ -1,0 +1,5 @@
+mutation AddTransactionStock($object: transactions_stock_insert_input!) {
+  insert_transactions_stock_one(object: $object) {
+    id
+  }
+}

@@ -1,0 +1,5 @@
+mutation UpdateTransactionStock($id: uuid!, $object: transactions_stock_set_input!) {
+  update_transactions_stock_by_pk(pk_columns: { id: $id }, _set: $object) {
+    id
+  }
+}
