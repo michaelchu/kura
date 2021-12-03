@@ -26,12 +26,10 @@ import UPDATE_TRANSACTION_STOCK from "../graphql/api/mutations/UpdateTransaction
 import UPDATE_TRANSACTION_OPTION from "../graphql/api/mutations/UpdateTransactionOption.graphql";
 
 const queryClient = new QueryClient();
-const endpoint = "https://profital.hasura.app/v1/graphql";
 
-const graphQLClient = new GraphQLClient(endpoint, {
+const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
-    "x-hasura-admin-secret":
-      "ou44uOYcPnw6olMayMD8PFsGmM6v2QkYlYMQYDLxhsAQvGSjp53oQK4mgJlObQR3",
+    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
   },
 });
 

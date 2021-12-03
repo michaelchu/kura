@@ -8,7 +8,7 @@ const Header = () => (
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title className="next/head">Profital</title>
+    <title className="next/head">Zentracker</title>
   </Head>
 );
 
