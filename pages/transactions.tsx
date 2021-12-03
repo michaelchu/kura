@@ -30,9 +30,10 @@ const endpoint = "https://profital.hasura.app/v1/graphql";
 
 const graphQLClient = new GraphQLClient(endpoint, {
   headers: {
-    'x-hasura-admin-secret': 'ou44uOYcPnw6olMayMD8PFsGmM6v2QkYlYMQYDLxhsAQvGSjp53oQK4mgJlObQR3',
+    "x-hasura-admin-secret":
+      "ou44uOYcPnw6olMayMD8PFsGmM6v2QkYlYMQYDLxhsAQvGSjp53oQK4mgJlObQR3",
   },
-})
+});
 
 export async function getStaticProps() {
   await queryClient.prefetchQuery("fetch_transactions", () => getTrans());
@@ -58,14 +59,7 @@ export default function Transactions(props) {
 
   const formattedCols = ["price", "fee"];
   const hiddenCols = ["id", "account_id"];
-  const cols = [
-    "Trade Date",
-    "Symbol",
-    "Quantity",
-    "Price",
-    "Fee"
-  ];
-
+  const cols = ["Trade Date", "Symbol", "Quantity", "Price", "Fee"];
 
   const deleteTransStock = useMutation(
     (variables) => {
