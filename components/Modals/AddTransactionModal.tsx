@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import TabInputs from "./TabInputs";
-import merge from "deepmerge";
+import moment from "moment";
+import _ from "lodash";
 
 const AddTransactionModal = ({
   show,
@@ -38,12 +39,34 @@ const AddTransactionModal = ({
           onClick={() => {
             if (isOption) {
               // if is option, merge fields to generate option symbol and update cache
-              handleCloseAndAdd(
-                merge(cache, { object: { asset_type: "option" } })
+              const { object }: any = cache;
+              const formatted_exp_date = moment(object.expiration_date).format(
+                "YYMMDD"
               );
+              const formatted_sym = [
+                object.symbol,
+                formatted_exp_date,
+                object.option_type,
+                object.strike,
+              ].join("");
+              const newCache = _.pick(object, [
+                "account_id",
+                "quantity",
+                "trade_date",
+                "action",
+                "price",
+                "fee",
+              ]);
+
+              handleCloseAndAdd({
+                object: _.merge(newCache, {
+                  asset_type: "option",
+                  symbol: formatted_sym,
+                }),
+              });
             } else {
               handleCloseAndAdd(
-                merge(cache, { object: { asset_type: "stock" } })
+                _.merge(cache, { object: { asset_type: "stock" } })
               );
             }
           }}

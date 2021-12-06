@@ -144,11 +144,11 @@ export default function Transactions(props) {
           rows={data.transactions}
           formattedCols={formattedCols}
           hiddenCols={hiddenCols}
-          onEdit={(trans) => {
+          onEdit={(trans: object) => {
             setTransaction(trans);
             editModalToggle();
           }}
-          onDelete={(trans) => {
+          onDelete={(trans: object) => {
             setTransaction(trans);
             deleteModalToggle();
           }}
