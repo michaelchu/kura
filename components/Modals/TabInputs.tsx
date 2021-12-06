@@ -9,6 +9,7 @@ const TabInputs = ({
   isOption,
   cache,
 }) => {
+  // TODO: Replace this with query from db
   const actionTypes = [
     { value: "BTO", label: "Buy to Open" },
     { value: "BTC", label: "Buy to Close" },
@@ -19,6 +20,12 @@ const TabInputs = ({
   const optionTypes = [
     { value: "C", label: "Call" },
     { value: "P", label: "Put" },
+  ];
+
+  const strategies = [
+    { value: "covered_call", label: "(Covered) Call" },
+    { value: "naked_long_call", label: "Naked (Long Call)" },
+    { value: "naked_short_put", label: "Naked (Short Put)" },
   ];
 
   const getOptionByValue = (
@@ -40,6 +47,19 @@ const TabInputs = ({
               handleChange(merge(cache, { object: { account_id: e.value } }))
             }
             defaultValue={getOptionByValue(accounts, transaction.account_id)}
+          />
+        </div>
+      </div>
+      <div className="col-lg-12">
+        <div className="mt-2">
+          <label className="form-label">Strategy</label>
+          <Select
+            options={strategies}
+            name="strategy-selection"
+            defaultValue={getOptionByValue(strategies, transaction.strategy)}
+            onChange={(e: HTMLInputElement) =>
+              handleChange(merge(cache, { object: { strategy: e.value } }))
+            }
           />
         </div>
       </div>

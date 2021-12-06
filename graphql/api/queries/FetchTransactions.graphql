@@ -5,10 +5,11 @@ query FetchTransactions {
     trade_date
     symbol
     quantity
+    action
     price
     fee
+    strategy
     asset_type
-    action
   }
   accounts {
     label: name

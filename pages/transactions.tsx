@@ -58,10 +58,11 @@ export default function Transactions(props) {
     "Trade Date",
     "Symbol",
     "Quantity",
+    "Action",
     "Price",
     "Fee",
+    "Strategy",
     "Asset Type",
-    "Action",
   ];
 
   const deleteTrans = useMutation(

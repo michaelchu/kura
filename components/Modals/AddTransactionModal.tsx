@@ -56,6 +56,7 @@ const AddTransactionModal = ({
                 "action",
                 "price",
                 "fee",
+                "strategy",
               ]);
 
               handleCloseAndAdd({
