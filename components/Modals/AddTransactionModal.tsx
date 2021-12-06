@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Nav } from "react-bootstrap";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import TabInputs from "./TabInputs";
+import merge from "deepmerge";
 
 const AddTransactionModal = ({
   show,
@@ -35,7 +36,16 @@ const AddTransactionModal = ({
         <Button
           variant="primary"
           onClick={() => {
-            handleCloseAndAdd(cache);
+            if (isOption) {
+              // if is option, merge fields to generate option symbol and update cache
+              handleCloseAndAdd(
+                merge(cache, { object: { asset_type: "option" } })
+              );
+            } else {
+              handleCloseAndAdd(
+                merge(cache, { object: { asset_type: "stock" } })
+              );
+            }
           }}
           type="button"
         >

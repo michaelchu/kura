@@ -18,12 +18,9 @@ import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import TransactionTable from "../components/TransactionTable/TransactionTable";
 
 import FETCH_TRANSACTIONS from "../graphql/api/queries/FetchTransactions.graphql";
-import DELETE_TRANSACTION_STOCK from "../graphql/api/mutations/DeleteTransactionStock.graphql";
-import DELETE_TRANSACTION_OPTION from "../graphql/api/mutations/DeleteTransactionOption.graphql";
-import ADD_TRANSACTION_STOCK from "../graphql/api/mutations/AddTransactionStock.graphql";
-import ADD_TRANSACTION_OPTION from "../graphql/api/mutations/AddTransactionOption.graphql";
-import UPDATE_TRANSACTION_STOCK from "../graphql/api/mutations/UpdateTransactionStock.graphql";
-import UPDATE_TRANSACTION_OPTION from "../graphql/api/mutations/UpdateTransactionOption.graphql";
+import DELETE_TRANSACTION from "../graphql/api/mutations/DeleteTransaction.graphql";
+import ADD_TRANSACTION from "../graphql/api/mutations/AddTransaction.graphql";
+import UPDATE_TRANSACTION from "../graphql/api/mutations/UpdateTransaction.graphql";
 
 const queryClient = new QueryClient();
 
@@ -57,11 +54,19 @@ export default function Transactions(props) {
 
   const formattedCols = ["price", "fee"];
   const hiddenCols = ["id", "account_id"];
-  const cols = ["Trade Date", "Symbol", "Quantity", "Price", "Fee"];
+  const cols = [
+    "Trade Date",
+    "Symbol",
+    "Quantity",
+    "Price",
+    "Fee",
+    "Asset Type",
+    "Action",
+  ];
 
-  const deleteTransStock = useMutation(
+  const deleteTrans = useMutation(
     (variables) => {
-      return graphQLClient.request(DELETE_TRANSACTION_STOCK, variables);
+      return graphQLClient.request(DELETE_TRANSACTION, variables);
     },
     {
       onSuccess: () => {
@@ -72,22 +77,9 @@ export default function Transactions(props) {
     }
   );
 
-  const deleteTransOption = useMutation(
+  const addTrans = useMutation(
     (variables) => {
-      return graphQLClient.request(DELETE_TRANSACTION_OPTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        deleteModalToggle();
-        setTransaction({});
-      },
-    }
-  );
-
-  const addTransStock = useMutation(
-    (variables) => {
-      return graphQLClient.request(ADD_TRANSACTION_STOCK, variables);
+      return graphQLClient.request(ADD_TRANSACTION, variables);
     },
     {
       onSuccess: () => {
@@ -97,33 +89,9 @@ export default function Transactions(props) {
     }
   );
 
-  const addTransOption = useMutation(
+  const updateTrans = useMutation(
     (variables) => {
-      return graphQLClient.request(ADD_TRANSACTION_OPTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        addModalToggle();
-      },
-    }
-  );
-
-  const updateTransStock = useMutation(
-    (variables) => {
-      return graphQLClient.request(UPDATE_TRANSACTION_STOCK, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        editModalToggle();
-      },
-    }
-  );
-
-  const updateTransOption = useMutation(
-    (variables) => {
-      return graphQLClient.request(UPDATE_TRANSACTION_OPTION, variables);
+      return graphQLClient.request(UPDATE_TRANSACTION, variables);
     },
     {
       onSuccess: () => {
@@ -141,7 +109,7 @@ export default function Transactions(props) {
         <div className="row align-items-center">
           <div className="col">
             <div className="page-pretitle">As of {moment().format("LLL")}</div>
-            <h2 className="page-title">Account Details</h2>
+            <h2 className="page-title">Trade History</h2>
           </div>
           <div className="col-auto ms-auto d-print-none">
             <div className="btn-list">
@@ -173,8 +141,7 @@ export default function Transactions(props) {
       <div className="col-12">
         <TransactionTable
           cols={cols}
-          rows={data.transactions_stock}
-          title={"Transactions"}
+          rows={data.transactions}
           formattedCols={formattedCols}
           hiddenCols={hiddenCols}
           onEdit={(trans) => {
@@ -196,11 +163,7 @@ export default function Transactions(props) {
           addModalToggle();
         }}
         handleCloseAndAdd={(data) => {
-          if (isOption) {
-            addTransOption.mutate(data);
-          } else {
-            addTransStock.mutate(data);
-          }
+          addTrans.mutate(data);
         }}
       />
       <EditTransactionModal
@@ -211,11 +174,7 @@ export default function Transactions(props) {
           editModalToggle();
         }}
         handleCloseAndUpdate={(data) => {
-          if (isOption) {
-            updateTransOption.mutate(data);
-          } else {
-            updateTransStock.mutate(data);
-          }
+          updateTrans.mutate(data);
         }}
       />
       <DeleteTransactionModal
@@ -225,11 +184,7 @@ export default function Transactions(props) {
           deleteModalToggle();
         }}
         handleCloseAndDelete={(transId) => {
-          if (isOption) {
-            deleteTransOption.mutate({ id: transId } as any);
-          } else {
-            deleteTransStock.mutate({ id: transId } as any);
-          }
+          deleteTrans.mutate({ id: transId } as any);
         }}
       />
     </Layout>

@@ -1,5 +1,0 @@
-mutation DeleteTransactionOption($id: uuid!) {
-  delete_transactions_option_by_pk(id: $id) {
-    id
-  }
-}

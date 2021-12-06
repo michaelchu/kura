@@ -1,5 +1,5 @@
 query FetchTransactions {
-  transactions_stock {
+  transactions(order_by: {trade_date: desc}) {
     id
     account_id
     trade_date
@@ -7,21 +7,11 @@ query FetchTransactions {
     quantity
     price
     fee
-  }
-  transactions_option {
-    id
+    asset_type
     action
-    trade_date
-    expiration_date
-    price
-    quantity
-    strategy
-    strike
-    symbol
-    type
   }
   accounts {
-    value: id
     label: name
+    value: id
   }
 }

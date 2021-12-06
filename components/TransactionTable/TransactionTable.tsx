@@ -1,49 +1,40 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
-import TransactionTableFilter from "./TransactionTableFilter";
-const accounting = require("accounting");
+import { Button } from "react-bootstrap";
+import accounting from "accounting";
 
-const TransactionTable = ({
+export default function TransactionTable({
   cols,
   rows,
-  title,
   formattedCols,
   hiddenCols,
   onEdit,
   onDelete,
-}) => {
+}) {
   return (
     <div className="card">
-      <div className="card-header">
-        <h3 className="card-title">{title}</h3>
-      </div>
-      {/*<div className="card-body border-bottom py-3">*/}
-      {/*  <TransactionTableFilter />*/}
-      {/*</div>*/}
       <Table
         responsive
         hover={true}
         striped={true}
         borderless={true}
-        className={"card-table table-vcenter text-nowrap datatable"}
+        className={"card-table table-vcenter"}
       >
         <thead>
           <tr>
-            {cols.map((col) => (
+            {cols.map((col: string) => (
               <th key={col}>{col}</th>
             ))}
-            <th />
+            <th className="w-1"></th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, i) => (
-            <tr key={i}>
-              {Object.entries(row).map(([key, value]) => {
+          {rows.map((row: object, i: number) => (
+            <tr>
+              {Object.entries(row).map(([key, value], idx: number) => {
                 if (!hiddenCols.includes(key)) {
                   return (
-                    <td key={key}>
+                    <td>
                       {formattedCols.includes(key)
                         ? accounting.formatMoney(value)
                         : value}
@@ -52,28 +43,23 @@ const TransactionTable = ({
                 }
               })}
               <td className="text-end">
-                <DropdownButton
-                  id="dropdown-basic-button"
-                  title="Action"
-                  size="sm"
-                  variant="light"
-                >
-                  <Dropdown.Item onClick={() => onEdit(row)}>
+                <div className="btn-list flex-nowrap">
+                  <Button variant="light" size="sm" onClick={() => onEdit(row)}>
                     Edit
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => onDelete(row)}>
-                    {" "}
-                    Delete{" "}
-                  </Dropdown.Item>
-                </DropdownButton>
+                  </Button>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => onDelete(row)}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
-      {/* <div><DataTableFooter data={data} /></div> */}
     </div>
   );
-};
-
-export default TransactionTable;
+}

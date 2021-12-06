@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-const merge = require("deepmerge");
+import merge from "deepmerge";
 
 const TabInputs = ({
   transaction,
@@ -10,10 +10,10 @@ const TabInputs = ({
   cache,
 }) => {
   const actionTypes = [
-    { value: "buy_to_open", label: "Buy to Open" },
-    { value: "buy_to_close", label: "Buy to Close" },
-    { value: "sell_to_open", label: "Sell to Open" },
-    { value: "sell_to_close", label: "Sell to Close" },
+    { value: "BTO", label: "Buy to Open" },
+    { value: "BTC", label: "Buy to Close" },
+    { value: "STO", label: "Sell to Open" },
+    { value: "STC", label: "Sell to Close" },
   ];
 
   const optionTypes = [
@@ -36,7 +36,7 @@ const TabInputs = ({
           <Select
             options={accounts}
             name="account-selection"
-            onChange={(e) =>
+            onChange={(e: HTMLInputElement) =>
               handleChange(merge(cache, { object: { account_id: e.value } }))
             }
             defaultValue={getOptionByValue(accounts, transaction.account_id)}
@@ -51,7 +51,7 @@ const TabInputs = ({
               type="text"
               className="form-control"
               defaultValue={transaction.symbol}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
                   merge(cache, { object: { symbol: e.target.value } })
                 );
@@ -67,7 +67,7 @@ const TabInputs = ({
               options={actionTypes}
               name="action-selection"
               defaultValue={getOptionByValue(actionTypes, transaction.action)}
-              onChange={(e) =>
+              onChange={(e: HTMLInputElement) =>
                 handleChange(merge(cache, { object: { action: e.value } }))
               }
             />
@@ -82,7 +82,7 @@ const TabInputs = ({
               type="date"
               className="form-control"
               defaultValue={transaction.trade_date}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
                   merge(cache, { object: { trade_date: e.target.value } })
                 );
@@ -101,7 +101,7 @@ const TabInputs = ({
                   optionTypes,
                   transaction.option_type
                 )}
-                onChange={(e) =>
+                onChange={(e: HTMLInputElement) =>
                   handleChange(
                     merge(cache, { object: { option_type: e.value } })
                   )
@@ -122,7 +122,7 @@ const TabInputs = ({
               type="text"
               className="form-control"
               defaultValue={transaction.quantity}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
                   merge(cache, {
                     object: { quantity: parseInt(e.target.value) },
@@ -140,7 +140,7 @@ const TabInputs = ({
               type="text"
               className="form-control"
               defaultValue={transaction.price}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
                   merge(cache, {
                     object: { price: parseFloat(e.target.value) },
@@ -158,7 +158,7 @@ const TabInputs = ({
               type="text"
               className="form-control"
               defaultValue={transaction.fee}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
                   merge(cache, {
                     object: { fee: parseFloat(e.target.value) },
@@ -179,7 +179,7 @@ const TabInputs = ({
                 type="text"
                 className="form-control"
                 defaultValue={transaction.strike}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   handleChange(
                     merge(cache, {
                       object: { strike: parseFloat(e.target.value) },
@@ -197,7 +197,7 @@ const TabInputs = ({
                 type="date"
                 className="form-control"
                 defaultValue={transaction.expiration}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   handleChange(
                     merge(cache, {
                       object: { expiration_date: e.target.value },

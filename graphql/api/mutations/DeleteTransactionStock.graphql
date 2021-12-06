@@ -1,5 +1,0 @@
-mutation DeleteTransactionStock($id: uuid!) {
-  delete_transactions_stock_by_pk(id: $id) {
-    id
-  }
-}

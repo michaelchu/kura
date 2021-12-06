@@ -28,7 +28,9 @@ const Footer = () => (
         </div>
         <div className="col-12 col-lg-auto mt-3 mt-lg-0">
           <ul className="list-inline list-inline-dots mb-0">
-            <li className="list-inline-item">Copyright &copy; 2020 Profital</li>
+            <li className="list-inline-item">
+              Copyright &copy; 2020 Goldspan Labs Inc.
+            </li>
           </ul>
         </div>
       </div>
