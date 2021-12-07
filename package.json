@@ -36,7 +36,8 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "latest",
     "react-query": "^3.5.9",
-    "react-select": "^3.1.1"
+    "react-select": "^3.1.1",
+    "react-table": "^7.7.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.177",

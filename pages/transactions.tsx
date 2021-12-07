@@ -11,7 +11,7 @@ import moment from "moment";
 import { Button } from "react-bootstrap";
 import { dehydrate } from "react-query/hydration";
 
-import Layout from "../components/Layout";
+import Layout from "../components/Layouts/Layout";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
@@ -106,7 +106,7 @@ export default function Transactions(props) {
 
   return (
     <Layout>
-      <div className="page-header text-white d-print-none">
+      <div className="page-header text-black d-print-none">
         <div className="row align-items-center">
           <div className="col">
             <div className="page-pretitle">As of {moment().format("LLL")}</div>
