@@ -28,7 +28,7 @@ const DeleteTransactionModal = ({
           variant="danger"
           onClick={() => handleCloseAndDelete(trans.id)}
           type="submit"
-          value="Yes, delete this transaction"
+          value="Delete"
         />
       </Modal.Footer>
     </Modal>

@@ -15,12 +15,17 @@ import Layout from "../components/Layouts/Layout";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
-import TransactionTable from "../components/TransactionTable/TransactionTable";
+import TransactionTableRT from "../components/TransactionTable/TransactionTableRT";
 
 import FETCH_TRANSACTIONS from "../graphql/api/queries/FetchTransactions.graphql";
 import DELETE_TRANSACTION from "../graphql/api/mutations/DeleteTransaction.graphql";
 import ADD_TRANSACTION from "../graphql/api/mutations/AddTransaction.graphql";
 import UPDATE_TRANSACTION from "../graphql/api/mutations/UpdateTransaction.graphql";
+
+import {
+  HIDDEN_COLUMNS,
+  COLUMNS,
+} from "../components/TransactionTable/Columns";
 
 const queryClient = new QueryClient();
 
@@ -51,19 +56,6 @@ export default function Transactions(props) {
   const [isOption, setIsOption] = useState(false);
 
   const [transaction, setTransaction] = useState({});
-
-  const formattedCols = ["price", "fee"];
-  const hiddenCols = ["id", "account_id"];
-  const cols = [
-    "Trade Date",
-    "Symbol",
-    "Quantity",
-    "Action",
-    "Price",
-    "Fee",
-    "Strategy",
-    "Asset Type",
-  ];
 
   const deleteTrans = useMutation(
     (variables) => {
@@ -139,21 +131,22 @@ export default function Transactions(props) {
         </div>
       </div>
 
-      <div className="col-12">
-        <TransactionTable
-          cols={cols}
-          rows={data.transactions}
-          formattedCols={formattedCols}
-          hiddenCols={hiddenCols}
-          onEdit={(trans: object) => {
-            setTransaction(trans);
-            editModalToggle();
-          }}
-          onDelete={(trans: object) => {
-            setTransaction(trans);
-            deleteModalToggle();
-          }}
-        />
+      <div className="row row-cards">
+        <div className="col-12">
+          <TransactionTableRT
+            cols={COLUMNS}
+            data={data.transactions}
+            hiddenCols={HIDDEN_COLUMNS}
+            onEdit={(trans: object) => {
+              setTransaction(trans);
+              editModalToggle();
+            }}
+            onDelete={(trans: object) => {
+              setTransaction(trans);
+              deleteModalToggle();
+            }}
+          />
+        </div>
       </div>
 
       <AddTransactionModal
