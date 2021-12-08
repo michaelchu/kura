@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="xl" bg="dark" variant="dark">
-      <Container>
+      <div className="container-xl">
         <Navbar.Brand href="/">
           <img
             src="/logo-dark.svg"
@@ -37,7 +37,7 @@ export default function NavBar() {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-      </Container>
+      </div>
     </Navbar>
   );
 }

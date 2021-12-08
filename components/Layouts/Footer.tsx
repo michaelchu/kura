@@ -6,22 +6,12 @@ const Footer = () => (
           <ul className="list-inline list-inline-dots mb-0">
             <li className="list-inline-item">
               <a href="./docs/index.html" className="link-secondary">
-                Documentation
+                Company
               </a>
             </li>
             <li className="list-inline-item">
               <a href="./license.html" className="link-secondary">
-                License
-              </a>
-            </li>
-            <li className="list-inline-item">
-              <a
-                href="https://github.com/tabler/tabler"
-                target="_blank"
-                className="link-secondary"
-                rel="noopener"
-              >
-                Source code
+                Contact Us
               </a>
             </li>
           </ul>
@@ -29,7 +19,7 @@ const Footer = () => (
         <div className="col-12 col-lg-auto mt-3 mt-lg-0">
           <ul className="list-inline list-inline-dots mb-0">
             <li className="list-inline-item">
-              Copyright &copy; 2020 Goldspan Labs Inc.
+              Copyright &copy; 2021 Zen Labs Inc.
             </li>
           </ul>
         </div>
