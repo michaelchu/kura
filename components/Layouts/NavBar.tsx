@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="xl" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/">
           <img
