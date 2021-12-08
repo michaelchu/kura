@@ -2,19 +2,11 @@ import React, { useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
 import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
-import {
-  IconChevronUp,
-  IconChevronDown,
-} from "@tabler/icons";
+import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 
-export default function TransactionTableRT({
-  cols,
-  data,
-  onEdit,
-  onDelete,
-}) {
-  const columns = useMemo(() => cols, []);
-  const dataRows = useMemo(() => data, []);
+export default function TransactionTableRT({ cols, data, onEdit, onDelete }) {
+  const columns = useMemo(() => cols, [cols]);
+  const dataRows = useMemo(() => data, [data]);
 
   const {
     getTableProps,
