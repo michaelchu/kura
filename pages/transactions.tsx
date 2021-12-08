@@ -22,10 +22,7 @@ import DELETE_TRANSACTION from "../graphql/api/mutations/DeleteTransaction.graph
 import ADD_TRANSACTION from "../graphql/api/mutations/AddTransaction.graphql";
 import UPDATE_TRANSACTION from "../graphql/api/mutations/UpdateTransaction.graphql";
 
-import {
-  HIDDEN_COLUMNS,
-  COLUMNS,
-} from "../components/TransactionTable/Columns";
+import { COLUMNS } from "../components/TransactionTable/Columns";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +41,7 @@ async function getTrans() {
   return graphQLClient.request(FETCH_TRANSACTIONS);
 }
 
-export default function Transactions(props) {
+export default function Transactions() {
   const queryClient = useQueryClient();
   const { isShowing: isAddModalShowing, toggle: addModalToggle } = useModal();
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
@@ -136,7 +133,6 @@ export default function Transactions(props) {
           <TransactionTableRT
             cols={COLUMNS}
             data={data.transactions}
-            hiddenCols={HIDDEN_COLUMNS}
             onEdit={(trans: object) => {
               setTransaction(trans);
               editModalToggle();
@@ -168,6 +164,7 @@ export default function Transactions(props) {
           editModalToggle();
         }}
         handleCloseAndUpdate={(data) => {
+          console.log(data);
           updateTrans.mutate(data);
         }}
       />

@@ -29,12 +29,14 @@ export const COLUMNS = [
     },
     { 
         Header: "Strategy",
-        accessor: "strategy"
+        accessor: "strategyByStrategy.display"
     },
     { 
         Header: "Asset Type",
         accessor: "asset_type"
+    },
+    {
+        Header: "Account",
+        accessor: "account.name"
     }
 ];
-
-export const HIDDEN_COLUMNS = ["id", "account_id"];

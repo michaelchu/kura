@@ -10,7 +10,6 @@ import {
 export default function TransactionTableRT({
   cols,
   data,
-  hiddenCols,
   onEdit,
   onDelete,
 }) {
@@ -27,7 +26,6 @@ export default function TransactionTableRT({
     {
       columns: columns,
       data: dataRows,
-      initialState: { hiddenColumns: hiddenCols },
     },
     useSortBy
   );
@@ -80,7 +78,7 @@ export default function TransactionTableRT({
                     <Button
                       variant="light"
                       size="sm"
-                      onClick={() => onEdit(row.values)}
+                      onClick={() => onEdit(row.original)}
                     >
                       <i
                         className="ti ti-edit"
@@ -90,7 +88,7 @@ export default function TransactionTableRT({
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={() => onDelete(row.values)}
+                      onClick={() => onDelete(row.original)}
                     >
                       <i
                         className="ti ti-trash"

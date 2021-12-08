@@ -1,6 +1,9 @@
 query FetchTransactions {
   transactions(order_by: {trade_date: desc}) {
     id
+    account {
+      name
+    }
     account_id
     trade_date
     symbol
@@ -8,8 +11,11 @@ query FetchTransactions {
     action
     price
     fee
-    strategy
     asset_type
+    strategy
+    strategyByStrategy {
+      display
+    }
   }
   accounts {
     label: name
