@@ -1313,6 +1313,11 @@
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.46.0.tgz#82c5d46fc2bd406226805309208e4078084fed77"
   integrity sha512-GufZYxw32OcqejSUpn5XdZi7zP/d+tUZH3S+mMlv3AnMn6MStOBKXOxqWYrJ529hjj1m5JHeghwHmHpj3SRJYg==
 
+"@types/accounting@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@types/accounting/-/accounting-0.4.2.tgz#81239fc56bc62511a3d3ff535dde2e0bbf3c53c1"
+  integrity sha512-M8W6tsLZguGdRaSQMmg58PUM/5HgoDuBGVyMiYNGi0FZkLzJDjUBGGYRYj1J9OWELCTqfux+ogVyKObCzfWJgg==
+
 "@types/invariant@^2.2.33":
   version "2.2.35"
   resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.35.tgz#cd3ebf581a6557452735688d8daba6cf0bd5a3be"
