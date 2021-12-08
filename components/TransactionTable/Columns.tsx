@@ -19,8 +19,10 @@ export const COLUMNS = [
     Cell: ({ value }) => {
       if (value == "BTO" || value == "BTC") {
         return <span className="badge bg-green-lt">{value}</span>;
-      } else {
+      } else if (value == "STC" || value == "STO") {
         return <span className="badge bg-pink-lt">{value}</span>;
+      } else {
+        return <span className="badge bg-yellow-lt">{value}</span>; 
       }
     },
   },
