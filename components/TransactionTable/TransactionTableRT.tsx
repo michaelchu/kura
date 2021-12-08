@@ -5,8 +5,6 @@ import { Button } from "react-bootstrap";
 import {
   IconChevronUp,
   IconChevronDown,
-  IconEdit,
-  IconTrash,
 } from "@tabler/icons";
 
 export default function TransactionTableRT({

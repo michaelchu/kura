@@ -19,6 +19,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.6",
     "@tabler/icons": "^1.46.0",
+    "@types/react-table": "^7.7.9",
     "accounting": "^0.4.1",
     "apollo-boost": "^0.4.4",
     "bootstrap": "^4.5.3",
