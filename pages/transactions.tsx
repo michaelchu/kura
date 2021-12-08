@@ -15,12 +15,12 @@ import Layout from "../components/Layouts/Layout";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
-import TransactionTableRT from "../components/TransactionTable/TransactionTableRT";
+import TransactionTable from "../components/TransactionTable/TransactionTable";
 
-import FETCH_TRANSACTIONS from "../graphql/api/queries/FetchTransactions.graphql";
-import DELETE_TRANSACTION from "../graphql/api/mutations/DeleteTransaction.graphql";
-import ADD_TRANSACTION from "../graphql/api/mutations/AddTransaction.graphql";
-import UPDATE_TRANSACTION from "../graphql/api/mutations/UpdateTransaction.graphql";
+import FETCH_TRANSACTIONS from "../api/graphql/queries/FetchTransactions.graphql";
+import DELETE_TRANSACTION from "../api/graphql/mutations/DeleteTransaction.graphql";
+import ADD_TRANSACTION from "../api/graphql/mutations/AddTransaction.graphql";
+import UPDATE_TRANSACTION from "../api/graphql/mutations/UpdateTransaction.graphql";
 
 import { COLUMNS } from "../components/TransactionTable/Columns";
 
@@ -130,7 +130,7 @@ export default function Transactions() {
 
       <div className="row row-cards">
         <div className="col-12">
-          <TransactionTableRT
+          <TransactionTable
             cols={COLUMNS}
             data={data.transactions}
             onEdit={(trans: object) => {
