@@ -50,19 +50,6 @@ const TabInputs = ({
           />
         </div>
       </div>
-      <div className="col-lg-12">
-        <div className="mt-2">
-          <label className="form-label">Strategy</label>
-          <Select
-            options={strategies}
-            name="strategy-selection"
-            defaultValue={getOptionByValue(strategies, transaction.strategy)}
-            onChange={(e: HTMLInputElement) =>
-              handleChange(merge(cache, { object: { strategy: e.value } }))
-            }
-          />
-        </div>
-      </div>
       <div className="row">
         <div className="col-lg-6">
           <div className="mt-2">
@@ -125,6 +112,24 @@ const TabInputs = ({
                   handleChange(
                     merge(cache, { object: { option_type: e.value } })
                   )
+                }
+              />
+            </div>
+          </div>
+        )}
+        {isOption && (
+          <div className="col-lg-12">
+            <div className="mt-2">
+              <label className="form-label">Strategy</label>
+              <Select
+                options={strategies}
+                name="strategy-selection"
+                defaultValue={getOptionByValue(
+                  strategies,
+                  transaction.strategy
+                )}
+                onChange={(e: HTMLInputElement) =>
+                  handleChange(merge(cache, { object: { strategy: e.value } }))
                 }
               />
             </div>

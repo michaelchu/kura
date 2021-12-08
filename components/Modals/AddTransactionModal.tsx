@@ -67,7 +67,9 @@ const AddTransactionModal = ({
               });
             } else {
               handleCloseAndAdd(
-                _.merge(cache, { object: { asset_type: "stock" } })
+                _.merge(cache, {
+                  object: { asset_type: "stock", strategy: "long_stock" },
+                })
               );
             }
           }}
