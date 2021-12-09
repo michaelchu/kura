@@ -29,7 +29,7 @@ export default function NavBar() {
               href="#"
               className="nav-link px-0"
               data-bs-toggle="dropdown"
-              tabIndex="-1"
+              tabIndex={-1}
               aria-label="Show notifications"
             >
               <svg
