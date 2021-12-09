@@ -44,7 +44,6 @@ export const COLUMNS = [
   {
     Header: "Days in Trade",
     accessor: "days_in_trade",
-    
   },
   {
     Header: "Account",

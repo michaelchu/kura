@@ -1,4 +1,3 @@
-import "../assets/css/tabler.min.css";
 import React from "react";
 import { Hydrate } from "react-query/hydration";
 import type { AppProps } from "next/app";

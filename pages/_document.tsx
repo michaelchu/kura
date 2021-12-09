@@ -10,11 +10,17 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://unpkg.com/@tabler/icons@latest/iconfont/tabler-icons.min.css"
           />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css"
+          />
         </Head>
 
-        <body>
-          <Main />
-          <NextScript />
+        <body className="antialiased">
+          <div className="wrapper">
+            <Main />
+            <NextScript />
+          </div>
         </body>
       </Html>
     );

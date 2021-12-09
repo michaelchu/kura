@@ -28,17 +28,16 @@ export default function ClosedPositions() {
 
   return (
     <Layout>
-      <div className="page-header text-black d-print-none">
-        <div className="row align-items-center">
-          <div className="col">
-            <h2 className="page-title">Closed Positions</h2>
+      <div className="page-body">
+        <div className="container-xl">
+          <div className="row row-cards">
+            <div className="col-12">
+              <ClosedPositionTable
+                cols={COLUMNS}
+                data={data.closed_positions}
+              />
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div className="row row-cards">
-        <div className="col-12">
-          <ClosedPositionTable cols={COLUMNS} data={data.closed_positions} />
         </div>
       </div>
     </Layout>

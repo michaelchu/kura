@@ -1,43 +1,118 @@
 import React from "react";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="xl" bg="dark" variant="dark">
+    <header className="navbar navbar-expand-md navbar-light d-print-none">
       <div className="container-xl">
-        <Navbar.Brand href="/">
-          <img
-            src="/logo-dark.svg"
-            alt="zentracker"
-            className="navbar-brand-image"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-            <Nav.Link href="/transactions">Transactions</Nav.Link>
-            <Nav.Link href="/open-positions">Open Positions</Nav.Link>
-            <Nav.Link href="/closed-positions">Closed Positions</Nav.Link>
-            <Nav.Link href="/analysis">Analysis</Nav.Link>
-          </Nav>
-          <Nav>
-            <NavDropdown
-              title="Michael Chu"
-              id="basic-nav-dropdown"
-              className="nav-item dropdown"
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar-menu"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <h1 className="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+          <a href=".">
+            <img
+              src="/logo-light.svg"
+              width="110"
+              height="32"
+              alt="zentracker"
+              className="navbar-brand-image"
+            />
+          </a>
+        </h1>
+        <div className="navbar-nav flex-row order-md-last">
+          <div className="nav-item dropdown d-none d-md-flex me-3">
+            <a
+              href="#"
+              className="nav-link px-0"
+              data-bs-toggle="dropdown"
+              tabIndex="-1"
+              aria-label="Show notifications"
             >
-              <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#">Settings</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#">Logout</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+                <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+              </svg>
+              <span className="badge bg-red"></span>
+            </a>
+            <div className="dropdown-menu dropdown-menu-end dropdown-menu-card">
+              <div className="card">
+                <div className="card-body">This is a notification</div>
+              </div>
+            </div>
+          </div>
+          <div className="nav-item dropdown">
+            <a
+              href="#"
+              className="nav-link d-flex lh-1 text-reset p-0"
+              data-bs-toggle="dropdown"
+              aria-label="Open user menu"
+            >
+              <span
+                className="avatar avatar-sm"
+                style={{ backgroundImage: `url("/002m.jpg")` }}
+              ></span>
+              <div className="d-none d-xl-block ps-2">
+                <div>Michael Chu</div>
+              </div>
+            </a>
+            <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a href="#" className="dropdown-item">
+                Set status
+              </a>
+              <a href="#" className="dropdown-item">
+                Profile & account
+              </a>
+              <a href="#" className="dropdown-item">
+                Feedback
+              </a>
+              <div className="dropdown-divider"></div>
+              <a href="#" className="dropdown-item">
+                Settings
+              </a>
+              <a href="#" className="dropdown-item">
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="collapse navbar-collapse" id="navbar-menu">
+          <div className="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+            <ul className="navbar-nav">
+              <li className="nav-item active">
+                <a className="nav-link" href="/dashboard">
+                  <span className="nav-link-title">Dashboard</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/transactions">
+                  <span className="nav-link-title">Transactions</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/closed-positions">
+                  <span className="nav-link-title">Closed Postions</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </Navbar>
+    </header>
   );
 }

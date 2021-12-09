@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
 import Table from "react-bootstrap/Table";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
+import ClosedPositionTableHeader from "../ClosedPositionTable/ClosedPositionTableHeader";
+import ClosedPositionTableFooter from "../ClosedPositionTable/ClosedPositionTableFooter";
 
 export default function ClosedPositionTable({ cols, data }) {
   const columns = useMemo(() => cols, [cols]);
@@ -23,6 +25,7 @@ export default function ClosedPositionTable({ cols, data }) {
 
   return (
     <div className="card">
+      <ClosedPositionTableHeader />
       <Table
         responsive
         hover={true}
@@ -68,6 +71,7 @@ export default function ClosedPositionTable({ cols, data }) {
           })}
         </tbody>
       </Table>
+      <ClosedPositionTableFooter />
     </div>
   );
 }
