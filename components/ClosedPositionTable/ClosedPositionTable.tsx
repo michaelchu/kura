@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import Table from "react-bootstrap/Table";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 import ClosedPositionTableHeader from "../ClosedPositionTable/ClosedPositionTableHeader";
@@ -15,17 +15,25 @@ export default function ClosedPositionTable({ cols, data }) {
     headerGroups,
     rows,
     prepareRow,
+    state,
+    setGlobalFilter,
   } = useTable(
     {
       columns: columns,
       data: dataRows,
     },
+    useGlobalFilter,
     useSortBy
   );
 
+  const { globalFilter } = state;
+
   return (
     <div className="card">
-      <ClosedPositionTableHeader />
+      <ClosedPositionTableHeader
+        filter={globalFilter}
+        setFilter={setGlobalFilter}
+      />
       <Table
         responsive
         hover={true}
