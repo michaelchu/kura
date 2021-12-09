@@ -38,12 +38,11 @@ export default function TransactionTableHeader({
     <>
       <div className="card-header">
         <h3 className="card-title">Transactions</h3>
-      </div>
-      <div className="card-body border-bottom py-3">
-        <div className="d-flex">
-          <div className="btn-list">
-            <Button
-              variant={"primary"}
+        <div className="ms-auto text-muted">
+          <div className="btn-group w-40">
+            <button
+              type="button"
+              className="btn btn-lime"
               onClick={() => {
                 setIsOption(true);
                 setTransaction({});
@@ -51,9 +50,10 @@ export default function TransactionTableHeader({
               }}
             >
               Add Option
-            </Button>
-            <Button
-              variant={"light"}
+            </button>
+            <button
+              type="button"
+              className="btn btn-light"
               onClick={() => {
                 setIsOption(false);
                 setTransaction({});
@@ -61,36 +61,34 @@ export default function TransactionTableHeader({
               }}
             >
               Add Stock
-            </Button>
+            </button>
           </div>
-          <div className="ms-auto text-muted">
-            <div className="input-icon ms-2 d-inline-block">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search…"
-                value={filter || ""}
-                onChange={(e) => setFilter(e.target.value)}
-              />
-              <span className="input-icon-addon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <circle cx="10" cy="10" r="7" />
-                  <line x1="21" y1="21" x2="15" y2="15" />
-                </svg>
-              </span>
-            </div>
+          <div className="input-icon ms-2 d-inline-block">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search…"
+              value={filter || ""}
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            <span className="input-icon-addon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <circle cx="10" cy="10" r="7" />
+                <line x1="21" y1="21" x2="15" y2="15" />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
