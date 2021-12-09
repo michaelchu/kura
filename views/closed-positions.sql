@@ -1,4 +1,5 @@
-CREATE VIEW closed_trades as
+DROP VIEW IF EXISTS closed_positions;
+CREATE VIEW closed_positions as
 WITH grouped_trades as (
     SELECT symbol,
            action,
@@ -17,7 +18,7 @@ WITH grouped_trades as (
     group by symbol, action, strategy, root, expiration, type, strike, asset_type, account_id
 )
 
-SELECT t.strategy,
+SELECT s.display as strategy,
        t.root,
        t.expiration,
        t.trade_date                   as entry_date,
@@ -32,5 +33,6 @@ from trades t
          INNER JOIN grouped_trades t2
                     on t.symbol = t2.symbol and t.strategy = t2.strategy and t.account_id = t2.account_id
          inner join accounts a on t.account_id = a.id
+         inner join strategies s on t.strategy = s.name
 where (t.action = 'BTO' or t.action = 'STO')
   and (t2.action <> 'BTO' and t2.action <> 'STO');

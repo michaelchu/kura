@@ -1,0 +1,15 @@
+query ClosedPositions {
+  closed_positions(order_by: {entry_date: desc}) {
+    entry_date
+    exit_date
+    root
+    strategy
+    expiration
+    original_cost
+    exit_cost
+    total_fees
+    realized_pnl
+    days_in_trade
+    name
+  }
+}
