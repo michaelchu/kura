@@ -14,6 +14,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css"
           />
+          <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rubik"></link>
         </Head>
 
         <body className="antialiased">
