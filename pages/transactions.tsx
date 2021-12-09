@@ -1,30 +1,13 @@
-import React, { useState } from "react";
-import {
-  useQuery,
-  useMutation,
-  QueryClient,
-  useQueryClient,
-} from "react-query";
-import useModal from "../hooks/useModal";
+import React from "react";
+import { useQuery, QueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
-import moment from "moment";
-import { Button } from "react-bootstrap";
 import { dehydrate } from "react-query/hydration";
 
 import Layout from "../components/Layouts/Layout";
-import AddTransactionModal from "../components/Modals/AddTransactionModal";
-import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal";
-import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import TransactionTable from "../components/TransactionTable/TransactionTable";
 
 import FETCH_TRANSACTIONS from "../api/graphql/queries/FetchTransactions.graphql";
-import DELETE_TRANSACTION from "../api/graphql/mutations/DeleteTransaction.graphql";
-import ADD_TRANSACTION from "../api/graphql/mutations/AddTransaction.graphql";
-import UPDATE_TRANSACTION from "../api/graphql/mutations/UpdateTransaction.graphql";
-
 import { COLUMNS } from "../components/TransactionTable/Columns";
-
-const queryClient = new QueryClient();
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -33,6 +16,7 @@ const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
 });
 
 export async function getStaticProps() {
+  const queryClient = new QueryClient();
   await queryClient.prefetchQuery("fetch_transactions", () => getTrans());
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }
@@ -42,142 +26,17 @@ async function getTrans() {
 }
 
 export default function Transactions() {
-  const queryClient = useQueryClient();
-  const { isShowing: isAddModalShowing, toggle: addModalToggle } = useModal();
-  const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
-  const {
-    isShowing: isDeleteModalShowing,
-    toggle: deleteModalToggle,
-  } = useModal();
-
-  const [isOption, setIsOption] = useState(false);
-
-  const [transaction, setTransaction] = useState({});
-
-  const deleteTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(DELETE_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        deleteModalToggle();
-        setTransaction({});
-      },
-    }
-  );
-
-  const addTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(ADD_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        addModalToggle();
-      },
-    }
-  );
-
-  const updateTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(UPDATE_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        editModalToggle();
-      },
-    }
-  );
-
   const { data } = useQuery("fetch_transactions", getTrans);
 
   return (
     <Layout>
-      <div className="page-header text-black d-print-none">
-        <div className="row align-items-center">
-          <div className="col">
-            <div className="page-pretitle">As of {moment().format("LLL")}</div>
-            <h2 className="page-title">Trade History</h2>
-          </div>
-          <div className="col-auto ms-auto d-print-none">
-            <div className="btn-list">
-              <Button
-                variant={"light"}
-                onClick={() => {
-                  setIsOption(false);
-                  setTransaction({});
-                  addModalToggle();
-                }}
-              >
-                Add Stock
-              </Button>
-              <Button
-                variant={"primary"}
-                onClick={() => {
-                  setIsOption(true);
-                  setTransaction({});
-                  addModalToggle();
-                }}
-              >
-                Add Option
-              </Button>
-            </div>
+      <div className="page-body">
+        <div className="row row-cards">
+          <div className="col-12">
+            <TransactionTable cols={COLUMNS} data={data} />
           </div>
         </div>
       </div>
-
-      <div className="row row-cards">
-        <div className="col-12">
-          <TransactionTable
-            cols={COLUMNS}
-            data={data.transactions}
-            onEdit={(trans: object) => {
-              setTransaction(trans);
-              editModalToggle();
-            }}
-            onDelete={(trans: object) => {
-              setTransaction(trans);
-              deleteModalToggle();
-            }}
-          />
-        </div>
-      </div>
-
-      <AddTransactionModal
-        show={isAddModalShowing}
-        accounts={data.accounts}
-        isOption={isOption}
-        handleClose={() => {
-          addModalToggle();
-        }}
-        handleCloseAndAdd={(data) => {
-          addTrans.mutate(data);
-        }}
-      />
-      <EditTransactionModal
-        show={isEditModalShowing}
-        selectedTrans={transaction}
-        accounts={data.accounts}
-        handleClose={() => {
-          editModalToggle();
-        }}
-        handleCloseAndUpdate={(data) => {
-          console.log(data);
-          updateTrans.mutate(data);
-        }}
-      />
-      <DeleteTransactionModal
-        show={isDeleteModalShowing}
-        trans={transaction}
-        handleClose={() => {
-          deleteModalToggle();
-        }}
-        handleCloseAndDelete={(transId) => {
-          deleteTrans.mutate({ id: transId } as any);
-        }}
-      />
     </Layout>
   );
 }

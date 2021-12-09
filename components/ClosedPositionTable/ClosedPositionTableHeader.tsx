@@ -13,7 +13,7 @@ const ClosedPositionTableHeader = ({ filter, setFilter }) => (
             <input
               type="text"
               className="form-control form-control-sm"
-              aria-label="Search invoice"
+              aria-label="Search Closed Positions"
               value={filter || ""}
               onChange={(e) => setFilter(e.target.value)}
             />

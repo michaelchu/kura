@@ -106,7 +106,7 @@ export default function NavBar() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/closed-positions">
-                  <span className="nav-link-title">Closed Postions</span>
+                  <span className="nav-link-title">Closed Positions</span>
                 </a>
               </li>
             </ul>
