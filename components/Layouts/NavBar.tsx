@@ -5,7 +5,7 @@ import { IconBell } from "@tabler/icons";
 export default function NavBar() {
   const router = useRouter();
   return (
-    <header className="navbar navbar-expand-md navbar-light d-print-none">
+    <header className="navbar navbar-expand-md navbar-dark d-print-none">
       <div className="container-xl">
         <button
           className="navbar-toggler"
@@ -18,7 +18,7 @@ export default function NavBar() {
         <h1 className="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
           <a href=".">
             <img
-              src="/logo-light.svg"
+              src="/logo-dark.png"
               width="110"
               height="32"
               alt="zentracker"
