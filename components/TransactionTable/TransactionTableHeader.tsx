@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconSearch } from '@tabler/icons';
+import { IconSearch } from "@tabler/icons";
 import { useMutation, useQueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import useModal from "../../hooks/useModal";

@@ -1,5 +1,5 @@
 import React from "react";
-import { IconSearch } from '@tabler/icons';
+import { IconSearch } from "@tabler/icons";
 
 const ClosedPositionTableHeader = ({ filter, setFilter }) => (
   <>
@@ -15,7 +15,7 @@ const ClosedPositionTableHeader = ({ filter, setFilter }) => (
             onChange={(e) => setFilter(e.target.value)}
           />
           <span className="input-icon-addon">
-              <IconSearch />
+            <IconSearch />
           </span>
         </div>
       </div>

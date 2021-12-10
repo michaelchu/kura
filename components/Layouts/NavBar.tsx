@@ -1,6 +1,9 @@
 import React from "react";
+import { useRouter } from "next/router";
+import { IconBell } from "@tabler/icons";
 
 export default function NavBar() {
+  const router = useRouter();
   return (
     <header className="navbar navbar-expand-md navbar-light d-print-none">
       <div className="container-xl">
@@ -32,22 +35,7 @@ export default function NavBar() {
               tabIndex={-1}
               aria-label="Show notifications"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-              </svg>
+              <IconBell />
               <span className="badge bg-red"></span>
             </a>
             <div className="dropdown-menu dropdown-menu-end dropdown-menu-card">
@@ -94,17 +82,35 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbar-menu">
           <div className="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
             <ul className="navbar-nav">
-              <li className="nav-item active">
+              <li
+                className={
+                  router.pathname == "/dashboard"
+                    ? "nav-item active"
+                    : "nav-item"
+                }
+              >
                 <a className="nav-link" href="/dashboard">
                   <span className="nav-link-title">Dashboard</span>
                 </a>
               </li>
-              <li className="nav-item">
+              <li
+                className={
+                  router.pathname == "/transactions"
+                    ? "nav-item active"
+                    : "nav-item"
+                }
+              >
                 <a className="nav-link" href="/transactions">
                   <span className="nav-link-title">Transactions</span>
                 </a>
               </li>
-              <li className="nav-item">
+              <li
+                className={
+                  router.pathname == "/closed-positions"
+                    ? "nav-item active"
+                    : "nav-item"
+                }
+              >
                 <a className="nav-link" href="/closed-positions">
                   <span className="nav-link-title">Closed Positions</span>
                 </a>

@@ -2,7 +2,7 @@ import React from "react";
 import { Hydrate } from "react-query/hydration";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
-import '../styles.css';
+import "../styles.css";
 
 const queryClient = new QueryClient();
 
