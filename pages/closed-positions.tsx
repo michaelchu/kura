@@ -1,11 +1,10 @@
-import React, { useState } from "react";
 import { useQuery, QueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import CLOSED_POSITIONS from "../api/graphql/queries/ClosedPositions.graphql";
-import { COLUMNS } from "../components/ClosedPositionTable/Columns";
-import ClosedPositionTable from "../components/ClosedPositionTable/ClosedPositionTable";
+import { COLUMNS } from "../components/Tables/ClosedPositionTable/Columns";
+import ClosedPositionTable from "../components/Tables/ClosedPositionTable/ClosedPositionTable";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {

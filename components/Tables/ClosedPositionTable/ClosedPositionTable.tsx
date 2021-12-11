@@ -1,9 +1,14 @@
 import React, { useMemo } from "react";
-import { useTable, useSortBy, useGlobalFilter } from "react-table";
+import {
+  useTable,
+  useSortBy,
+  useGlobalFilter,
+  usePagination,
+} from "react-table";
 import Table from "react-bootstrap/Table";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
-import ClosedPositionTableHeader from "../ClosedPositionTable/ClosedPositionTableHeader";
-import ClosedPositionTableFooter from "../ClosedPositionTable/ClosedPositionTableFooter";
+import ClosedPositionTableHeader from "./ClosedPositionTableHeader";
+import TableFooter from "../TableFooter";
 
 export default function ClosedPositionTable({ cols, data }) {
   const columns = useMemo(() => cols, [cols]);
@@ -13,7 +18,14 @@ export default function ClosedPositionTable({ cols, data }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
     prepareRow,
     state,
     setGlobalFilter,
@@ -23,10 +35,11 @@ export default function ClosedPositionTable({ cols, data }) {
       data: dataRows,
     },
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    usePagination
   );
 
-  const { globalFilter } = state;
+  const { globalFilter, pageIndex } = state;
 
   return (
     <div className="card">
@@ -65,7 +78,7 @@ export default function ClosedPositionTable({ cols, data }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps}>
-          {rows.map((row) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -79,7 +92,16 @@ export default function ClosedPositionTable({ cols, data }) {
           })}
         </tbody>
       </Table>
-      <ClosedPositionTableFooter />
+      <TableFooter
+        previousPage={previousPage}
+        nextPage={nextPage}
+        canNextPage={canNextPage}
+        canPreviousPage={canPreviousPage}
+        pageOptions={pageOptions}
+        pageIndex={pageIndex}
+        pageCount={pageCount}
+        gotoPage={gotoPage}
+      />
     </div>
   );
 }

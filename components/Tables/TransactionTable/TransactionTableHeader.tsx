@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { IconSearch } from "@tabler/icons";
 import { useMutation, useQueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
-import useModal from "../../hooks/useModal";
-import AddTransactionModal from "../../components/Modals/AddTransactionModal";
-import ADD_TRANSACTION from "../../api/graphql/mutations/AddTransaction.graphql";
+import useModal from "../../../hooks/useModal";
+import AddTransactionModal from "../../Modals/AddTransactionModal";
+import ADD_TRANSACTION from "../../../api/graphql/mutations/AddTransaction.graphql";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {

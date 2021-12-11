@@ -1,20 +1,25 @@
 import React, { useMemo, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
-import { useTable, useSortBy, useGlobalFilter } from "react-table";
-import useModal from "../../hooks/useModal";
+import {
+  useTable,
+  useSortBy,
+  useGlobalFilter,
+  usePagination,
+} from "react-table";
+import useModal from "../../../hooks/useModal";
 import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 
-import TransactionTableHeader from "../TransactionTable/TransactionTableHeader";
-import TransactionTableFooter from "../TransactionTable/TransactionTableFooter";
+import TransactionTableHeader from "./TransactionTableHeader";
+import TableFooter from "../TableFooter";
 
-import DeleteTransactionModal from "../../components/Modals/DeleteTransactionModal";
-import EditTransactionModal from "../../components/Modals/EditTransactionModal";
+import DeleteTransactionModal from "../../Modals/DeleteTransactionModal";
+import EditTransactionModal from "../../Modals/EditTransactionModal";
 
-import DELETE_TRANSACTION from "../../api/graphql/mutations/DeleteTransaction.graphql";
-import UPDATE_TRANSACTION from "../../api/graphql/mutations/UpdateTransaction.graphql";
+import DELETE_TRANSACTION from "../../../api/graphql/mutations/DeleteTransaction.graphql";
+import UPDATE_TRANSACTION from "../../../api/graphql/mutations/UpdateTransaction.graphql";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -42,9 +47,10 @@ export default function TransactionTable({ cols, data }) {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        deleteModalToggle();
-        setTransaction({});
+        queryClient.invalidateQueries("fetch_transactions").then(() => {
+          deleteModalToggle();
+          setTransaction({});
+        });
       },
     }
   );
@@ -55,8 +61,9 @@ export default function TransactionTable({ cols, data }) {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        editModalToggle();
+        queryClient
+          .invalidateQueries("fetch_transactions")
+          .then(() => editModalToggle());
       },
     }
   );
@@ -65,7 +72,14 @@ export default function TransactionTable({ cols, data }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
     prepareRow,
     state,
     setGlobalFilter,
@@ -75,10 +89,11 @@ export default function TransactionTable({ cols, data }) {
       data: dataRows,
     },
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    usePagination
   );
 
-  const { globalFilter } = state;
+  const { globalFilter, pageIndex } = state;
 
   return (
     <div className="card">
@@ -115,12 +130,12 @@ export default function TransactionTable({ cols, data }) {
                   </span>
                 </th>
               ))}
-              <th className="w-1"></th>
+              <th className="w-1" />
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps}>
-          {rows.map((row) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -142,7 +157,7 @@ export default function TransactionTable({ cols, data }) {
                       <i
                         className="ti ti-edit"
                         style={{ fontSize: "1.25rem" }}
-                      ></i>
+                      />
                     </Button>
                     <Button
                       variant="secondary"
@@ -155,7 +170,7 @@ export default function TransactionTable({ cols, data }) {
                       <i
                         className="ti ti-trash"
                         style={{ fontSize: "1.25rem" }}
-                      ></i>
+                      />
                     </Button>
                   </div>
                 </td>
@@ -164,7 +179,16 @@ export default function TransactionTable({ cols, data }) {
           })}
         </tbody>
       </Table>
-      <TransactionTableFooter />
+      <TableFooter
+        previousPage={previousPage}
+        nextPage={nextPage}
+        canNextPage={canNextPage}
+        canPreviousPage={canPreviousPage}
+        pageOptions={pageOptions}
+        pageIndex={pageIndex}
+        pageCount={pageCount}
+        gotoPage={gotoPage}
+      />
 
       <EditTransactionModal
         show={isEditModalShowing}

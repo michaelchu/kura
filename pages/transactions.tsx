@@ -4,10 +4,10 @@ import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 
 import Layout from "../components/Layouts/Layout";
-import TransactionTable from "../components/TransactionTable/TransactionTable";
+import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
 
 import FETCH_TRANSACTIONS from "../api/graphql/queries/FetchTransactions.graphql";
-import { COLUMNS } from "../components/TransactionTable/Columns";
+import { COLUMNS } from "../components/Tables/TransactionTable/Columns";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
