@@ -5,13 +5,13 @@ import TabInputs from "./TabInputs";
 import moment from "moment";
 import _ from "lodash";
 
-const AddTransactionModal = ({
+export default function AddTransactionModal({
   show,
   accounts,
   isOption,
   handleClose,
   handleCloseAndAdd,
-}) => {
+}) {
   const [cache, setCache] = useState({ object: {} });
 
   return (
@@ -80,6 +80,4 @@ const AddTransactionModal = ({
       </Modal.Footer>
     </Modal>
   );
-};
-
-export default AddTransactionModal;
+}

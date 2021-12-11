@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import TabInputs from "./TabInputs";
 
-const EditTransactionModal = ({
+export default function EditTransactionModal({
   show,
   selectedTrans,
   accounts,
   handleClose,
   handleCloseAndUpdate,
-}) => {
+}) {
   const [cache, setCache] = useState({ id: selectedTrans.id, object: {} });
 
   return (
@@ -59,6 +59,4 @@ const EditTransactionModal = ({
       </Modal.Footer>
     </Modal>
   );
-};
-
-export default EditTransactionModal;
+}

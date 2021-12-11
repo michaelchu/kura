@@ -2,13 +2,13 @@ import React from "react";
 import Select from "react-select";
 import merge from "deepmerge";
 
-const TabInputs = ({
+export default function TabInputs({
   transaction,
   accounts,
   handleChange,
   isOption,
   cache,
-}) => {
+}) {
   // TODO: Replace this with query from db
   const actionTypes = [
     { value: "BTO", label: "Buy to Open" },
@@ -236,6 +236,4 @@ const TabInputs = ({
       )}
     </div>
   );
-};
-
-export default TabInputs;
+}

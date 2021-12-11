@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
-const DeleteTransactionModal = ({
+export default function DeleteTransactionModal({
   show,
   trans,
   handleClose,
   handleCloseAndDelete,
-}) => {
+}) {
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>
@@ -33,6 +33,4 @@ const DeleteTransactionModal = ({
       </Modal.Footer>
     </Modal>
   );
-};
-
-export default DeleteTransactionModal;
+}
