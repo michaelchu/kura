@@ -87,6 +87,9 @@ export default function TransactionTable({ cols, data }) {
     {
       columns: columns,
       data: dataRows,
+      initialState: {
+        pageSize: 20,
+      },
     },
     useGlobalFilter,
     useSortBy,

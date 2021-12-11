@@ -33,6 +33,9 @@ export default function ClosedPositionTable({ cols, data }) {
     {
       columns: columns,
       data: dataRows,
+      initialState: {
+        pageSize: 20,
+      },
     },
     useGlobalFilter,
     useSortBy,
