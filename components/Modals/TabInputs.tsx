@@ -15,6 +15,8 @@ export default function TabInputs({
     { value: "BTC", label: "Buy to Close" },
     { value: "STO", label: "Sell to Open" },
     { value: "STC", label: "Sell to Close" },
+    { value: "EXP", label: "Expired" },
+    { value: "ASG", label: "Assignment" },
   ];
 
   const optionTypes = [
@@ -22,10 +24,16 @@ export default function TabInputs({
     { value: "P", label: "Put" },
   ];
 
-  const strategies = [
-    { value: "covered_call", label: "(Covered) Call" },
-    { value: "naked_long_call", label: "Naked (Long Call)" },
-    { value: "naked_short_put", label: "Naked (Short Put)" },
+  const option_strategies = [
+    { value: "covered_call", label: "Covered Call" },
+    { value: "long_call", label: "Long Call" },
+    { value: "short_put", label: "Short Put" },
+  ];
+
+  const stock_strategies = [
+    { value: "covered_call", label: "Covered Call" },
+    { value: "long_stock", label: "Long Stock" },
+    { value: "short_stock", label: "Short Stock" },
   ];
 
   const getOptionByValue = (
@@ -117,15 +125,32 @@ export default function TabInputs({
             </div>
           </div>
         )}
-        {isOption && (
+        {isOption ? (
           <div className="col-lg-12">
             <div className="mt-2">
               <label className="form-label">Strategy</label>
               <Select
-                options={strategies}
+                options={option_strategies}
                 name="strategy-selection"
                 defaultValue={getOptionByValue(
-                  strategies,
+                  option_strategies,
+                  transaction.strategy
+                )}
+                onChange={(e: HTMLInputElement) =>
+                  handleChange(merge(cache, { object: { strategy: e.value } }))
+                }
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="col-lg-12">
+            <div className="mt-2">
+              <label className="form-label">Strategy</label>
+              <Select
+                options={stock_strategies}
+                name="strategy-selection"
+                defaultValue={getOptionByValue(
+                  stock_strategies,
                   transaction.strategy
                 )}
                 onChange={(e: HTMLInputElement) =>

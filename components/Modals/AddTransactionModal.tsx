@@ -31,7 +31,14 @@ export default function AddTransactionModal({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button type="button" variant="outline-secondary" onClick={handleClose}>
+        <Button
+          type="button"
+          variant="outline-secondary"
+          onClick={() => {
+            setCache({ object: {} });
+            handleClose();
+          }}
+        >
           Close
         </Button>
         <Button
@@ -65,12 +72,14 @@ export default function AddTransactionModal({
                   symbol: formatted_sym,
                 }),
               });
+              setCache({ object: {} });
             } else {
               handleCloseAndAdd(
                 _.merge(cache, {
-                  object: { asset_type: "stock", strategy: "long_stock" },
+                  object: { asset_type: "stock" },
                 })
               );
+              setCache({ object: {} });
             }
           }}
           type="button"

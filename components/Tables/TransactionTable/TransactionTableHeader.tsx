@@ -28,8 +28,10 @@ export default function TransactionTableHeader({
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions");
-        addModalToggle();
+        queryClient.invalidateQueries("fetch_transactions").then(() => {
+          setTransaction({});
+          addModalToggle();
+        });
       },
     }
   );
