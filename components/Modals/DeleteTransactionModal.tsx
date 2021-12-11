@@ -19,7 +19,7 @@ export default function DeleteTransactionModal({
         <Button
           as="input"
           type="button"
-          variant="secondary"
+          variant="outline-secondary"
           onClick={handleClose}
           value="Cancel"
         />

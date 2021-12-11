@@ -43,7 +43,7 @@ export default function EditTransactionModal({
         <Button
           as="input"
           type="button"
-          variant="secondary"
+          variant="outline-secondary"
           onClick={handleClose}
           value="Close"
         />
