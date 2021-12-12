@@ -11,7 +11,7 @@ export const COLUMNS = [
   },
   {
     Header: "Symbol",
-    accessor: "root",
+    accessor: "symbol",
   },
   {
     Header: "Strategy",

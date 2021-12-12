@@ -2,7 +2,7 @@ query ClosedPositions {
   closed_positions(order_by: {entry_date: desc}) {
     entry_date
     exit_date
-    root
+    symbol
     strategy
     expiration
     original_cost
