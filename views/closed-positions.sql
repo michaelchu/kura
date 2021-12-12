@@ -19,7 +19,7 @@ WITH grouped_trades as (
 )
 
 SELECT s.display as strategy,
-       t.root,
+       t.symbol,
        t.expiration,
        t.trade_date                   as entry_date,
        t2.trade_date                  as exit_date,
