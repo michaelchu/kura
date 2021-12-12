@@ -13,7 +13,7 @@ export default function NavBar() {
           data-bs-toggle="collapse"
           data-bs-target="#navbar-menu"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </button>
         <h1 className="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
           <a href=".">
@@ -36,7 +36,7 @@ export default function NavBar() {
               aria-label="Show notifications"
             >
               <IconBell />
-              <span className="badge bg-red"></span>
+              <span className="badge bg-red" />
             </a>
             <div className="dropdown-menu dropdown-menu-end dropdown-menu-card">
               <div className="card">
@@ -54,22 +54,19 @@ export default function NavBar() {
               <span
                 className="avatar avatar-sm"
                 style={{ backgroundImage: `url("/002m.jpg")` }}
-              ></span>
+              />
               <div className="d-none d-xl-block ps-2">
                 <div>Michael Chu</div>
               </div>
             </a>
             <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
               <a href="#" className="dropdown-item">
-                Set status
-              </a>
-              <a href="#" className="dropdown-item">
                 Profile & account
               </a>
               <a href="#" className="dropdown-item">
                 Feedback
               </a>
-              <div className="dropdown-divider"></div>
+              <div className="dropdown-divider" />
               <a href="#" className="dropdown-item">
                 Settings
               </a>
@@ -84,24 +81,13 @@ export default function NavBar() {
             <ul className="navbar-nav">
               <li
                 className={
-                  router.pathname == "/dashboard"
+                  router.pathname == "/open-positions"
                     ? "nav-item active"
                     : "nav-item"
                 }
               >
-                <a className="nav-link" href="/dashboard">
-                  <span className="nav-link-title">Dashboard</span>
-                </a>
-              </li>
-              <li
-                className={
-                  router.pathname == "/transactions"
-                    ? "nav-item active"
-                    : "nav-item"
-                }
-              >
-                <a className="nav-link" href="/transactions">
-                  <span className="nav-link-title">Transactions</span>
+                <a className="nav-link" href="/open-positions">
+                  <span className="nav-link-title">Open Positions</span>
                 </a>
               </li>
               <li
@@ -113,6 +99,17 @@ export default function NavBar() {
               >
                 <a className="nav-link" href="/closed-positions">
                   <span className="nav-link-title">Closed Positions</span>
+                </a>
+              </li>
+              <li
+                className={
+                  router.pathname == "/transactions"
+                    ? "nav-item active"
+                    : "nav-item"
+                }
+              >
+                <a className="nav-link" href="/transactions">
+                  <span className="nav-link-title">Transactions</span>
                 </a>
               </li>
             </ul>
