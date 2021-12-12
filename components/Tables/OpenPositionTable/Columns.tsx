@@ -2,10 +2,6 @@ import accounting from "accounting";
 
 export const COLUMNS = [
   {
-    Header: "Strategy",
-    accessor: "strategy",
-  },
-  {
     Header: "Trade Date",
     accessor: "trade_date",
   },
