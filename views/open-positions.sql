@@ -1,29 +1,25 @@
-WITH open_positons as (
-    SELECT t.root,
-           t.symbol,
-           t.expiration,
-           t.strike,
-           t.type,
-           sum(t.quantity) as quantity,
-           t.strategy
-    from trades t
-    group by t.root, t.symbol, t.expiration, t.strategy, t.strike, t.type
+DROP VIEW IF EXISTS open_positions;
+CREATE OR REPLACE VIEW open_positions AS
+WITH open_positions as (
+    SELECT symbol, strategy, sum(quantity)
+    from trades
+    GROUP BY symbol, strategy
     having sum(quantity) <> 0
 )
 
-SELECT t.account_id,
-       t.trade_date,
+SELECT t.strategy,
+       trade_date,
+       root,
        t.action,
-       op.symbol,
-       op.root,
-       op.expiration,
-       op.type,
-       op.strike,
-       t.quantity,
-       t.price,
-       t.fee,
-       t.strategy,
-       t.asset_type,
-       current_date - t.trade_date as days_in_trade
-from open_positons op
-         INNER JOIN transactions t on t.symbol = op.symbol
+       expiration,
+       type,
+       strike,
+       total_cost,
+       asset_type,
+       a.name,
+       account_id
+from open_positions op
+         INNER JOIN trades t on (t.symbol = op.symbol and t.strategy = op.strategy) or
+                                (t.root = op.symbol and t.strategy = op.strategy)
+         INNER JOIN accounts a on t.account_id = a.id
+ORDER BY root, trade_date DESC;
