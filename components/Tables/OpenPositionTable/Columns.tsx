@@ -14,6 +14,17 @@ export const COLUMNS = [
     accessor: "root",
   },
   {
+    Header: "Asset Type",
+    accessor: "asset_type",
+    Cell: ({ value }) => {
+      if (value == "stock") {
+        return <span className="badge bg-purple-lt">{value}</span>;
+      } else {
+        return <span className="badge bg-azure-lt">{value}</span>;
+      }
+    },
+  },
+  {
     Header: "Action",
     accessor: "action",
     Cell: ({ value }) => {
@@ -62,17 +73,6 @@ export const COLUMNS = [
         );
       } else {
         return <span>{accounting.formatMoney(value)}</span>;
-      }
-    },
-  },
-  {
-    Header: "Asset Type",
-    accessor: "asset_type",
-    Cell: ({ value }) => {
-      if (value == "stock") {
-        return <span className="badge bg-purple-lt">{value}</span>;
-      } else {
-        return <span className="badge bg-azure-lt">{value}</span>;
       }
     },
   },
