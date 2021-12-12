@@ -1,0 +1,16 @@
+query OpenPositions {
+    open_positions {
+        strategy
+        trade_date
+        root
+        action
+        quantity
+        expiration
+        type
+        strike
+        total_cost
+        asset_type
+        name
+        account_id
+    }
+}

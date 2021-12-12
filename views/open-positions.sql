@@ -7,7 +7,7 @@ WITH open_positions as (
     having sum(quantity) <> 0
 )
 
-SELECT t.strategy,
+SELECT s.display as strategy,
        trade_date,
        root,
        t.action,
@@ -22,4 +22,5 @@ from open_positions op
          INNER JOIN trades t on (t.symbol = op.symbol and t.strategy = op.strategy) or
                                 (t.root = op.symbol and t.strategy = op.strategy)
          INNER JOIN accounts a on t.account_id = a.id
+INNER JOIN strategies s on op.strategy = s.name
 ORDER BY root, trade_date DESC;
