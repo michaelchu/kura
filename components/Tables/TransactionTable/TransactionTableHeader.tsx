@@ -44,7 +44,7 @@ export default function TransactionTableHeader({
           <div className="btn-group w-40">
             <button
               type="button"
-              className="btn btn-lime"
+              className="btn btn-outline-cyan"
               onClick={() => {
                 setIsOption(true);
                 setTransaction({});
@@ -55,7 +55,7 @@ export default function TransactionTableHeader({
             </button>
             <button
               type="button"
-              className="btn btn-light"
+              className="btn btn-outline-cyan"
               onClick={() => {
                 setIsOption(false);
                 setTransaction({});

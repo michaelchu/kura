@@ -5,7 +5,6 @@ import Layout from "../components/Layouts/Layout";
 import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
 import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
 import Accordion from "../components/Accordion/Accordion";
-import _ from "lodash";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
