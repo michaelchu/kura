@@ -9,7 +9,6 @@ import {
 } from "react-table";
 import useModal from "../../../hooks/useModal";
 import Table from "react-bootstrap/Table";
-import { Button } from "react-bootstrap";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 
 import TransactionTableHeader from "./TransactionTableHeader";
@@ -30,11 +29,6 @@ export default function TransactionTable({ cols, data }) {
   const queryClient = useQueryClient();
 
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
-  const {
-    isShowing: isDeleteModalShowing,
-    toggle: deleteModalToggle,
-  } = useModal();
-
   const [transaction, setTransaction] = useState({});
 
   const columns = useMemo(() => cols, [cols]);
@@ -115,7 +109,10 @@ export default function TransactionTable({ cols, data }) {
       >
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr
+              {...headerGroup.getHeaderGroupProps()}
+              style={{ textAlign: "center" }}
+            >
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
