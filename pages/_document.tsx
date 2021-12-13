@@ -18,10 +18,10 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
             href="https://fonts.googleapis.com/css?family=Nunito"
-          ></link>
+          />
         </Head>
 
-        <body className="antialiased">
+        <body className="theme-light">
           <div className="wrapper">
             <Main />
             <NextScript />

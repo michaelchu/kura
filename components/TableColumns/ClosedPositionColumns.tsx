@@ -35,7 +35,7 @@ export const ClosedPositionColumns = [
           <div style={{ textAlign: "center" }}>
             <span className={"text-success"}>
               {accounting.formatMoney(Math.abs(value))}
-              <i> CR</i>
+              <sub> CR</sub>
             </span>
           </div>
         );
@@ -44,7 +44,7 @@ export const ClosedPositionColumns = [
           <div style={{ textAlign: "center" }}>
             <span className={"text-danger"}>
               {accounting.formatMoney(value)}
-              <i> DR</i>
+              <sub> DR</sub>
             </span>
           </div>
         );
@@ -66,7 +66,7 @@ export const ClosedPositionColumns = [
           <div style={{ textAlign: "center" }}>
             <span className={"text-success"}>
               {accounting.formatMoney(Math.abs(value))}
-              <i> CR</i>
+              <sub> CR</sub>
             </span>
           </div>
         );
@@ -75,7 +75,7 @@ export const ClosedPositionColumns = [
           <div style={{ textAlign: "center" }}>
             <span className={"text-danger"}>
               {accounting.formatMoney(value)}
-              <i> DR</i>
+              <sub> DR</sub>
             </span>
           </div>
         );
