@@ -8,6 +8,7 @@ export default function EditTransactionModal({
   accounts,
   handleClose,
   handleCloseAndUpdate,
+  handleCloseAndDelete,
 }) {
   const [cache, setCache] = useState({ id: selectedTrans.id, object: {} });
 
@@ -43,9 +44,11 @@ export default function EditTransactionModal({
         <Button
           as="input"
           type="button"
-          variant="outline-secondary"
-          onClick={handleClose}
-          value="Close"
+          variant="danger"
+          onClick={() => {
+            handleCloseAndDelete(selectedTrans.id);
+          }}
+          value="Delete"
         />
         <Button
           as="input"
