@@ -50,7 +50,7 @@ export default function AccordionTable({ cols, data }) {
         hover={true}
         striped={true}
         borderless={true}
-        className={"card-table table-vcenter"}
+        className={"card-table table-vcenter table-sm"}
         {...getTableProps}
       >
         <thead>
