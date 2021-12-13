@@ -9,13 +9,11 @@ import {
 } from "react-table";
 import useModal from "../../../hooks/useModal";
 import Table from "react-bootstrap/Table";
-import { Button } from "react-bootstrap";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 
 import TransactionTableHeader from "./TransactionTableHeader";
 import TableFooter from "../TableFooter";
 
-import DeleteTransactionModal from "../../Modals/DeleteTransactionModal";
 import EditTransactionModal from "../../Modals/EditTransactionModal";
 
 import DELETE_TRANSACTION from "../../../api/graphql/mutations/DeleteTransaction.graphql";
@@ -31,11 +29,6 @@ export default function TransactionTable({ cols, data }) {
   const queryClient = useQueryClient();
 
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
-  const {
-    isShowing: isDeleteModalShowing,
-    toggle: deleteModalToggle,
-  } = useModal();
-
   const [transaction, setTransaction] = useState({});
 
   const columns = useMemo(() => cols, [cols]);
@@ -48,7 +41,7 @@ export default function TransactionTable({ cols, data }) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("fetch_transactions").then(() => {
-          deleteModalToggle();
+          editModalToggle();
           setTransaction({});
         });
       },
@@ -88,7 +81,7 @@ export default function TransactionTable({ cols, data }) {
       columns: columns,
       data: dataRows,
       initialState: {
-        pageSize: 20,
+        pageSize: 25,
       },
     },
     useGlobalFilter,
@@ -111,12 +104,15 @@ export default function TransactionTable({ cols, data }) {
         hover={true}
         striped={true}
         borderless={true}
-        className={"card-table table-vcenter"}
+        className={"card-table table-vcenter table-sm"}
         {...getTableProps}
       >
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr
+              {...headerGroup.getHeaderGroupProps()}
+              style={{ textAlign: "center" }}
+            >
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
@@ -147,34 +143,20 @@ export default function TransactionTable({ cols, data }) {
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
-                <td className="text-end">
-                  <div className="btn-list flex-nowrap">
-                    <Button
-                      variant="light"
-                      size="sm"
+                <td>
+                  <div>
+                    <a
                       onClick={() => {
                         setTransaction(row.original);
                         editModalToggle();
                       }}
                     >
+                      {" "}
                       <i
                         className="ti ti-edit"
-                        style={{ fontSize: "1.25rem" }}
-                      />
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => {
-                        setTransaction(row.original);
-                        deleteModalToggle();
-                      }}
-                    >
-                      <i
-                        className="ti ti-trash"
-                        style={{ fontSize: "1.25rem" }}
-                      />
-                    </Button>
+                        style={{ fontSize: "1rem" }}
+                      />{" "}
+                    </a>
                   </div>
                 </td>
               </tr>
@@ -203,15 +185,8 @@ export default function TransactionTable({ cols, data }) {
         handleCloseAndUpdate={(data) => {
           updateTrans.mutate(data);
         }}
-      />
-      <DeleteTransactionModal
-        show={isDeleteModalShowing}
-        trans={transaction}
-        handleClose={() => {
-          deleteModalToggle();
-        }}
-        handleCloseAndDelete={(transId) => {
-          deleteTrans.mutate({ id: transId } as any);
+        handleCloseAndDelete={(id) => {
+          deleteTrans.mutate({ id: id } as any);
         }}
       />
     </div>

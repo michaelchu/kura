@@ -7,10 +7,10 @@ import {
 } from "react-table";
 import Table from "react-bootstrap/Table";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
-import ClosedPositionTableHeader from "./ClosedPositionTableHeader";
-import TableFooter from "../TableFooter";
 
-export default function ClosedPositionTable({ cols, data }) {
+import TableFooter from "../Tables/TableFooter";
+
+export default function AccordionTable({ cols, data }) {
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(() => data, [data]);
 
@@ -28,13 +28,12 @@ export default function ClosedPositionTable({ cols, data }) {
     pageCount,
     prepareRow,
     state,
-    setGlobalFilter,
   } = useTable(
     {
       columns: columns,
       data: dataRows,
       initialState: {
-        pageSize: 20,
+        pageSize: 10,
       },
     },
     useGlobalFilter,
@@ -42,14 +41,10 @@ export default function ClosedPositionTable({ cols, data }) {
     usePagination
   );
 
-  const { globalFilter, pageIndex } = state;
+  const { pageIndex } = state;
 
   return (
-    <div className="card">
-      <ClosedPositionTableHeader
-        filter={globalFilter}
-        setFilter={setGlobalFilter}
-      />
+    <>
       <Table
         responsive
         hover={true}
@@ -108,6 +103,6 @@ export default function ClosedPositionTable({ cols, data }) {
         pageCount={pageCount}
         gotoPage={gotoPage}
       />
-    </div>
+    </>
   );
 }
