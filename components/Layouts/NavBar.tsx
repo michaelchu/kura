@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { IconBell, IconSun } from "@tabler/icons";
+import { IconBell, IconSun, IconMoon } from "@tabler/icons";
 
 export default function NavBar() {
   const router = useRouter();
@@ -30,20 +30,18 @@ export default function NavBar() {
           <a
             className="nav-link px-0 hide-theme-dark"
             onClick={() => (document.body.className = "theme-dark")}
-            title=""
+            title={"Enable dark mode"}
             data-bs-toggle="tooltip"
             data-bs-placement="bottom"
-            data-bs-original-title="Enable dark mode"
           >
-            <IconSun />
+            <IconMoon />
           </a>
           <a
             className="nav-link px-0 hide-theme-light"
             onClick={() => (document.body.className = "theme-light")}
-            title=""
+            title={"Enable light mode"}
             data-bs-toggle="tooltip"
             data-bs-placement="bottom"
-            data-bs-original-title="Enable light mode"
           >
             <IconSun />
           </a>
