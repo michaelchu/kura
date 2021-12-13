@@ -2,6 +2,6 @@
 
 Automated options trade tracking
 
-No more custom spreadsheets or manually entering trades. Zentracker handles the complexity of tracking, so you can easily stay on top of your trading.
+No more custom spreadsheets, Zentracker handles the complexity of tracking and analysing your trades, so you can easily stay on top of your trading.
 
-Built with next.js, react and graphQL.
+Built with Next.js, React.js and GraphQL.
