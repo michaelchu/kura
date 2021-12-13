@@ -4,7 +4,9 @@ import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import CLOSED_POSITIONS from "../api/graphql/queries/ClosedPositions.graphql";
 import { ClosedPositionColumns } from "../components/TableColumns/ClosedPositionColumns";
-import ClosedPositionTable from "../components/Tables/ClosedPositionTable/ClosedPositionTable";
+import Accordion from "../components/Accordion/Accordion";
+import _ from "lodash";
+import dayjs from "dayjs";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -24,15 +26,22 @@ async function getTrans() {
 
 export default function ClosedPositions() {
   const { data } = useQuery("closed_positions", getTrans);
+  const grouped_positions = _.groupBy(
+    data.closed_positions,
+    ({ exit_date }) => {
+      return dayjs(exit_date).format("MMM YYYY");
+    }
+  );
 
   return (
     <Layout>
       <div className="page-body">
         <div className="row row-cards">
           <div className="col-12">
-            <ClosedPositionTable
+            <Accordion
+              title={"Closed Positions"}
               cols={ClosedPositionColumns}
-              data={data.closed_positions}
+              data={grouped_positions}
             />
           </div>
         </div>

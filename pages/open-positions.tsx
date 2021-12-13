@@ -5,6 +5,7 @@ import Layout from "../components/Layouts/Layout";
 import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
 import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
 import Accordion from "../components/Accordion/Accordion";
+import _ from "lodash";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -24,6 +25,10 @@ async function getTrans() {
 
 export default function OpenPositions() {
   const { data } = useQuery("open_positions", getTrans);
+  const grouped_positions = _.groupBy(
+    data.open_positions,
+    ({ strategy, root, name }) => root + " (" + strategy + ") -  " + name
+  );
 
   return (
     <Layout>
@@ -33,7 +38,7 @@ export default function OpenPositions() {
             <Accordion
               title={"Open Positions"}
               cols={OpenPositionsColumns}
-              data={data}
+              data={grouped_positions}
             />
           </div>
         </div>

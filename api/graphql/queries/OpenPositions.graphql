@@ -13,4 +13,11 @@ query OpenPositions {
         name
         account_id
     }
+    open_positions_cb {
+        account_id
+        cost_basis
+        name
+        root
+        strategy
+    }
 }
