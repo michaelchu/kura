@@ -3,7 +3,7 @@ import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
-import { COLUMNS } from "../components/Tables/OpenPositionTable/Columns";
+import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
 import Accordion from "../components/Accordion/Accordion";
 import _ from "lodash";
 
@@ -26,17 +26,16 @@ async function getTrans() {
 export default function OpenPositions() {
   const { data } = useQuery("open_positions", getTrans);
 
-  const grouped_positions = _.groupBy(
-    data.open_positions,
-    ({ strategy, root }) => root + " (" + strategy + ")"
-  );
-
   return (
     <Layout>
       <div className="page-body">
         <div className="row row-cards">
           <div className="col-12">
-            <Accordion cols={COLUMNS} data={grouped_positions} />
+            <Accordion
+              title={"Open Positions"}
+              cols={OpenPositionsColumns}
+              data={data}
+            />
           </div>
         </div>
       </div>

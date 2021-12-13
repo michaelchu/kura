@@ -7,7 +7,7 @@ import Layout from "../components/Layouts/Layout";
 import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
 
 import FETCH_TRANSACTIONS from "../api/graphql/queries/FetchTransactions.graphql";
-import { COLUMNS } from "../components/Tables/TransactionTable/Columns";
+import { TransactionColumns } from "../components/TableColumns/TransactionColumns";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -33,7 +33,7 @@ export default function Transactions() {
       <div className="page-body">
         <div className="row row-cards">
           <div className="col-12">
-            <TransactionTable cols={COLUMNS} data={data} />
+            <TransactionTable cols={TransactionColumns} data={data} />
           </div>
         </div>
       </div>

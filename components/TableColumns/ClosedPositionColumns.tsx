@@ -1,6 +1,6 @@
 import accounting from "accounting";
 
-export const COLUMNS = [
+export const ClosedPositionColumns = [
   {
     Header: "Entry Date",
     accessor: "entry_date",

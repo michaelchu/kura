@@ -3,7 +3,7 @@ import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import CLOSED_POSITIONS from "../api/graphql/queries/ClosedPositions.graphql";
-import { COLUMNS } from "../components/Tables/ClosedPositionTable/Columns";
+import { ClosedPositionColumns } from "../components/TableColumns/ClosedPositionColumns";
 import ClosedPositionTable from "../components/Tables/ClosedPositionTable/ClosedPositionTable";
 
 const queryClient = new QueryClient();
@@ -30,7 +30,10 @@ export default function ClosedPositions() {
       <div className="page-body">
         <div className="row row-cards">
           <div className="col-12">
-            <ClosedPositionTable cols={COLUMNS} data={data.closed_positions} />
+            <ClosedPositionTable
+              cols={ClosedPositionColumns}
+              data={data.closed_positions}
+            />
           </div>
         </div>
       </div>

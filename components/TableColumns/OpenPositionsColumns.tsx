@@ -1,13 +1,9 @@
 import accounting from "accounting";
 
-export const COLUMNS = [
+export const OpenPositionsColumns = [
   {
     Header: "Trade Date",
     accessor: "trade_date",
-  },
-  {
-    Header: "Root",
-    accessor: "root",
   },
   {
     Header: "Asset Type",
@@ -71,9 +67,5 @@ export const COLUMNS = [
         return <span>{accounting.formatMoney(value)}</span>;
       }
     },
-  },
-  {
-    Header: "Account",
-    accessor: "name",
   },
 ];

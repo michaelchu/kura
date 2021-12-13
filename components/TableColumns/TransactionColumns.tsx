@@ -1,6 +1,6 @@
 import accounting from "accounting";
 
-export const COLUMNS = [
+export const TransactionColumns = [
   {
     Header: "Trade Date",
     accessor: "trade_date",
