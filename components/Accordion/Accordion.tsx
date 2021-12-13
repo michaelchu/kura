@@ -1,6 +1,21 @@
 import React from "react";
 import AccordionTable from "../Accordion/AccordionTable";
 
+interface RowItem {
+  account_id: string;
+  action: string;
+  asset_type: string;
+  expiration: string;
+  name: string;
+  quantity: number;
+  root: string;
+  strategy: string;
+  strike: string;
+  total_cost: number;
+  trade_date: string;
+  type: string;
+}
+
 export default function Accordion({ cols, data }) {
   return (
     <div className="card">
@@ -8,9 +23,9 @@ export default function Accordion({ cols, data }) {
         <h2 className="card-title">Open Positions</h2>
       </div>
       <div className="accordion" id="open-positions-accordion">
-        {Object.entries(data).map(([key, value], idx) => {
+        {Object.entries(data).map(([key, value]: [string, RowItem[]], idx) => {
           return (
-            <div className="accordion-item">
+            <div key={idx} className="accordion-item">
               <h2 className="accordion-header" id={"heading-" + idx}>
                 <button
                   className="accordion-button"
@@ -21,7 +36,7 @@ export default function Accordion({ cols, data }) {
                 >
                   {key}
                   <span
-                    className="badge badge bg-green-lt"
+                    className="badge badge bg-indigo-lt"
                     style={{ marginLeft: 5 }}
                   >
                     {" "}
