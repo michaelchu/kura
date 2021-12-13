@@ -17,14 +17,6 @@ interface RowItem {
   type: string;
 }
 
-interface OpenPositionsCB {
-  account_id: string;
-  cost_basis: number;
-  name: string;
-  root: string;
-  strategy: string;
-}
-
 export default function Accordion({ title, cols, data }) {
   const grouped_positions = _.groupBy(
     data.open_positions,
