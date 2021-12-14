@@ -2,12 +2,12 @@ import accounting from "accounting";
 
 export const OpenPositionsColumns = [
   {
-    Header: "Trade Date",
+    Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
     accessor: "trade_date",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Asset Type",
+    Header: <div style={{ textAlign: "center" }}>Asset Type</div>,
     accessor: "asset_type",
     Cell: ({ value }) => {
       if (value == "stock") {
@@ -26,7 +26,7 @@ export const OpenPositionsColumns = [
     },
   },
   {
-    Header: "Action",
+    Header: <div style={{ textAlign: "center" }}>Action</div>,
     accessor: "action",
     Cell: ({ value }) => {
       if (value == "BTO" || value == "BTC") {
@@ -54,32 +54,54 @@ export const OpenPositionsColumns = [
     },
   },
   {
-    Header: "Quantity",
+    Header: <div style={{ textAlign: "center" }}>Quantity</div>,
     accessor: "quantity",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Expiration",
+    Header: <div style={{ textAlign: "center" }}>Expiration</div>,
     accessor: "expiration",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Option Type",
+    Header: <div style={{ textAlign: "center" }}>Option Type</div>,
     accessor: "type",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Strike",
+    Header: <div style={{ textAlign: "center" }}>Strike</div>,
     accessor: "strike",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Total Cost",
+    Header: <div style={{ textAlign: "right" }}>Price</div>,
+    accessor: "price",
+    Cell: ({ value }) => {
+      return (
+        <div style={{ textAlign: "right" }}>
+          {accounting.formatMoney(value)}
+        </div>
+      );
+    },
+  },
+  {
+    Header: <div style={{ textAlign: "right" }}>Fees</div>,
+    accessor: "fee",
+    Cell: ({ value }) => {
+      return (
+        <div style={{ textAlign: "right" }}>
+          {accounting.formatMoney(value)}
+        </div>
+      );
+    },
+  },
+  {
+    Header: <div style={{ textAlign: "right" }}>Total Cost</div>,
     accessor: "total_cost",
     Cell: ({ value }) => {
       if (value < 0) {
         return (
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "right" }}>
             <span className={"text-success"}>
               {accounting.formatMoney(Math.abs(value))}
               <sub> CR</sub>
@@ -88,7 +110,7 @@ export const OpenPositionsColumns = [
         );
       } else if (value > 0) {
         return (
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "right" }}>
             <span className={"text-danger"}>
               {accounting.formatMoney(value)}
               <sub> DR</sub>
@@ -97,7 +119,7 @@ export const OpenPositionsColumns = [
         );
       } else {
         return (
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "right" }}>
             <span>{accounting.formatMoney(value)}</span>
           </div>
         );
