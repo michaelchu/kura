@@ -42,6 +42,7 @@ export default function NavBar() {
             title={"Enable light mode"}
             data-bs-toggle="tooltip"
             data-bs-placement="bottom"
+            style={{ color: "#f59f00" }}
           >
             <IconSun />
           </a>
