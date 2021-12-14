@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import TabInputs from "./TabInputs";
 import moment from "moment";
 import _ from "lodash";
+import { Modal, Button } from "react-bootstrap";
 
 export default function AddTransactionModal({
   show,
@@ -15,7 +14,7 @@ export default function AddTransactionModal({
   const [cache, setCache] = useState({ object: {} });
 
   return (
-    <Modal show={show} onHide={handleClose} size={"sm"} centered>
+    <Modal show={show} onHide={handleClose} size={"lg"} centered>
       <Modal.Header>
         <Modal.Title>
           Add {isOption ? "Option" : "Stock"} Transaction

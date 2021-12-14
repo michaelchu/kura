@@ -1,54 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { IconSearch } from "@tabler/icons";
-import { useMutation, useQueryClient } from "react-query";
-import { GraphQLClient } from "graphql-request";
-import useModal from "../../../hooks/useModal";
-import AddTransactionModal from "../../Modals/AddTransactionModal";
-import ADD_TRANSACTION from "../../../api/graphql/mutations/AddTransaction.graphql";
-
-const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
-  headers: {
-    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-  },
-});
 
 export default function TransactionTableHeader({
   filter,
   setFilter,
   setTransaction,
-  accounts,
+  setIsOption,
+  addModalToggle,
 }) {
-  const queryClient = useQueryClient();
-  const { isShowing: isAddModalShowing, toggle: addModalToggle } = useModal();
-  const [isOption, setIsOption] = useState(false);
-
-  const addTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(ADD_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions").then(() => {
-          setTransaction({});
-          addModalToggle();
-        });
-      },
-    }
-  );
-
   return (
     <>
       <div className="card-header">
         <h3 className="card-title">Transactions</h3>
         <div className="ms-auto text-muted">
-          <div className="btn-group w-40">
+          <div className="btn-group w-40" style={{ verticalAlign: "top" }}>
             <button
               type="button"
               className="btn btn-outline-info"
+              data-bs-toggle="modal"
+              data-bs-target="#add-modal"
               onClick={() => {
                 setIsOption(true);
-                setTransaction({});
                 addModalToggle();
+                setTransaction({});
               }}
             >
               Add Option
@@ -56,10 +30,12 @@ export default function TransactionTableHeader({
             <button
               type="button"
               className="btn btn-outline-info"
+              data-bs-toggle="modal"
+              data-bs-target="#add-modal"
               onClick={() => {
                 setIsOption(false);
-                setTransaction({});
                 addModalToggle();
+                setTransaction({});
               }}
             >
               Add Stock
@@ -79,17 +55,6 @@ export default function TransactionTableHeader({
           </div>
         </div>
       </div>
-      <AddTransactionModal
-        show={isAddModalShowing}
-        accounts={accounts}
-        isOption={isOption}
-        handleClose={() => {
-          addModalToggle();
-        }}
-        handleCloseAndAdd={(data) => {
-          addTrans.mutate(data);
-        }}
-      />
     </>
   );
 }

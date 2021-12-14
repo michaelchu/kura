@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "react-select";
+import Select from "../Select";
 import merge from "deepmerge";
 
 export default function TabInputs({
@@ -49,11 +49,13 @@ export default function TabInputs({
         <div className="mt-2">
           <label className="form-label">Accounts</label>
           <Select
+            name={"accounts-selection"}
             options={accounts}
-            name="account-selection"
-            onChange={(e: HTMLInputElement) =>
-              handleChange(merge(cache, { object: { account_id: e.value } }))
-            }
+            onChange={(e) => {
+              handleChange(
+                merge(cache, { object: { account_id: e.target.value } })
+              );
+            }}
             defaultValue={getOptionByValue(accounts, transaction.account_id)}
           />
         </div>
@@ -82,8 +84,10 @@ export default function TabInputs({
               options={actionTypes}
               name="action-selection"
               defaultValue={getOptionByValue(actionTypes, transaction.action)}
-              onChange={(e: HTMLInputElement) =>
-                handleChange(merge(cache, { object: { action: e.value } }))
+              onChange={(e) =>
+                handleChange(
+                  merge(cache, { object: { action: e.target.value } })
+                )
               }
             />
           </div>
@@ -116,9 +120,9 @@ export default function TabInputs({
                   optionTypes,
                   transaction.option_type
                 )}
-                onChange={(e: HTMLInputElement) =>
+                onChange={(e) =>
                   handleChange(
-                    merge(cache, { object: { option_type: e.value } })
+                    merge(cache, { object: { option_type: e.target.value } })
                   )
                 }
               />
@@ -136,8 +140,10 @@ export default function TabInputs({
                   option_strategies,
                   transaction.strategy
                 )}
-                onChange={(e: HTMLInputElement) =>
-                  handleChange(merge(cache, { object: { strategy: e.value } }))
+                onChange={(e) =>
+                  handleChange(
+                    merge(cache, { object: { strategy: e.target.value } })
+                  )
                 }
               />
             </div>
@@ -153,8 +159,10 @@ export default function TabInputs({
                   stock_strategies,
                   transaction.strategy
                 )}
-                onChange={(e: HTMLInputElement) =>
-                  handleChange(merge(cache, { object: { strategy: e.value } }))
+                onChange={(e) =>
+                  handleChange(
+                    merge(cache, { object: { strategy: e.target.value } })
+                  )
                 }
               />
             </div>

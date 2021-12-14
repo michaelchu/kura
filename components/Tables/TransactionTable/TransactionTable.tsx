@@ -15,9 +15,11 @@ import TransactionTableHeader from "./TransactionTableHeader";
 import TableFooter from "../TableFooter";
 
 import EditTransactionModal from "../../Modals/EditTransactionModal";
+import AddTransactionModal from "../../Modals/AddTransactionModal";
 
 import DELETE_TRANSACTION from "../../../api/graphql/mutations/DeleteTransaction.graphql";
 import UPDATE_TRANSACTION from "../../../api/graphql/mutations/UpdateTransaction.graphql";
+import ADD_TRANSACTION from "../../../api/graphql/mutations/AddTransaction.graphql";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -29,11 +31,26 @@ export default function TransactionTable({ cols, data }) {
   const queryClient = useQueryClient();
 
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
+  const { isShowing: isAddModalShowing, toggle: addModalToggle } = useModal();
   const [transaction, setTransaction] = useState({});
+  const [isOption, setIsOption] = useState(false);
 
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(() => data.transactions, [data.transactions]);
 
+  const addTrans = useMutation(
+    (variables) => {
+      return graphQLClient.request(ADD_TRANSACTION, variables);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("fetch_transactions").then(() => {
+          setTransaction({});
+          addModalToggle();
+        });
+      },
+    }
+  );
   const deleteTrans = useMutation(
     (variables) => {
       return graphQLClient.request(DELETE_TRANSACTION, variables);
@@ -97,7 +114,8 @@ export default function TransactionTable({ cols, data }) {
         filter={globalFilter}
         setFilter={setGlobalFilter}
         setTransaction={setTransaction}
-        accounts={data.accounts}
+        setIsOption={setIsOption}
+        addModalToggle={addModalToggle}
       />
       <Table
         responsive
@@ -175,13 +193,20 @@ export default function TransactionTable({ cols, data }) {
         gotoPage={gotoPage}
       />
 
+      <AddTransactionModal
+        show={isAddModalShowing}
+        accounts={data.accounts}
+        isOption={isOption}
+        handleClose={() => addModalToggle()}
+        handleCloseAndAdd={(data) => {
+          addTrans.mutate(data);
+        }}
+      />
       <EditTransactionModal
         show={isEditModalShowing}
         selectedTrans={transaction}
         accounts={data.accounts}
-        handleClose={() => {
-          editModalToggle();
-        }}
+        handleClose={() => editModalToggle()}
         handleCloseAndUpdate={(data) => {
           updateTrans.mutate(data);
         }}
