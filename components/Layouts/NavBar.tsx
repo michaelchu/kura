@@ -100,13 +100,13 @@ export default function NavBar() {
             <ul className="navbar-nav">
               <li
                 className={
-                  router.pathname == "/open-positions"
+                  router.pathname == "/dashboard"
                     ? "nav-item active"
                     : "nav-item"
                 }
               >
-                <a className="nav-link" href="/open-positions">
-                  <span className="nav-link-title">Open Positions</span>
+                <a className="nav-link" href="/dashboard">
+                  <span className="nav-link-title">Dashboard</span>
                 </a>
               </li>
               <li
