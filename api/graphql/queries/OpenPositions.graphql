@@ -8,6 +8,8 @@ query OpenPositions {
         expiration
         type
         strike
+        price
+        fee
         total_cost
         asset_type
         name
