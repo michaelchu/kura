@@ -14,6 +14,7 @@ export default function Layout(props) {
         <Footer />
       </div>
       <Script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js" />
+      <Script src="https://cdn.jsdelivr.net/npm/litepicker@2.0.11/dist/litepicker.js" />
     </div>
   );
 }
