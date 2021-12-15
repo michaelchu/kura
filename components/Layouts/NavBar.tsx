@@ -30,8 +30,6 @@ export default function NavBar() {
           <a
             className="nav-link px-0 hide-theme-dark"
             onClick={() => (document.body.className = "theme-dark")}
-            title={"Enable dark mode"}
-            data-bs-toggle="tooltip"
             data-bs-placement="bottom"
           >
             <IconMoon />
@@ -39,8 +37,6 @@ export default function NavBar() {
           <a
             className="nav-link px-0 hide-theme-light"
             onClick={() => (document.body.className = "theme-light")}
-            title={"Enable light mode"}
-            data-bs-toggle="tooltip"
             data-bs-placement="bottom"
             style={{ color: "#f59f00" }}
           >
