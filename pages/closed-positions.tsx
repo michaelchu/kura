@@ -7,7 +7,7 @@ import { ClosedPositionColumns } from "../components/TableColumns/ClosedPosition
 import Accordion from "../components/Accordion/Accordion";
 import _ from "lodash";
 import dayjs from "dayjs";
-import ListGroupStickyTop from "../components/Lists/ListGroupStickyTop";
+import ListGroupStickyTop from "../components/Lists/ClosedPositionList/ListGroupStickyTop";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -46,7 +46,10 @@ export default function ClosedPositions() {
             />
           </div>
           <div className="col-12 d-block d-md-none">
-            <ListGroupStickyTop title={"Closed Positions"} data={[]} />
+            <ListGroupStickyTop
+              title={"Closed Positions"}
+              data={grouped_positions}
+            />
           </div>
         </div>
       </div>

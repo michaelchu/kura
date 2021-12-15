@@ -69,103 +69,12 @@ export default function Dashboard() {
               chartId={"commission-chart"}
             />
           </div>
-          <div className="col-md-8">
+          <div className="col-md-12">
             <div className="card">
               <div className="card-body">
                 <h3 className="card-title">Income vs Target by Months</h3>
                 <div id="monthly-income-chart" className="chart-lg" />
               </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-header">
-                <h3 className="card-title">
-                  Most Profitable Strategies of All Time
-                </h3>
-              </div>
-              <table className="table card-table table-vcenter">
-                <thead>
-                  <tr>
-                    <th>Strategy</th>
-                    <th colSpan={2}>Total Return</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Covered Call</td>
-                    <td>$3,550</td>
-                    <td className="w-50">
-                      <div className="progress progress-xs">
-                        <div
-                          className="progress-bar bg-primary"
-                          style={{ width: "71.0%" }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Short Put</td>
-                    <td>$1,798</td>
-                    <td className="w-50">
-                      <div className="progress progress-xs">
-                        <div
-                          className="progress-bar bg-primary"
-                          style={{ width: "35.96%" }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Bull Call Spread</td>
-                    <td>$1,245</td>
-                    <td className="w-50">
-                      <div className="progress progress-xs">
-                        <div
-                          className="progress-bar bg-primary"
-                          style={{ width: "24.9%" }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Iron Condor</td>
-                    <td>$986</td>
-                    <td className="w-50">
-                      <div className="progress progress-xs">
-                        <div
-                          className="progress-bar bg-primary"
-                          style={{ width: "19.72%" }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Call Butterfly</td>
-                    <td>$854</td>
-                    <td className="w-50">
-                      <div className="progress progress-xs">
-                        <div
-                          className="progress-bar bg-primary"
-                          style={{ width: "17.08%" }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ratio Spread</td>
-                    <td>$804</td>
-                    <td className="w-50">
-                      <div className="progress progress-xs">
-                        <div
-                          className="progress-bar bg-primary"
-                          style={{ width: "16.08%" }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
           <div className="col-12">
