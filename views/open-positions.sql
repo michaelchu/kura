@@ -12,6 +12,7 @@ WITH open_positions AS (
 SELECT s.display AS strategy,
        t.trade_date,
        t.root,
+       t.symbol,
        t.action,
        t.quantity,
        t.expiration,

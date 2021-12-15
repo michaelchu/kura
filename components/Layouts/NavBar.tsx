@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { IconBell, IconSun, IconMoon } from "@tabler/icons";
+import { IconBell, IconSun, IconMoon, IconUser } from "@tabler/icons";
 
 export default function NavBar() {
   const router = useRouter();
@@ -30,8 +30,6 @@ export default function NavBar() {
           <a
             className="nav-link px-0 hide-theme-dark"
             onClick={() => (document.body.className = "theme-dark")}
-            title={"Enable dark mode"}
-            data-bs-toggle="tooltip"
             data-bs-placement="bottom"
           >
             <IconMoon />
@@ -39,14 +37,12 @@ export default function NavBar() {
           <a
             className="nav-link px-0 hide-theme-light"
             onClick={() => (document.body.className = "theme-light")}
-            title={"Enable light mode"}
-            data-bs-toggle="tooltip"
             data-bs-placement="bottom"
             style={{ color: "#f59f00" }}
           >
             <IconSun />
           </a>
-          <div className="nav-item dropdown d-none d-md-flex me-3">
+          <div className="nav-item dropdown  me-3">
             <a
               href="#"
               className="nav-link px-0"
@@ -70,12 +66,11 @@ export default function NavBar() {
               data-bs-toggle="dropdown"
               aria-label="Open user menu"
             >
-              <span
-                className="avatar avatar-sm"
-                style={{ backgroundImage: `url("/002m.jpg")` }}
-              />
+              <span className="avatar avatar-sm">
+                <IconUser />
+              </span>
               <div className="d-none d-xl-block ps-2">
-                <div>Michael Chu</div>
+                <div>Satoshi Nakamoto</div>
               </div>
             </a>
             <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
