@@ -26,7 +26,6 @@ export default function TableFooter({
                 onClick={() => previousPage()}
               >
                 <IconChevronLeft />
-                prev
               </button>
             </li>
             {_.range(0, pageCount).map((idx) => {
@@ -53,7 +52,7 @@ export default function TableFooter({
                 disabled={!canNextPage}
                 onClick={() => nextPage()}
               >
-                next <IconChevronRight />
+                <IconChevronRight />
               </button>
             </li>
           </ul>
