@@ -9,6 +9,7 @@ import Accordion from "../components/Accordion/Accordion";
 import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
 import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
 import _ from "lodash";
+import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -80,10 +81,16 @@ export default function Dashboard() {
           <div className="col-12">
             <MonthlyIncomeProgress />
           </div>
-          <div className="col-12">
+          <div className="col-12 d-none d-md-block">
             <Accordion
               title={"Open Positions"}
               cols={OpenPositionsColumns}
+              data={grouped_positions}
+            />
+          </div>
+          <div className="col-12 d-block d-md-none">
+            <ListGroupStickyTop
+              title={"Open Positions"}
               data={grouped_positions}
             />
           </div>

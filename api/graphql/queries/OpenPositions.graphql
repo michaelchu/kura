@@ -3,6 +3,7 @@ query OpenPositions {
         strategy
         trade_date
         root
+        symbol
         action
         quantity
         expiration
