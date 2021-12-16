@@ -36,7 +36,9 @@ export default function TransactionTable({ cols, data }) {
   const [isOption, setIsOption] = useState(false);
 
   const columns = useMemo(() => cols, [cols]);
-  const dataRows = useMemo(() => data.transactions, [data.transactions]);
+  const dataRows = useMemo(() => data.transaction_costs, [
+    data.transaction_costs,
+  ]);
 
   const addTrans = useMutation(
     (variables) => {
