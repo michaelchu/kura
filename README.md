@@ -1,4 +1,4 @@
-# Zentracker
+# Kura
 
 Automated options trade tracking
 
