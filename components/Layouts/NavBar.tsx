@@ -21,7 +21,7 @@ export default function NavBar() {
               src="/logo-dark.png"
               width="110"
               height="32"
-              alt="zentracker"
+              alt="kura"
               className="navbar-brand-image"
             />
           </a>
