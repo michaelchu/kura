@@ -9,7 +9,7 @@ export default function Header() {
         name="viewport"
         content="width=device-width, initial-scale=1, viewport-fit=cover"
       />
-      <title className="next/head">Zentracker</title>
+      <title className="next/head">Kura - Porfolio Tracker & Planner</title>
     </Head>
   );
 }
