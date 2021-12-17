@@ -126,6 +126,15 @@ export default function NavBar() {
                   <span className="nav-link-title">Transactions</span>
                 </a>
               </li>
+              <li
+                className={
+                  router.pathname == "/goals" ? "nav-item active" : "nav-item"
+                }
+              >
+                <a className="nav-link" href="/goals">
+                  <span className="nav-link-title">Goals</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
