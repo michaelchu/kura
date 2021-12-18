@@ -1,4 +1,5 @@
 import _ from "lodash";
+import accounting from "accounting";
 
 export default function MonthlyIncomeProgress(props) {
   const grouped_rows = _.groupBy(props.data, (row) => row.root);
@@ -15,8 +16,9 @@ export default function MonthlyIncomeProgress(props) {
         return (
           <div className="list-group-item">
             <p className="mb-3">
-              <strong>{symbol}</strong> Progress - <strong>${total}</strong> of
-              ${goal}
+              <strong>{symbol}</strong> Progress -{" "}
+              <strong>{accounting.formatMoney(total)}</strong> of{" "}
+              {accounting.formatMoney(goal)}
             </p>
             <div className="progress progress-separated mb-3">
               {strategies.map((strategy, idx) => {
@@ -38,7 +40,7 @@ export default function MonthlyIncomeProgress(props) {
                       <span className={"legend me-2 " + progress_shades[idx]} />
                       <span>{strategy.strategy}</span>
                       <span className="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">
-                        ${strategy.current * -1}
+                        {accounting.formatMoney(strategy.current * -1)}
                       </span>
                     </div>
                   </>
