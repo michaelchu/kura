@@ -5,5 +5,5 @@ node_modules
 #idea folder
 .idea/
 .env.local
-/api/graphql/queries/.graphqlconfig
-/api/graphql/queries/schema.graphql
+/api/queries/.graphqlconfig
+/api/queries/schema.graphql

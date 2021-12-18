@@ -17,9 +17,9 @@ import TableFooter from "../TableFooter";
 import EditTransactionModal from "../../Modals/EditTransactionModal";
 import AddTransactionModal from "../../Modals/AddTransactionModal";
 
-import DELETE_TRANSACTION from "../../../api/graphql/mutations/DeleteTransaction.graphql";
-import UPDATE_TRANSACTION from "../../../api/graphql/mutations/UpdateTransaction.graphql";
-import ADD_TRANSACTION from "../../../api/graphql/mutations/AddTransaction.graphql";
+import DELETE_TRANSACTION from "../../../api/mutations/DeleteTransaction.graphql";
+import UPDATE_TRANSACTION from "../../../api/mutations/UpdateTransaction.graphql";
+import ADD_TRANSACTION from "../../../api/mutations/AddTransaction.graphql";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {

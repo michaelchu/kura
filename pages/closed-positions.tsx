@@ -2,7 +2,7 @@ import { useQuery, QueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
-import CLOSED_POSITIONS from "../api/graphql/queries/ClosedPositions.graphql";
+import CLOSED_POSITIONS from "../api/queries/ClosedPositions.graphql";
 import { ClosedPositionColumns } from "../components/TableColumns/ClosedPositionColumns";
 import Accordion from "../components/Accordion";
 import GenericReactTable from "../components/Tables/GenericReactTable";

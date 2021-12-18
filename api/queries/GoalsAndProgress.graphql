@@ -1,5 +1,5 @@
 query GoalsAndProgress {
-    goals_and_progress {
+    goals_and_progress(order_by: {period: desc}, where: {interval: {_eq: "MONTHLY"}}) {
         user_id
         strategy
         root
