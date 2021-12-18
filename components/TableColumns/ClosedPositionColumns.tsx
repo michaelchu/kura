@@ -104,7 +104,7 @@ export const ClosedPositionColumns = [
     Cell: ({ value }) => {
       return (
         <div style={{ textAlign: "right" }}>
-          <span className={"text-danger"}>{accounting.formatMoney(value)}</span>
+          <span>{accounting.formatMoney(value)}</span>
         </div>
       );
     },
