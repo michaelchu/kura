@@ -1,0 +1,11 @@
+query GoalsAndProgress {
+    goals_and_progress {
+        user_id
+        strategy
+        root
+        period
+        goal
+        interval
+        current
+    }
+}

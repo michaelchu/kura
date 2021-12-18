@@ -10,6 +10,8 @@ import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsCo
 import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
 import _ from "lodash";
 import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
+import GenericReactTable from "../components/Tables/GenericReactTable";
+import React from "react";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -84,8 +86,11 @@ export default function Dashboard() {
           <div className="col-12 d-none d-md-block">
             <Accordion
               title={"Open Positions"}
-              cols={OpenPositionsColumns}
               data={grouped_positions}
+              subComponent={{
+                component: GenericReactTable,
+                subProps: OpenPositionsColumns,
+              }}
             />
           </div>
           <div className="col-12 d-block d-md-none">
