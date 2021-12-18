@@ -2,10 +2,12 @@ import { useQuery, QueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
-import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
-import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
-import Accordion from "../components/Accordion/Accordion";
+import Accordion from "../components/Accordion";
+import GOALS_AND_PROGRESS from "../api/queries/GoalsAndProgress.graphql";
 import _ from "lodash";
+import React from "react";
+import dayjs from "dayjs";
+import MonthlyIncomeProgress from "../components/StatCards/ProgressCards/MonthlyIncomeProgress";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -15,20 +17,19 @@ const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
 });
 
 export async function getStaticProps() {
-  await queryClient.prefetchQuery("open_positions", () => getTrans());
+  await queryClient.prefetchQuery("goals_and_progress", () => getTrans());
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }
 
 async function getTrans() {
-  return graphQLClient.request(OPEN_POSITIONS);
+  return graphQLClient.request(GOALS_AND_PROGRESS);
 }
 
-export default function OpenPositions() {
-  const { data } = useQuery("open_positions", getTrans);
-  const grouped_positions = _.groupBy(
-    data.open_positions,
-    ({ strategy, root, name }) => root + " (" + strategy + ") -  " + name
-  );
+export default function Goals() {
+  const { data } = useQuery("goals_and_progress", getTrans);
+  const grouped_positions = _.groupBy(data.goals_and_progress, ({ period }) => {
+    return dayjs(period).format("MMM YYYY");
+  });
 
   return (
     <Layout>
@@ -36,9 +37,11 @@ export default function OpenPositions() {
         <div className="row row-cards">
           <div className="col-12">
             <Accordion
-              title={"Open Positions"}
-              cols={OpenPositionsColumns}
+              title={"Goals"}
               data={grouped_positions}
+              subComponent={{
+                component: MonthlyIncomeProgress,
+              }}
             />
           </div>
         </div>

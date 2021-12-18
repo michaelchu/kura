@@ -18,8 +18,10 @@ WITH grouped_trades as (
     group by symbol, action, strategy, root, expiration, type, strike, asset_type, account_id
 )
 
-SELECT s.display as strategy,
+SELECT s.display                      as strategy,
+       s.name                         as strategy_name,
        t.symbol,
+       t.root,
        t.expiration,
        t.trade_date                   as entry_date,
        t2.trade_date                  as exit_date,

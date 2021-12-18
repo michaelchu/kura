@@ -2,12 +2,14 @@ import { useQuery, QueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
-import CLOSED_POSITIONS from "../api/graphql/queries/ClosedPositions.graphql";
+import CLOSED_POSITIONS from "../api/queries/ClosedPositions.graphql";
 import { ClosedPositionColumns } from "../components/TableColumns/ClosedPositionColumns";
-import Accordion from "../components/Accordion/Accordion";
+import Accordion from "../components/Accordion";
+import GenericReactTable from "../components/Tables/GenericReactTable";
 import _ from "lodash";
 import dayjs from "dayjs";
 import ListGroupStickyTop from "../components/Lists/ClosedPositionList/ListGroupStickyTop";
+import React from "react";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -41,8 +43,11 @@ export default function ClosedPositions() {
           <div className="col-12 d-none d-md-block">
             <Accordion
               title={"Closed Positions"}
-              cols={ClosedPositionColumns}
               data={grouped_positions}
+              subComponent={{
+                component: GenericReactTable,
+                subProps: ClosedPositionColumns,
+              }}
             />
           </div>
           <div className="col-12 d-block d-md-none">

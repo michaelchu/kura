@@ -10,9 +10,9 @@ import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 
 import TableFooter from "../Tables/TableFooter";
 
-export default function AccordionTable({ cols, data }) {
-  const columns = useMemo(() => cols, [cols]);
-  const dataRows = useMemo(() => data, [data]);
+export default function GenericReactTable(props) {
+  const columns = useMemo(() => props.subProps, [props.subProps]);
+  const dataRows = useMemo(() => props.data, [props.data]);
 
   const {
     getTableProps,

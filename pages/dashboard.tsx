@@ -5,11 +5,13 @@ import Layout from "../components/Layouts/Layout";
 import MiniStatCardWithProgressBar from "../components/StatCards/MiniStatCards/MiniStatCardWithProgressBar";
 import MiniStatCardWithChart from "../components/StatCards/MiniStatCards/MiniStatCardWithChart";
 import MonthlyIncomeProgress from "../components/StatCards/ProgressCards/MonthlyIncomeProgress";
-import Accordion from "../components/Accordion/Accordion";
+import Accordion from "../components/Accordion";
 import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
-import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
+import OPEN_POSITIONS from "../api/queries/OpenPositions.graphql";
 import _ from "lodash";
 import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
+import GenericReactTable from "../components/Tables/GenericReactTable";
+import React from "react";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -78,14 +80,21 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="col-12">
-            <MonthlyIncomeProgress />
-          </div>
+          {/*<div className="col-12">*/}
+          {/*  <div className="card">*/}
+          {/*    <div className="card-body">*/}
+          {/*      <MonthlyIncomeProgress />*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
           <div className="col-12 d-none d-md-block">
             <Accordion
               title={"Open Positions"}
-              cols={OpenPositionsColumns}
               data={grouped_positions}
+              subComponent={{
+                component: GenericReactTable,
+                subProps: OpenPositionsColumns,
+              }}
             />
           </div>
           <div className="col-12 d-block d-md-none">

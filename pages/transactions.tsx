@@ -6,7 +6,7 @@ import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
 
-import FETCH_TRANSACTIONS from "../api/graphql/queries/FetchTransactions.graphql";
+import FETCH_TRANSACTIONS from "../api/queries/FetchTransactions.graphql";
 import { TransactionColumns } from "../components/TableColumns/TransactionColumns";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
