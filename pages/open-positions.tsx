@@ -4,7 +4,7 @@ import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
 import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
-import Accordion from "../components/Accordion/Accordion";
+import Accordion from "../components/Accordion";
 import _ from "lodash";
 
 const queryClient = new QueryClient();

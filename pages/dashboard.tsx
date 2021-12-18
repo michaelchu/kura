@@ -5,7 +5,7 @@ import Layout from "../components/Layouts/Layout";
 import MiniStatCardWithProgressBar from "../components/StatCards/MiniStatCards/MiniStatCardWithProgressBar";
 import MiniStatCardWithChart from "../components/StatCards/MiniStatCards/MiniStatCardWithChart";
 import MonthlyIncomeProgress from "../components/StatCards/ProgressCards/MonthlyIncomeProgress";
-import Accordion from "../components/Accordion/Accordion";
+import Accordion from "../components/Accordion";
 import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
 import OPEN_POSITIONS from "../api/graphql/queries/OpenPositions.graphql";
 import _ from "lodash";

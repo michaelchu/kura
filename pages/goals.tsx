@@ -2,7 +2,7 @@ import { useQuery, QueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
-import Accordion from "../components/Accordion/Accordion";
+import Accordion from "../components/Accordion";
 import GOALS_AND_PROGRESS from "../api/graphql/queries/GoalsAndProgress.graphql";
 import _ from "lodash";
 import { ClosedPositionColumns } from "../components/TableColumns/ClosedPositionColumns";
