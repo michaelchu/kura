@@ -30,7 +30,9 @@ export default function Accordion(props) {
                 </h2>
                 <div
                   id={"collapse-" + idx}
-                  className={"accordion-collapse collapse show"}
+                  className={
+                    "accordion-collapse collapse " + (idx == 0 ? "show" : "")
+                  }
                   data-bs-parent="#open-positions-accordion"
                 >
                   <div className="accordion-body">
