@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import React, { useMemo } from "react";
+import { useQueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import {
   useTable,
@@ -7,19 +7,11 @@ import {
   useGlobalFilter,
   usePagination,
 } from "react-table";
-import useModal from "../../../hooks/useModal";
 import Table from "react-bootstrap/Table";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 
 import TransactionTableHeader from "./TransactionTableHeader";
 import TableFooter from "../TableFooter";
-
-import EditTransactionModal from "../../Modals/EditTransactionModal";
-import AddTransactionModal from "../../Modals/AddTransactionModal";
-
-import DELETE_TRANSACTION from "../../../api/mutations/DeleteTransaction.graphql";
-import UPDATE_TRANSACTION from "../../../api/mutations/UpdateTransaction.graphql";
-import ADD_TRANSACTION from "../../../api/mutations/AddTransaction.graphql";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -27,58 +19,18 @@ const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   },
 });
 
-export default function TransactionTable({ cols, data }) {
-  const queryClient = useQueryClient();
-
-  const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
-  const { isShowing: isAddModalShowing, toggle: addModalToggle } = useModal();
-  const [transaction, setTransaction] = useState({});
-  const [isOption, setIsOption] = useState(false);
-
+export default function TransactionTable({
+  cols,
+  data,
+  setTransaction,
+  setIsOption,
+  editModalToggle,
+  addModalToggle,
+}) {
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(() => data.transaction_costs, [
     data.transaction_costs,
   ]);
-
-  const addTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(ADD_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions").then(() => {
-          setTransaction({});
-          addModalToggle();
-        });
-      },
-    }
-  );
-  const deleteTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(DELETE_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions").then(() => {
-          editModalToggle();
-          setTransaction({});
-        });
-      },
-    }
-  );
-
-  const updateTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(UPDATE_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient
-          .invalidateQueries("fetch_transactions")
-          .then(() => editModalToggle());
-      },
-    }
-  );
 
   const {
     getTableProps,
@@ -193,28 +145,6 @@ export default function TransactionTable({ cols, data }) {
         pageIndex={pageIndex}
         pageCount={pageCount}
         gotoPage={gotoPage}
-      />
-
-      <AddTransactionModal
-        show={isAddModalShowing}
-        accounts={data.accounts}
-        isOption={isOption}
-        handleClose={() => addModalToggle()}
-        handleCloseAndAdd={(data) => {
-          addTrans.mutate(data);
-        }}
-      />
-      <EditTransactionModal
-        show={isEditModalShowing}
-        selectedTrans={transaction}
-        accounts={data.accounts}
-        handleClose={() => editModalToggle()}
-        handleCloseAndUpdate={(data) => {
-          updateTrans.mutate(data);
-        }}
-        handleCloseAndDelete={(id) => {
-          deleteTrans.mutate({ id: id } as any);
-        }}
       />
     </div>
   );
