@@ -35,6 +35,7 @@ export interface TransactionRowItem {
   symbol: string;
   quantity: number;
   action: string;
+  action_name: string;
   price: number;
   fee: number;
   total_cost: number;

@@ -20,6 +20,9 @@ import useModal from "../hooks/useModal";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import CustomToast from "../components/CustomToast";
+import ListGroupStickyTop from "../components/Lists/TransactionList/ListGroupStickyTop";
+import _ from "lodash";
+import dayjs from "dayjs";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -53,8 +56,6 @@ export default function Transactions() {
 
   const [transaction, setTransaction] = useState({});
   const [isOption, setIsOption] = useState(false);
-
-  const { data } = useQuery("fetch_transactions", getTrans);
 
   const addTrans = useMutation(
     (variables) => {
@@ -104,11 +105,19 @@ export default function Transactions() {
     }
   );
 
+  const { data } = useQuery("fetch_transactions", getTrans);
+  const grouped_positions = _.groupBy(
+    data.transaction_costs,
+    ({ trade_date }) => {
+      return dayjs(trade_date).format("MMM YYYY");
+    }
+  );
+
   return (
     <Layout>
       <div className="page-body">
         <div className="row row-cards">
-          <div className="col-12">
+          <div className="col-12 d-none d-md-block">
             <TransactionTable
               cols={TransactionColumns}
               data={data}
@@ -116,6 +125,12 @@ export default function Transactions() {
               setIsOption={setIsOption}
               editModalToggle={editModalToggle}
               addModalToggle={addModalToggle}
+            />
+          </div>
+          <div className="col-12 d-block d-md-none">
+            <ListGroupStickyTop
+              title={"Transactions"}
+              data={grouped_positions}
             />
           </div>
         </div>

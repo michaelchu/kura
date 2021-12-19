@@ -15,9 +15,11 @@ SELECT transactions.id,
        quantity,
        asset_type,
        action,
+       a2.label  as action_name,
        strategy,
        s.display as strategy_name,
        a.name    as account_name
 from transactions
          inner join strategies s on transactions.strategy = s.name
          inner join accounts a on transactions.account_id = a.id
+         inner join actions a2 on transactions.action = a2.name
