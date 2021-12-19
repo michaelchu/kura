@@ -11,7 +11,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="list-inline-item">
-                <a href="#" className="link-secondary">
+                <a href="mailto:hello@goldspanlabs.com" className="link-secondary">
                   Contact Us
                 </a>
               </li>
