@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS trades;
 CREATE VIEW trades as
 WITH options as (
     SELECT t.strategy,
@@ -8,12 +9,15 @@ WITH options as (
            t.fee,
            t.quantity,
            t.account_id,
+           u.id                                                                 as user_id,
            sum((t.price::numeric * t.quantity::numeric * 100) + t.fee::numeric) as total_cost,
            regexp_matches(t.symbol, '^(.+)([0-9]{6})([PC])([0-9]+)$')           as block
     from transactions t
+             INNER JOIN accounts a on t.account_id = a.id
+             INNER JOIN users u on a.user_id = u.id
     where asset_type = 'option'
     group by t.strategy, t.symbol, t.asset_type, t.trade_date, t.price, t.strategy, t.quantity, t.fee, t.action,
-             t.account_id
+             t.account_id, u.id
 )
 SELECT options.trade_date,
        options.symbol,
@@ -27,7 +31,8 @@ SELECT options.trade_date,
        options.block[3]                    as type,
        options.block[4]                    as strike,
        options.asset_type,
-       options.account_id
+       options.account_id,
+       options.user_id
 from options
 
 UNION
@@ -44,9 +49,12 @@ SELECT trade_date,
        null                              as type,
        null                              as strike,
        asset_type,
-       t.account_id
+       t.account_id,
+       u.id                              as user_id
 from transactions t
+         INNER JOIN accounts a on t.account_id = a.id
+         INNER JOIN users u on a.user_id = u.id
 where asset_type = 'stock'
 group by t.strategy, t.symbol, t.asset_type, t.trade_date, t.price, t.strategy, t.quantity, t.fee, t.action,
-         t.account_id
+         t.account_id, u.id
 order by root, strategy, trade_date desc;
