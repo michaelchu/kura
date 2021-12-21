@@ -9,7 +9,7 @@ export default function ListGroupItem(props) {
         </div>
         <div className="col-3">
           <div className="text-body">${props.avg_price}</div>
-          <div className="text-muted">{props.quantity} Quantity</div>
+          <div className="text-muted">{props.quantity} Qty</div>
         </div>
         <div className="col-4">
           <div className={"text-body text-end"}>
