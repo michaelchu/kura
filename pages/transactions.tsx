@@ -12,7 +12,7 @@ import Layout from "../components/Layouts/Layout";
 import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
 
 import FETCH_TRANSACTIONS from "../api/queries/FetchTransactions.graphql";
-import { TransactionColumns } from "../components/TableColumns/TransactionColumns";
+import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
 import ADD_TRANSACTION from "../api/mutations/AddTransaction.graphql";
 import DELETE_TRANSACTION from "../api/mutations/DeleteTransaction.graphql";
 import UPDATE_TRANSACTION from "../api/mutations/UpdateTransaction.graphql";

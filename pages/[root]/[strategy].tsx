@@ -1,11 +1,11 @@
 import { useQuery, QueryClient } from "react-query";
 import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
-import Layout from "../../../components/Layouts/Layout";
-import STRATEGY_DETAIL from "../../../api/queries/StrategyDetail.graphql";
+import Layout from "../../components/Layouts/Layout";
+import STRATEGY_DETAIL from "../../api/queries/StrategyDetail.graphql";
 import { useRouter } from "next/router";
-import { StrategyDetailColumns } from "../../../components/TableColumns/StrategyDetailColumns";
-import GenericReactTable from "../../../components/Tables/GenericReactTable";
+import { StrategyDetailColumns } from "../../components/Tables/TableColumns/StrategyDetailColumns";
+import GenericReactTable from "../../components/Tables/GenericReactTable";
 import React from "react";
 import _ from "lodash";
 

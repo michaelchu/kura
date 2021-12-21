@@ -5,7 +5,7 @@ import Layout from "../components/Layouts/Layout";
 import MiniStatCardWithProgressBar from "../components/StatCards/MiniStatCards/MiniStatCardWithProgressBar";
 import MiniStatCardWithChart from "../components/StatCards/MiniStatCards/MiniStatCardWithChart";
 import MonthlyIncomeProgress from "../components/StatCards/ProgressCards/MonthlyIncomeProgress";
-import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
+import { OpenPositionsColumns } from "../components/Tables/TableColumns/OpenPositionsColumns";
 import OPEN_POSITIONS from "../api/queries/OpenPositions.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
