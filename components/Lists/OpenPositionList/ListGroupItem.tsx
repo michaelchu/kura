@@ -13,7 +13,7 @@ export default function ListGroupItem(props) {
         </div>
         <div className="col-4">
           <div className={"text-body text-end"}>
-            {accounting.formatMoney(Math.abs(props.book_cost))}
+            {accounting.formatMoney(props.book_cost)}
           </div>
           <div className="text-muted text-end">{props.strategy}</div>
         </div>
