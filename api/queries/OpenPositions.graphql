@@ -1,26 +1,16 @@
 query OpenPositions {
     open_positions {
         strategy
-        trade_date
         root
         symbol
-        action
-        quantity
         expiration
         type
         strike
-        price
-        fee
-        total_cost
+        avg_price
+        book_cost
         asset_type
         name
+        quantity
         account_id
-    }
-    open_positions_cb {
-        account_id
-        cost_basis
-        name
-        root
-        strategy
     }
 }

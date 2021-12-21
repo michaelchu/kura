@@ -5,13 +5,12 @@ import Layout from "../components/Layouts/Layout";
 import MiniStatCardWithProgressBar from "../components/StatCards/MiniStatCards/MiniStatCardWithProgressBar";
 import MiniStatCardWithChart from "../components/StatCards/MiniStatCards/MiniStatCardWithChart";
 import MonthlyIncomeProgress from "../components/StatCards/ProgressCards/MonthlyIncomeProgress";
-import Accordion from "../components/Accordion";
 import { OpenPositionsColumns } from "../components/TableColumns/OpenPositionsColumns";
 import OPEN_POSITIONS from "../api/queries/OpenPositions.graphql";
-import _ from "lodash";
-import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
+import _ from "lodash";
+import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -31,11 +30,11 @@ async function getTrans() {
 
 export default function Dashboard() {
   const { data } = useQuery("open_positions", getTrans);
+
   const grouped_positions = _.groupBy(
     data.open_positions,
-    ({ strategy, root, name }) => root + " (" + strategy + ") -  " + name
+    ({ asset_type }) => asset_type
   );
-
   return (
     <Layout>
       <div className="page-body">
@@ -88,13 +87,10 @@ export default function Dashboard() {
           {/*  </div>*/}
           {/*</div>*/}
           <div className="col-12 d-none d-md-block">
-            <Accordion
+            <GenericReactTable
               title={"Open Positions"}
-              data={grouped_positions}
-              subComponent={{
-                component: GenericReactTable,
-                subProps: OpenPositionsColumns,
-              }}
+              subProps={OpenPositionsColumns}
+              data={data.open_positions}
             />
           </div>
           <div className="col-12 d-block d-md-none">

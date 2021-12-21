@@ -44,7 +44,10 @@ export default function GenericReactTable(props) {
   const { pageIndex } = state;
 
   return (
-    <>
+    <div className="card">
+      <div className="card-header">
+        <h3 className="card-title">{props.title}</h3>
+      </div>
       <Table
         responsive
         hover={true}
@@ -100,6 +103,6 @@ export default function GenericReactTable(props) {
         pageCount={pageCount}
         gotoPage={gotoPage}
       />
-    </>
+    </div>
   );
 }

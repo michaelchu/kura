@@ -1,4 +1,4 @@
-DROP VIEW IF EXISTS trades;
+DROP VIEW IF EXISTS trades CASCADE;
 CREATE VIEW trades as
 WITH options as (
     SELECT t.strategy,
@@ -7,6 +7,7 @@ WITH options as (
            t.asset_type,
            t.trade_date,
            t.fee,
+           t.price,
            t.quantity,
            t.account_id,
            u.id                                                                 as user_id,
@@ -23,13 +24,15 @@ SELECT options.trade_date,
        options.symbol,
        options.action,
        options.strategy,
-       options.block[1]                    as root,
+       options.block[1]                            as root,
        options.quantity,
+       options.price,
+       options.total_cost / 100 / options.quantity as adjusted_price,
        options.fee,
        options.total_cost,
-       to_date(options.block[2], 'YYMMDD') as expiration,
-       options.block[3]                    as type,
-       options.block[4]                    as strike,
+       to_date(options.block[2], 'YYMMDD')         as expiration,
+       options.block[3]                            as type,
+       options.block[4]                            as strike,
        options.asset_type,
        options.account_id,
        options.user_id
@@ -41,16 +44,18 @@ SELECT trade_date,
        t.symbol,
        t.action,
        t.strategy,
-       t.symbol                          as root,
+       t.symbol                                       as root,
        t.quantity,
+       t.price,
+       sum((t.price * t.quantity) + fee) / t.quantity as adjusted_price,
        t.fee,
-       sum((t.price * t.quantity) + fee) as total_cost,
-       null                              as expiration,
-       null                              as type,
-       null                              as strike,
+       sum((t.price * t.quantity) + fee)              as total_cost,
+       null                                           as expiration,
+       null                                           as type,
+       null                                           as strike,
        asset_type,
        t.account_id,
-       u.id                              as user_id
+       u.id                                           as user_id
 from transactions t
          INNER JOIN accounts a on t.account_id = a.id
          INNER JOIN users u on a.user_id = u.id

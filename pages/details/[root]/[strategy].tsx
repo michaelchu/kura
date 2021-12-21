@@ -10,6 +10,8 @@ import _ from "lodash";
 import dayjs from "dayjs";
 import ListGroupStickyTop from "../../../components/Lists/ClosedPositionList/ListGroupStickyTop";
 import React from "react";
+import TransactionTable from "../../../components/Tables/TransactionTable/TransactionTable";
+import { TransactionColumns } from "../../../components/TableColumns/TransactionColumns";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -35,33 +37,13 @@ async function getTrans() {
 }
 
 export default function StrategyDetail() {
-  const res = useQuery("strategy_detail", getTrans);
-  console.log(res);
-  const grouped_positions = {};
-  // const grouped_positions = _.groupBy(res.data.trades, ({ trade_date }) => {
-  //   return dayjs(trade_date).format("MMM YYYY");
-  // });
+  const { data } = useQuery("strategy_detail", getTrans);
 
   return (
     <Layout>
       <div className="page-body">
         <div className="row row-cards">
-          <div className="col-12 d-none d-md-block">
-            <Accordion
-              title={"Strategy Detail"}
-              data={grouped_positions}
-              subComponent={{
-                component: GenericReactTable,
-                subProps: StrategyDetailColumns,
-              }}
-            />
-          </div>
-          <div className="col-12 d-block d-md-none">
-            <ListGroupStickyTop
-              title={"Strategy Detail"}
-              data={grouped_positions}
-            />
-          </div>
+          <div className="col-12 d-none d-md-block"></div>
         </div>
       </div>
     </Layout>
