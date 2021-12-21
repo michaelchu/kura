@@ -33,7 +33,7 @@ export default function GenericReactTable(props) {
       columns: columns,
       data: dataRows,
       initialState: {
-        pageSize: 10,
+        pageSize: 50,
       },
     },
     useGlobalFilter,

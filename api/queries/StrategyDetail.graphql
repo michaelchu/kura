@@ -1,5 +1,5 @@
-query StrategyDetail {
-    trades(where: {root: {_eq: "LCID"}, strategy: {_eq: "covered_call"}}) {
+query StrategyDetail($root: String!, $strategy: String!) {
+    trades(where: {root: {_eq: $root}, strategy: {_eq: $strategy}}) {
         account_id
         action
         asset_type
