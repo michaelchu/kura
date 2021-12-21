@@ -87,11 +87,16 @@ export default function Dashboard() {
           {/*  </div>*/}
           {/*</div>*/}
           <div className="col-12 d-none d-md-block">
-            <GenericReactTable
-              title={"Open Positions"}
-              subProps={OpenPositionsColumns}
-              data={data.open_positions}
-            />
+            <div className="card">
+              <div className="card-header">
+                <h3 className="card-title">Open Positions</h3>
+              </div>
+              <GenericReactTable
+                title={"Open Positions"}
+                subProps={OpenPositionsColumns}
+                data={data.open_positions}
+              />
+            </div>
           </div>
           <div className="col-12 d-block d-md-none">
             <ListGroupStickyTop
