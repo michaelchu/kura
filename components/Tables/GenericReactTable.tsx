@@ -50,7 +50,7 @@ export default function GenericReactTable(props) {
         hover={true}
         striped={true}
         borderless={true}
-        className={"card-table table-vcenter table-sm"}
+        className={"card-table table-vcenter"}
         {...getTableProps}
       >
         <thead>
