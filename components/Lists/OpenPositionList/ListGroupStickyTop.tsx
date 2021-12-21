@@ -18,11 +18,11 @@ export default function ListGroupStickyTop({ title, data }) {
                 return (
                   <ListGroupItem
                     symbol={row.symbol}
-                    trade_date={row.trade_date}
-                    action={row.action}
-                    price={row.price}
-                    total_cost={row.total_cost}
-                    fee={row.fee}
+                    account={row.name}
+                    quantity={row.quantity}
+                    avg_price={row.avg_price}
+                    book_cost={row.book_cost}
+                    strategy={row.strategy}
                   />
                 );
               })}

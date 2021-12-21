@@ -11,6 +11,18 @@ body {
     padding: 0;
 }
 
+.card {
+    border-radius: 10px;
+}
+
+.card-header:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.card-footer:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
 .theme-dark {
     color: #ffffffb3;
 }

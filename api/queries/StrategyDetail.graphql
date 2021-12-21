@@ -1,0 +1,18 @@
+query StrategyDetail {
+    trades(where: {root: {_eq: "LCID"}, strategy: {_eq: "covered_call"}}) {
+        account_id
+        action
+        asset_type
+        expiration
+        fee
+        quantity
+        root
+        strategy
+        strike
+        symbol
+        total_cost
+        trade_date
+        type
+        user_id
+    }
+}
