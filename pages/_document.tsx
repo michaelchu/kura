@@ -19,6 +19,7 @@ class MyDocument extends Document {
             type="text/css"
             href="https://fonts.googleapis.com/css?family=Rubik"
           />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         </Head>
 
         <body className="theme-light">
