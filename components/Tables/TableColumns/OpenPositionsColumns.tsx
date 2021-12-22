@@ -13,8 +13,12 @@ export const OpenPositionsColumns = [
   },
   {
     Header: <div style={{ textAlign: "center" }}>Strategy</div>,
-    accessor: "strategy",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
+    accessor: "strategy_name",
+    Cell: ({ value, row }) => (
+      <div style={{ textAlign: "center" }}>
+        <a href={row.original.root + "/" + row.original.strategy}>{value}</a>
+      </div>
+    ),
   },
   {
     Header: <div style={{ textAlign: "center" }}>Asset Type</div>,

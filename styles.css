@@ -12,15 +12,15 @@ body {
 }
 
 .card {
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .card-header:first-child {
-    border-radius: 10px 10px 0 0;
+    border-radius: 7px 7px 0 0;
 }
 
 .card-footer:last-child {
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 7px 7px;
 }
 
 .theme-dark {
