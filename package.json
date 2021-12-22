@@ -1,7 +1,7 @@
 {
-  "name": "Zentracker",
+  "name": "Kura",
   "version": "1.0.0",
-  "description": "Covered Call Tracker",
+  "description": "Trade tracking and analytics platform for options and stock traders",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
