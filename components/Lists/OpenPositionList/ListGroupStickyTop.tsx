@@ -22,7 +22,7 @@ export default function ListGroupStickyTop({ title, data }) {
                     quantity={row.quantity}
                     avg_price={row.avg_price}
                     book_cost={row.book_cost}
-                    strategy={row.strategy}
+                    strategy={row.strategy_name}
                   />
                 );
               })}
