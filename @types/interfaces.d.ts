@@ -44,6 +44,24 @@ export interface TransactionRowItem {
   strategy_name: string;
 }
 
+export interface StrategyDetailRowItem {
+  account_id: string;
+  action: string;
+  asset_type: string;
+  expiration: string;
+  fee: number;
+  quantity: number;
+  root: string;
+  price: number;
+  strategy: string;
+  strike: string;
+  symbol: string;
+  total_cost: number;
+  trade_date: string;
+  type: string;
+  user_id: string;
+}
+
 export interface account {
   label: string;
   id: string;

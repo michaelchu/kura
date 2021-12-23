@@ -1,6 +1,7 @@
 query OpenPositions {
     open_positions {
         strategy
+        strategy_name
         root
         symbol
         expiration
