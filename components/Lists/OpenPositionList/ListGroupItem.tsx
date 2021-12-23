@@ -15,7 +15,9 @@ export default function ListGroupItem(props) {
           <div className={"text-body text-end"}>
             {accounting.formatMoney(props.book_cost)}
           </div>
-          <div className="text-muted text-end">{props.strategy}</div>
+          <div className="text-muted text-end">
+            <a href={props.root + "/" + props.strategy}>{props.strategy_name}</a>
+          </div>
         </div>
       </div>
     </div>
