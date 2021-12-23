@@ -11,6 +11,9 @@ import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
 import _ from "lodash";
 import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
+import dynamic from "next/dynamic";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -35,6 +38,57 @@ export default function Dashboard() {
     data.open_positions,
     ({ asset_type }) => asset_type
   );
+  const options = {
+    chart: {
+      stacked: true,
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        borderRadius: 7,
+      },
+    },
+    xaxis: {
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
+    },
+    yaxis: {
+      title: {
+        text: "Income",
+      },
+    },
+  };
+
+  const series = [
+    {
+      name: "Covered Call",
+      data: [44, 55, 41, 67, 22, 43, 44, 55, 41, 67, 22, 43],
+    },
+    {
+      name: "Short Put",
+      data: [13, 23, 20, 8, 13, 27, 44, 55, 41, 67, 22, 43],
+    },
+    {
+      name: "Long Stock",
+      data: [11, 17, 15, 15, 21, 14, 11, 17, 15, 15, 21, 14],
+    },
+    {
+      name: "Long Call",
+      data: [21, 7, 25, 13, 22, 8, 21, 7, 25, 13, 22, 8],
+    },
+  ];
   return (
     <Layout>
       <div className="page-body">
@@ -75,17 +129,10 @@ export default function Dashboard() {
             <div className="card">
               <div className="card-body">
                 <h3 className="card-title">Income vs Target by Months</h3>
-                <div id="monthly-income-chart" className="chart-lg" />
+                <Chart options={options} series={series} type={"bar"} />
               </div>
             </div>
           </div>
-          {/*<div className="col-12">*/}
-          {/*  <div className="card">*/}
-          {/*    <div className="card-body">*/}
-          {/*      <MonthlyIncomeProgress />*/}
-          {/*    </div>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
           <div className="col-12 d-none d-md-block">
             <div className="card">
               <div className="card-header">
