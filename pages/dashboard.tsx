@@ -3,7 +3,8 @@ import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import { OpenPositionsColumns } from "../components/Tables/TableColumns/OpenPositionsColumns";
-import OPEN_POSITIONS from "../api/queries/OpenPositions.graphql";
+import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
+import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
 import _ from "lodash";
@@ -22,16 +23,16 @@ const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
 });
 
 export async function getStaticProps() {
-  await queryClient.prefetchQuery("open_positions", () => getTrans());
+  await queryClient.prefetchQuery("DASHBOARD_QUERY", () => getTrans());
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }
 
 async function getTrans() {
-  return graphQLClient.request(OPEN_POSITIONS);
+  return graphQLClient.request(DASHBOARD_QUERY);
 }
 
 export default function Dashboard() {
-  const { data } = useQuery("open_positions", getTrans);
+  const { data } = useQuery("DASHBOARD_QUERY", getTrans);
 
   const grouped_positions = _.groupBy(
     data.open_positions,
@@ -40,6 +41,7 @@ export default function Dashboard() {
   const options = {
     chart: {
       stacked: true,
+      fontFamily: "Rubik, Helvetica, Arial, sans-serif",
     },
     dataLabels: {
       enabled: false,
@@ -141,7 +143,12 @@ export default function Dashboard() {
               <div className="card-body" style={{ position: "relative" }}>
                 <h3 className="card-title">Current vs. Previous Month P/L</h3>
                 <Chart
-                  options={{ dataLabels: { enabled: false } }}
+                  options={{
+                    chart: {
+                      fontFamily: "Rubik, Helvetica, Arial, sans-serif",
+                    },
+                    dataLabels: { enabled: false },
+                  }}
                   series={area_series}
                   type={"area"}
                   height="300"
@@ -166,6 +173,18 @@ export default function Dashboard() {
               title={"Open Positions"}
               data={grouped_positions}
             />
+          </div>
+          <div className="col-12">
+            <div className="card">
+              <div className="card-header">
+                <h3 className="card-title">Recent Transactions</h3>
+              </div>
+              <GenericReactTable
+                title={"Recent Transactions"}
+                subProps={TransactionColumns}
+                data={data.transaction_costs}
+              />
+            </div>
           </div>
         </div>
       </div>
