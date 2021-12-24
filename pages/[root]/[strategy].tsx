@@ -12,7 +12,6 @@ import React from "react";
 import _ from "lodash";
 import accounting from "accounting";
 import MiniCenteredStatCard from "../../components/StatCards/MiniCenteredStatCard";
-import MonthlyIncomeProgress from "../../components/StatCards/ProgressCards/MonthlyIncomeProgress";
 
 interface Params {
   root: string;
