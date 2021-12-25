@@ -42,6 +42,9 @@ export default function Dashboard() {
   );
   const options = {
     chart: {
+      animations: {
+        enabled: false,
+      },
       stacked: true,
       fontFamily: "Rubik, Helvetica, Arial, sans-serif",
     },
@@ -147,6 +150,9 @@ export default function Dashboard() {
                 <Chart
                   options={{
                     chart: {
+                      animations: {
+                        enabled: false,
+                      },
                       fontFamily: "Rubik, Helvetica, Arial, sans-serif",
                     },
                     dataLabels: { enabled: false },
