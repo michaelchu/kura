@@ -1,6 +1,6 @@
 import accounting from "accounting";
 
-export const TransactionColumns = [
+export const RecentTransColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
     accessor: "trade_date",
@@ -13,7 +13,7 @@ export const TransactionColumns = [
   },
   {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "symbol",
+    accessor: "display",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {

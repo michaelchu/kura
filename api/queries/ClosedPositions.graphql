@@ -3,6 +3,7 @@ query ClosedPositions {
     entry_date
     exit_date
     symbol
+    display
     strategy
     expiration
     original_cost

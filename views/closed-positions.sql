@@ -1,7 +1,8 @@
-DROP VIEW IF EXISTS closed_positions;
+DROP VIEW IF EXISTS closed_positions CASCADE;
 CREATE VIEW closed_positions as
 WITH grouped_trades as (
     SELECT symbol,
+           display,
            action,
            strategy,
            root,
@@ -15,12 +16,13 @@ WITH grouped_trades as (
            asset_type,
            account_id
     from trades
-    group by symbol, action, strategy, root, expiration, type, strike, asset_type, account_id
+    group by symbol,display, action, strategy, root, expiration, type, strike, asset_type, account_id
 )
 
 SELECT s.display                      as strategy,
        s.name                         as strategy_name,
        t.symbol,
+       t.display,
        t.root,
        t.expiration,
        t.trade_date                   as entry_date,

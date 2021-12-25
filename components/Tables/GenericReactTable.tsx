@@ -48,8 +48,8 @@ export default function GenericReactTable(props) {
       <Table
         responsive
         hover={true}
-        striped={true}
-        borderless={true}
+        striped={false}
+        borderless={false}
         className={"card-table table-vcenter"}
         {...getTableProps}
       >

@@ -3,8 +3,9 @@ import { GraphQLClient } from "graphql-request";
 import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import { OpenPositionsColumns } from "../components/Tables/TableColumns/OpenPositionsColumns";
-import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
+import { RecentTransColumns } from "../components/Tables/TableColumns/RecentTransColumns";
 import { RecentTransListCols } from "../components/Lists/ListColumns/RecentTransListCols";
+import { OpenPositionsListCols } from "../components/Lists/ListColumns/OpenPositionsListCols";
 import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
@@ -170,9 +171,10 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="col-12 d-block d-md-none">
-            <ListGroupStickyTop
+            <List
               title={"Open Positions"}
-              data={grouped_positions}
+              data={data.open_positions}
+              columns={OpenPositionsListCols}
             />
           </div>
           <div className="col-12 d-none d-md-block">
@@ -182,15 +184,15 @@ export default function Dashboard() {
               </div>
               <GenericReactTable
                 title={"Recent Transactions"}
-                subProps={TransactionColumns}
-                data={data.transaction_costs}
+                subProps={RecentTransColumns}
+                data={data.trades}
               />
             </div>
           </div>
           <div className="col-12 d-block d-md-none">
             <List
               title={"Recent Transactions"}
-              data={data.transaction_costs}
+              data={data.trades}
               columns={RecentTransListCols}
             />
           </div>
