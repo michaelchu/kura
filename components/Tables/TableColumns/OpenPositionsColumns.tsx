@@ -21,25 +21,6 @@ export const OpenPositionsColumns = [
     ),
   },
   {
-    Header: <div style={{ textAlign: "center" }}>Asset Type</div>,
-    accessor: "asset_type",
-    Cell: ({ value }) => {
-      if (value == "stock") {
-        return (
-          <div style={{ textAlign: "center" }}>
-            <span className="badge bg-purple-lt">{value}</span>
-          </div>
-        );
-      } else {
-        return (
-          <div style={{ textAlign: "center" }}>
-            <span className="badge bg-azure-lt">{value}</span>
-          </div>
-        );
-      }
-    },
-  },
-  {
     Header: <div style={{ textAlign: "center" }}>Quantity</div>,
     accessor: "quantity",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,

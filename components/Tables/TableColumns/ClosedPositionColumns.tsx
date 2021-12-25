@@ -17,11 +17,6 @@ export const ClosedPositionColumns = [
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: <div style={{ textAlign: "center" }}>Expiration</div>,
-    accessor: "expiration",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
-  },
-  {
     Header: <div style={{ textAlign: "center" }}>Entry Date</div>,
     accessor: "entry_date",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,

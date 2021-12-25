@@ -2,46 +2,27 @@ import accounting from "accounting";
 
 export const TransactionColumns = [
   {
-    Header: "Trade Date",
+    Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
     accessor: "trade_date",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Account",
+    Header: <div style={{ textAlign: "center" }}>Account</div>,
     accessor: "account_name",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Symbol",
+    Header: <div style={{ textAlign: "center" }}>Symbol</div>,
     accessor: "symbol",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Strategy",
+    Header: <div style={{ textAlign: "center" }}>Strategy</div>,
     accessor: "strategy_name",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: "Asset Type",
-    accessor: "asset_type",
-    Cell: ({ value }) => {
-      if (value == "stock") {
-        return (
-          <div style={{ textAlign: "center" }}>
-            <span className="badge bg-purple-lt">{value}</span>
-          </div>
-        );
-      } else {
-        return (
-          <div style={{ textAlign: "center" }}>
-            <span className="badge bg-azure-lt">{value}</span>
-          </div>
-        );
-      }
-    },
-  },
-  {
-    Header: "Action",
+    Header: <div style={{ textAlign: "center" }}>Action</div>,
     accessor: "action",
     Cell: ({ value }) => {
       if (value == "BTO" || value == "BTC") {
@@ -66,7 +47,7 @@ export const TransactionColumns = [
     },
   },
   {
-    Header: "Quantity",
+    Header: <div style={{ textAlign: "center" }}>Quantity</div>,
     accessor: "quantity",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
