@@ -2,26 +2,28 @@ import accounting from "accounting";
 
 export const OpenPositionsListCols = [
   {
-    top: { accessor: "display" },
+    top: { accessor: "display", Cell: ({ value }) => <small>{value}</small> },
     bottom: {
       accessor: "strategy_name",
       Cell: ({ value, row }) => (
         <div>
-          <a href={row.root + "/" + row.strategy}>{value}</a>
+          <a href={row.root + "/" + row.strategy}>
+            <small>{value}</small>
+          </a>
         </div>
       ),
     },
-    width: "col-5",
+    width: "col-6",
   },
   {
     top: {
       accessor: "avg_price",
-      Cell: ({ value }) => accounting.formatMoney(value),
+      Cell: ({ value }) => <small>{accounting.formatMoney(value)}</small>,
     },
     bottom: {
       accessor: "quantity",
       Cell: ({ value }) => {
-        return `${value} Qty`;
+        return <small>{value} Qty</small>;
       },
     },
     width: "col-3",
@@ -29,9 +31,12 @@ export const OpenPositionsListCols = [
   {
     top: {
       accessor: "book_cost",
-      Cell: ({ value }) => accounting.formatMoney(value),
+      Cell: ({ value }) => <small>{accounting.formatMoney(value)}</small>,
     },
-    bottom: { accessor: "trade_date" },
-    width: "col-4",
+    bottom: {
+      accessor: "trade_date",
+      Cell: ({ value }) => <small>{value}</small>,
+    },
+    width: "col-3",
   },
 ];
