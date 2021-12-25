@@ -47,7 +47,7 @@ export const RecentTransColumns = [
     },
   },
   {
-    Header: <div style={{ textAlign: "center" }}>Quantity</div>,
+    Header: <div style={{ textAlign: "center" }}>Qty</div>,
     accessor: "quantity",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
