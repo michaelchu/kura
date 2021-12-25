@@ -4,14 +4,15 @@ import { dehydrate } from "react-query/hydration";
 import Layout from "../components/Layouts/Layout";
 import { OpenPositionsColumns } from "../components/Tables/TableColumns/OpenPositionsColumns";
 import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
+import { RecentTransListCols } from "../components/Lists/ListColumns/RecentTransListCols";
 import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
 import _ from "lodash";
 import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
+import List from "../components/Lists/List";
 import dynamic from "next/dynamic";
 import MiniCenteredStatCard from "../components/StatCards/MiniCenteredStatCard";
-import accounting from "accounting";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -97,28 +98,28 @@ export default function Dashboard() {
     <Layout>
       <div className="page-body">
         <div className="row row-deck row-cards">
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Total Realized P/L"}
               value={"$5,034"}
               pct_chg={2.65}
             />
           </div>
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Win Rate"}
               value={"78%"}
               pct_chg={3.5}
             />
           </div>
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Average P/L"}
               value={"$110"}
               pct_chg={1.59}
             />
           </div>
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Total Commissions"}
               value={"$343"}
@@ -174,7 +175,7 @@ export default function Dashboard() {
               data={grouped_positions}
             />
           </div>
-          <div className="col-12">
+          <div className="col-12 d-none d-md-block">
             <div className="card">
               <div className="card-header">
                 <h3 className="card-title">Recent Transactions</h3>
@@ -185,6 +186,13 @@ export default function Dashboard() {
                 data={data.transaction_costs}
               />
             </div>
+          </div>
+          <div className="col-12 d-block d-md-none">
+            <List
+              title={"Recent Transactions"}
+              data={data.transaction_costs}
+              columns={RecentTransListCols}
+            />
           </div>
         </div>
       </div>
