@@ -2,6 +2,9 @@ query Dashboard {
     open_positions {
         strategy
         strategy_name
+        trade_date
+        days_from_expiration
+        days_to_expiration
         root
         symbol
         expiration
