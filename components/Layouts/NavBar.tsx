@@ -5,7 +5,7 @@ import { IconBell, IconSun, IconMoon, IconUser } from "@tabler/icons";
 export default function NavBar() {
   const router = useRouter();
   return (
-    <header className="navbar navbar-expand-md navbar-dark d-print-none">
+    <header className="navbar navbar-expand-md navbar-dark sticky-top d-print-none">
       <div className="container-xl">
         <button
           className="navbar-toggler"
