@@ -98,28 +98,28 @@ export default function Dashboard() {
     <Layout>
       <div className="page-body">
         <div className="row row-deck row-cards">
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Total Realized P/L"}
               value={"$5,034"}
               pct_chg={2.65}
             />
           </div>
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Win Rate"}
               value={"78%"}
               pct_chg={3.5}
             />
           </div>
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Average P/L"}
               value={"$110"}
               pct_chg={1.59}
             />
           </div>
-          <div className="col-6 col-sm-6 col-lg-3">
+          <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Total Commissions"}
               value={"$343"}
