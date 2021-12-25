@@ -10,7 +10,6 @@ import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
 import _ from "lodash";
-import ListGroupStickyTop from "../components/Lists/OpenPositionList/ListGroupStickyTop";
 import List from "../components/Lists/List";
 import dynamic from "next/dynamic";
 import MiniCenteredStatCard from "../components/StatCards/MiniCenteredStatCard";
@@ -130,7 +129,8 @@ export default function Dashboard() {
               pct_chg={2}
             />
           </div>
-          <div className="col-12 col-sm-6">
+          {/*Switch to horizontal progress bar for current month in mobile*/}
+          <div className="col-12 col-sm-6 d-none d-md-block">
             <div className="card">
               <div className="card-body" style={{ position: "relative" }}>
                 <h3 className="card-title">Realized P/L - July to December</h3>
@@ -195,13 +195,13 @@ export default function Dashboard() {
               />
             </div>
           </div>
-          <div className="col-12 d-block d-md-none">
-            <List
-              title={"Recent Transactions"}
-              data={data.trades}
-              columns={RecentTransListCols}
-            />
-          </div>
+          {/*<div className="col-12 d-block d-md-none">*/}
+          {/*  <List*/}
+          {/*    title={"Recent Transactions"}*/}
+          {/*    data={data.trades}*/}
+          {/*    columns={RecentTransListCols}*/}
+          {/*  />*/}
+          {/*</div>*/}
         </div>
       </div>
     </Layout>
