@@ -17,7 +17,7 @@ export default function ListGroupStickyTop({ title, data }) {
               {rows.map((row) => {
                 return (
                   <ListGroupItem
-                    symbol={row.symbol}
+                    symbol={row.display}
                     account={row.name}
                     quantity={row.quantity}
                     avg_price={row.avg_price}

@@ -8,7 +8,7 @@ export const ClosedPositionColumns = [
   },
   {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "symbol",
+    accessor: "display",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {

@@ -1,5 +1,6 @@
 query Dashboard {
-    open_positions {
+    open_positions(order_by: {trade_date: desc}) {
+        display
         strategy
         strategy_name
         trade_date
@@ -17,12 +18,11 @@ query Dashboard {
         quantity
         account_id
     }
-    transaction_costs(order_by: {trade_date: desc}, limit: 10) {
-        id
+    trades(order_by: {trade_date: desc}, limit: 10) {
         account_name
         account_id
         trade_date
-        symbol
+        display
         quantity
         action
         action_name

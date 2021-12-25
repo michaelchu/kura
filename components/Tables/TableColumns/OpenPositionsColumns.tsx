@@ -18,7 +18,7 @@ export const OpenPositionsColumns = [
         return (
           <div className="progress progress-separated">
             <div
-              className="progress-bar bg-primary"
+              className="progress-bar bg-info"
               role="progressbar"
               style={{ width: ratio + "%", height: "20px" }}
             />
@@ -31,7 +31,7 @@ export const OpenPositionsColumns = [
   },
   {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "symbol",
+    accessor: "display",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {

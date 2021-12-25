@@ -19,7 +19,7 @@ SELECT transactions.id,
        strategy,
        s.display as strategy_name,
        a.name    as account_name
-from transactions
-         inner join strategies s on transactions.strategy = s.name
-         inner join accounts a on transactions.account_id = a.id
-         inner join actions a2 on transactions.action = a2.name
+from trades
+         inner join strategies s on trades.strategy = s.name
+         inner join accounts a on trades.account_id = a.id
+         inner join actions a2 on trades.action = a2.name
