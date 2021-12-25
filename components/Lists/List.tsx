@@ -1,10 +1,9 @@
 const render = (row, renderProps): JSX.Element => {
+  if (!("accessor" in renderProps)) return <></>;
   const value = row[renderProps.accessor];
-  return "Cell" in renderProps ? (
-    renderProps.Cell({ row, value })
-  ) : (
-    <>{value}</>
-  );
+
+  if (!("Cell" in renderProps)) return <>{value}</>;
+  return renderProps.Cell({ row, value });
 };
 
 export default function List(props) {

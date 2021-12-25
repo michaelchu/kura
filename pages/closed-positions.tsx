@@ -8,8 +8,9 @@ import Accordion from "../components/Accordion";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import _ from "lodash";
 import dayjs from "dayjs";
-import ListGroupStickyTop from "../components/Lists/ClosedPositionList/ListGroupStickyTop";
 import React from "react";
+import ListGroup from "../components/Lists/ListGroup";
+import { ClosedPositionsListCols } from "../components/Lists/ListColumns/ClosedPositionsListCols";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -51,9 +52,13 @@ export default function ClosedPositions() {
             />
           </div>
           <div className="col-12 d-block d-md-none">
-            <ListGroupStickyTop
+            <ListGroup
               title={"Closed Positions"}
-              data={grouped_positions}
+              data={data.closed_positions}
+              groupFunc={({ exit_date }) => {
+                return dayjs(exit_date).format("MMM YYYY");
+              }}
+              columns={ClosedPositionsListCols}
             />
           </div>
         </div>

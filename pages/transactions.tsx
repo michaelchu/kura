@@ -20,9 +20,10 @@ import useModal from "../hooks/useModal";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import CustomToast from "../components/CustomToast";
-import ListGroupStickyTop from "../components/Lists/TransactionList/ListGroupStickyTop";
 import _ from "lodash";
 import dayjs from "dayjs";
+import ListGroup from "../components/Lists/ListGroup";
+import { TransactionsListCols } from "../components/Lists/ListColumns/TransactionsListCols";
 
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -128,9 +129,13 @@ export default function Transactions() {
             />
           </div>
           <div className="col-12 d-block d-md-none">
-            <ListGroupStickyTop
+            <ListGroup
               title={"Transactions"}
-              data={grouped_positions}
+              data={data.transaction_costs}
+              groupFunc={({ trade_date }) => {
+                return dayjs(trade_date).format("MMM YYYY");
+              }}
+              columns={TransactionsListCols}
             />
           </div>
         </div>
