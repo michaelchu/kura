@@ -12,7 +12,7 @@ export const OpenPositionsColumns = [
     Cell: ({ row }) => {
       if (row.original.asset_type == "option") {
         const ratio =
-          (row.original.days_to_expiration /
+          ((row.original.days_from_expiration - row.original.days_to_expiration) /
             row.original.days_from_expiration) *
           100;
         return (
