@@ -14,12 +14,15 @@ export default function PnlCompChart(props) {
     <div className="col-12 col-sm-6">
       <div className="card">
         <div className="card-body" style={{ position: "relative" }}>
-          <h3 className="card-title">Current vs. Previous Month P/L</h3>
+          <h3 className="card-title">Month Over Month Performance</h3>
           <props.chart
             options={{
               chart: {
                 animations: {
                   enabled: false,
+                },
+                toolbar: {
+                  show: false,
                 },
                 fontFamily: "Rubik, Helvetica, Arial, sans-serif",
               },
