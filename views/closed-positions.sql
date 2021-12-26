@@ -1,5 +1,5 @@
 DROP VIEW IF EXISTS closed_positions CASCADE;
-CREATE VIEW closed_positions as
+CREATE OR REPLACE VIEW closed_positions as
 WITH grouped_trades as (
     SELECT symbol,
            display,
@@ -32,7 +32,8 @@ SELECT s.display                      as strategy,
        t2.total_cost                  as exit_cost,
        (t2.fees + t.fee)              as total_fees,
        (t2.total_cost + t.total_cost) as realized_pnl,
-       a.name
+       a.name,
+       t.user_id
 from trades t
          INNER JOIN grouped_trades t2
                     on t.symbol = t2.symbol and t.strategy = t2.strategy and t.account_id = t2.account_id

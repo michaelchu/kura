@@ -33,4 +33,10 @@ query Dashboard {
         strategy
         strategy_name
     }
+    dashboard_stats {
+        avg_pnl
+        total_fees
+        total_pnl
+        win_rate
+    }
 }

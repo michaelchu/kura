@@ -12,7 +12,8 @@ import React from "react";
 import _ from "lodash";
 import List from "../components/Lists/List";
 import dynamic from "next/dynamic";
-import MiniCenteredStatCard from "../components/StatCards/MiniCenteredStatCard";
+import MiniCenteredStatCard from "../components/Dashboard/StatCards/MiniCenteredStatCard";
+import accounting from "accounting";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -34,11 +35,8 @@ async function getTrans() {
 
 export default function Dashboard() {
   const { data } = useQuery("DASHBOARD_QUERY", getTrans);
+  const { total_pnl, total_fees, avg_pnl, win_rate } = data.dashboard_stats[0];
 
-  const grouped_positions = _.groupBy(
-    data.open_positions,
-    ({ asset_type }) => asset_type
-  );
   const options = {
     chart: {
       animations: {
@@ -104,28 +102,28 @@ export default function Dashboard() {
           <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Total Realized P/L"}
-              value={"$5,034"}
+              value={accounting.formatMoney(total_pnl)}
               pct_chg={2.65}
             />
           </div>
           <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Win Rate"}
-              value={"78%"}
+              value={win_rate + "%"}
               pct_chg={3.5}
             />
           </div>
           <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Average P/L"}
-              value={"$110"}
+              value={accounting.formatMoney(avg_pnl)}
               pct_chg={1.59}
             />
           </div>
           <div className="col-6 col-sm-3 col-lg-3">
             <MiniCenteredStatCard
               title={"Total Commissions"}
-              value={"$343"}
+              value={accounting.formatMoney(total_fees)}
               pct_chg={2}
             />
           </div>
