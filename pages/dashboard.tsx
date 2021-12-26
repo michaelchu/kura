@@ -13,7 +13,9 @@ import List from "../components/Lists/List";
 import StatsBoard from "../components/Dashboard/StatsBoard";
 import PnlChart from "../components/Dashboard/PnlChart";
 import PnlCompChart from "../components/Dashboard/PnlCompChart";
+import dynamic from "next/dynamic";
 
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -45,8 +47,8 @@ export default function Dashboard() {
             win_rate={win_rate}
           />
           {/*Switch to horizontal progress bar for current month in mobile*/}
-          <PnlChart />
-          <PnlCompChart />
+          <PnlChart chart={Chart} />
+          <PnlCompChart chart={Chart} />
           <div className="col-12 d-none d-md-block">
             <div className="card">
               <div className="card-header">

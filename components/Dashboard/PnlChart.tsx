@@ -1,8 +1,6 @@
 import React from "react";
-import dynamic from "next/dynamic";
 
 export default function PnlChart(props) {
-  const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
   const options = {
     chart: {
       animations: {
@@ -54,7 +52,12 @@ export default function PnlChart(props) {
       <div className="card">
         <div className="card-body" style={{ position: "relative" }}>
           <h3 className="card-title">Realized P/L - July to December</h3>
-          <Chart options={options} series={series} type={"bar"} height="300" />
+          <props.chart
+            options={options}
+            series={series}
+            type={"bar"}
+            height="300"
+          />
         </div>
       </div>
     </div>

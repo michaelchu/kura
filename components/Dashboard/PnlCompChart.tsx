@@ -1,8 +1,6 @@
 import React from "react";
-import dynamic from "next/dynamic";
 
 export default function PnlCompChart(props) {
-  const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
   const area_series = [
     {
       name: "Current Month",
@@ -18,7 +16,7 @@ export default function PnlCompChart(props) {
       <div className="card">
         <div className="card-body" style={{ position: "relative" }}>
           <h3 className="card-title">Current vs. Previous Month P/L</h3>
-          <Chart
+          <props.chart
             options={{
               chart: {
                 animations: {
