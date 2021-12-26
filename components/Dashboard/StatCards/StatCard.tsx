@@ -1,6 +1,6 @@
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons";
 
-export default function MiniCenteredStatCard({ title, value, pct_chg }) {
+export default function StatCard({ title, value, pct_chg }) {
   return (
     <div className="card">
       <div className="card-body p-2 text-center">
