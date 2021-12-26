@@ -16,7 +16,6 @@ import PnlCompChart from "../components/Dashboard/PnlCompChart";
 import dynamic from "next/dynamic";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
     "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
@@ -24,16 +23,17 @@ const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
 });
 
 export async function getStaticProps() {
-  await queryClient.prefetchQuery("DASHBOARD_QUERY", () => getTrans());
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("dashboard_query", () =>
+    graphQLClient.request(DASHBOARD_QUERY)
+  );
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }
 
-async function getTrans() {
-  return graphQLClient.request(DASHBOARD_QUERY);
-}
-
 export default function Dashboard() {
-  const { data } = useQuery("DASHBOARD_QUERY", getTrans);
+  const { data } = useQuery("dashboard_query", () => {
+    return graphQLClient.request(DASHBOARD_QUERY);
+  });
   const { total_pnl, total_fees, avg_pnl, win_rate } = data.dashboard_stats[0];
 
   return (
@@ -48,7 +48,7 @@ export default function Dashboard() {
           />
           {/*Switch to horizontal progress bar for current month in mobile*/}
           <PnlChart chart={Chart} />
-          <PnlCompChart chart={Chart} />
+          <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
           <div className="col-12 d-none d-md-block">
             <div className="card">
               <div className="card-header">

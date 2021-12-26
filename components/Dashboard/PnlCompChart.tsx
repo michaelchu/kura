@@ -1,16 +1,15 @@
 import React from "react";
+import _ from "lodash";
 
 export default function PnlCompChart(props) {
-  const area_series = [
-    {
-      name: "Current Month",
-      data: [31, 40, 28, 51, 42, 109, 100, 125, 145, 154, 264, 654],
-    },
-    {
-      name: "Previous Month",
-      data: [453.01, 32, 45, 62, 74, 82, 97, 167, 187, 193, 235, 264],
-    },
-  ];
+  const series = _.groupBy(props.data, ({ period }) => period);
+
+  const formatted_series = Object.entries(series).map(([key, rows]) => {
+    const legend = _.capitalize(_.startCase(key).toLowerCase());
+    const data = rows.map(({ cumulated_pnl }) => cumulated_pnl * -1);
+    return { name: legend, data };
+  });
+
   return (
     <div className="col-12 col-sm-6">
       <div className="card">
@@ -25,8 +24,12 @@ export default function PnlCompChart(props) {
                 fontFamily: "Rubik, Helvetica, Arial, sans-serif",
               },
               dataLabels: { enabled: false },
+              xaxis: {
+                labels: { show: true, rotate: 0 },
+                tickAmount: 4,
+              },
             }}
-            series={area_series}
+            series={formatted_series}
             type={"area"}
             height="300"
           />
