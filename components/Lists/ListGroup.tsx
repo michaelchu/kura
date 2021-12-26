@@ -10,7 +10,6 @@ const render = (row, renderProps): JSX.Element => {
 export default function ListGroup(props) {
   const grouped_data = _.groupBy(props.data, props.groupFunc);
 
-  console.log(grouped_data);
   return (
     <div className="card">
       <div className="card-header">

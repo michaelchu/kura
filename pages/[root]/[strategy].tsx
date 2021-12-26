@@ -11,7 +11,7 @@ import SkeletonTable from "../../components/Tables/SkeletonTable";
 import React from "react";
 import _ from "lodash";
 import accounting from "accounting";
-import MiniCenteredStatCard from "../../components/StatCards/MiniCenteredStatCard";
+import StatCard from "../../components/Dashboard/StatCards/StatCard";
 
 interface Params {
   root: string;
@@ -101,22 +101,22 @@ export default function StrategyDetail() {
     <Layout>
       <div className="page-body">
         <div className="row row-cards">
-          <div className="col-sm-4 col-lg-4">
-            <MiniCenteredStatCard
+          <div className="col-6 col-sm-4 col-lg-4">
+            <StatCard
               title={"Current Cost Basis"}
               value={accounting.formatMoney(cost_basis())}
               pct_chg={-2.65}
             />
           </div>
-          <div className="col-sm-4 col-lg-4">
-            <MiniCenteredStatCard
+          <div className="col-6 col-sm-4 col-lg-4">
+            <StatCard
               title={"Total Costs"}
               value={accounting.formatMoney(total_costs())}
               pct_chg={-5.25}
             />
           </div>
           <div className="col-sm-4 col-lg-4">
-            <MiniCenteredStatCard
+            <StatCard
               title={"Total Fees"}
               value={accounting.formatMoney(total_fees())}
               pct_chg={4.34}

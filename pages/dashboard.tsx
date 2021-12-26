@@ -9,13 +9,13 @@ import { OpenPositionsListCols } from "../components/Lists/ListColumns/OpenPosit
 import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
-import _ from "lodash";
 import List from "../components/Lists/List";
+import StatsBoard from "../components/Dashboard/StatsBoard";
+import PnlChart from "../components/Dashboard/PnlChart";
+import PnlCompChart from "../components/Dashboard/PnlCompChart";
 import dynamic from "next/dynamic";
-import MiniCenteredStatCard from "../components/StatCards/MiniCenteredStatCard";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
   headers: {
@@ -34,136 +34,21 @@ async function getTrans() {
 
 export default function Dashboard() {
   const { data } = useQuery("DASHBOARD_QUERY", getTrans);
-
-  const grouped_positions = _.groupBy(
-    data.open_positions,
-    ({ asset_type }) => asset_type
-  );
-  const options = {
-    chart: {
-      animations: {
-        enabled: false,
-      },
-      stacked: true,
-      fontFamily: "Rubik, Helvetica, Arial, sans-serif",
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    height: 100,
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        borderRadius: 7,
-      },
-    },
-    xaxis: {
-      categories: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    },
-    yaxis: {
-      title: {
-        text: "Income",
-      },
-    },
-  };
-
-  const series = [
-    {
-      name: "Covered Call",
-      data: [440, 550, 410, 670, 220, 430],
-    },
-    {
-      name: "Short Put",
-      data: [130, 230, 200, 80, 130, 270],
-    },
-    {
-      name: "Long Stock",
-      data: [110, 170, 150, 150, 210, 10],
-    },
-    {
-      name: "Long Call",
-      data: [210, 70, 250, 130, 220, 80],
-    },
-  ];
-
-  const area_series = [
-    {
-      name: "Current Month",
-      data: [31, 40, 28, 51, 42, 109, 100, 125, 145, 154, 264, 654],
-    },
-    {
-      name: "Previous Month",
-      data: [11, 32, 45, 62, 74, 82, 97, 167, 187, 193, 235, 264],
-    },
-  ];
+  const { total_pnl, total_fees, avg_pnl, win_rate } = data.dashboard_stats[0];
 
   return (
     <Layout>
       <div className="page-body">
         <div className="row row-deck row-cards">
-          <div className="col-6 col-sm-3 col-lg-3">
-            <MiniCenteredStatCard
-              title={"Total Realized P/L"}
-              value={"$5,034"}
-              pct_chg={2.65}
-            />
-          </div>
-          <div className="col-6 col-sm-3 col-lg-3">
-            <MiniCenteredStatCard
-              title={"Win Rate"}
-              value={"78%"}
-              pct_chg={3.5}
-            />
-          </div>
-          <div className="col-6 col-sm-3 col-lg-3">
-            <MiniCenteredStatCard
-              title={"Average P/L"}
-              value={"$110"}
-              pct_chg={1.59}
-            />
-          </div>
-          <div className="col-6 col-sm-3 col-lg-3">
-            <MiniCenteredStatCard
-              title={"Total Commissions"}
-              value={"$343"}
-              pct_chg={2}
-            />
-          </div>
+          <StatsBoard
+            total_fees={total_fees}
+            total_pnl={total_pnl}
+            avg_pnl={avg_pnl}
+            win_rate={win_rate}
+          />
           {/*Switch to horizontal progress bar for current month in mobile*/}
-          <div className="col-12 col-sm-6 d-none d-md-block">
-            <div className="card">
-              <div className="card-body" style={{ position: "relative" }}>
-                <h3 className="card-title">Realized P/L - July to December</h3>
-                <Chart
-                  options={options}
-                  series={series}
-                  type={"bar"}
-                  height="300"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-12 col-sm-6">
-            <div className="card">
-              <div className="card-body" style={{ position: "relative" }}>
-                <h3 className="card-title">Current vs. Previous Month P/L</h3>
-                <Chart
-                  options={{
-                    chart: {
-                      animations: {
-                        enabled: false,
-                      },
-                      fontFamily: "Rubik, Helvetica, Arial, sans-serif",
-                    },
-                    dataLabels: { enabled: false },
-                  }}
-                  series={area_series}
-                  type={"area"}
-                  height="300"
-                />
-              </div>
-            </div>
-          </div>
+          <PnlChart chart={Chart} />
+          <PnlCompChart chart={Chart} />
           <div className="col-12 d-none d-md-block">
             <div className="card">
               <div className="card-header">
@@ -195,13 +80,13 @@ export default function Dashboard() {
               />
             </div>
           </div>
-          {/*<div className="col-12 d-block d-md-none">*/}
-          {/*  <List*/}
-          {/*    title={"Recent Transactions"}*/}
-          {/*    data={data.trades}*/}
-          {/*    columns={RecentTransListCols}*/}
-          {/*  />*/}
-          {/*</div>*/}
+          <div className="col-12 d-block d-md-none">
+            <List
+              title={"Recent Transactions"}
+              data={data.trades}
+              columns={RecentTransListCols}
+            />
+          </div>
         </div>
       </div>
     </Layout>

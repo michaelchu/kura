@@ -1,6 +1,6 @@
 DROP VIEW IF EXISTS transaction_costs;
-CREATE VIEW transaction_costs AS
-SELECT transactions.id,
+CREATE OR REPLACE VIEW transaction_costs AS
+SELECT t.id,
        symbol,
        trade_date,
        price,
@@ -18,8 +18,9 @@ SELECT transactions.id,
        a2.label  as action_name,
        strategy,
        s.display as strategy_name,
-       a.name    as account_name
-from trades
-         inner join strategies s on trades.strategy = s.name
-         inner join accounts a on trades.account_id = a.id
-         inner join actions a2 on trades.action = a2.name
+       a.name    as account_name,
+       a.user_id
+from transactions t
+         inner join strategies s on t.strategy = s.name
+         inner join accounts a on t.account_id = a.id
+         inner join actions a2 on t.action = a2.name

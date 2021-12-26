@@ -18,7 +18,7 @@ query Dashboard {
         quantity
         account_id
     }
-    trades(order_by: {trade_date: desc}, limit: 10) {
+    trades(order_by: {trade_date: desc}, limit: 5) {
         account_name
         account_id
         trade_date
@@ -32,5 +32,11 @@ query Dashboard {
         asset_type
         strategy
         strategy_name
+    }
+    dashboard_stats {
+        avg_pnl
+        total_fees
+        total_pnl
+        win_rate
     }
 }

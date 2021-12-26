@@ -5,11 +5,6 @@ export const ClosedPositionsListCols = [
     top: { accessor: "display" },
     bottom: {
       accessor: "strategy",
-      Cell: ({ value, row }) => (
-        <div>
-          <a href={row.root + "/" + row.strategy}>{value}</a>
-        </div>
-      ),
     },
     width: "col-6",
   },
