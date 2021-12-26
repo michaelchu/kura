@@ -18,7 +18,7 @@ query Dashboard {
         quantity
         account_id
     }
-    trades(order_by: {trade_date: desc}, limit: 10) {
+    trades(order_by: {trade_date: desc}, limit: 5) {
         account_name
         account_id
         trade_date

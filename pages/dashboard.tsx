@@ -130,7 +130,7 @@ export default function Dashboard() {
             />
           </div>
           {/*Switch to horizontal progress bar for current month in mobile*/}
-          <div className="col-12 col-sm-6 d-none d-md-block">
+          <div className="col-12 col-sm-6 d-none d-sm-block">
             <div className="card">
               <div className="card-body" style={{ position: "relative" }}>
                 <h3 className="card-title">Realized P/L - July to December</h3>
@@ -195,13 +195,13 @@ export default function Dashboard() {
               />
             </div>
           </div>
-          {/*<div className="col-12 d-block d-md-none">*/}
-          {/*  <List*/}
-          {/*    title={"Recent Transactions"}*/}
-          {/*    data={data.trades}*/}
-          {/*    columns={RecentTransListCols}*/}
-          {/*  />*/}
-          {/*</div>*/}
+          <div className="col-12 d-block d-md-none">
+            <List
+              title={"Recent Transactions"}
+              data={data.trades}
+              columns={RecentTransListCols}
+            />
+          </div>
         </div>
       </div>
     </Layout>
