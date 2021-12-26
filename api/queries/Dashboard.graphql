@@ -39,4 +39,11 @@ query Dashboard {
         total_pnl
         win_rate
     }
+    pnl_comp_chart {
+        cumulated_pnl
+        day
+        exit_date
+        period
+        user_id
+    }
 }
