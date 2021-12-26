@@ -7,7 +7,7 @@ import GOALS_AND_PROGRESS from "../api/queries/GoalsAndProgress.graphql";
 import _ from "lodash";
 import React from "react";
 import dayjs from "dayjs";
-import MonthlyIncomeProgress from "../components/StatCards/ProgressCards/MonthlyIncomeProgress";
+import MonthlyIncomeProgress from "../components/Progress/MonthlyIncomeProgress";
 
 const queryClient = new QueryClient();
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
