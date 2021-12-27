@@ -14,6 +14,7 @@ import StatsBoard from "../components/Dashboard/StatsBoard";
 import PnlChart from "../components/Dashboard/PnlChart";
 import PnlCompChart from "../components/Dashboard/PnlCompChart";
 import dynamic from "next/dynamic";
+import PositionDetailsModal from "../components/Modals/PositionDetailsModal";
 import style from "../components/Dashboard/scroll.module.css";
 import PositionDetailsModal from "../components/Modals/PositionDetailsModal";
 
