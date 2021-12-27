@@ -8,6 +8,7 @@ export default function PnlChart(props) {
       },
       stacked: true,
       fontFamily: "Rubik, Helvetica, Arial, sans-serif",
+      toolbar: { show: false },
     },
     dataLabels: {
       enabled: false,
