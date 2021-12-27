@@ -107,12 +107,6 @@ export default function Transactions() {
   );
 
   const { data } = useQuery("fetch_transactions", getTrans);
-  const grouped_positions = _.groupBy(
-    data.transaction_costs,
-    ({ trade_date }) => {
-      return dayjs(trade_date).format("MMM YYYY");
-    }
-  );
 
   return (
     <Layout>

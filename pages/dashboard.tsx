@@ -14,6 +14,7 @@ import StatsBoard from "../components/Dashboard/StatsBoard";
 import PnlChart from "../components/Dashboard/PnlChart";
 import PnlCompChart from "../components/Dashboard/PnlCompChart";
 import dynamic from "next/dynamic";
+import PositionDetailsModal from "../components/Modals/PositionDetailsModal";
 import style from "../components/Dashboard/scroll.module.css";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -83,6 +84,8 @@ export default function Dashboard() {
               title={"Open Positions"}
               data={data.open_positions}
               columns={OpenPositionsListCols}
+              prefix={"open"}
+              modal={PositionDetailsModal}
             />
           </div>
           <div className="col-12 d-none d-md-block">
@@ -102,6 +105,7 @@ export default function Dashboard() {
               title={"Recent Transactions"}
               data={data.trades}
               columns={RecentTransListCols}
+              modal={PositionDetailsModal}
             />
           </div>
         </div>
