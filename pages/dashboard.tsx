@@ -14,7 +14,6 @@ import StatsBoard from "../components/Dashboard/StatsBoard";
 import PnlChart from "../components/Dashboard/PnlChart";
 import PnlCompChart from "../components/Dashboard/PnlCompChart";
 import dynamic from "next/dynamic";
-import PositionDetailsModal from "../components/Modals/PositionDetailsModal";
 import style from "../components/Dashboard/scroll.module.css";
 import PositionDetailsModal from "../components/Modals/PositionDetailsModal";
 
@@ -49,7 +48,7 @@ export default function Dashboard() {
             avg_pnl={avg_pnl}
             win_rate={win_rate}
           />
-          {/*Switch to horizontal progress bar for current month in mobile*/}
+
           <div className="col-12 col-sm-6 d-none d-sm-block">
             <PnlChart chart={Chart} data={data.pnl_chart} />
           </div>
