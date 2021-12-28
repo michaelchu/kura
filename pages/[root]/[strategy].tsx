@@ -11,7 +11,7 @@ import SkeletonTable from "../../components/Tables/SkeletonTable";
 import React from "react";
 import _ from "lodash";
 import accounting from "accounting";
-import StatCard from "../../components/Dashboard/StatCards/StatCard";
+import StatCard from "../../components/Dashboard/StatCard";
 
 interface Params {
   root: string;

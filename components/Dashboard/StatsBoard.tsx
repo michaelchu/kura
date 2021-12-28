@@ -1,4 +1,4 @@
-import StatCard from "./StatCards/StatCard";
+import StatCard from "./StatCard";
 import accounting from "accounting";
 import React from "react";
 
