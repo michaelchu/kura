@@ -31,6 +31,14 @@ export default function PnlCompChart(props) {
                 labels: { show: true, rotate: 0 },
                 tickAmount: 4,
               },
+              yaxis: {
+                title: {
+                  text: "Realized P/L",
+                },
+              },
+              theme: {
+                palette: "palette4",
+              },
             }}
             series={formatted_series}
             type={"area"}

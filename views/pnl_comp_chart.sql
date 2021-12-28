@@ -1,6 +1,7 @@
 DROP VIEW IF EXISTS pnl_comp_chart;
 CREATE OR REPLACE VIEW pnl_comp_chart AS
 WITH base as (
+    -- we might want to limit to prev and current month instead of min(exit_date)
     SELECT generate_series(date_trunc('month', min(exit_date)),
                            (date_trunc('month', max(exit_date)) + interval '1 month - 1 day')::date,
                            interval '1 day')::DATE as exit_date,
