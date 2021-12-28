@@ -36,9 +36,7 @@ export default function PnlCompChart(props) {
                   text: "Realized P/L",
                 },
               },
-              theme: {
-                palette: "palette4",
-              },
+              colors: ["rgba(128,143,168,0.64)", "rgba(64,175,83,0.87)"],
             }}
             series={formatted_series}
             type={"area"}
