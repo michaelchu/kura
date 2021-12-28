@@ -46,4 +46,9 @@ query Dashboard {
         period
         user_id
     }
+    pnl_chart {
+        period
+        realized_pnl
+        strategy
+    }
 }

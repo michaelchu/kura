@@ -47,7 +47,7 @@ export default function Dashboard() {
             win_rate={win_rate}
           />
           {/*Switch to horizontal progress bar for current month in mobile*/}
-          <PnlChart chart={Chart} />
+          <PnlChart chart={Chart} data={data.pnl_chart} />
           <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
           <div className="col-12 d-none d-md-block">
             <div className="card">
