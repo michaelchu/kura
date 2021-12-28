@@ -65,33 +65,18 @@ export default function PnlChart(props) {
     theme: {
       palette: "palette5",
     },
-    // colors: [
-    // "#ae3ec9",
-    // "#d6336c",
-    // "#d6336c",
-    // "#d63939",
-    // "#f76707",
-    // "#f59f00",
-    //   "rgba(47,179,68,0.53)",
-    //   "rgba(12,166,120,0.66)",
-    //   "rgba(23,162,184,0.65)",
-    //   "rgba(32,107,196,0.66)",
-    //   "rgba(66,99,235,0.7)",
-    // ],
   };
 
   return (
-    <div className="col-12 col-sm-6 d-none d-sm-block">
-      <div className="card">
-        <div className="card-body" style={{ position: "relative" }}>
-          <h3 className="card-title">Last 6 Months Realized P/L</h3>
-          <props.chart
-            options={options}
-            series={series}
-            type={"bar"}
-            height="300"
-          />
-        </div>
+    <div className="card">
+      <div className="card-body" style={{ position: "relative" }}>
+        <h3 className="card-title">Last 6 Months Realized P/L</h3>
+        <props.chart
+          options={options}
+          series={series}
+          type={"bar"}
+          height="300"
+        />
       </div>
     </div>
   );
