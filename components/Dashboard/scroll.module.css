@@ -1,0 +1,15 @@
+.scrolling {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: repeat(2, calc(100% - 20px));
+}
+
+.scrolling::-webkit-scrollbar {
+    display: none;
+}
+
+.chart {
+    display: inline-block;
+}

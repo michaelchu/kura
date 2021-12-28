@@ -11,38 +11,36 @@ export default function PnlCompChart(props) {
   });
 
   return (
-    <div className="col-12 col-sm-6">
-      <div className="card">
-        <div className="card-body" style={{ position: "relative" }}>
-          <h3 className="card-title">Month Over Month Performance</h3>
-          <props.chart
-            options={{
-              chart: {
-                animations: {
-                  enabled: false,
-                },
-                toolbar: {
-                  show: false,
-                },
-                fontFamily: "Rubik, Helvetica, Arial, sans-serif",
+    <div className="card">
+      <div className="card-body" style={{ position: "relative" }}>
+        <h3 className="card-title">Month Over Month Performance</h3>
+        <props.chart
+          options={{
+            chart: {
+              animations: {
+                enabled: false,
               },
-              dataLabels: { enabled: false },
-              xaxis: {
-                labels: { show: true, rotate: 0 },
-                tickAmount: 4,
+              toolbar: {
+                show: false,
               },
-              yaxis: {
-                title: {
-                  text: "Realized P/L",
-                },
+              fontFamily: "Rubik, Helvetica, Arial, sans-serif",
+            },
+            dataLabels: { enabled: false },
+            xaxis: {
+              labels: { show: true, rotate: 0 },
+              tickAmount: 4,
+            },
+            yaxis: {
+              title: {
+                text: "Realized P/L",
               },
-              colors: ["rgba(128,143,168,0.64)", "rgba(64,175,83,0.87)"],
-            }}
-            series={formatted_series}
-            type={"area"}
-            height="300"
-          />
-        </div>
+            },
+            colors: ["rgba(128,143,168,0.64)", "rgba(64,175,83,0.87)"],
+          }}
+          series={formatted_series}
+          type={"area"}
+          height="300"
+        />
       </div>
     </div>
   );
