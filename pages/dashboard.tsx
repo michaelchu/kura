@@ -14,8 +14,8 @@ import StatsBoard from "../components/Dashboard/StatsBoard";
 import PnlChart from "../components/Dashboard/PnlChart";
 import PnlCompChart from "../components/Dashboard/PnlCompChart";
 import dynamic from "next/dynamic";
-import PositionDetailsModal from "../components/Modals/PositionDetailsModal";
 import style from "../components/Dashboard/scroll.module.css";
+import PositionDetailsModal from "../components/Modals/PositionDetailsModal";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -56,7 +56,7 @@ export default function Dashboard() {
             <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
           </div>
 
-          <div className="d-block d-md-none">
+          <div className={style.scrolling + " d-block d-md-none"}>
             <div className={style.scrolling}>
               <div className="col-12 chart">
                 <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
