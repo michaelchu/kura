@@ -50,13 +50,13 @@ export default function Dashboard() {
           />
 
           <div className="col-12 col-sm-6 d-none d-sm-block">
-            <PnlChart chart={Chart} data={data.pnl_chart} />
-          </div>
-          <div className="col-12 col-sm-6 d-none d-sm-block">
             <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
           </div>
+          <div className="col-12 col-sm-6 d-none d-sm-block">
+            <PnlChart chart={Chart} data={data.pnl_chart} />
+          </div>
 
-          <div className={style.scrolling + " d-block d-md-none"}>
+          <div className={"d-block d-md-none"}>
             <div className={style.scrolling}>
               <div className="col-12 chart">
                 <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
