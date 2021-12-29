@@ -3,7 +3,7 @@
     overflow-y: hidden;
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: repeat(2, calc(100% - 20px));
+    grid-template-columns: repeat(2, calc(100% - 25px));
 }
 
 .scrolling::-webkit-scrollbar {
