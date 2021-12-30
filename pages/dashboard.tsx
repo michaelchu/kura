@@ -11,10 +11,10 @@ import GenericReactTable from "../components/Tables/GenericReactTable";
 import React from "react";
 import List from "../components/Lists/List";
 import StatsBoard from "../components/Dashboard/StatsBoard";
-import PnlChart from "../components/Dashboard/PnlChart";
-import PnlCompChart from "../components/Dashboard/PnlCompChart";
 import dynamic from "next/dynamic";
-import style from "../components/Dashboard/scroll.module.css";
+import TransactionDetailsModal from "../components/Modals/TransactionDetailsModal";
+import DashboardChart from "../components/Dashboard/DashboardChart";
+import OpenPosDetailsModal from "../components/Modals/OpenPosDetailsModal";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -47,24 +47,8 @@ export default function Dashboard() {
             avg_pnl={avg_pnl}
             win_rate={win_rate}
           />
-          {/*Switch to horizontal progress bar for current month in mobile*/}
-          <div className="col-12 col-sm-6 d-none d-sm-block">
-            <PnlChart chart={Chart} data={data.pnl_chart} />
-          </div>
-          <div className="col-12 col-sm-6 d-none d-sm-block">
-            <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
-          </div>
 
-          <div className="d-block d-md-none">
-            <div className={style.scrolling}>
-              <div className="col-12 chart">
-                <PnlCompChart chart={Chart} data={data.pnl_comp_chart} />
-              </div>
-              <div className="col-12 chart">
-                <PnlChart chart={Chart} data={data.pnl_chart} />
-              </div>
-            </div>
-          </div>
+          <DashboardChart data={data} chart={Chart} />
 
           <div className="col-12 d-none d-md-block">
             <div className="card">
@@ -83,6 +67,8 @@ export default function Dashboard() {
               title={"Open Positions"}
               data={data.open_positions}
               columns={OpenPositionsListCols}
+              prefix={"open"}
+              modal={OpenPosDetailsModal}
             />
           </div>
           <div className="col-12 d-none d-md-block">
@@ -102,6 +88,7 @@ export default function Dashboard() {
               title={"Recent Transactions"}
               data={data.trades}
               columns={RecentTransListCols}
+              modal={TransactionDetailsModal}
             />
           </div>
         </div>

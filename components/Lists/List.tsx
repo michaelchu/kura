@@ -1,54 +1,38 @@
-const render = (row, renderProps): JSX.Element => {
-  if (!("accessor" in renderProps)) return <></>;
-  const value = row[renderProps.accessor];
-
-  if (!("Cell" in renderProps)) return <>{value}</>;
-  return renderProps.Cell({ row, value });
-};
+import { ListGroup } from "react-bootstrap";
+import ListItem from "./ListItem";
+import useModal from "../../hooks/useModal";
+import React, { useState } from "react";
 
 export default function List(props) {
+  const { isShowing: isModalShowing, toggle: ModalToggle } = useModal();
+  const [row, setRow] = useState({});
   return (
-    <div className="card">
-      <div className="card-header">
-        <h3 className="card-title">{props.title}</h3>
+    <>
+      <div className="card">
+        <div className="card-header">
+          <h3 className="card-title">{props.title}</h3>
+        </div>
+        <ListGroup variant={"flush"}>
+          {props.data.map((row) => (
+            <ListItem
+              row={row}
+              columns={props.columns}
+              onClick={(row) => {
+                setRow(row);
+                ModalToggle();
+              }}
+            />
+          ))}
+        </ListGroup>
       </div>
-      <div
-        className="list-group list-group-flush overflow-auto"
-        style={{ maxHeight: "35rem" }}
-      >
-        {props.data.map((row) => {
-          return (
-            <div className="list-group-item">
-              <div className="row">
-                {props.columns.map((col, index) => {
-                  return (
-                    <div className={col.width ? col.width : "col-4"}>
-                      <div
-                        className={
-                          props.columns[index + 1]
-                            ? "text-body"
-                            : "text-body text-end"
-                        }
-                      >
-                        {render(row, col["top"])}
-                      </div>
-                      <div
-                        className={
-                          props.columns[index + 1]
-                            ? "text-muted"
-                            : "text-muted text-end"
-                        }
-                      >
-                        {render(row, col["bottom"])}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+      <props.modal
+        row={row}
+        show={isModalShowing}
+        handleClose={() => ModalToggle()}
+        handleCloseAndRoll={() => {
+          ModalToggle();
+        }}
+      />
+    </>
   );
 }

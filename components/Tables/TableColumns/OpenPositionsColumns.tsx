@@ -7,12 +7,32 @@ export const OpenPositionsColumns = [
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
+    Header: <div style={{ textAlign: "center" }}>Account</div>,
+    accessor: "name",
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
+  },
+  {
+    Header: <div style={{ textAlign: "center" }}>Symbol</div>,
+    accessor: "display",
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
+  },
+  {
+    Header: <div style={{ textAlign: "center" }}>Strategy</div>,
+    accessor: "strategy_name",
+    Cell: ({ value, row }) => (
+      <div style={{ textAlign: "center" }}>
+        <a href={row.original.root + "/" + row.original.strategy}>{value}</a>
+      </div>
+    ),
+  },
+  {
     Header: <div style={{ textAlign: "center" }}>Progress</div>,
     accessor: "days_to_expiration",
     Cell: ({ row }) => {
       if (row.original.asset_type == "option") {
         const ratio =
-          ((row.original.days_from_expiration - row.original.days_to_expiration) /
+          ((row.original.days_from_expiration -
+            row.original.days_to_expiration) /
             row.original.days_from_expiration) *
           100;
         return (
@@ -28,25 +48,6 @@ export const OpenPositionsColumns = [
         return <></>;
       }
     },
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "display",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "name",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Strategy</div>,
-    accessor: "strategy_name",
-    Cell: ({ value, row }) => (
-      <div style={{ textAlign: "center" }}>
-        <a href={row.original.root + "/" + row.original.strategy}>{value}</a>
-      </div>
-    ),
   },
   {
     Header: <div style={{ textAlign: "center" }}>Qty</div>,

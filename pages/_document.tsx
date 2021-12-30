@@ -22,7 +22,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         </Head>
 
-        <body className="theme-dark">
+        <body className="theme-light">
           <div className="wrapper">
             <Main />
             <NextScript />
