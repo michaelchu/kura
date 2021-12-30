@@ -14,6 +14,7 @@ import StatsBoard from "../components/Dashboard/StatsBoard";
 import dynamic from "next/dynamic";
 import TransactionDetailsModal from "../components/Modals/TransactionDetailsModal";
 import DashboardChart from "../components/Dashboard/DashboardChart";
+import OpenPosDetailsModal from "../components/Modals/OpenPosDetailsModal";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
@@ -67,7 +68,7 @@ export default function Dashboard() {
               data={data.open_positions}
               columns={OpenPositionsListCols}
               prefix={"open"}
-              modal={TransactionDetailsModal}
+              modal={OpenPosDetailsModal}
             />
           </div>
           <div className="col-12 d-none d-md-block">

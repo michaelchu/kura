@@ -1,18 +1,8 @@
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import React from "react";
 import accounting from "accounting";
 
-export default function TransactionDetailsModal({ row, show, handleClose }) {
-  const includeBadge = (action: string, action_name: string) => {
-    if (action == "BTO" || action == "BTC") {
-      return <span className="badge bg-green-lt">{action_name}</span>;
-    } else if (action == "STC" || action == "STO") {
-      return <span className="badge bg-pink-lt">{action_name}</span>;
-    } else {
-      return <span className="badge bg-yellow-lt">{action_name}</span>;
-    }
-  };
-
+export default function OpenPosDetailsModal({ row, show, handleClose }) {
   return (
     <Modal show={show} onHide={handleClose} size={"lg"} centered>
       <Modal.Header closeButton>
@@ -23,7 +13,7 @@ export default function TransactionDetailsModal({ row, show, handleClose }) {
           <div className={"col-6 text-muted"}>
             <h4>Account</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.account_name}</div>
+          <div className={"col-6 text-body text-end"}>{row.name}</div>
 
           <div className={"col-6 text-muted"}>
             <h4>Trade Date</h4>
@@ -37,13 +27,6 @@ export default function TransactionDetailsModal({ row, show, handleClose }) {
           <div className={"hr"} />
 
           <div className={"col-6 text-muted"}>
-            <h4>Action</h4>
-          </div>
-          <div className={"col-6 text-body text-end"}>
-            {includeBadge(row.action, row.action_name)}
-          </div>
-
-          <div className={"col-6 text-muted"}>
             <h4>Quantity</h4>
           </div>
           <div className={"col-6 text-body text-end"}>{row.quantity}</div>
@@ -52,23 +35,32 @@ export default function TransactionDetailsModal({ row, show, handleClose }) {
             <h4>Price</h4>
           </div>
           <div className={"col-6 text-body text-end"}>
-            {accounting.formatMoney(row.price)}
+            {accounting.formatMoney(row.avg_price)}
           </div>
 
           <div className={"col-6 text-muted"}>
-            <h4>Fee</h4>
+            <h4>Book Cost</h4>
           </div>
           <div className={"col-6 text-body text-end"}>
-            {accounting.formatMoney(row.fee)}
-          </div>
-
-          <div className={"col-6 text-muted"}>
-            <h4>Total Cost</h4>
-          </div>
-          <div className={"col-6 text-body text-end"}>
-            {accounting.formatMoney(row.total_cost)}
+            {accounting.formatMoney(row.book_cost)}
           </div>
         </div>
+        {row.asset_type == "option" ? (
+          <div className={"row mt-2"}>
+            <div className={"col-12"}>
+              <Button
+                className={"btn-yellow w-100"}
+                onClick={() => {
+                  handleClose();
+                }}
+              >
+                Roll
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </Modal.Body>
     </Modal>
   );
