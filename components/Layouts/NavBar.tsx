@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { IconBell, IconSun, IconMoon, IconUser } from "@tabler/icons";
+import { IconUser } from "@tabler/icons";
 
 export default function NavBar() {
   const router = useRouter();
@@ -27,38 +27,6 @@ export default function NavBar() {
           </a>
         </h1>
         <div className="navbar-nav flex-row order-md-last">
-          <a
-            className="nav-link px-0 hide-theme-dark"
-            onClick={() => (document.body.className = "theme-dark")}
-            data-bs-placement="bottom"
-          >
-            <IconMoon />
-          </a>
-          <a
-            className="nav-link px-0 hide-theme-light"
-            onClick={() => (document.body.className = "theme-light")}
-            data-bs-placement="bottom"
-            style={{ color: "#f59f00" }}
-          >
-            <IconSun />
-          </a>
-          <div className="nav-item dropdown  me-3">
-            <a
-              href="#"
-              className="nav-link px-0"
-              data-bs-toggle="dropdown"
-              tabIndex={-1}
-              aria-label="Show notifications"
-            >
-              <IconBell />
-              <span className="badge bg-red" />
-            </a>
-            <div className="dropdown-menu dropdown-menu-end dropdown-menu-card">
-              <div className="card">
-                <div className="card-body">This is a notification</div>
-              </div>
-            </div>
-          </div>
           <div className="nav-item dropdown">
             <a
               href="#"
@@ -68,6 +36,7 @@ export default function NavBar() {
             >
               <span className="avatar avatar-sm">
                 <IconUser />
+                <span className="badge bg-red" />
               </span>
               <div className="d-none d-xl-block ps-2">
                 <div>Satoshi Nakamoto</div>
@@ -81,6 +50,20 @@ export default function NavBar() {
                 Feedback
               </a>
               <div className="dropdown-divider" />
+              <div className="dropdown-item">
+                <span>Dark Mode</span>
+                <div className="form-check form-check-single form-switch">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    onChange={() => {
+                      document.body.className == "theme-light"
+                        ? (document.body.className = "theme-dark")
+                        : (document.body.className = "theme-light");
+                    }}
+                  />
+                </div>
+              </div>
               <a href="#" className="dropdown-item">
                 Settings
               </a>
