@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 export default function List(props) {
   const { isShowing: isModalShowing, toggle: ModalToggle } = useModal();
-  const [symbol, setSymbol] = useState("");
+  const [row, setRow] = useState({});
   return (
     <>
       <div className="card">
@@ -17,8 +17,8 @@ export default function List(props) {
             <ListItem
               row={row}
               columns={props.columns}
-              onClick={(symbol) => {
-                setSymbol(symbol);
+              onClick={(row) => {
+                setRow(row);
                 ModalToggle();
               }}
             />
@@ -26,7 +26,7 @@ export default function List(props) {
         </ListGroup>
       </div>
       <props.modal
-        symbol={symbol}
+        row={row}
         show={isModalShowing}
         handleClose={() => ModalToggle()}
         handleCloseAndRoll={() => {

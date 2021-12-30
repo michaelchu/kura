@@ -12,7 +12,7 @@ export default function ListItem(props) {
     <ListGroup.Item
       className={"list-group-item"}
       onClick={() => {
-        props.onClick(props.row.display);
+        props.onClick(props.row);
       }}
     >
       <div className="row">
