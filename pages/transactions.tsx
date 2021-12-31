@@ -20,7 +20,6 @@ import useModal from "../hooks/useModal";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import CustomToast from "../components/CustomToast";
-import _ from "lodash";
 import dayjs from "dayjs";
 import ListGroup from "../components/Lists/ListGroup";
 import { TransactionsListCols } from "../components/Lists/ListColumns/TransactionsListCols";
@@ -58,21 +57,6 @@ export default function Transactions() {
   const [transaction, setTransaction] = useState({});
   const [isOption, setIsOption] = useState(false);
 
-  const addTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(ADD_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions").then(() => {
-          showFinishedToastToggle();
-        });
-      },
-      onError: () => {
-        showErrorToastToggle();
-      },
-    }
-  );
   const deleteTrans = useMutation(
     (variables) => {
       return graphQLClient.request(DELETE_TRANSACTION, variables);
@@ -117,9 +101,7 @@ export default function Transactions() {
               cols={TransactionColumns}
               data={data}
               setTransaction={setTransaction}
-              setIsOption={setIsOption}
               editModalToggle={editModalToggle}
-              addModalToggle={addModalToggle}
             />
           </div>
           <div className="col-12 d-block d-md-none">
@@ -134,17 +116,6 @@ export default function Transactions() {
           </div>
         </div>
       </div>
-
-      <AddTransactionModal
-        show={isAddModalShowing}
-        accounts={data.accounts}
-        isOption={isOption}
-        handleClose={() => addModalToggle()}
-        handleCloseAndAdd={(data) => {
-          addModalToggle();
-          addTrans.mutate(data);
-        }}
-      />
 
       <EditTransactionModal
         show={isEditModalShowing}

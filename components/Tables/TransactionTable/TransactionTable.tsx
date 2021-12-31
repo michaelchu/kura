@@ -23,9 +23,7 @@ export default function TransactionTable({
   cols,
   data,
   setTransaction,
-  setIsOption,
   editModalToggle,
-  addModalToggle,
 }) {
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(() => data.transaction_costs, [
@@ -67,9 +65,6 @@ export default function TransactionTable({
       <TransactionTableHeader
         filter={globalFilter}
         setFilter={setGlobalFilter}
-        setTransaction={setTransaction}
-        setIsOption={setIsOption}
-        addModalToggle={addModalToggle}
       />
       <Table
         responsive

@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { IconUser } from "@tabler/icons";
+import { IconUser, IconPlus } from "@tabler/icons";
 
-export default function NavBar() {
+export default function NavBar({ toggleModal }) {
   const router = useRouter();
   return (
     <header className="navbar navbar-expand-md navbar-dark sticky-top d-print-none">
@@ -27,6 +27,11 @@ export default function NavBar() {
           </a>
         </h1>
         <div className="navbar-nav flex-row order-md-last">
+          <div className="nav-item dropdown me-3">
+            <a href="#" className="nav-link px-0" onClick={() => toggleModal()}>
+              <IconPlus />
+            </a>
+          </div>
           <div className="nav-item dropdown">
             <a
               href="#"
@@ -38,9 +43,6 @@ export default function NavBar() {
                 <IconUser />
                 <span className="badge bg-red" />
               </span>
-              <div className="d-none d-xl-block ps-2">
-                <div>Satoshi Nakamoto</div>
-              </div>
             </a>
             <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
               <a href="#" className="dropdown-item">
