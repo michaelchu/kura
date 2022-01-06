@@ -13,11 +13,9 @@ import TransactionTable from "../components/Tables/TransactionTable/TransactionT
 
 import FETCH_TRANSACTIONS from "../api/queries/FetchTransactions.graphql";
 import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
-import ADD_TRANSACTION from "../api/mutations/AddTransaction.graphql";
 import DELETE_TRANSACTION from "../api/mutations/DeleteTransaction.graphql";
 import UPDATE_TRANSACTION from "../api/mutations/UpdateTransaction.graphql";
 import useModal from "../hooks/useModal";
-import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import CustomToast from "../components/CustomToast";
 import dayjs from "dayjs";
@@ -44,7 +42,6 @@ export default function Transactions() {
   const queryClient = useQueryClient();
 
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
-  const { isShowing: isAddModalShowing, toggle: addModalToggle } = useModal();
   const {
     isShowing: isFinishedToastShowing,
     toggle: showFinishedToastToggle,
@@ -55,7 +52,6 @@ export default function Transactions() {
   } = useModal();
 
   const [transaction, setTransaction] = useState({});
-  const [isOption, setIsOption] = useState(false);
 
   const deleteTrans = useMutation(
     (variables) => {

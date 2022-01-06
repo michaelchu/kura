@@ -1,22 +1,23 @@
 query FetchTransactions {
-  transaction_costs(order_by: {trade_date: desc}) {
-    id
-    account_name
-    account_id
-    trade_date
-    symbol
-    quantity
-    action
-    action_name
-    price
-    fee
-    total_cost
-    asset_type
-    strategy
-    strategy_name
-  }
-  accounts {
-    label: name
-    value: id
-  }
+    transaction_costs(order_by: {trade_date: desc}) {
+        id
+        account_name
+        account_id
+        trade_date
+        symbol
+        display
+        quantity
+        action
+        action_name
+        price
+        fee
+        total_cost
+        asset_type
+        strategy
+        strategy_name
+    }
+    accounts {
+        label: name
+        value: id
+    }
 }
