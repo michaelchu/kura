@@ -3,16 +3,11 @@ import { useTable } from "react-table";
 import Table from "react-bootstrap/Table";
 
 export default function SkeletonTable({ columns }) {
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({
-    columns: useMemo(() => columns, []),
-    data: useMemo(() => [{}, {}, {}], []),
-  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({
+      columns: useMemo(() => columns, []),
+      data: useMemo(() => [{}, {}, {}], []),
+    });
 
   return (
     <>

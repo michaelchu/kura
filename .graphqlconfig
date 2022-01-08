@@ -1,0 +1,16 @@
+{
+  "name": "Kura Graphql API",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:4000/api",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "x-hasura-admin-secret": "ou44uOYcPnw6olMayMD8PFsGmM6v2QkYlYMQYDLxhsAQvGSjp53oQK4mgJlObQR3"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

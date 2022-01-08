@@ -42,14 +42,10 @@ export default function Transactions() {
   const queryClient = useQueryClient();
 
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
-  const {
-    isShowing: isFinishedToastShowing,
-    toggle: showFinishedToastToggle,
-  } = useModal();
-  const {
-    isShowing: isErrorToastShowing,
-    toggle: showErrorToastToggle,
-  } = useModal();
+  const { isShowing: isFinishedToastShowing, toggle: showFinishedToastToggle } =
+    useModal();
+  const { isShowing: isErrorToastShowing, toggle: showErrorToastToggle } =
+    useModal();
 
   const [transaction, setTransaction] = useState({});
 

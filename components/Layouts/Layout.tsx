@@ -38,14 +38,10 @@ export default function Layout(props) {
   );
 
   const { isShowing: isModalShowing, toggle: ModalToggle } = useModal();
-  const {
-    isShowing: isFinishedToastShowing,
-    toggle: showFinishedToastToggle,
-  } = useModal();
-  const {
-    isShowing: isErrorToastShowing,
-    toggle: showErrorToastToggle,
-  } = useModal();
+  const { isShowing: isFinishedToastShowing, toggle: showFinishedToastToggle } =
+    useModal();
+  const { isShowing: isErrorToastShowing, toggle: showErrorToastToggle } =
+    useModal();
 
   return (
     <div>

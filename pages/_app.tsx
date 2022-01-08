@@ -2,7 +2,7 @@ import React from "react";
 import { Hydrate } from "react-query/hydration";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { AuthProvider } from "../api/auth";
+import { AuthProvider } from "../hooks/useAuth";
 import "../styles.css";
 
 const queryClient = new QueryClient();

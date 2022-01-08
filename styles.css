@@ -1,28 +1,28 @@
 body {
-    font-family: 'Rubik', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  }
+  font-family: "Rubik", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
 
 .accordion-item {
-    border: none;
-    border-bottom: 1px solid rgba(98, 105, 118, 0.16);
+  border: none;
+  border-bottom: 1px solid rgba(98, 105, 118, 0.16);
 }
 
 .accordion-body {
-    padding: 0;
+  padding: 0;
 }
 
 .card {
-    border-radius: 7px;
+  border-radius: 7px;
 }
 
 .card-header:first-child {
-    border-radius: 7px 7px 0 0;
+  border-radius: 7px 7px 0 0;
 }
 
 .card-footer:last-child {
-    border-radius: 0 0 7px 7px;
+  border-radius: 0 0 7px 7px;
 }
 
 .theme-dark {
-    color: #ffffffb3;
+  color: #ffffffb3;
 }

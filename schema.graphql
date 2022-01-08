@@ -1,0 +1,36 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: RootQueryType
+  mutation: RootMutationType
+}
+
+type RootMutationType {
+  "login with the params"
+  login(email: String!, password: String!): Session
+  "Create a user"
+  signUp(email: String!, password: String!): User
+}
+
+type RootQueryType {
+  tradingAccounts(userId: ID!): [TradingAccount]
+}
+
+"session value"
+type Session {
+  token: String
+  user: User
+}
+
+type TradingAccount {
+  currency: String!
+  id: ID!
+  name: String!
+  userId: ID!
+}
+
+"A user"
+type User {
+  email: String
+  id: ID
+}
