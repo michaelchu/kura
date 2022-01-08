@@ -17,7 +17,7 @@
   "author": "Michael Chu",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.3.6",
+    "@apollo/client": "^3.5.6",
     "@tabler/icons": "^1.46.0",
     "@types/accounting": "^0.4.2",
     "@types/react-table": "^7.7.9",
