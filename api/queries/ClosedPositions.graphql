@@ -1,16 +1,14 @@
 query ClosedPositions {
-  closed_positions(order_by: { entry_date: desc }) {
+  closedPositions() {
+    symbol
+    strategy
     entry_date
     exit_date
-    symbol
-    display
-    strategy
-    expiration
-    original_cost
+    days_in_trade
+    entry_cost
     exit_cost
     total_fees
     realized_pnl
-    days_in_trade
-    name
+    trading_account_name
   }
 }
