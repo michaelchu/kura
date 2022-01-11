@@ -1,5 +1,5 @@
-mutation DeleteTransaction($id: uuid!) {
-  delete_transactions_by_pk(id: $id) {
+mutation DeleteTransaction($id: ID!) {
+  deleteTransactionByPk(id: $id) {
     id
   }
 }

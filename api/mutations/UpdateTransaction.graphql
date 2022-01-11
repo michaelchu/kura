@@ -1,5 +1,5 @@
-mutation UpdateTransaction($id: uuid!, $object: transactions_set_input!) {
-  update_transactions_by_pk(pk_columns: { id: $id }, _set: $object) {
+mutation UpdateTransaction($id: ID!, $object: TransactionsInput!) {
+  updateTransactionByPk(id: $id, object: $object) {
     id
   }
 }
