@@ -99,7 +99,7 @@ export default function Transactions() {
           <div className="col-12 d-block d-md-none">
             <ListGroup
               title={"Transactions"}
-              data={data.transaction_costs}
+              data={data.transactions}
               groupFunc={({ trade_date }) => {
                 return dayjs(trade_date).format("MMM YYYY");
               }}
@@ -112,7 +112,7 @@ export default function Transactions() {
       <EditTransactionModal
         show={isEditModalShowing}
         selectedTrans={transaction}
-        accounts={data.accounts}
+        accounts={data.tradingAccounts}
         handleClose={() => editModalToggle()}
         handleCloseAndUpdate={(data) => {
           editModalToggle();

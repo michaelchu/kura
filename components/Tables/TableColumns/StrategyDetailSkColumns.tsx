@@ -16,18 +16,6 @@ export const StrategyDetailSKColumns = [
     accessor: "quantity",
   },
   {
-    Header: <div style={{ textAlign: "center" }}>Expiration</div>,
-    accessor: "expiration",
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Option Type</div>,
-    accessor: "type",
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Strike</div>,
-    accessor: "strike",
-  },
-  {
     Header: <div style={{ textAlign: "right" }}>Price</div>,
     accessor: "price",
   },

@@ -31,7 +31,7 @@ async function getTrans() {
 export default function ClosedPositions() {
   const { data } = useQuery("closed_positions", getTrans);
   const grouped_positions = _.groupBy(
-    data.closed_positions,
+    data.closedPositions,
     ({ exit_date }) => {
       return dayjs(exit_date).format("MMM YYYY");
     }
@@ -54,7 +54,7 @@ export default function ClosedPositions() {
           <div className="col-12 d-block d-md-none">
             <ListGroup
               title={"Closed Positions"}
-              data={data.closed_positions}
+              data={data.closedPositions}
               groupFunc={({ exit_date }) => {
                 return dayjs(exit_date).format("MMM YYYY");
               }}

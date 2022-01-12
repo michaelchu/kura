@@ -2,9 +2,9 @@ import accounting from "accounting";
 
 export const RecentTransListCols = [
   {
-    top: { accessor: "display" },
+    top: { accessor: "symbol" },
     bottom: {
-      accessor: "strategy_name",
+      accessor: "strategy",
     },
     width: "col-8",
   },

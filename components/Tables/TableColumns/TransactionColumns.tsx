@@ -8,17 +8,17 @@ export const TransactionColumns = [
   },
   {
     Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "account_name",
+    accessor: "trading_account_name",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "display",
+    accessor: "symbol",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Strategy</div>,
-    accessor: "strategy_name",
+    accessor: "strategy",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {

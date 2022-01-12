@@ -3,12 +3,12 @@ import accounting from "accounting";
 export const ClosedPositionColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "name",
+    accessor: "trading_account_name",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "display",
+    accessor: "symbol",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
@@ -33,7 +33,7 @@ export const ClosedPositionColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Original Cost</div>,
-    accessor: "original_cost",
+    accessor: "entry_cost",
     Cell: ({ value }) => {
       if (value < 0) {
         return (

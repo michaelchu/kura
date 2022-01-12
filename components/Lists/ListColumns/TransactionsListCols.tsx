@@ -4,7 +4,7 @@ export const TransactionsListCols = [
   {
     top: { accessor: "symbol" },
     bottom: {
-      accessor: "strategy_name",
+      accessor: "strategy",
     },
     width: "col-5",
   },

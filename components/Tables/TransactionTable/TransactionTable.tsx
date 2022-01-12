@@ -27,8 +27,8 @@ export default function TransactionTable({
 }) {
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(
-    () => data.transaction_costs,
-    [data.transaction_costs]
+    () => data.transactions,
+    [data.transactions]
   );
 
   const {

@@ -35,7 +35,7 @@ export default function Dashboard() {
   const { data } = useQuery("dashboard_query", () => {
     return graphQLClient.request(DASHBOARD_QUERY);
   });
-  const { total_pnl, total_fees, avg_pnl, win_rate } = data.dashboard_stats[0];
+  const { total_pnl, total_fees, avg_pnl, win_rate } = data.dashboardStats[0];
 
   return (
     <Layout>
@@ -58,14 +58,14 @@ export default function Dashboard() {
               <GenericReactTable
                 title={"Open Positions"}
                 subProps={OpenPositionsColumns}
-                data={data.open_positions}
+                data={data.openPositions}
               />
             </div>
           </div>
           <div className="col-12 d-block d-md-none">
             <List
               title={"Open Positions"}
-              data={data.open_positions}
+              data={data.openPositions}
               columns={OpenPositionsListCols}
               prefix={"open"}
               modal={OpenPosDetailsModal}
@@ -79,14 +79,14 @@ export default function Dashboard() {
               <GenericReactTable
                 title={"Recent Transactions"}
                 subProps={RecentTransColumns}
-                data={data.trades}
+                data={data.transactions}
               />
             </div>
           </div>
           <div className="col-12 d-block d-md-none">
             <List
               title={"Recent Transactions"}
-              data={data.trades}
+              data={data.transactions}
               columns={RecentTransListCols}
               modal={TransactionDetailsModal}
             />

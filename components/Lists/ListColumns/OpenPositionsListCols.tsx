@@ -2,9 +2,9 @@ import accounting from "accounting";
 
 export const OpenPositionsListCols = [
   {
-    top: { accessor: "display" },
+    top: { accessor: "symbol" },
     bottom: {
-      accessor: "strategy_name",
+      accessor: "strategy",
       Cell: ({ value, row }) => (
         <div>
           <a href={row.root + "/" + row.strategy}>{value}</a>
