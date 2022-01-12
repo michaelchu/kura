@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { IconEye } from "@tabler/icons";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signIn } = useAuth();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    signIn({ email, password });
+  };
+
   return (
     <div className="antialiased border-top-wide border-primary d-flex flex-column">
       <div className="page page-center">
@@ -11,7 +22,12 @@ export default function Login() {
               <img src="./static/logo.svg" height="36" alt="" />
             </a>
           </div>
-          <form className="card card-md" action="." method="get">
+          <form
+            className="card card-md"
+            action="."
+            method="get"
+            onSubmit={(e) => onSubmit(e)}
+          >
             <div className="card-body">
               <h2 className="card-title text-center mb-4">
                 Login to your account
@@ -22,6 +38,7 @@ export default function Login() {
                   type="email"
                   className="form-control"
                   placeholder="Enter email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-2">
@@ -36,6 +53,7 @@ export default function Login() {
                     type="password"
                     className="form-control"
                     placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <span className="input-group-text">
                     <a

@@ -42,7 +42,7 @@ function useProvideAuth() {
 
   const createApolloClient = () => {
     const link = new HttpLink({
-      uri: "http://localhost:4000/api",
+      uri: process.env.NEXT_PUBLIC_GQL_ENDPOINT,
       headers: getAuthHeaders(),
     });
 
@@ -52,7 +52,7 @@ function useProvideAuth() {
     });
   };
 
-  const signIn = async ({ username, password }) => {
+  const signIn = async ({ email, password }) => {
     const client = createApolloClient();
     const LoginMutation = gql`
       mutation Login($email: String!, $password: String!) {
@@ -64,7 +64,7 @@ function useProvideAuth() {
 
     const result = await client.mutate({
       mutation: LoginMutation,
-      variables: { username, password },
+      variables: { email, password },
     });
 
     console.log(result);
