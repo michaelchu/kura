@@ -11,7 +11,7 @@ query Dashboard {
     book_cost
     days_from_expiration
     days_to_expiration
-    trading_acount_name
+    trading_account_name
     trading_account_id
   }
   transactions(limit: 5) {

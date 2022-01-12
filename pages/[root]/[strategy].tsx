@@ -55,13 +55,13 @@ export default function StrategyDetail() {
 
   const total_costs = () => {
     return _.round(
-      data.trades.reduce((acc, { total_cost }) => total_cost + acc, 0),
+      data.strategyDetails.reduce((acc, { total_cost }) => total_cost + acc, 0),
       2
     );
   };
   const total_fees = () => {
     return _.round(
-      data.trades.reduce((acc, { fee }) => fee + acc, 0),
+      data.strategyDetails.reduce((acc, { fee }) => fee + acc, 0),
       2
     );
   };
@@ -69,7 +69,7 @@ export default function StrategyDetail() {
   const cost_basis = () => {
     let tc = total_costs();
     if (strategy == "covered_call") {
-      const total_quantity = data.trades
+      const total_quantity = data.strategyDetails
         .filter(({ asset_type }) => asset_type == "stock")
         .reduce((acc, { quantity }) => quantity + acc, 0);
 
@@ -140,7 +140,7 @@ export default function StrategyDetail() {
               </div>
               <GenericReactTable
                 subProps={StrategyDetailColumns}
-                data={data.trades}
+                data={data.strategyDetails}
               />
             </div>
           </div>

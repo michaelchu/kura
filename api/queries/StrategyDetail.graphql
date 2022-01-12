@@ -1,5 +1,5 @@
 query StrategyDetail($root: String!, $strategy: String!) {
-  strategyDetail(root: $root, strategy: $strategy) {
+  strategyDetails(root: $root, strategy: $strategy) {
     trading_account_name
     action
     asset_type
