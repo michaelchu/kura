@@ -1,5 +1,5 @@
 query Dashboard {
-  openPositions() {
+  openPositions {
     symbol
     strategy
     trade_date

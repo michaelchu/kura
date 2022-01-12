@@ -1,19 +1,14 @@
 query StrategyDetail($root: String!, $strategy: String!) {
-  trades(where: { root: { _eq: $root }, strategy: { _eq: $strategy } }) {
-    account_id
+  strategyDetail(root: $root, strategy: $strategy) {
+    trading_account_name
     action
     asset_type
-    expiration
     fee
     quantity
-    root
     price
     strategy
-    strike
     symbol
     total_cost
     trade_date
-    type
-    user_id
   }
 }

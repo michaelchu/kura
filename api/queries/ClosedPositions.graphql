@@ -1,5 +1,5 @@
 query ClosedPositions {
-  closedPositions() {
+  closedPositions {
     symbol
     strategy
     entry_date
