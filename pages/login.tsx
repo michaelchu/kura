@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { IconEye } from "@tabler/icons";
 import { useAuth } from "../hooks/useAuth";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,7 +12,15 @@ export default function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    signIn({ email, password });
+    signIn({ email, password })
+      .then(() => {
+        // get return url from query parameters or default to '/'
+        const returnUrl = router.query.returnUrl || "/dashboard";
+        router.push(returnUrl);
+      })
+      .catch((error) => {
+        setError("apiError", { message: error });
+      });
   };
 
   return (

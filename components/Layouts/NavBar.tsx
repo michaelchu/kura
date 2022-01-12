@@ -1,9 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { useAuth } from "../../hooks/useAuth";
 import { IconUser, IconPlus } from "@tabler/icons";
+import { NavDropdown } from "./NavDropdown";
 
 export default function NavBar({ toggleModal }) {
   const router = useRouter();
+  const { signOut, isSignedIn } = useAuth();
+
   return (
     <header className="navbar navbar-expand-md navbar-dark sticky-top d-print-none">
       <div className="container-xl">
@@ -26,55 +30,7 @@ export default function NavBar({ toggleModal }) {
             />
           </a>
         </h1>
-        <div className="navbar-nav flex-row order-md-last">
-          <div className="nav-item dropdown me-3">
-            <a href="#" className="nav-link px-0" onClick={() => toggleModal()}>
-              <IconPlus />
-            </a>
-          </div>
-          <div className="nav-item dropdown">
-            <a
-              href="#"
-              className="nav-link d-flex lh-1 text-reset p-0"
-              data-bs-toggle="dropdown"
-              aria-label="Open user menu"
-            >
-              <span className="avatar avatar-sm">
-                <IconUser />
-                <span className="badge bg-red" />
-              </span>
-            </a>
-            <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <a href="#" className="dropdown-item">
-                Profile & account
-              </a>
-              <a href="#" className="dropdown-item">
-                Feedback
-              </a>
-              <div className="dropdown-divider" />
-              <div className="dropdown-item">
-                <span>Dark Mode</span>
-                <div className="form-check form-check-single form-switch">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    onChange={() => {
-                      document.body.className == "theme-light"
-                        ? (document.body.className = "theme-dark")
-                        : (document.body.className = "theme-light");
-                    }}
-                  />
-                </div>
-              </div>
-              <a href="#" className="dropdown-item">
-                Settings
-              </a>
-              <a href="#" className="dropdown-item">
-                Logout
-              </a>
-            </div>
-          </div>
-        </div>
+        {isSignedIn() && <NavDropdown signOut={signOut} router={router} />}
         <div className="collapse navbar-collapse" id="navbar-menu">
           <div className="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
             <ul className="navbar-nav">
@@ -109,15 +65,6 @@ export default function NavBar({ toggleModal }) {
               >
                 <a className="nav-link" href="/transactions">
                   <span className="nav-link-title">Transactions</span>
-                </a>
-              </li>
-              <li
-                className={
-                  router.pathname == "/goals" ? "nav-item active" : "nav-item"
-                }
-              >
-                <a className="nav-link" href="/goals">
-                  <span className="nav-link-title">Goals</span>
                 </a>
               </li>
             </ul>

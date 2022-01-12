@@ -6,6 +6,7 @@ import {
   HttpLink,
   gql,
 } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const authContext = createContext({});
 

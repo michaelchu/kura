@@ -1,0 +1,58 @@
+import React from "react";
+export default function NavDropdown({ signOut, router }) {
+  return (
+    <div className="navbar-nav flex-row order-md-last">
+      <div className="nav-item dropdown me-3">
+        <a href="#" className="nav-link px-0" onClick={() => toggleModal()}>
+          <IconPlus />
+        </a>
+      </div>
+      <div className="nav-item dropdown">
+        <a
+          href="#"
+          className="nav-link d-flex lh-1 text-reset p-0"
+          data-bs-toggle="dropdown"
+          aria-label="Open user menu"
+        >
+          <span className="avatar avatar-sm">
+            <IconUser />
+            <span className="badge bg-red" />
+          </span>
+        </a>
+        <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+          <a href="#" className="dropdown-item">
+            Profile & account
+          </a>
+          <a href="#" className="dropdown-item">
+            Feedback
+          </a>
+          <div className="dropdown-divider" />
+          <div className="dropdown-item">
+            <span>Dark Mode</span>
+            <div className="form-check form-check-single form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                onChange={() => {
+                  document.body.className == "theme-light"
+                    ? (document.body.className = "theme-dark")
+                    : (document.body.className = "theme-light");
+                }}
+              />
+            </div>
+          </div>
+          <a className="dropdown-item">Settings</a>
+          <a
+            className="dropdown-item"
+            onClick={() => {
+              signOut();
+              router.push("/");
+            }}
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
