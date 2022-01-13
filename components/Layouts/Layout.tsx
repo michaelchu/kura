@@ -5,37 +5,25 @@ import React from "react";
 import Script from "next/script";
 import TransactionModal from "../../components/Modals/TransactionModal";
 import useModal from "../../hooks/useModal";
-import { useMutation, useQueryClient } from "react-query";
 import ADD_TRANSACTION from "../../api/mutations/AddTransaction.graphql";
 import CustomToast from "../CustomToast";
-import { GraphQLClient } from "graphql-request";
 
 export default function Layout(props) {
-  const graphQLClient = new GraphQLClient(
-    process.env.NEXT_PUBLIC_GQL_ENDPOINT,
-    {
-      headers: {
-        "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-      },
-    }
-  );
-
-  const queryClient = useQueryClient();
-  const addTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(ADD_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("dashboard_query").then(() => {
-          showFinishedToastToggle();
-        });
-      },
-      onError: () => {
-        showErrorToastToggle();
-      },
-    }
-  );
+  // const addTrans = useMutation(
+  // (variables) => {
+  // return graphQLClient.request(ADD_TRANSACTION, variables);
+  // },
+  // {
+  //   onSuccess: () => {
+  // queryClient.invalidateQueries("dashboard_query").then(() => {
+  //   showFinishedToastToggle();
+  // });
+  // },
+  // onError: () => {
+  // showErrorToastToggle();
+  //   },
+  // }
+  // );
 
   const { isShowing: isModalShowing, toggle: ModalToggle } = useModal();
   const { isShowing: isFinishedToastShowing, toggle: showFinishedToastToggle } =
@@ -56,7 +44,7 @@ export default function Layout(props) {
         handleClose={() => ModalToggle()}
         handleCloseAndAdd={(data) => {
           ModalToggle();
-          addTrans.mutate(data);
+          // addTrans.mutate(data);
         }}
       />
       <CustomToast

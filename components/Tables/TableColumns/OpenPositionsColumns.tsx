@@ -1,14 +1,15 @@
 import accounting from "accounting";
+import Link from "next/link";
 
 export const OpenPositionsColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
-    accessor: "trade_date",
+    accessor: "tradeDate",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "trading_account_name",
+    accessor: "tradingAccountName",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
@@ -21,19 +22,20 @@ export const OpenPositionsColumns = [
     accessor: "strategy",
     Cell: ({ value, row }) => (
       <div style={{ textAlign: "center" }}>
-        <a href={row.original.root + "/" + row.original.strategy}>{value}</a>
+        <Link href={row.original.root + "/" + row.original.strategyId}>
+          <a>{value}</a>
+        </Link>
       </div>
     ),
   },
   {
     Header: <div style={{ textAlign: "center" }}>Progress</div>,
-    accessor: "days_to_expiration",
+    accessor: "daysToExpiration",
     Cell: ({ row }) => {
-      if (row.original.asset_type == "option") {
+      if (row.original.assetType == "option") {
         const ratio =
-          ((row.original.days_from_expiration -
-            row.original.days_to_expiration) /
-            row.original.days_from_expiration) *
+          ((row.original.daysFromExpiration - row.original.daysToExpiration) /
+            row.original.daysFromExpiration) *
           100;
         return (
           <div className="progress progress-separated">
@@ -56,7 +58,7 @@ export const OpenPositionsColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Avg Price</div>,
-    accessor: "avg_price",
+    accessor: "avgPrice",
     Cell: ({ value }) => {
       return (
         <div style={{ textAlign: "right" }}>
@@ -67,7 +69,7 @@ export const OpenPositionsColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Book Cost</div>,
-    accessor: "book_cost",
+    accessor: "bookCost",
     Cell: ({ value }) => {
       return (
         <div style={{ textAlign: "right" }}>

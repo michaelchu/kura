@@ -2,25 +2,18 @@ import React, { useState } from "react";
 import { IconEye } from "@tabler/icons";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn } = useAuth();
+  const { signIn, loading, error } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    signIn({ email, password })
-      .then(() => {
-        // get return url from query parameters or default to '/'
-        const returnUrl = router.query.returnUrl || "/dashboard";
-        router.push(returnUrl);
-      })
-      .catch((error) => {
-        setError("apiError", { message: error });
-      });
+    signIn(email, password);
   };
 
   return (
@@ -34,7 +27,6 @@ export default function Login() {
           </div>
           <form
             className="card card-md"
-            action="."
             method="get"
             onSubmit={(e) => onSubmit(e)}
           >
@@ -46,7 +38,7 @@ export default function Login() {
                 <label className="form-label">Email address</label>
                 <input
                   type="email"
-                  className="form-control"
+                  className={error ? "form-control is-invalid" : "form-control"}
                   placeholder="Enter email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -61,22 +53,19 @@ export default function Login() {
                 <div className="input-group input-group-flat">
                   <input
                     type="password"
-                    className="form-control"
+                    className={
+                      error ? "form-control is-invalid" : "form-control"
+                    }
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <span className="input-group-text">
-                    <a
-                      href="#"
-                      className="link-secondary"
-                      title="Show password"
-                      data-bs-toggle="tooltip"
-                    >
-                      <IconEye />
-                    </a>
-                  </span>
                 </div>
               </div>
+              {error && (
+                <div className="text-danger mb-3">
+                  Oops! The email/password you entered is incorrect.
+                </div>
+              )}
               <div className="mb-2">
                 <label className="form-check">
                   <input type="checkbox" className="form-check-input" />
@@ -86,7 +75,11 @@ export default function Login() {
                 </label>
               </div>
               <div className="form-footer">
-                <button type="submit" className="btn btn-primary w-100">
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100"
+                  disabled={loading}
+                >
                   Sign in
                 </button>
               </div>
@@ -94,9 +87,9 @@ export default function Login() {
           </form>
           <div className="text-center text-muted mt-3">
             Don't have account yet?{" "}
-            <a href="./signup" tabIndex={-1}>
-              Sign up
-            </a>
+            <Link href="/signup">
+              <a>Sign up</a>
+            </Link>
           </div>
         </div>
       </div>

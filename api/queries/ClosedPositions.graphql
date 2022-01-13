@@ -2,13 +2,13 @@ query ClosedPositions {
   closedPositions {
     symbol
     strategy
-    entry_date
-    exit_date
-    days_in_trade
-    entry_cost
-    exit_cost
-    total_fees
-    realized_pnl
-    trading_account_name
+    entryDate
+    exitDate
+    daysInTrade
+    entryCost
+    exitCost
+    totalFees
+    realizedPnl
+    tradingAccountName
   }
 }

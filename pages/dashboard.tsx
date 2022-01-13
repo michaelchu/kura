@@ -1,6 +1,4 @@
-import { useQuery, QueryClient } from "react-query";
-import { GraphQLClient } from "graphql-request";
-import { dehydrate } from "react-query/hydration";
+import { useQuery } from "@apollo/client";
 import Layout from "../components/Layouts/Layout";
 import { OpenPositionsColumns } from "../components/Tables/TableColumns/OpenPositionsColumns";
 import { RecentTransColumns } from "../components/Tables/TableColumns/RecentTransColumns";
@@ -16,36 +14,24 @@ import TransactionDetailsModal from "../components/Modals/TransactionDetailsModa
 import DashboardChart from "../components/Dashboard/DashboardChart";
 import OpenPosDetailsModal from "../components/Modals/OpenPosDetailsModal";
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
-  headers: {
-    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-  },
-});
-
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery("dashboard_query", () =>
-    graphQLClient.request(DASHBOARD_QUERY)
-  );
-  return { props: { dehydratedState: dehydrate(queryClient) } };
-}
-
 export default function Dashboard() {
-  const { data } = useQuery("dashboard_query", () => {
-    return graphQLClient.request(DASHBOARD_QUERY);
-  });
-  const { total_pnl, total_fees, avg_pnl, win_rate } = data.dashboardStats[0];
+  const { loading, error, data } = useQuery(DASHBOARD_QUERY);
+  const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+
+  const { totalPnl, totalFees, avgPnl, winRate } = data.dashboardStats;
 
   return (
     <Layout>
       <div className="page-body">
         <div className="row row-deck row-cards">
           <StatsBoard
-            total_fees={total_fees}
-            total_pnl={total_pnl}
-            avg_pnl={avg_pnl}
-            win_rate={win_rate}
+            total_fees={totalFees}
+            total_pnl={totalPnl}
+            avg_pnl={avgPnl}
+            win_rate={winRate}
           />
 
           <DashboardChart data={data} chart={Chart} />
