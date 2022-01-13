@@ -3,12 +3,12 @@ import accounting from "accounting";
 export const TransactionColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
-    accessor: "trade_date",
+    accessor: "tradeDate",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "trading_account_name",
+    accessor: "tradingAccountName",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
@@ -75,7 +75,7 @@ export const TransactionColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Total Cost</div>,
-    accessor: "total_cost",
+    accessor: "totalCost",
     Cell: ({ value }) => {
       return (
         <div style={{ textAlign: "right" }}>

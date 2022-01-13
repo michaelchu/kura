@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  useQuery,
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "react-query";
-import { GraphQLClient } from "graphql-request";
-import { dehydrate } from "react-query/hydration";
+import { useQuery } from "@apollo/client";
 
 import Layout from "../components/Layouts/Layout";
 import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
@@ -22,25 +15,7 @@ import dayjs from "dayjs";
 import ListGroup from "../components/Lists/ListGroup";
 import { TransactionsListCols } from "../components/Lists/ListColumns/TransactionsListCols";
 
-const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
-  headers: {
-    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-  },
-});
-
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery("fetch_transactions", () => getTrans());
-  return { props: { dehydratedState: dehydrate(queryClient) } };
-}
-
-async function getTrans() {
-  return graphQLClient.request(FETCH_TRANSACTIONS);
-}
-
 export default function Transactions() {
-  const queryClient = useQueryClient();
-
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
   const { isShowing: isFinishedToastShowing, toggle: showFinishedToastToggle } =
     useModal();
@@ -49,40 +24,42 @@ export default function Transactions() {
 
   const [transaction, setTransaction] = useState({});
 
-  const deleteTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(DELETE_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetch_transactions").then(() => {
-          setTransaction({});
-          showFinishedToastToggle();
-        });
-      },
-      onError: () => {
-        showErrorToastToggle();
-      },
-    }
-  );
+  // const deleteTrans = useMutation(
+  //   (variables) => {
+  //     return graphQLClient.request(DELETE_TRANSACTION, variables);
+  //   },
+  //   {
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries("fetch_transactions").then(() => {
+  //         setTransaction({});
+  //         showFinishedToastToggle();
+  //       });
+  //     },
+  //     onError: () => {
+  //       showErrorToastToggle();
+  //     },
+  //   }
+  // );
 
-  const updateTrans = useMutation(
-    (variables) => {
-      return graphQLClient.request(UPDATE_TRANSACTION, variables);
-    },
-    {
-      onSuccess: () => {
-        queryClient
-          .invalidateQueries("fetch_transactions")
-          .then(() => showFinishedToastToggle());
-      },
-      onError: () => {
-        showErrorToastToggle();
-      },
-    }
-  );
+  // const updateTrans = useMutation(
+  //   (variables) => {
+  //     return graphQLClient.request(UPDATE_TRANSACTION, variables);
+  //   },
+  //   {
+  //     onSuccess: () => {
+  //       queryClient
+  //         .invalidateQueries("fetch_transactions")
+  //         .then(() => showFinishedToastToggle());
+  //     },
+  //     onError: () => {
+  //       showErrorToastToggle();
+  //     },
+  //   }
+  // );
 
-  const { data } = useQuery("fetch_transactions", getTrans);
+  const { data, loading, error } = useQuery(FETCH_TRANSACTIONS);
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
 
   return (
     <Layout>
@@ -116,11 +93,11 @@ export default function Transactions() {
         handleClose={() => editModalToggle()}
         handleCloseAndUpdate={(data) => {
           editModalToggle();
-          updateTrans.mutate(data);
+          // updateTrans.mutate(data);
         }}
         handleCloseAndDelete={(id) => {
           editModalToggle();
-          deleteTrans.mutate({ id: id } as any);
+          // deleteTrans.mutate({ id: id } as any);
         }}
       />
 

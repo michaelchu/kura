@@ -1,14 +1,18 @@
-query StrategyDetail($root: String!, $strategy: String!) {
-  strategyDetails(root: $root, strategy: $strategy) {
-    trading_account_name
+query StrategyDetail($root: String!, $strategyId: String!) {
+  strategyDetails(root: $root, strategyId: $strategyId) {
+    tradingAccountName
     action
-    asset_type
+    assetType
     fee
     quantity
     price
     strategy
+    strategyId
     symbol
-    total_cost
-    trade_date
+    totalCost
+    tradeDate
+  }
+  strategy(strategyId: $strategyId) {
+    label
   }
 }

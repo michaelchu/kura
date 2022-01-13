@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { IconEye } from "@tabler/icons";
+import { useAuth } from "../hooks/useAuth";
+import Link from "next/link";
 
 export default function SignUp() {
+  const { signUp, loading, error } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    signUp(email, password);
+  };
+
   return (
     <div className="antialiased border-top-wide border-primary d-flex flex-column">
       <div className="page page-center">
@@ -11,25 +22,22 @@ export default function SignUp() {
               <img src="./static/logo.svg" height="36" alt="" />
             </a>
           </div>
-          <form className="card card-md" action="." method="get">
+          <form
+            className="card card-md"
+            method="get"
+            onSubmit={(e) => onSubmit(e)}
+          >
             <div className="card-body">
               <h2 className="card-title text-center mb-4">
                 Create new account
               </h2>
-              <div className="mb-3">
-                <label className="form-label">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter name"
-                />
-              </div>
               <div className="mb-3">
                 <label className="form-label">Email address</label>
                 <input
                   type="email"
                   className="form-control"
                   placeholder="Enter email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -39,19 +47,15 @@ export default function SignUp() {
                     type="password"
                     className="form-control"
                     placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
-                  <span className="input-group-text">
-                    <a
-                      href="#"
-                      className="link-secondary"
-                      title="Show password"
-                      data-bs-toggle="tooltip"
-                    >
-                      <IconEye />
-                    </a>
-                  </span>
                 </div>
               </div>
+              {error && (
+                <div className="text-danger mb-3">
+                  There was an error creating your account.
+                </div>
+              )}
               <div className="mb-3">
                 <label className="form-check">
                   <input type="checkbox" className="form-check-input" />
@@ -65,7 +69,11 @@ export default function SignUp() {
                 </label>
               </div>
               <div className="form-footer">
-                <button type="submit" className="btn btn-primary w-100">
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100"
+                  disabled={loading}
+                >
                   Create new account
                 </button>
               </div>
@@ -73,9 +81,9 @@ export default function SignUp() {
           </form>
           <div className="text-center text-muted mt-3">
             Already have account?{" "}
-            <a href="/login" tabIndex={-1}>
-              Sign in
-            </a>
+            <Link href="/login">
+              <a>Sign in</a>
+            </Link>
           </div>
         </div>
       </div>

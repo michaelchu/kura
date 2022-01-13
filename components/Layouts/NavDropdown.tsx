@@ -1,5 +1,7 @@
 import React from "react";
-export default function NavDropdown({ signOut, router }) {
+import { IconUser, IconPlus } from "@tabler/icons";
+
+export default function NavDropdown({ signOut, router, toggleModal }) {
   return (
     <div className="navbar-nav flex-row order-md-last">
       <div className="nav-item dropdown me-3">
@@ -9,7 +11,6 @@ export default function NavDropdown({ signOut, router }) {
       </div>
       <div className="nav-item dropdown">
         <a
-          href="#"
           className="nav-link d-flex lh-1 text-reset p-0"
           data-bs-toggle="dropdown"
           aria-label="Open user menu"
@@ -46,7 +47,6 @@ export default function NavDropdown({ signOut, router }) {
             className="dropdown-item"
             onClick={() => {
               signOut();
-              router.push("/");
             }}
           >
             Logout

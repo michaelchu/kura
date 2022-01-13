@@ -1,8 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../../hooks/useAuth";
-import { IconUser, IconPlus } from "@tabler/icons";
-import { NavDropdown } from "./NavDropdown";
+import NavDropdown from "./NavDropdown";
+import Nav from "./Nav";
+import Link from "next/link";
 
 export default function NavBar({ toggleModal }) {
   const router = useRouter();
@@ -20,56 +21,35 @@ export default function NavBar({ toggleModal }) {
           <span className="navbar-toggler-icon" />
         </button>
         <h1 className="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-          <a href=".">
-            <img
-              src="/logo-dark.png"
-              width="110"
-              height="32"
-              alt="kura"
-              className="navbar-brand-image"
-            />
-          </a>
+          <Link href=".">
+            <a>
+              <img
+                src="/logo-dark.png"
+                width="110"
+                height="32"
+                alt="kura"
+                className="navbar-brand-image"
+              />
+            </a>
+          </Link>
         </h1>
-        {isSignedIn() && <NavDropdown signOut={signOut} router={router} />}
-        <div className="collapse navbar-collapse" id="navbar-menu">
-          <div className="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
-            <ul className="navbar-nav">
-              <li
-                className={
-                  router.pathname == "/dashboard"
-                    ? "nav-item active"
-                    : "nav-item"
-                }
-              >
-                <a className="nav-link" href="/dashboard">
-                  <span className="nav-link-title">Dashboard</span>
-                </a>
-              </li>
-              <li
-                className={
-                  router.pathname == "/closed-positions"
-                    ? "nav-item active"
-                    : "nav-item"
-                }
-              >
-                <a className="nav-link" href="/closed-positions">
-                  <span className="nav-link-title">Closed Positions</span>
-                </a>
-              </li>
-              <li
-                className={
-                  router.pathname == "/transactions"
-                    ? "nav-item active"
-                    : "nav-item"
-                }
-              >
-                <a className="nav-link" href="/transactions">
-                  <span className="nav-link-title">Transactions</span>
-                </a>
-              </li>
-            </ul>
+        {isSignedIn() && (
+          <NavDropdown
+            signOut={signOut}
+            router={router}
+            toggleModal={toggleModal}
+          />
+        )}
+        {isSignedIn() && <Nav router={router} />}
+        {!isSignedIn() && (
+          <div className="navbar-nav flex-row order-md-last">
+            <div className="nav-item dropdown me-3">
+              <Link href="/login">
+                <a className="nav-link px-0">Login</a>
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   );

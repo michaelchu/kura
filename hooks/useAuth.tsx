@@ -1,4 +1,10 @@
-import React, { useState, useContext, createContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  useMemo,
+} from "react";
 import {
   ApolloProvider,
   ApolloClient,
@@ -7,37 +13,40 @@ import {
   gql,
 } from "@apollo/client";
 import { useRouter } from "next/router";
+import useStorage from "./useStorage";
 
-const authContext = createContext({});
-
-export function AuthProvider({ children }) {
-  const auth = useProvideAuth();
-
-  return (
-    <authContext.Provider value={auth}>
-      <ApolloProvider client={auth.createApolloClient()}>
-        {children}
-      </ApolloProvider>
-    </authContext.Provider>
-  );
+interface AuthContextType {
+  isSignedIn: () => boolean;
+  loading: boolean;
+  error?: any;
+  signIn: (email: string, password: string) => void;
+  signUp: (email: string, password: string) => void;
+  signOut: () => void;
 }
 
-export const useAuth = () => {
-  return useContext(authContext);
-};
+const authContext = createContext<AuthContextType>({} as AuthContextType);
 
-function useProvideAuth() {
-  const [authToken, setAuthToken] = useState(null);
+export function AuthProvider({ children }) {
+  const router = useRouter();
+  const { getItem, setItem, removeItem } = useStorage();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<any>();
+
+  // If we change page, reset the error state.
+  useEffect(() => {
+    if (error) setError(null);
+  }, [router.pathname]);
 
   const isSignedIn = () => {
-    return !!authToken;
+    // Checks if there is a saved token and it's still valid
+    return !!getItem("token");
   };
 
   const getAuthHeaders = () => {
-    if (!authToken) return null;
+    if (!getItem("token")) return null;
 
     return {
-      authorization: `Bearer ${authToken}`,
+      authorization: `Bearer ${getItem("token")}`,
     };
   };
 
@@ -53,37 +62,83 @@ function useProvideAuth() {
     });
   };
 
-  const signIn = async ({ email, password }) => {
+  const signIn = async (email, password) => {
+    setLoading(true);
+
     const client = createApolloClient();
     const LoginMutation = gql`
-      mutation Login($email: String!, $password: String!) {
+      mutation ($email: String!, $password: String!) {
         login(email: $email, password: $password) {
           token
         }
       }
     `;
 
-    const result = await client.mutate({
-      mutation: LoginMutation,
-      variables: { email, password },
-    });
+    await client
+      .mutate({
+        mutation: LoginMutation,
+        variables: { email, password },
+      })
+      .then((result) => {
+        if (result?.data?.login?.token) {
+          setItem("token", result.data.login.token, "session");
+          router.push("/dashboard");
+        }
+      })
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
+  };
 
-    console.log(result);
+  const signUp = async (email, password) => {
+    setLoading(true);
 
-    if (result?.data?.login?.token) {
-      setAuthToken(result.data.login.token);
-    }
+    const client = createApolloClient();
+    const SignUpMutation = gql`
+      mutation ($email: String!, $password: String!) {
+        signUp(email: $email, password: $password) {
+          email
+          id
+        }
+      }
+    `;
+
+    await client
+      .mutate({
+        mutation: SignUpMutation,
+        variables: { email, password },
+      })
+      .then((_result) => {
+        // consider creating a "sign up" success card/page to direct to and prompt user to login"
+        router.push("/");
+      })
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
   };
 
   const signOut = () => {
-    setAuthToken(null);
+    removeItem("token");
+    router.push("/login");
   };
 
-  return {
-    setAuthToken,
-    isSignedIn,
-    signIn,
-    signOut,
-    createApolloClient,
-  };
+  const memoedValue = useMemo(
+    () => ({
+      loading,
+      error,
+      isSignedIn,
+      signIn,
+      signOut,
+      signUp,
+    }),
+    [isSignedIn, loading, error]
+  );
+
+  return (
+    <authContext.Provider value={memoedValue}>
+      <ApolloProvider client={createApolloClient()}>{children}</ApolloProvider>
+    </authContext.Provider>
+  );
 }
+
+export const useAuth = () => {
+  return useContext(authContext);
+};

@@ -1,16 +1,16 @@
 query FetchTransactions {
   transactions {
     id
-    trading_account_name
-    trading_account_id
-    trade_date
+    tradingAccountName
+    tradingAccountId
+    tradeDate
     symbol
     quantity
     action
     price
     fee
-    total_cost
-    asset_type
+    totalCost
+    assetType
     strategy
   }
   tradingAccounts {

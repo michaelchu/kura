@@ -3,7 +3,7 @@ import accounting from "accounting";
 export const StrategyDetailColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
-    accessor: "trade_date",
+    accessor: "tradeDate",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
@@ -68,7 +68,7 @@ export const StrategyDetailColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Total Cost</div>,
-    accessor: "total_cost",
+    accessor: "totalCost",
     Cell: ({ value }) => {
       if (value < 0) {
         return (
