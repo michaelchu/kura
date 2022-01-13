@@ -1,11 +1,11 @@
 export const StrategyDetailSKColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
-    accessor: "trade_date",
+    accessor: "tradeDate",
   },
   {
     Header: <div style={{ textAlign: "center" }}>Asset Type</div>,
-    accessor: "asset_type",
+    accessor: "assetType",
   },
   {
     Header: <div style={{ textAlign: "center" }}>Action</div>,
@@ -14,18 +14,6 @@ export const StrategyDetailSKColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Quantity</div>,
     accessor: "quantity",
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Expiration</div>,
-    accessor: "expiration",
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Option Type</div>,
-    accessor: "type",
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Strike</div>,
-    accessor: "strike",
   },
   {
     Header: <div style={{ textAlign: "right" }}>Price</div>,
@@ -37,6 +25,6 @@ export const StrategyDetailSKColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Total Cost</div>,
-    accessor: "total_cost",
+    accessor: "totalCost",
   },
 ];

@@ -1,5 +1,5 @@
-mutation AddTransaction($object: transactions_insert_input!) {
-  insert_transactions_one(object: $object) {
+mutation AddTransaction($object: TransactionsInput!) {
+  insertTransactionsOne(object: $object) {
     id
   }
 }

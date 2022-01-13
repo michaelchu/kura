@@ -3,27 +3,13 @@ import accounting from "accounting";
 export const StrategyDetailColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
-    accessor: "trade_date",
+    accessor: "tradeDate",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: <div style={{ textAlign: "center" }}>Asset Type</div>,
-    accessor: "asset_type",
-    Cell: ({ value }) => {
-      if (value == "stock") {
-        return (
-          <div style={{ textAlign: "center" }}>
-            <span className="badge bg-purple-lt">{value}</span>
-          </div>
-        );
-      } else {
-        return (
-          <div style={{ textAlign: "center" }}>
-            <span className="badge bg-azure-lt">{value}</span>
-          </div>
-        );
-      }
-    },
+    Header: <div style={{ textAlign: "center" }}>Symbol</div>,
+    accessor: "symbol",
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Action</div>,
@@ -59,21 +45,6 @@ export const StrategyDetailColumns = [
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: <div style={{ textAlign: "center" }}>Expiration</div>,
-    accessor: "expiration",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Option Type</div>,
-    accessor: "type",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
-  },
-  {
-    Header: <div style={{ textAlign: "center" }}>Strike</div>,
-    accessor: "strike",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
-  },
-  {
     Header: <div style={{ textAlign: "right" }}>Price</div>,
     accessor: "price",
     Cell: ({ value }) => {
@@ -97,7 +68,7 @@ export const StrategyDetailColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Total Cost</div>,
-    accessor: "total_cost",
+    accessor: "totalCost",
     Cell: ({ value }) => {
       if (value < 0) {
         return (

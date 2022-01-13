@@ -3,12 +3,12 @@ import accounting from "accounting";
 export const ClosedPositionColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "name",
+    accessor: "tradingAccountName",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "display",
+    accessor: "symbol",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
@@ -18,22 +18,22 @@ export const ClosedPositionColumns = [
   },
   {
     Header: <div style={{ textAlign: "center" }}>Entry Date</div>,
-    accessor: "entry_date",
+    accessor: "entryDate",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Exit Date</div>,
-    accessor: "exit_date",
+    accessor: "exitDate",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Days in Trade </div>,
-    accessor: "days_in_trade",
+    accessor: "daysInTrade",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "right" }}>Original Cost</div>,
-    accessor: "original_cost",
+    accessor: "entryCost",
     Cell: ({ value }) => {
       if (value < 0) {
         return (
@@ -64,7 +64,7 @@ export const ClosedPositionColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Exit Cost</div>,
-    accessor: "exit_cost",
+    accessor: "exitCost",
     Cell: ({ value }) => {
       if (value < 0) {
         return (
@@ -95,7 +95,7 @@ export const ClosedPositionColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Total Fees</div>,
-    accessor: "total_fees",
+    accessor: "totalFees",
     Cell: ({ value }) => {
       return (
         <div style={{ textAlign: "right" }}>
@@ -106,7 +106,7 @@ export const ClosedPositionColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Realized P/L</div>,
-    accessor: "realized_pnl",
+    accessor: "realizedPnl",
     Cell: ({ value }) => {
       if (value < 0) {
         return (

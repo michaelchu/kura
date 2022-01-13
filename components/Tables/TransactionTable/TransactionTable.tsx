@@ -26,9 +26,7 @@ export default function TransactionTable({
   editModalToggle,
 }) {
   const columns = useMemo(() => cols, [cols]);
-  const dataRows = useMemo(() => data.transaction_costs, [
-    data.transaction_costs,
-  ]);
+  const dataRows = useMemo(() => data.transactions, [data.transactions]);
 
   const {
     getTableProps,

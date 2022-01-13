@@ -1,6 +1,4 @@
-import { useQuery, QueryClient } from "react-query";
-import { GraphQLClient } from "graphql-request";
-import { dehydrate } from "react-query/hydration";
+import { useQuery } from "@apollo/client";
 import Layout from "../../components/Layouts/Layout";
 import STRATEGY_DETAIL from "../../api/queries/StrategyDetail.graphql";
 import { useRouter } from "next/router";
@@ -13,64 +11,44 @@ import _ from "lodash";
 import accounting from "accounting";
 import StatCard from "../../components/Dashboard/StatCard";
 
-interface Params {
-  root: string;
-  strategy: string;
-}
-
-const queryClient = new QueryClient();
-const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
-  headers: {
-    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-  },
-});
-
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { root: "root", strategy: "strategy" } }],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context) {
-  await queryClient.prefetchQuery("strategy_detail", () =>
-    getTrans(context.params)
-  );
-  return {
-    props: { dehydratedState: dehydrate(queryClient) },
-  };
-}
-
-async function getTrans(params) {
-  return graphQLClient.request(STRATEGY_DETAIL, params);
-}
-
 export default function StrategyDetail() {
   const router = useRouter();
   // @ts-ignore
-  const { root, strategy }: Params = router.query;
-  const { data } = useQuery("strategy_detail", () =>
-    getTrans({ root: root, strategy: strategy })
-  );
+  const {
+    root,
+    strategyId,
+  }: {
+    root: string;
+    strategyId: string;
+  } = router.query;
+  const { data, loading, error } = useQuery(STRATEGY_DETAIL, {
+    variables: { root, strategyId },
+  });
+
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
 
   const total_costs = () => {
     return _.round(
-      data.trades.reduce((acc, { total_cost }) => total_cost + acc, 0),
+      data.strategyDetails.reduce(
+        (acc, { totalCost }) => parseFloat(totalCost) + acc,
+        0
+      ),
       2
     );
   };
   const total_fees = () => {
     return _.round(
-      data.trades.reduce((acc, { fee }) => fee + acc, 0),
+      data.strategyDetails.reduce((acc, { fee }) => parseFloat(fee) + acc, 0),
       2
     );
   };
 
   const cost_basis = () => {
     let tc = total_costs();
-    if (strategy == "covered_call") {
-      const total_quantity = data.trades
-        .filter(({ asset_type }) => asset_type == "stock")
+    if (data.strategy.label == "Covered Call") {
+      const total_quantity = data.strategyDetails
+        .filter(({ assetType }) => assetType == "stock")
         .reduce((acc, { quantity }) => quantity + acc, 0);
 
       return _.round(tc / total_quantity, 2);
@@ -78,24 +56,6 @@ export default function StrategyDetail() {
       return tc;
     }
   };
-
-  if (router.isFallback)
-    return (
-      <Layout>
-        <div className="page-body">
-          <div className="row row-cards">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-header">
-                  <h3 className="card-title">Strategy Details</h3>
-                </div>
-                <SkeletonTable columns={StrategyDetailSKColumns} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </Layout>
-    );
 
   return (
     <Layout>
@@ -134,13 +94,13 @@ export default function StrategyDetail() {
               <div className="card-header">
                 <h3 className="card-title">
                   Strategy Details for {root} {"("}
-                  {_.startCase(strategy)}
+                  {data.strategy.label}
                   {")"}
                 </h3>
               </div>
               <GenericReactTable
                 subProps={StrategyDetailColumns}
-                data={data.trades}
+                data={data.strategyDetails}
               />
             </div>
           </div>

@@ -1,54 +1,49 @@
 query Dashboard {
-    open_positions(order_by: {trade_date: desc}) {
-        display
-        strategy
-        strategy_name
-        trade_date
-        days_from_expiration
-        days_to_expiration
-        root
-        symbol
-        expiration
-        type
-        strike
-        avg_price
-        book_cost
-        asset_type
-        name
-        quantity
-        account_id
-    }
-    trades(order_by: {trade_date: desc}, limit: 5) {
-        account_name
-        account_id
-        trade_date
-        display
-        quantity
-        action
-        action_name
-        price
-        fee
-        total_cost
-        asset_type
-        strategy
-        strategy_name
-    }
-    dashboard_stats {
-        avg_pnl
-        total_fees
-        total_pnl
-        win_rate
-    }
-    pnl_comp_chart {
-        cumulated_pnl
-        day
-        exit_date
-        period
-        user_id
-    }
-    pnl_chart {
-        period
-        realized_pnl
-        strategy
-    }
+  openPositions {
+    symbol
+    root
+    assetType
+    strategy
+    strategyId
+    tradeDate
+    expiration
+    strike
+    optionType
+    quantity
+    avgPrice
+    bookCost
+    daysFromExpiration
+    daysToExpiration
+    tradingAccountName
+    tradingAccountId
+  }
+  transactions(limit: 5) {
+    tradingAccountName
+    tradingAccountId
+    tradeDate
+    symbol
+    quantity
+    action
+    price
+    fee
+    totalCost
+    assetType
+    strategy
+  }
+  dashboardStats {
+    avgPnl
+    totalFees
+    totalPnl
+    winRate
+  }
+  pnlCompChart {
+    cumulatedPnl
+    exitDate
+    period
+  }
+  pnlChart {
+    period
+    realizedPnl
+    strategy
+  }
 }

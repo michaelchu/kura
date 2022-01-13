@@ -3,22 +3,22 @@ import accounting from "accounting";
 export const RecentTransColumns = [
   {
     Header: <div style={{ textAlign: "center" }}>Trade Date</div>,
-    accessor: "trade_date",
+    accessor: "tradeDate",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "account_name",
+    accessor: "tradingAccountName",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
-    accessor: "display",
+    accessor: "symbol",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
     Header: <div style={{ textAlign: "center" }}>Strategy</div>,
-    accessor: "strategy_name",
+    accessor: "strategy",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
@@ -75,7 +75,7 @@ export const RecentTransColumns = [
   },
   {
     Header: <div style={{ textAlign: "right" }}>Total Cost</div>,
-    accessor: "total_cost",
+    accessor: "totalCost",
     Cell: ({ value }) => {
       return (
         <div style={{ textAlign: "right" }}>

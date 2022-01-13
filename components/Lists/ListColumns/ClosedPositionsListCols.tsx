@@ -2,7 +2,7 @@ import accounting from "accounting";
 
 export const ClosedPositionsListCols = [
   {
-    top: { accessor: "display" },
+    top: { accessor: "symbol" },
     bottom: {
       accessor: "strategy",
     },
