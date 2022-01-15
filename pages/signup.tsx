@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import { IconEye } from "@tabler/icons";
-import { useAuth } from "../hooks/useAuth";
+import { useRouter } from "next/router";
+import { gql, useMutation } from "@apollo/client";
 import Link from "next/link";
+import useStorage from "../hooks/useStorage";
 
 export default function SignUp() {
-  const { signUp, loading, error } = useAuth();
+  const SignUpMutation = gql`
+    mutation ($email: String!, $password: String!) {
+      signUp(email: $email, password: $password) {
+        token
+      }
+    }
+  `;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setItem } = useStorage();
+  const router = useRouter()
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    signUp(email, password);
-  };
+  const [signUp, { loading, error }] = useMutation(SignUpMutation, {
+    variables: { email, password },
+    onCompleted: ({ signUp }) => {
+      setItem("token", signUp.token, "session");
+      router.push("/dashboard");
+    },
+    onError: (_error) => {}
+  });
 
   return (
     <div className="antialiased border-top-wide border-primary d-flex flex-column">
@@ -22,11 +36,7 @@ export default function SignUp() {
               <img src="./static/logo.svg" height="36" alt="" />
             </a>
           </div>
-          <form
-            className="card card-md"
-            method="get"
-            onSubmit={(e) => onSubmit(e)}
-          >
+          <div className="card card-md">
             <div className="card-body">
               <h2 className="card-title text-center mb-4">
                 Create new account
@@ -35,7 +45,7 @@ export default function SignUp() {
                 <label className="form-label">Email address</label>
                 <input
                   type="email"
-                  className="form-control"
+                  className={error ? "form-control is-invalid" : "form-control"}
                   placeholder="Enter email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -45,7 +55,9 @@ export default function SignUp() {
                 <div className="input-group input-group-flat">
                   <input
                     type="password"
-                    className="form-control"
+                    className={
+                      error ? "form-control is-invalid" : "form-control"
+                    }
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -53,7 +65,7 @@ export default function SignUp() {
               </div>
               {error && (
                 <div className="text-danger mb-3">
-                  There was an error creating your account.
+                  Oops! User already exist!
                 </div>
               )}
               <div className="mb-3">
@@ -73,12 +85,13 @@ export default function SignUp() {
                   type="submit"
                   className="btn btn-primary w-100"
                   disabled={loading}
+                  onClick={() => signUp()}
                 >
                   Create new account
                 </button>
               </div>
             </div>
-          </form>
+          </div>
           <div className="text-center text-muted mt-3">
             Already have account?{" "}
             <Link href="/login">

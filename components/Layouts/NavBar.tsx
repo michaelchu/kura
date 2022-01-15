@@ -1,13 +1,15 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "../../hooks/useAuth";
+import useSession from "../../hooks/useSession";
+import useStorage from "../../hooks/useStorage";
 import NavDropdown from "./NavDropdown";
 import Nav from "./Nav";
 import Link from "next/link";
 
 export default function NavBar({ toggleModal }) {
   const router = useRouter();
-  const { signOut, isSignedIn } = useAuth();
+  const { isSignedIn } = useSession();
+  const { getItem, removeItem } = useStorage();
 
   return (
     <header className="navbar navbar-expand-md navbar-dark sticky-top d-print-none">
@@ -35,7 +37,10 @@ export default function NavBar({ toggleModal }) {
         </h1>
         {isSignedIn() && (
           <NavDropdown
-            signOut={signOut}
+            signOut={() => {
+              removeItem("token");
+              router.push("/login");
+            }}
             router={router}
             toggleModal={toggleModal}
           />

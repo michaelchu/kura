@@ -1,20 +1,30 @@
 import React, { useState } from "react";
 import { IconEye } from "@tabler/icons";
-import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { gql, useMutation } from "@apollo/client";
+import useStorage from "../hooks/useStorage";
 
 export default function Login() {
+  const LoginMutation = gql`
+    mutation ($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        token
+      }
+    }
+  `;
+
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const { signIn, loading, error } = useAuth();
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    signIn(email, password);
-  };
+  const { setItem } = useStorage();
+  const [login, { loading, error }] = useMutation(LoginMutation, {
+    variables: { email, password },
+    onCompleted: ({ login }) => {
+      setItem("token", login.token, "session");
+      router.push("/dashboard");
+    },
+  });
 
   return (
     <div className="antialiased border-top-wide border-primary d-flex flex-column">
@@ -25,11 +35,7 @@ export default function Login() {
               <img src="./static/logo.svg" height="36" alt="" />
             </a>
           </div>
-          <form
-            className="card card-md"
-            method="get"
-            onSubmit={(e) => onSubmit(e)}
-          >
+          <div className="card card-md">
             <div className="card-body">
               <h2 className="card-title text-center mb-4">
                 Login to your account
@@ -79,12 +85,13 @@ export default function Login() {
                   type="submit"
                   className="btn btn-primary w-100"
                   disabled={loading}
+                  onClick={() => login()}
                 >
                   Sign in
                 </button>
               </div>
             </div>
-          </form>
+          </div>
           <div className="text-center text-muted mt-3">
             Don't have account yet?{" "}
             <Link href="/signup">
