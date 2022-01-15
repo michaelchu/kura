@@ -13,6 +13,7 @@ import {
   gql,
 } from "@apollo/client";
 import { useRouter } from "next/router";
+import useStorage from "./useStorage";
 
 interface AuthContextType {
   isSignedIn: () => boolean;
@@ -27,7 +28,7 @@ const authContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }) {
   const router = useRouter();
-  const [authToken, setAuthToken] = useState<any>(null);
+  const { getItem, setItem, removeItem } = useStorage();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>();
 
@@ -37,14 +38,15 @@ export function AuthProvider({ children }) {
   }, [router.pathname]);
 
   const isSignedIn = () => {
-    return !!authToken;
+    // Checks if there is a saved token and it's still valid
+    return !!getItem("token");
   };
 
   const getAuthHeaders = () => {
-    if (!authToken) return null;
+    if (!getItem("token")) return null;
 
     return {
-      authorization: `Bearer ${authToken}`,
+      authorization: `Bearer ${getItem("token")}`,
     };
   };
 
@@ -79,7 +81,7 @@ export function AuthProvider({ children }) {
       })
       .then((result) => {
         if (result?.data?.login?.token) {
-          setAuthToken(result.data.login.token);
+          setItem("token", result.data.login.token, "session");
           router.push("/dashboard");
         }
       })
@@ -114,9 +116,8 @@ export function AuthProvider({ children }) {
   };
 
   const signOut = () => {
-    //TODO: Call the logout endpoint to remove the auth token on the server side
-    setAuthToken(null);
-    router.push("/");
+    removeItem("token");
+    router.push("/login");
   };
 
   const memoedValue = useMemo(
