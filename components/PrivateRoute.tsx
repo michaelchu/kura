@@ -4,20 +4,20 @@ import useSession from "../hooks/useSession";
 
 export default function PrivateRoute({ protectedRoutes, children }) {
   const router = useRouter();
-  const { isSignedIn } = useSession();
+  const isSignedIn = useSession();
 
   const pathIsProtected = protectedRoutes.indexOf(router.pathname) !== -1;
 
   useEffect(() => {
-    if (!isSignedIn() && pathIsProtected) {
+    if (!isSignedIn && pathIsProtected) {
       router.push({
         pathname: "/login",
         query: { from: router.pathname },
       });
     }
-  }, [isSignedIn(), pathIsProtected]);
+  }, [isSignedIn, pathIsProtected]);
 
-  if (!isSignedIn() && pathIsProtected) {
+  if (!isSignedIn && pathIsProtected) {
     return "Loading...";
   }
 

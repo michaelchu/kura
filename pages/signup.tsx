@@ -32,9 +32,7 @@ export default function SignUp() {
       <div className="page page-center login-dark">
         <div className="container-tight py-4">
           <div className="text-center mb-4">
-            <a href=".">
-              <img src="/logo-dark.png" height="36" alt="" />
-            </a>
+            <img src="/logo-dark.png" height="36" alt="" />
           </div>
           <div className="card card-md">
             <div className="card-body">

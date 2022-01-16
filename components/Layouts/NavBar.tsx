@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function NavBar({ toggleModal }) {
   const router = useRouter();
-  const { isSignedIn } = useSession();
+  const isSignedIn = useSession();
   const { getItem, removeItem } = useStorage();
 
   return (
@@ -35,7 +35,7 @@ export default function NavBar({ toggleModal }) {
             </a>
           </Link>
         </h1>
-        {isSignedIn() && (
+        {isSignedIn && (
           <NavDropdown
             signOut={() => {
               removeItem("token");
@@ -45,8 +45,8 @@ export default function NavBar({ toggleModal }) {
             toggleModal={toggleModal}
           />
         )}
-        {isSignedIn() && <Nav router={router} />}
-        {!isSignedIn() && (
+        {isSignedIn && <Nav router={router} />}
+        {!isSignedIn && (
           <div className="navbar-nav flex-row order-md-last">
             <div className="nav-item dropdown me-3">
               <Link href="/login">

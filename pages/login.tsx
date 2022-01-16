@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { gql, useMutation } from "@apollo/client";
 import useStorage from "../hooks/useStorage";
+import useSession from "../hooks/useSession";
 
 export default function Login() {
   const LoginMutation = gql`
@@ -15,6 +16,7 @@ export default function Login() {
   `;
 
   const router = useRouter();
+  const isSignedIn = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setItem, getItem } = useStorage();
@@ -33,7 +35,7 @@ export default function Login() {
 
   useEffect(() => {
     // redirect to dashboard if already logged in
-    if (getItem("token")) {
+    if (isSignedIn) {
       router.push("/dashboard");
     }
   }, []);
@@ -43,9 +45,7 @@ export default function Login() {
       <div className="page page-center login-dark">
         <div className="container-tight py-4">
           <div className="text-center mb-4">
-            <a href=".">
-              <img src="/logo-dark.png" height="36" alt="" />
-            </a>
+            <img src="/logo-dark.png" height="36" alt="" />
           </div>
           <div className="card card-md">
             <div className="card-body">
