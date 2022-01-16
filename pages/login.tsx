@@ -40,18 +40,19 @@ export default function Login() {
 
   return (
     <div className="antialiased border-top-wide border-primary d-flex flex-column">
-      <div className="page page-center">
+      <div className="page page-center login-dark">
         <div className="container-tight py-4">
           <div className="text-center mb-4">
             <a href=".">
-              <img src="./static/logo.svg" height="36" alt="" />
+              <img src="/logo-dark.png" height="36" alt="" />
             </a>
           </div>
           <div className="card card-md">
             <div className="card-body">
-              <h2 className="card-title text-center mb-4">
-                Login to your account
-              </h2>
+              <h1 className="text-center mb-4">Welcome Back</h1>
+              <div className="card-subtitle text-center">
+                Enter your credentials to access your account.
+              </div>
               <div className="mb-3">
                 <label className="form-label">Email address</label>
                 <input
@@ -65,7 +66,7 @@ export default function Login() {
                 <label className="form-label">
                   Password
                   <span className="form-label-description">
-                    <a href="/forgot-password">I forgot password</a>
+                    <a href="/forgot-password">Forgot your password?</a>
                   </span>
                 </label>
                 <div className="input-group input-group-flat">
@@ -93,14 +94,14 @@ export default function Login() {
                 >
                   Sign in
                 </button>
+                <div className="text-center text-muted mt-3">
+                  Don't have account yet?{" "}
+                  <Link href="/signup">
+                    <a>Sign up</a>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="text-center text-muted mt-3">
-            Don't have account yet?{" "}
-            <Link href="/signup">
-              <a>Sign up</a>
-            </Link>
           </div>
         </div>
       </div>

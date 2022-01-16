@@ -29,18 +29,16 @@ export default function SignUp() {
 
   return (
     <div className="antialiased border-top-wide border-primary d-flex flex-column">
-      <div className="page page-center">
+      <div className="page page-center login-dark">
         <div className="container-tight py-4">
           <div className="text-center mb-4">
             <a href=".">
-              <img src="./static/logo.svg" height="36" alt="" />
+              <img src="/logo-dark.png" height="36" alt="" />
             </a>
           </div>
           <div className="card card-md">
             <div className="card-body">
-              <h2 className="card-title text-center mb-4">
-                Create new account
-              </h2>
+              <h1 className="text-center mb-4">Create your free account</h1>
               <div className="mb-3">
                 <label className="form-label">Email address</label>
                 <input
@@ -72,7 +70,7 @@ export default function SignUp() {
                 <label className="form-check">
                   <input type="checkbox" className="form-check-input" />
                   <span className="form-check-label">
-                    Agree the{" "}
+                    I agree to the{" "}
                     <a href="./terms-of-service.html" tabIndex={-1}>
                       terms and policy
                     </a>
@@ -89,14 +87,14 @@ export default function SignUp() {
                 >
                   Create new account
                 </button>
+                <div className="text-center text-muted mt-3">
+                  Already have account?{" "}
+                  <Link href="/login">
+                    <a>Sign in</a>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="text-center text-muted mt-3">
-            Already have account?{" "}
-            <Link href="/login">
-              <a>Sign in</a>
-            </Link>
           </div>
         </div>
       </div>
