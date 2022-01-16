@@ -12,6 +12,7 @@ import { ClosedPositionsListCols } from "../components/Lists/ListColumns/ClosedP
 
 export default function ClosedPositions() {
   const { data, loading, error } = useQuery(CLOSED_POSITIONS);
+
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 

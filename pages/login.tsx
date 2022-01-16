@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IconEye } from "@tabler/icons";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setItem } = useStorage();
+  const { setItem, getItem } = useStorage();
   const [login, { loading, error }] = useMutation(LoginMutation, {
     variables: { email, password },
     onCompleted: ({ login }) => {
@@ -25,6 +25,13 @@ export default function Login() {
       router.push("/dashboard");
     },
   });
+
+  useEffect(() => {
+    // redirect to dashboard if already logged in
+    if (getItem("token")) {
+      router.push("/dashboard");
+    }
+  }, []);
 
   return (
     <div className="antialiased border-top-wide border-primary d-flex flex-column">

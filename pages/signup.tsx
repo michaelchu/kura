@@ -16,7 +16,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setItem } = useStorage();
-  const router = useRouter()
+  const router = useRouter();
 
   const [signUp, { loading, error }] = useMutation(SignUpMutation, {
     variables: { email, password },
@@ -24,7 +24,7 @@ export default function SignUp() {
       setItem("token", signUp.token, "session");
       router.push("/dashboard");
     },
-    onError: (_error) => {}
+    onError: (_error) => {},
   });
 
   return (

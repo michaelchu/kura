@@ -23,7 +23,9 @@ export default function TransactionDetailsModal({ row, show, handleClose }) {
           <div className={"col-6 text-muted"}>
             <h4>Account</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.tradingAccountName}</div>
+          <div className={"col-6 text-body text-end"}>
+            {row.tradingAccountName}
+          </div>
 
           <div className={"col-6 text-muted"}>
             <h4>Trade Date</h4>

@@ -6,10 +6,14 @@ import {
   InMemoryCache,
   HttpLink,
 } from "@apollo/client";
+import PrivateRoute from "../components/PrivateRoute";
 import useStorage from "../hooks/useStorage";
 import "../styles.css";
 
 export default function App({ Component, pageProps }: AppProps) {
+  // Add your protected routes here
+  const protectedRoutes = ["/dashboard", "/closed-positions", "/transactions"];
+
   const { getItem } = useStorage();
 
   const createApolloClient = () => {
@@ -27,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
   };
   return (
     <ApolloProvider client={createApolloClient()}>
-      <Component {...pageProps} />
+      <PrivateRoute protectedRoutes={protectedRoutes}>
+        <Component {...pageProps} />
+      </PrivateRoute>
     </ApolloProvider>
   );
 }
