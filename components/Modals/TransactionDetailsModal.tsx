@@ -23,24 +23,24 @@ export default function TransactionDetailsModal({ row, show, handleClose }) {
           <div className={"col-6 text-muted"}>
             <h4>Account</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.account_name}</div>
+          <div className={"col-6 text-body text-end"}>{row.tradingAccountName}</div>
 
           <div className={"col-6 text-muted"}>
             <h4>Trade Date</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.trade_date}</div>
+          <div className={"col-6 text-body text-end"}>{row.tradeDate}</div>
 
           <div className={"col-6 text-muted"}>
             <h4>Strategy</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.strategy_name}</div>
+          <div className={"col-6 text-body text-end"}>{row.strategy}</div>
           <div className={"hr"} />
 
           <div className={"col-6 text-muted"}>
             <h4>Action</h4>
           </div>
           <div className={"col-6 text-body text-end"}>
-            {includeBadge(row.action, row.action_name)}
+            {includeBadge(row.action, row.action)}
           </div>
 
           <div className={"col-6 text-muted"}>
@@ -66,7 +66,7 @@ export default function TransactionDetailsModal({ row, show, handleClose }) {
             <h4>Total Cost</h4>
           </div>
           <div className={"col-6 text-body text-end"}>
-            {accounting.formatMoney(row.total_cost)}
+            {accounting.formatMoney(row.totalCost)}
           </div>
         </div>
       </Modal.Body>

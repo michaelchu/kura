@@ -72,14 +72,6 @@ export default function Login() {
                   Oops! The email/password you entered is incorrect.
                 </div>
               )}
-              <div className="mb-2">
-                <label className="form-check">
-                  <input type="checkbox" className="form-check-input" />
-                  <span className="form-check-label">
-                    Remember me on this device
-                  </span>
-                </label>
-              </div>
               <div className="form-footer">
                 <button
                   type="submit"

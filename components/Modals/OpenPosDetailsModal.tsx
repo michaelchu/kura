@@ -13,17 +13,17 @@ export default function OpenPosDetailsModal({ row, show, handleClose }) {
           <div className={"col-6 text-muted"}>
             <h4>Account</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.name}</div>
+          <div className={"col-6 text-body text-end"}>{row.tradingAccountName}</div>
 
           <div className={"col-6 text-muted"}>
             <h4>Trade Date</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.trade_date}</div>
+          <div className={"col-6 text-body text-end"}>{row.tradeDate}</div>
 
           <div className={"col-6 text-muted"}>
             <h4>Strategy</h4>
           </div>
-          <div className={"col-6 text-body text-end"}>{row.strategy_name}</div>
+          <div className={"col-6 text-body text-end"}>{row.strategy}</div>
           <div className={"hr"} />
 
           <div className={"col-6 text-muted"}>
@@ -35,14 +35,14 @@ export default function OpenPosDetailsModal({ row, show, handleClose }) {
             <h4>Price</h4>
           </div>
           <div className={"col-6 text-body text-end"}>
-            {accounting.formatMoney(row.avg_price)}
+            {accounting.formatMoney(row.avgPrice)}
           </div>
 
           <div className={"col-6 text-muted"}>
             <h4>Book Cost</h4>
           </div>
           <div className={"col-6 text-body text-end"}>
-            {accounting.formatMoney(row.book_cost)}
+            {accounting.formatMoney(row.bookCost)}
           </div>
         </div>
         {row.asset_type == "option" ? (

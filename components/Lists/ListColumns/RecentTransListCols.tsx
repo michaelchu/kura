@@ -10,11 +10,11 @@ export const RecentTransListCols = [
   },
   {
     top: {
-      accessor: "total_cost",
+      accessor: "totalCost",
       Cell: ({ value }) => accounting.formatMoney(value),
     },
     bottom: {
-      accessor: "trade_date",
+      accessor: "tradeDate",
     },
     width: "col-4",
   },
