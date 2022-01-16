@@ -22,7 +22,12 @@ export default function Login() {
     variables: { email, password },
     onCompleted: ({ login }) => {
       setItem("token", login.token, "session");
-      router.push("/dashboard");
+
+      if (router.query?.from) {
+        router.push(router.query.from as string);
+      } else {
+        router.push("/dashboard");
+      }
     },
   });
 

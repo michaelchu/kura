@@ -10,7 +10,10 @@ export default function PrivateRoute({ protectedRoutes, children }) {
 
   useEffect(() => {
     if (!isSignedIn() && pathIsProtected) {
-      router.push("/login");
+      router.push({
+        pathname: "/login",
+        query: { from: router.pathname },
+      });
     }
   }, [isSignedIn(), pathIsProtected]);
 
