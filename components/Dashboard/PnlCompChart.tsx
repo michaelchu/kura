@@ -6,7 +6,7 @@ export default function PnlCompChart(props) {
 
   const formatted_series = Object.entries(series).map(([key, rows]) => {
     const legend = _.capitalize(_.startCase(key).toLowerCase());
-    const data = rows.map(({ cumulated_pnl }) => cumulated_pnl * -1);
+    const data = rows.map(({ cumulatedPnl }) => cumulatedPnl * -1);
     return { name: legend, data };
   });
 

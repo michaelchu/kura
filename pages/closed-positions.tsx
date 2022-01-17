@@ -38,8 +38,8 @@ export default function ClosedPositions() {
             <ListGroup
               title={"Closed Positions"}
               data={data.closedPositions}
-              groupFunc={({ exit_date }) => {
-                return dayjs(exit_date).format("MMM YYYY");
+              groupFunc={({ exitDate }) => {
+                return dayjs(exitDate).format("MMM YYYY");
               }}
               columns={ClosedPositionsListCols}
             />

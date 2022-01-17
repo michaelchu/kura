@@ -30,7 +30,7 @@ export default function PnlChart(props) {
 
   const series = Object.entries(series_new).map(
     ([key, value]: [string, any[]]) => {
-      const values = value.map(({ realized_pnl }) => realized_pnl * -1);
+      const values = value.map(({ realizedPnl }) => realizedPnl * -1);
       return { name: key, data: values };
     }
   );

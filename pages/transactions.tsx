@@ -77,8 +77,8 @@ export default function Transactions() {
             <ListGroup
               title={"Transactions"}
               data={data.transactions}
-              groupFunc={({ trade_date }) => {
-                return dayjs(trade_date).format("MMM YYYY");
+              groupFunc={({ tradeDate }) => {
+                return dayjs(tradeDate).format("MMM YYYY");
               }}
               columns={TransactionsListCols}
             />

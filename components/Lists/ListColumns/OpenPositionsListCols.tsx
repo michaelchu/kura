@@ -14,7 +14,7 @@ export const OpenPositionsListCols = [
       Cell: ({ value }) => accounting.formatMoney(value),
     },
     bottom: {
-      accessor: "trade_date",
+      accessor: "tradeDate",
     },
     width: "col-4",
   },

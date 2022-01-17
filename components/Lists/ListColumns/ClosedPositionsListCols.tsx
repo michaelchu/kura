@@ -10,7 +10,7 @@ export const ClosedPositionsListCols = [
   },
   {
     top: {
-      accessor: "realized_pnl",
+      accessor: "realizedPnl",
       Cell: ({ value }) => (
         <span className={value < 0 ? "text-success" : "text-danger"}>
           {value < 0
@@ -20,7 +20,7 @@ export const ClosedPositionsListCols = [
       ),
     },
     bottom: {
-      accessor: "exit_date",
+      accessor: "exitDate",
       Cell: ({ value }) => <small>{value}</small>,
     },
     width: "col-6",
