@@ -16,8 +16,8 @@ export default function ClosedPositions() {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  const grouped_positions = _.groupBy(data.closedPositions, ({ exit_date }) => {
-    return dayjs(exit_date).format("MMM YYYY");
+  const grouped_positions = _.groupBy(data.closedPositions, ({ exitDate }) => {
+    return dayjs(exitDate).format("MMM YYYY");
   });
 
   return (

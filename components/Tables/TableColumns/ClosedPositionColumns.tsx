@@ -118,7 +118,7 @@ export const ClosedPositionColumns = [
         );
       } else if (value > 0) {
         return (
-          <div style={{ textAlign: "left" }}>
+          <div style={{ textAlign: "right" }}>
             <span className={"text-danger"}>
               {accounting.formatMoney(value * -1)}
             </span>
