@@ -1,36 +1,141 @@
 # This file was generated based on ".graphqlconfig". Do not edit manually.
 
 schema {
-  query: RootQueryType
-  mutation: RootMutationType
+    query: RootQueryType
+    mutation: RootMutationType
+}
+
+type ClosedPosition {
+    daysInTrade: Int
+    entryCost: Decimal
+    entryDate: Date
+    exitCost: Decimal
+    exitDate: Date
+    realizedPnl: Decimal
+    strategy: String
+    symbol: String
+    totalFees: Decimal
+    tradingAccountId: String
+    tradingAccountName: String
+}
+
+type DashboardStats {
+    avgPnl: Decimal
+    totalFees: Decimal
+    totalPnl: Decimal
+    winRate: Decimal
+}
+
+type OpenPosition {
+    assetType: String
+    avgPrice: Decimal
+    bookCost: Decimal
+    daysFromExpiration: Int
+    daysToExpiration: Int
+    expiration: Date
+    optionType: String
+    quantity: Int
+    root: String
+    strategy: String
+    strategyId: String
+    strike: Decimal
+    symbol: String
+    tradeDate: Date
+    tradingAccountId: String
+    tradingAccountName: String
+}
+
+type PnlCompData {
+    cumulatedPnl: Decimal
+    exitDate: Date
+    period: String
+}
+
+type PnlData {
+    period: String
+    realizedPnl: Decimal
+    strategy: String
 }
 
 type RootMutationType {
-  "login with the params"
-  login(email: String!, password: String!): Session
-  "Create a user"
-  signUp(email: String!, password: String!): User
+    deleteTransactionByPk(id: ID!): Transaction
+    insertTransactionsOne(object: TransactionsInput!): Transaction
+    login(email: String!, password: String!): Session
+    signUp(email: String!, password: String!): Session
+    updateTransactionByPk(id: ID!, object: TransactionsInput!): Transaction
 }
 
 type RootQueryType {
-  tradingAccounts(userId: ID!): [TradingAccount]
+    closedPositions: [ClosedPosition]
+    dashboardStats: DashboardStats
+    openPositions: [OpenPosition]
+    pnlChart: [PnlData]
+    pnlCompChart: [PnlCompData]
+    strategy(strategyId: String!): Strategy
+    strategyDetails(root: String!, strategyId: String!): [Transaction]
+    tradingAccounts: [TradingAccount]
+    transactions(limit: Int): [Transaction]
 }
 
 "session value"
 type Session {
-  token: String
-  user: User
+    token: String
+}
+
+type Strategy {
+    id: String
+    label: String
+    legs: Int
 }
 
 type TradingAccount {
-  currency: String!
-  id: ID!
-  name: String!
-  userId: ID!
+    currency: String!
+    id: ID!
+    name: String!
 }
 
-"A user"
-type User {
-  email: String
-  id: ID
+type Transaction {
+    action: String
+    assetType: String
+    fee: Decimal
+    id: String
+    price: Decimal
+    quantity: Int
+    strategy: String
+    strategyId: String
+    symbol: String
+    totalCost: Decimal
+    tradeDate: String
+    tradingAccountId: String
+    tradingAccountName: String
+}
+
+"""
+
+The `Date` scalar type represents a date. The Date appears in a JSON
+response as an ISO8601 formatted string, without a time component.
+"""
+scalar Date
+
+"""
+
+The `Decimal` scalar type represents signed double-precision fractional
+values parsed by the `Decimal` library.  The Decimal appears in a JSON
+response as a string to preserve precision.
+"""
+scalar Decimal
+
+input TransactionsInput {
+    action: String!
+    assetType: String!
+    expiration: Date
+    fee: Decimal!
+    optionType: String
+    price: Decimal!
+    quantity: Int!
+    strategyId: String!
+    strike: Decimal
+    symbol: String!
+    tradeDate: Date!
+    tradingAccountId: String!
 }

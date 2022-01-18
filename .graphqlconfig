@@ -7,7 +7,7 @@
         "url": "http://localhost:4000/api",
         "headers": {
           "user-agent": "JS GraphQL",
-          "x-hasura-admin-secret": "ou44uOYcPnw6olMayMD8PFsGmM6v2QkYlYMQYDLxhsAQvGSjp53oQK4mgJlObQR3"
+          "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJrdXJhIiwiZXhwIjoxNjQyNzI5NjUwLCJpYXQiOjE2NDI0NzA0NTAsImlzcyI6Imt1cmEiLCJqdGkiOiI0YjEwMGYwYi1mMWFlLTRkMzYtYjM3Ny02MDA4MWFjZjk5ZjgiLCJuYmYiOjE2NDI0NzA0NDksInN1YiI6Ijg1ZDdhY2I5LWNlMGMtNGYzMy04ZjAxLWIyZmM4NGNlODVlZSIsInR5cCI6ImFjY2VzcyJ9.y8twFe5wrl2u04igsSvU61NHPYN9KFnIikPATt1FP3r7D4CUOBbsVPJbOUAQf_hICI5VpnqfgKL3-7Vx7czv8A"
         },
         "introspect": false
       }
