@@ -13,6 +13,7 @@ query StrategyDetail($root: String!, $strategyId: String!) {
     tradeDate
   }
   strategy(strategyId: $strategyId) {
+    id
     label
   }
 }

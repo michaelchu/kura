@@ -46,7 +46,7 @@ export default function StrategyDetail() {
 
   const cost_basis = () => {
     let tc = total_costs();
-    if (data.strategy.label == "Covered Call") {
+    if (data.strategy.id == "covered-stock") {
       const total_quantity = data.strategyDetails
         .filter(({ assetType }) => assetType == "stock")
         .reduce((acc, { quantity }) => quantity + acc, 0);
@@ -82,13 +82,6 @@ export default function StrategyDetail() {
               pct_chg={4.34}
             />
           </div>
-          {/*<div className="col-12">*/}
-          {/*  <div className="card">*/}
-          {/*    <div className="card-body">*/}
-          {/*      <MonthlyIncomeProgress />*/}
-          {/*    </div>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
           <div className="col-12">
             <div className="card">
               <div className="card-header">

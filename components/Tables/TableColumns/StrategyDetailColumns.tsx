@@ -7,6 +7,11 @@ export const StrategyDetailColumns = [
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
+    Header: <div style={{ textAlign: "center" }}>Account</div>,
+    accessor: "tradingAccountName",
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
+  },
+  {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
     accessor: "symbol",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
