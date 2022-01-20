@@ -16,6 +16,7 @@ export default function PnlCompChart(props) {
         <h3 className="card-title">Month Over Month Performance</h3>
         <props.chart
           options={{
+            colors: ["#264653", "#2a9d8f"],
             chart: {
               animations: {
                 enabled: false,
@@ -26,6 +27,10 @@ export default function PnlCompChart(props) {
               fontFamily: "Rubik, Helvetica, Arial, sans-serif",
             },
             dataLabels: { enabled: false },
+            stroke: {
+              width: [0, 3, 6],
+              curve: "smooth",
+            },
             xaxis: {
               labels: { show: true, rotate: 0 },
               tickAmount: 4,
@@ -35,7 +40,6 @@ export default function PnlCompChart(props) {
                 text: "Realized P/L",
               },
             },
-            colors: ["rgba(128,143,168,0.64)", "rgba(64,175,83,0.87)"],
           }}
           series={formatted_series}
           type={"area"}
