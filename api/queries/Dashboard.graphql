@@ -42,8 +42,10 @@ query Dashboard {
     period
   }
   pnlChart {
-    period
-    realizedPnl
-    strategy
+    series {
+      name
+      data
+    }
+    categories
   }
 }

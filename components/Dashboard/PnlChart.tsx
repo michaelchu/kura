@@ -2,38 +2,10 @@ import React from "react";
 import _ from "lodash";
 
 export default function PnlChart(props) {
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  const monthNumToName = (num) => {
-    return months[num - 1] || "";
-  };
-
-  // @ts-ignore
-  const categories = _.uniqBy(props.data, "period").map(({ period }) =>
-    monthNumToName(period)
-  );
-
-  const series_new = _.groupBy(props.data, "strategy");
-
-  const series = Object.entries(series_new).map(
-    ([key, value]: [string, any[]]) => {
-      const values = value.map(({ realizedPnl }) => realizedPnl * -1);
-      return { name: key, data: values };
-    }
-  );
+  const series = _.map(props.data.series, ({ name, data }) => {
+    const inverted_data = _.map(data, (val) => val * -1);
+    return { name, data: inverted_data };
+  });
 
   const options = {
     chart: {
@@ -55,7 +27,7 @@ export default function PnlChart(props) {
       },
     },
     xaxis: {
-      categories: categories,
+      categories: props.data.categories,
     },
     yaxis: {
       title: {
