@@ -21,6 +21,7 @@ type ClosedPosition {
 
 type DashboardStats {
     avgPnl: Decimal
+    monthlyPnl: Decimal
     totalFees: Decimal
     totalPnl: Decimal
     winRate: Decimal
