@@ -26,6 +26,11 @@ type DashboardStats {
     winRate: Decimal
 }
 
+type Data {
+    data: [Decimal]
+    name: String
+}
+
 type OpenPosition {
     assetType: String
     avgPrice: Decimal
@@ -52,9 +57,8 @@ type PnlCompData {
 }
 
 type PnlData {
-    period: String
-    realizedPnl: Decimal
-    strategy: String
+    categories: [String]
+    series: [Data]
 }
 
 type RootMutationType {
@@ -63,13 +67,14 @@ type RootMutationType {
     login(email: String!, password: String!): Session
     signUp(email: String!, password: String!): Session
     updateTransactionByPk(id: ID!, object: TransactionsInput!): Transaction
+    uploadFile(accountId: ID!, file: Upload!): String
 }
 
 type RootQueryType {
     closedPositions: [ClosedPosition]
     dashboardStats: DashboardStats
     openPositions: [OpenPosition]
-    pnlChart: [PnlData]
+    pnlChart: PnlData
     pnlCompChart: [PnlCompData]
     strategy(strategyId: String!): Strategy
     strategyDetails(root: String!, strategyId: String!): [Transaction]
@@ -124,6 +129,9 @@ values parsed by the `Decimal` library.  The Decimal appears in a JSON
 response as a string to preserve precision.
 """
 scalar Decimal
+
+"Represents an uploaded file."
+scalar Upload
 
 input TransactionsInput {
     action: String!
