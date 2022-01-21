@@ -2,11 +2,6 @@ import accounting from "accounting";
 
 export const ClosedPositionColumns = [
   {
-    Header: <div style={{ textAlign: "center" }}>Account</div>,
-    accessor: "tradingAccountName",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
-  },
-  {
     Header: <div style={{ textAlign: "center" }}>Symbol</div>,
     accessor: "symbol",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
@@ -32,7 +27,7 @@ export const ClosedPositionColumns = [
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
   },
   {
-    Header: <div style={{ textAlign: "right" }}>Original Cost</div>,
+    Header: <div style={{ textAlign: "right" }}>Entry Cost</div>,
     accessor: "entryCost",
     Cell: ({ value }) => {
       if (value < 0) {
@@ -91,17 +86,6 @@ export const ClosedPositionColumns = [
           </div>
         );
       }
-    },
-  },
-  {
-    Header: <div style={{ textAlign: "right" }}>Total Fees</div>,
-    accessor: "totalFees",
-    Cell: ({ value }) => {
-      return (
-        <div style={{ textAlign: "right" }}>
-          <span>{accounting.formatMoney(value)}</span>
-        </div>
-      );
     },
   },
   {

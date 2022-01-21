@@ -63,17 +63,6 @@ export const RecentTransColumns = [
     },
   },
   {
-    Header: <div style={{ textAlign: "right" }}>Fee</div>,
-    accessor: "fee",
-    Cell: ({ value }) => {
-      return (
-        <div style={{ textAlign: "right" }}>
-          <span>{accounting.formatMoney(value)}</span>
-        </div>
-      );
-    },
-  },
-  {
     Header: <div style={{ textAlign: "right" }}>Total Cost</div>,
     accessor: "totalCost",
     Cell: ({ value }) => {
