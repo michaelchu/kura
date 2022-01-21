@@ -6,10 +6,10 @@ import React from "react";
 export default function DashboardChart({ chart, data }) {
   return (
     <>
-      <div className="col-12 col-sm-6 d-none d-sm-block">
+      <div className="col-12 col-sm-6 d-none d-md-block">
         <PnlCompChart chart={chart} data={data.pnlCompChart} />
       </div>
-      <div className="col-12 col-sm-6 d-none d-sm-block">
+      <div className="col-12 col-sm-6 d-none d-md-block">
         <PnlChart chart={chart} data={data.pnlChart} />
       </div>
 
