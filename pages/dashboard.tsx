@@ -21,7 +21,7 @@ export default function Dashboard() {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  const { totalPnl, totalFees, avgPnl, winRate } = data.dashboardStats;
+  const { totalPnl, totalFees, monthlyPnl, winRate } = data.dashboardStats;
 
   return (
     <Layout>
@@ -30,7 +30,7 @@ export default function Dashboard() {
           <StatsBoard
             total_fees={totalFees}
             total_pnl={totalPnl}
-            avg_pnl={avgPnl}
+            monthly_pnl={monthlyPnl}
             win_rate={winRate}
           />
 
