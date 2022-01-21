@@ -16,6 +16,25 @@ export default function PnlCompChart(props) {
         <h3 className="card-title">Month Over Month Performance</h3>
         <props.chart
           options={{
+            annotations: {
+              yaxis: [
+                {
+                  y: 6500,
+                  strokeDashArray: 5,
+                  borderColor: "#262626",
+                  label: {
+                    position: "left",
+                    textAnchor: "front",
+                    borderColor: "#f8d55e",
+                    style: {
+                      color: "#262626",
+                      background: "#f8d55e",
+                    },
+                    text: "Income Goal: $6500",
+                  },
+                },
+              ],
+            },
             colors: ["#264653", "#2a9d8f"],
             chart: {
               animations: {
