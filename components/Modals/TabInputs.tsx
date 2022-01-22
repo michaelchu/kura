@@ -6,7 +6,6 @@ export default function TabInputs({
   transaction,
   accounts,
   handleChange,
-  isOption,
   cache,
 }) {
   // TODO: Replace this with query from db
@@ -25,22 +24,22 @@ export default function TabInputs({
   ];
 
   const option_strategies = [
-    { value: "covered_call", label: "Covered Call" },
-    { value: "long_call", label: "Long Call" },
-    { value: "short_put", label: "Short Put" },
+    { value: "covered-stock", label: "Covered Stock" },
+    { value: "single", label: "Single Option" },
   ];
 
   const stock_strategies = [
-    { value: "covered_call", label: "Covered Call" },
-    { value: "long_stock", label: "Long Stock" },
-    { value: "short_stock", label: "Short Stock" },
+    { value: "stock", label: "Stock" },
+    { value: "covered-stock", label: "Covered Stock" },
   ];
 
   const getOptionByValue = (
     options: { value: string; label: string }[],
     value: string
   ) => {
-    return options.find((opt) => opt.value === value);
+    return options.find(
+      (opt: { label: string; value: string }) => opt.value === value
+    );
   };
 
   return (
@@ -56,7 +55,10 @@ export default function TabInputs({
                 merge(cache, { object: { account_id: e.target.value } })
               );
             }}
-            defaultValue={getOptionByValue(accounts, transaction.account_id)}
+            defaultValue={getOptionByValue(
+              accounts,
+              transaction.tradingAccountId
+            )}
           />
         </div>
       </div>
@@ -100,7 +102,7 @@ export default function TabInputs({
             <input
               type="date"
               className="form-control"
-              defaultValue={transaction.trade_date}
+              defaultValue={transaction.tradeDate}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
                   merge(cache, { object: { trade_date: e.target.value } })
@@ -109,7 +111,7 @@ export default function TabInputs({
             />
           </div>
         </div>
-        {isOption && (
+        {transaction.assetType == "option" && (
           <div className="col-lg-6">
             <div className="mt-2">
               <label className="form-label">Option Type</label>
@@ -118,7 +120,7 @@ export default function TabInputs({
                 name="option-type-selection"
                 defaultValue={getOptionByValue(
                   optionTypes,
-                  transaction.option_type
+                  transaction.optionType
                 )}
                 onChange={(e) =>
                   handleChange(
@@ -129,7 +131,7 @@ export default function TabInputs({
             </div>
           </div>
         )}
-        {isOption ? (
+        {transaction.assetType == "option" ? (
           <div className="col-lg-12">
             <div className="mt-2">
               <label className="form-label">Strategy</label>
@@ -138,7 +140,7 @@ export default function TabInputs({
                 name="strategy-selection"
                 defaultValue={getOptionByValue(
                   option_strategies,
-                  transaction.strategy
+                  transaction.strategyId
                 )}
                 onChange={(e) =>
                   handleChange(
@@ -157,7 +159,7 @@ export default function TabInputs({
                 name="strategy-selection"
                 defaultValue={getOptionByValue(
                   stock_strategies,
-                  transaction.strategy
+                  transaction.strategyId
                 )}
                 onChange={(e) =>
                   handleChange(
@@ -228,7 +230,7 @@ export default function TabInputs({
           </div>
         </div>
       </div>
-      {isOption && (
+      {transaction.assetType == "option" && (
         <div className="row">
           <div className="col-lg-6">
             <div className="mt-2">

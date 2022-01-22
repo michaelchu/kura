@@ -13,32 +13,19 @@ export default function EditTransactionModal({
   const [cache, setCache] = useState({ id: selectedTrans.id, object: {} });
 
   return (
-    <Modal show={show} onHide={handleClose} size={"lg"} centered>
+    <Modal show={show} onHide={handleClose} size={"sm"} centered>
       <Modal.Header>
         <Modal.Title>Edit Transaction</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {selectedTrans && selectedTrans.option_type ? (
-          <TabInputs
-            transaction={selectedTrans}
-            cache={cache}
-            accounts={accounts}
-            handleChange={(cache) => {
-              setCache({ ...cache, id: selectedTrans.id });
-            }}
-            isOption={true}
-          />
-        ) : (
-          <TabInputs
-            transaction={selectedTrans}
-            cache={cache}
-            accounts={accounts}
-            handleChange={(cache) => {
-              setCache({ ...cache, id: selectedTrans.id });
-            }}
-            isOption={false}
-          />
-        )}
+        <TabInputs
+          transaction={selectedTrans}
+          cache={cache}
+          accounts={accounts}
+          handleChange={(cache) => {
+            setCache({ ...cache, id: selectedTrans.id });
+          }}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button

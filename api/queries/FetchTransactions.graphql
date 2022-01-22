@@ -11,10 +11,14 @@ query FetchTransactions {
     fee
     totalCost
     assetType
+    optionType
+    strike
+    expiration
     strategy
+    strategyId
   }
   tradingAccounts {
-    id
-    name
+    value: id
+    label: name
   }
 }
