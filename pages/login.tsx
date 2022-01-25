@@ -92,7 +92,11 @@ export default function Login() {
                 <div className="form-footer">
                   <button
                     type="submit"
-                    className="btn btn-primary w-100"
+                    className={
+                      loading
+                        ? "btn btn-primary btn-loading w-100"
+                        : "btn btn-primary w-100"
+                    }
                     disabled={loading}
                     onClick={() => login().then(() => client.resetStore())}
                   >
