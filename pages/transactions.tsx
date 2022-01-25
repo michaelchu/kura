@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 
 import Layout from "../components/Layouts/Layout";
 import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
@@ -24,38 +24,28 @@ export default function Transactions() {
 
   const [transaction, setTransaction] = useState({});
 
-  // const deleteTrans = useMutation(
-  //   (variables) => {
-  //     return graphQLClient.request(DELETE_TRANSACTION, variables);
-  //   },
-  //   {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries("fetch_transactions").then(() => {
-  //         setTransaction({});
-  //         showFinishedToastToggle();
-  //       });
-  //     },
-  //     onError: () => {
-  //       showErrorToastToggle();
-  //     },
-  //   }
-  // );
+  const [updateMutation, {}] = useMutation(UPDATE_TRANSACTION, {
+    onError: (err) => {
+      console.log(err);
+      showErrorToastToggle();
+    },
+    onCompleted: () => {
+      showFinishedToastToggle();
+    },
+    refetchQueries: [FETCH_TRANSACTIONS],
+    awaitRefetchQueries: true,
+  });
 
-  // const updateTrans = useMutation(
-  //   (variables) => {
-  //     return graphQLClient.request(UPDATE_TRANSACTION, variables);
-  //   },
-  //   {
-  //     onSuccess: () => {
-  //       queryClient
-  //         .invalidateQueries("fetch_transactions")
-  //         .then(() => showFinishedToastToggle());
-  //     },
-  //     onError: () => {
-  //       showErrorToastToggle();
-  //     },
-  //   }
-  // );
+  const [deleteMutation, {}] = useMutation(DELETE_TRANSACTION, {
+    onError: () => {
+      showErrorToastToggle();
+    },
+    onCompleted: () => {
+      showFinishedToastToggle();
+    },
+    refetchQueries: [FETCH_TRANSACTIONS],
+    awaitRefetchQueries: true,
+  });
 
   const { data, loading, error } = useQuery(FETCH_TRANSACTIONS);
   if (loading) return "Loading...";
@@ -93,11 +83,11 @@ export default function Transactions() {
         handleClose={() => editModalToggle()}
         handleCloseAndUpdate={(data) => {
           editModalToggle();
-          // updateTrans.mutate(data);
+          updateMutation({ variables: data }).then();
         }}
         handleCloseAndDelete={(id) => {
           editModalToggle();
-          // deleteTrans.mutate({ id: id } as any);
+          deleteMutation({ variables: { id: id } }).then();
         }}
       />
 

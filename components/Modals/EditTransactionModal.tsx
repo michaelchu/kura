@@ -10,11 +10,14 @@ export default function EditTransactionModal({
   handleCloseAndUpdate,
   handleCloseAndDelete,
 }) {
-  const [cache, setCache] = useState({ id: selectedTrans.id, object: {} });
+  const [cache, setCache] = useState({
+    id: selectedTrans.id,
+    object: {},
+  });
 
   return (
     <Modal show={show} onHide={handleClose} size={"sm"} centered>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title>Edit Transaction</Modal.Title>
       </Modal.Header>
       <Modal.Body>

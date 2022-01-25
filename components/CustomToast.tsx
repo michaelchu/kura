@@ -11,7 +11,7 @@ export default function CustomToast({
   autohide = true,
 }) {
   return (
-    <ToastContainer className="p-3" position={"top-end"}>
+    <ToastContainer className="p-3" position={"middle-center"}>
       <Toast
         style={style}
         autohide={autohide}

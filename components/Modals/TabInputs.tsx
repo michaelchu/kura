@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "../Select";
 import merge from "deepmerge";
+import dayjs from "dayjs";
 
 export default function TabInputs({
   transaction,
@@ -8,7 +9,23 @@ export default function TabInputs({
   handleChange,
   cache,
 }) {
-  // TODO: Replace this with query from db
+  const stripSymbol = (symbol) => {
+    return symbol.split(" ")[0];
+  };
+
+  const [root, setRoot] = useState(stripSymbol(transaction.symbol) || "");
+  const [strike, setStrike] = useState(transaction.strike || "");
+  const [expiration, setExpiration] = useState(transaction.expiration || "");
+  const [optionType, setOptionType] = useState(transaction.optionType || "");
+
+  useEffect(() => {
+    handleChange(
+      merge(cache, {
+        object: { symbol: formatSymbol(root, expiration, strike, optionType) },
+      })
+    );
+  }, [root, strike, expiration, optionType]);
+
   const actionTypes = [
     { value: "BTO", label: "Buy to Open" },
     { value: "BTC", label: "Buy to Close" },
@@ -42,6 +59,11 @@ export default function TabInputs({
     );
   };
 
+  const formatSymbol = (root, expiration, strike, optionType) => {
+    const exp = dayjs(expiration).format("DD MMM YY");
+    return `${root} ${exp} ${strike} ${optionType}`;
+  };
+
   return (
     <div>
       <div className="col-lg-12">
@@ -52,7 +74,7 @@ export default function TabInputs({
             options={accounts}
             onChange={(e) => {
               handleChange(
-                merge(cache, { object: { account_id: e.target.value } })
+                merge(cache, { object: { tradingAccountId: e.target.value } })
               );
             }}
             defaultValue={getOptionByValue(
@@ -69,11 +91,9 @@ export default function TabInputs({
             <input
               type="text"
               className="form-control"
-              defaultValue={transaction.symbol}
+              defaultValue={stripSymbol(transaction.symbol)}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChange(
-                  merge(cache, { object: { symbol: e.target.value } })
-                );
+                setRoot(e.target.value);
               }}
               required
             />
@@ -105,7 +125,7 @@ export default function TabInputs({
               defaultValue={transaction.tradeDate}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
-                  merge(cache, { object: { trade_date: e.target.value } })
+                  merge(cache, { object: { tradeDate: e.target.value } })
                 );
               }}
             />
@@ -122,11 +142,14 @@ export default function TabInputs({
                   optionTypes,
                   transaction.optionType
                 )}
-                onChange={(e) =>
+                onChange={(e) => {
+                  setOptionType(e.target.value);
                   handleChange(
-                    merge(cache, { object: { option_type: e.target.value } })
-                  )
-                }
+                    merge(cache, {
+                      object: { optionType: e.target.value },
+                    })
+                  );
+                }}
               />
             </div>
           </div>
@@ -144,7 +167,7 @@ export default function TabInputs({
                 )}
                 onChange={(e) =>
                   handleChange(
-                    merge(cache, { object: { strategy: e.target.value } })
+                    merge(cache, { object: { strategyId: e.target.value } })
                   )
                 }
               />
@@ -163,7 +186,7 @@ export default function TabInputs({
                 )}
                 onChange={(e) =>
                   handleChange(
-                    merge(cache, { object: { strategy: e.target.value } })
+                    merge(cache, { object: { strategyId: e.target.value } })
                   )
                 }
               />
@@ -240,6 +263,7 @@ export default function TabInputs({
                 className="form-control"
                 defaultValue={transaction.strike}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setStrike(e.target.value);
                   handleChange(
                     merge(cache, {
                       object: { strike: parseFloat(e.target.value) },
@@ -258,9 +282,10 @@ export default function TabInputs({
                 className="form-control"
                 defaultValue={transaction.expiration}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setExpiration(e.target.value);
                   handleChange(
                     merge(cache, {
-                      object: { expiration_date: e.target.value },
+                      object: { expiration: e.target.value },
                     })
                   );
                 }}
