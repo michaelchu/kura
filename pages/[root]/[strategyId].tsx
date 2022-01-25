@@ -25,7 +25,7 @@ export default function StrategyDetail() {
     variables: { root, strategyId },
   });
 
-  if (loading) return "Loading...";
+  if (loading) return <Layout />;
   if (error) return `Error! ${error.message}`;
 
   const total_costs = () => {

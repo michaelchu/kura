@@ -26,17 +26,12 @@ export default function NavBar({ toggleModal }) {
               <span className="navbar-toggler-icon" />
             </button>
             <h1 className="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-              <Link href="/">
-                <a>
-                  <img
-                    src="/logo-dark.png"
-                    width="110"
-                    height="32"
-                    alt="kura"
-                    className="navbar-brand-image"
-                  />
-                </a>
-              </Link>
+              <img
+                src="/logo-dark.png"
+                height="36"
+                alt="Kura"
+                className="navbar-brand-image"
+              />
             </h1>
             {isSignedIn && (
               <NavDropdown
