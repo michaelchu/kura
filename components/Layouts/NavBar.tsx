@@ -9,7 +9,7 @@ import Link from "next/link";
 export default function NavBar({ toggleModal }) {
   const router = useRouter();
   const isSignedIn = useSession();
-  const { getItem, removeItem } = useStorage();
+  const { removeItem } = useStorage();
 
   return (
     <header className="navbar navbar-expand-md navbar-dark sticky-top d-print-none">

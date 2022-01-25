@@ -1,6 +1,4 @@
 import React, { useMemo } from "react";
-import { useQueryClient } from "react-query";
-import { GraphQLClient } from "graphql-request";
 import {
   useTable,
   useSortBy,
@@ -12,12 +10,6 @@ import { IconChevronUp, IconChevronDown } from "@tabler/icons";
 
 import TransactionTableHeader from "./TransactionTableHeader";
 import TableFooter from "../TableFooter";
-
-const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_GQL_ENDPOINT, {
-  headers: {
-    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-  },
-});
 
 export default function TransactionTable({
   cols,
