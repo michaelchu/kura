@@ -138,16 +138,16 @@ scalar Decimal
 scalar Upload
 
 input TransactionsInput {
-    action: String!
-    assetType: String!
+    action: String
+    assetType: String
     expiration: Date
-    fee: Decimal!
+    fee: Decimal
     optionType: String
-    price: Decimal!
-    quantity: Int!
-    strategyId: String!
+    price: Decimal
+    quantity: Int
+    strategyId: String
     strike: Decimal
-    symbol: String!
-    tradeDate: Date!
-    tradingAccountId: String!
+    symbol: String
+    tradeDate: Date
+    tradingAccountId: String
 }
