@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconEye } from "@tabler/icons";
+import { IconUserPlus } from "@tabler/icons";
 import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
 import Link from "next/link";
@@ -78,6 +78,7 @@ export default function SignUp() {
                 disabled={loading}
                 onClick={() => signUp()}
               >
+                <IconUserPlus />
                 Create new account
               </button>
               <div className="text-center text-muted mt-3">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { IconEye } from "@tabler/icons";
 import { useRouter } from "next/router";
+import { IconLogin } from "@tabler/icons";
 import Link from "next/link";
 import { gql, useMutation } from "@apollo/client";
 import useStorage from "../hooks/useStorage";
@@ -89,6 +89,7 @@ export default function Login() {
                 disabled={loading}
                 onClick={() => login()}
               >
+                <IconLogin />
                 Sign in
               </button>
               <div className="text-center text-muted mt-3">
