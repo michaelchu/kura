@@ -21,14 +21,14 @@ export default function PnlCompChart(props) {
                 {
                   y: 6500,
                   strokeDashArray: 5,
-                  borderColor: "#262626",
+                  borderColor: "#2a9d8f",
                   label: {
                     position: "left",
                     textAnchor: "front",
-                    borderColor: "#f8d55e",
+                    borderColor: "#2a9d8f",
                     style: {
-                      color: "#262626",
-                      background: "#f8d55e",
+                      color: "#f8fafc",
+                      background: "#2a9d8f",
                     },
                     text: "Income Goal: $6500",
                   },
