@@ -1,14 +1,22 @@
 import React from "react";
 import { IconMail } from "@tabler/icons";
+import Link from "next/link";
 
 export default function ForgotPassword() {
   return (
     <div className="page page-center login-dark">
       <div className="container-tight py-4">
         <div className="text-center mb-4">
-          <a href=".">
-            <img src="./static/logo.svg" height="36" alt="" />
-          </a>
+          <Link href="/">
+            <a>
+              <img
+                src="/logo-dark.png"
+                height="36"
+                alt="kura"
+                className="navbar-brand-image"
+              />
+            </a>
+          </Link>
         </div>
         <form className="card card-md" action="." method="get">
           <div className="card-body">

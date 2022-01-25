@@ -47,7 +47,16 @@ export default function Login() {
         <div className="page page-center login-dark">
           <div className="container-tight py-4">
             <div className="text-center mb-4">
-              <img src="/logo-dark.png" height="36" alt="" />
+              <Link href="/">
+                <a>
+                  <img
+                    src="/logo-dark.png"
+                    height="36"
+                    alt="Kura"
+                    className="navbar-brand-image"
+                  />
+                </a>
+              </Link>
             </div>
             <div className="card card-md">
               <div className="card-body">

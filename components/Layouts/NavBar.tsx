@@ -26,7 +26,7 @@ export default function NavBar({ toggleModal }) {
               <span className="navbar-toggler-icon" />
             </button>
             <h1 className="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-              <Link href=".">
+              <Link href="/">
                 <a>
                   <img
                     src="/logo-dark.png"
