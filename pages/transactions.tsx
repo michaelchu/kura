@@ -14,6 +14,7 @@ import CustomToast from "../components/CustomToast";
 import dayjs from "dayjs";
 import ListGroup from "../components/Lists/ListGroup";
 import { TransactionsListCols } from "../components/Lists/ListColumns/TransactionsListCols";
+import ErrorPage from "../components/ErrorPage";
 
 export default function Transactions() {
   const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
@@ -48,8 +49,8 @@ export default function Transactions() {
   });
 
   const { data, loading, error } = useQuery(FETCH_TRANSACTIONS);
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
+  if (loading) return <Layout />;
+  if (error) return <ErrorPage />;
 
   return (
     <Layout>

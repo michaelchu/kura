@@ -1,7 +1,7 @@
 import React from "react";
 import { IconUser, IconPlus } from "@tabler/icons";
 
-export default function NavDropdown({ signOut, router, toggleModal }) {
+export default function NavDropdown({ signOut, toggleModal }) {
   return (
     <div className="navbar-nav flex-row order-md-last">
       <div className="nav-item dropdown me-3">

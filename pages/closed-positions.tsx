@@ -9,12 +9,13 @@ import dayjs from "dayjs";
 import React from "react";
 import ListGroup from "../components/Lists/ListGroup";
 import { ClosedPositionsListCols } from "../components/Lists/ListColumns/ClosedPositionsListCols";
+import ErrorPage from "../components/ErrorPage";
 
 export default function ClosedPositions() {
   const { data, loading, error } = useQuery(CLOSED_POSITIONS);
 
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
+  if (loading) return <Layout />;
+  if (error) return <ErrorPage />;
 
   const grouped_positions = _.groupBy(data.closedPositions, ({ exitDate }) => {
     return dayjs(exitDate).format("MMM YYYY");

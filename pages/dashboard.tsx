@@ -13,13 +13,14 @@ import dynamic from "next/dynamic";
 import TransactionDetailsModal from "../components/Modals/TransactionDetailsModal";
 import DashboardChart from "../components/Dashboard/DashboardChart";
 import OpenPosDetailsModal from "../components/Modals/OpenPosDetailsModal";
+import ErrorPage from "../components/ErrorPage";
 
 export default function Dashboard() {
   const { loading, error, data } = useQuery(DASHBOARD_QUERY);
   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
+  if (loading) return <Layout />;
+  if (error) return <ErrorPage />;
 
   const { totalPnl, totalFees, monthlyPnl, winRate } = data.dashboardStats;
 

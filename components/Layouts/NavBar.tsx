@@ -46,7 +46,6 @@ export default function NavBar({ toggleModal }) {
                     router.push("/login");
                   });
                 }}
-                router={router}
                 toggleModal={toggleModal}
               />
             )}
