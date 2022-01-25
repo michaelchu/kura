@@ -103,12 +103,15 @@ type TradingAccount {
 type Transaction {
     action: String
     assetType: String
+    expiration: String
     fee: Decimal
     id: String
+    optionType: String
     price: Decimal
     quantity: Int
     strategy: String
     strategyId: String
+    strike: Decimal
     symbol: String
     totalCost: Decimal
     tradeDate: String

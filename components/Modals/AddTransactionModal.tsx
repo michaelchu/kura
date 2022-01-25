@@ -26,7 +26,6 @@ export default function AddTransactionModal({
           cache={cache}
           accounts={accounts}
           handleChange={setCache}
-          isOption={isOption}
         />
       </Modal.Body>
       <Modal.Footer>

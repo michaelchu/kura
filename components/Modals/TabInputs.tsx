@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "../Select";
 import merge from "deepmerge";
+import dayjs from "dayjs";
 
 export default function TabInputs({
   transaction,
   accounts,
   handleChange,
-  isOption,
   cache,
 }) {
-  // TODO: Replace this with query from db
+  const stripSymbol = (symbol) => {
+    return symbol.split(" ")[0];
+  };
+
+  const [root, setRoot] = useState(stripSymbol(transaction.symbol) || "");
+  const [strike, setStrike] = useState(transaction.strike || "");
+  const [expiration, setExpiration] = useState(transaction.expiration || "");
+  const [optionType, setOptionType] = useState(transaction.optionType || "");
+
+  useEffect(() => {
+    handleChange(
+      merge(cache, {
+        object: { symbol: formatSymbol(root, expiration, strike, optionType) },
+      })
+    );
+  }, [root, strike, expiration, optionType]);
+
   const actionTypes = [
     { value: "BTO", label: "Buy to Open" },
     { value: "BTC", label: "Buy to Close" },
@@ -25,22 +41,27 @@ export default function TabInputs({
   ];
 
   const option_strategies = [
-    { value: "covered_call", label: "Covered Call" },
-    { value: "long_call", label: "Long Call" },
-    { value: "short_put", label: "Short Put" },
+    { value: "covered-stock", label: "Covered Stock" },
+    { value: "single", label: "Single Option" },
   ];
 
   const stock_strategies = [
-    { value: "covered_call", label: "Covered Call" },
-    { value: "long_stock", label: "Long Stock" },
-    { value: "short_stock", label: "Short Stock" },
+    { value: "stock", label: "Stock" },
+    { value: "covered-stock", label: "Covered Stock" },
   ];
 
   const getOptionByValue = (
     options: { value: string; label: string }[],
     value: string
   ) => {
-    return options.find((opt) => opt.value === value);
+    return options.find(
+      (opt: { label: string; value: string }) => opt.value === value
+    );
+  };
+
+  const formatSymbol = (root, expiration, strike, optionType) => {
+    const exp = dayjs(expiration).format("DD MMM YY");
+    return `${root} ${exp} ${strike} ${optionType}`;
   };
 
   return (
@@ -53,10 +74,13 @@ export default function TabInputs({
             options={accounts}
             onChange={(e) => {
               handleChange(
-                merge(cache, { object: { account_id: e.target.value } })
+                merge(cache, { object: { tradingAccountId: e.target.value } })
               );
             }}
-            defaultValue={getOptionByValue(accounts, transaction.account_id)}
+            defaultValue={getOptionByValue(
+              accounts,
+              transaction.tradingAccountId
+            )}
           />
         </div>
       </div>
@@ -67,11 +91,9 @@ export default function TabInputs({
             <input
               type="text"
               className="form-control"
-              defaultValue={transaction.symbol}
+              defaultValue={stripSymbol(transaction.symbol)}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChange(
-                  merge(cache, { object: { symbol: e.target.value } })
-                );
+                setRoot(e.target.value);
               }}
               required
             />
@@ -100,16 +122,16 @@ export default function TabInputs({
             <input
               type="date"
               className="form-control"
-              defaultValue={transaction.trade_date}
+              defaultValue={transaction.tradeDate}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(
-                  merge(cache, { object: { trade_date: e.target.value } })
+                  merge(cache, { object: { tradeDate: e.target.value } })
                 );
               }}
             />
           </div>
         </div>
-        {isOption && (
+        {transaction.assetType == "option" && (
           <div className="col-lg-6">
             <div className="mt-2">
               <label className="form-label">Option Type</label>
@@ -118,18 +140,21 @@ export default function TabInputs({
                 name="option-type-selection"
                 defaultValue={getOptionByValue(
                   optionTypes,
-                  transaction.option_type
+                  transaction.optionType
                 )}
-                onChange={(e) =>
+                onChange={(e) => {
+                  setOptionType(e.target.value);
                   handleChange(
-                    merge(cache, { object: { option_type: e.target.value } })
-                  )
-                }
+                    merge(cache, {
+                      object: { optionType: e.target.value },
+                    })
+                  );
+                }}
               />
             </div>
           </div>
         )}
-        {isOption ? (
+        {transaction.assetType == "option" ? (
           <div className="col-lg-12">
             <div className="mt-2">
               <label className="form-label">Strategy</label>
@@ -138,11 +163,11 @@ export default function TabInputs({
                 name="strategy-selection"
                 defaultValue={getOptionByValue(
                   option_strategies,
-                  transaction.strategy
+                  transaction.strategyId
                 )}
                 onChange={(e) =>
                   handleChange(
-                    merge(cache, { object: { strategy: e.target.value } })
+                    merge(cache, { object: { strategyId: e.target.value } })
                   )
                 }
               />
@@ -157,11 +182,11 @@ export default function TabInputs({
                 name="strategy-selection"
                 defaultValue={getOptionByValue(
                   stock_strategies,
-                  transaction.strategy
+                  transaction.strategyId
                 )}
                 onChange={(e) =>
                   handleChange(
-                    merge(cache, { object: { strategy: e.target.value } })
+                    merge(cache, { object: { strategyId: e.target.value } })
                   )
                 }
               />
@@ -228,7 +253,7 @@ export default function TabInputs({
           </div>
         </div>
       </div>
-      {isOption && (
+      {transaction.assetType == "option" && (
         <div className="row">
           <div className="col-lg-6">
             <div className="mt-2">
@@ -238,6 +263,7 @@ export default function TabInputs({
                 className="form-control"
                 defaultValue={transaction.strike}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setStrike(e.target.value);
                   handleChange(
                     merge(cache, {
                       object: { strike: parseFloat(e.target.value) },
@@ -256,9 +282,10 @@ export default function TabInputs({
                 className="form-control"
                 defaultValue={transaction.expiration}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setExpiration(e.target.value);
                   handleChange(
                     merge(cache, {
-                      object: { expiration_date: e.target.value },
+                      object: { expiration: e.target.value },
                     })
                   );
                 }}
