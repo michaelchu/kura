@@ -10,4 +10,13 @@ module.exports = {
   webpackDevMiddleware: (config) => {
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/login",
+        permanent: false,
+      },
+    ];
+  },
 };
