@@ -63,7 +63,7 @@ export default function TabInputs({
     if (expiration != "") {
       expiration = dayjs(expiration).format("DD MMM YY");
     }
-    return `${root} ${expiration} ${strike} ${optionType}`;
+    return `${root} ${expiration} ${strike} ${optionType}`.trim();
   };
 
   return (
