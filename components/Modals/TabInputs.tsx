@@ -60,8 +60,10 @@ export default function TabInputs({
   };
 
   const formatSymbol = (root, expiration, strike, optionType) => {
-    const exp = dayjs(expiration).format("DD MMM YY");
-    return `${root} ${exp} ${strike} ${optionType}`;
+    if (expiration != "") {
+      expiration = dayjs(expiration).format("DD MMM YY");
+    }
+    return `${root} ${expiration} ${strike} ${optionType}`;
   };
 
   return (
