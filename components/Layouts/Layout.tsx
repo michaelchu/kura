@@ -3,29 +3,12 @@ import Header from "./Header";
 import NavBar from "./NavBar";
 import React from "react";
 import Script from "next/script";
-import TransactionModal from "../../components/Modals/TransactionModal";
 import useModal from "../../hooks/useModal";
-import ADD_TRANSACTION from "../../api/mutations/AddTransaction.graphql";
 import CustomToast from "../CustomToast";
+import AddTransactionCanvas from "../Canvas/AddTransactionCanvas";
 
 export default function Layout(props) {
-  // const addTrans = useMutation(
-  // (variables) => {
-  // return graphQLClient.request(ADD_TRANSACTION, variables);
-  // },
-  // {
-  //   onSuccess: () => {
-  // queryClient.invalidateQueries("dashboard_query").then(() => {
-  //   showFinishedToastToggle();
-  // });
-  // },
-  // onError: () => {
-  // showErrorToastToggle();
-  //   },
-  // }
-  // );
-
-  const { isShowing: isModalShowing, toggle: ModalToggle } = useModal();
+  const { isShowing: isCanvasShowing, toggle: CanvasToggle } = useModal();
   const { isShowing: isFinishedToastShowing, toggle: showFinishedToastToggle } =
     useModal();
   const { isShowing: isErrorToastShowing, toggle: showErrorToastToggle } =
@@ -34,18 +17,14 @@ export default function Layout(props) {
   return (
     <div>
       <Header />
-      <NavBar toggleModal={ModalToggle} />
+      <NavBar canvasToggle={CanvasToggle} />
       <div className="page-wrapper">
         <div className="container-xl">{props.children}</div>
         <Footer />
       </div>
-      <TransactionModal
-        show={isModalShowing}
-        handleClose={() => ModalToggle()}
-        handleCloseAndAdd={(data) => {
-          ModalToggle();
-          // addTrans.mutate(data);
-        }}
+      <AddTransactionCanvas
+        canvasToggle={CanvasToggle}
+        show={isCanvasShowing}
       />
       <CustomToast
         style={{ background: "#2fb344", color: "#fff", border: 0 }}

@@ -10,6 +10,7 @@ export default function TabInputs({
   cache,
 }) {
   const stripSymbol = (symbol) => {
+    if (!symbol) return "";
     return symbol.split(" ")[0];
   };
 

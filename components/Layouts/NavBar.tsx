@@ -6,8 +6,9 @@ import NavDropdown from "./NavDropdown";
 import Nav from "./Nav";
 import Link from "next/link";
 import { ApolloConsumer } from "@apollo/client";
+import { IconPlus } from "@tabler/icons";
 
-export default function NavBar({ toggleModal }) {
+export default function NavBar({ canvasToggle }) {
   const router = useRouter();
   const isSignedIn = useSession();
   const { removeItem } = useStorage();
@@ -34,15 +35,25 @@ export default function NavBar({ toggleModal }) {
               />
             </h1>
             {isSignedIn && (
-              <NavDropdown
-                signOut={() => {
-                  client.resetStore().then(() => {
-                    removeItem("token");
-                    router.push("/login");
-                  });
-                }}
-                toggleModal={toggleModal}
-              />
+              <div className="navbar-nav flex-row order-md-last">
+                <div className="nav-item dropdown me-3">
+                  <a
+                    href="#"
+                    className="nav-link px-0"
+                    onClick={() => canvasToggle()}
+                  >
+                    <IconPlus />
+                  </a>
+                </div>
+                <NavDropdown
+                  signOut={() => {
+                    client.resetStore().then(() => {
+                      removeItem("token");
+                      router.push("/login");
+                    });
+                  }}
+                />
+              </div>
             )}
             {isSignedIn && <Nav router={router} />}
             {!isSignedIn && (
