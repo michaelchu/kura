@@ -1,98 +1,54 @@
 import Select from "../Select";
-import merge from "deepmerge";
 import React from "react";
-import { actionTypes, stock_strategies } from "../Helpers";
+import { strategies } from "../Helpers";
 
-export default function CommonInputs({
-  accounts,
-  handleChange,
-  cache,
-  setRoot,
-}) {
+export default function CommonInputs(props) {
   return (
     <div>
-      <div className="col-lg-12">
-        <div className="mt-2">
-          <label className="form-label">Accounts</label>
+      <div className="form-group row mb-3">
+        <label className="form-label col-3 col-form-label">Accounts</label>
+        <div className={"col"}>
           <Select
             name={"accounts-selection"}
-            options={accounts}
-            onChange={(e) => {
-              handleChange(
-                merge(cache, { object: { tradingAccountId: e.target.value } })
-              );
-            }}
+            className={"form-select"}
+            options={props.accounts}
+            onChange={(e) => props.setTradingAccount(e.target.value)}
           />
         </div>
       </div>
-      <div className="row">
-        <div className="col-lg-6">
-          <div className="mt-2">
-            <label className="form-label">Symbol</label>
-            <input
-              type="text"
-              className="form-control"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setRoot(e.target.value);
-              }}
-              required
-            />
-          </div>
-        </div>
-        <div className="col-lg-6">
-          <div className="mt-2">
-            <label className="form-label">Action</label>
-            <Select
-              options={actionTypes}
-              name="action-selection"
-              onChange={(e) =>
-                handleChange(
-                  merge(cache, { object: { action: e.target.value } })
-                )
-              }
-            />
-          </div>
+      <div className="form-group row mb-3">
+        <label className="form-label col-3 col-form-label">Symbol</label>
+        <div className={"col"}>
+          <input
+            type="text"
+            className="form-control"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              props.setRoot(e.target.value)
+            }
+          />
         </div>
       </div>
-      <div className="row">
-        <div className="col-lg">
-          <div className="mt-2">
-            <label className="form-label">Trade Date</label>
-            <input
-              type="date"
-              className="form-control"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChange(
-                  merge(cache, { object: { tradeDate: e.target.value } })
-                );
-              }}
-            />
-          </div>
+      <div className="form-group row mb-3">
+        <label className="form-label col-3 col-form-label">Strategy</label>
+        <div className={"col"}>
+          <Select
+            name={"strategy-selection"}
+            className={"form-select"}
+            options={strategies}
+            onChange={(e) => props.setStrategy(e.target.value)}
+          />
         </div>
-        <div className="col-lg-6">
-          <div className="mt-2">
-            <label className="form-label">Fees</label>
-            <input
-              type="text"
-              className="form-control"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {}}
-              required
-            />
-          </div>
-        </div>
-        <div className="col-lg-12">
-          <div className="mt-2">
-            <label className="form-label">Strategy</label>
-            <Select
-              options={stock_strategies}
-              name="strategy-selection"
-              onChange={(e) =>
-                handleChange(
-                  merge(cache, { object: { strategyId: e.target.value } })
-                )
-              }
-            />
-          </div>
+      </div>
+      <div className="form-group row mb-3">
+        <label className="form-label col-3 col-form-label">Date</label>
+        <div className={"col"}>
+          <input
+            type="date"
+            className="form-control"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              props.setTradeDate(e.target.value)
+            }
+          />
         </div>
       </div>
     </div>

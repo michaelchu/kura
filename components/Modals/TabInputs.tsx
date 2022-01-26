@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Select from "../Select";
 import merge from "deepmerge";
-import dayjs from "dayjs";
 import {
   actionTypes,
   optionTypes,
   getOptionByValue,
-  option_strategies,
-  stock_strategies,
+  strategies,
   formatSymbol,
 } from "../Helpers";
 
@@ -125,45 +123,24 @@ export default function TabInputs({
             </div>
           </div>
         )}
-        {transaction.assetType == "option" ? (
-          <div className="col-lg-12">
-            <div className="mt-2">
-              <label className="form-label">Strategy</label>
-              <Select
-                options={option_strategies}
-                name="strategy-selection"
-                defaultValue={getOptionByValue(
-                  option_strategies,
-                  transaction.strategyId
-                )}
-                onChange={(e) =>
-                  handleChange(
-                    merge(cache, { object: { strategyId: e.target.value } })
-                  )
-                }
-              />
-            </div>
+        <div className="col-lg-12">
+          <div className="mt-2">
+            <label className="form-label">Strategy</label>
+            <Select
+              options={strategies}
+              name="strategy-selection"
+              defaultValue={getOptionByValue(
+                strategies,
+                transaction.strategyId
+              )}
+              onChange={(e) =>
+                handleChange(
+                  merge(cache, { object: { strategyId: e.target.value } })
+                )
+              }
+            />
           </div>
-        ) : (
-          <div className="col-lg-12">
-            <div className="mt-2">
-              <label className="form-label">Strategy</label>
-              <Select
-                options={stock_strategies}
-                name="strategy-selection"
-                defaultValue={getOptionByValue(
-                  stock_strategies,
-                  transaction.strategyId
-                )}
-                onChange={(e) =>
-                  handleChange(
-                    merge(cache, { object: { strategyId: e.target.value } })
-                  )
-                }
-              />
-            </div>
-          </div>
-        )}
+        </div>
       </div>
       <div className="mt-3">
         <div className="dropdown-divider" />

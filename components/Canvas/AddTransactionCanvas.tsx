@@ -13,7 +13,11 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
       }
     }
   `;
-  const [cache, setCache] = useState({ object: [] });
+  const [commonCache, setCommonCache] = useState({});
+  const [strategyCache, setStrategyCache] = useState({ object: [] });
+
+  const mergeCache = () => {};
+
   const { data, error, loading } = useQuery(TRADING_ACCOUNTS_QUERY);
   if (loading) return null; // consider rendering canvas skeleton during load
   if (error) return <ErrorPage />;
@@ -23,7 +27,7 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
       show={show}
       onHide={() => canvasToggle()}
       placement="end"
-      style={{ width: "500px" }}
+      style={{ width: "375px" }}
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Add Transaction</Offcanvas.Title>
@@ -35,20 +39,19 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
           leg only.
         </p>
         <CanvasInputs
-          cache={cache}
+          commonCache={commonCache}
+          strategyCache={strategyCache}
           accounts={data.tradingAccounts}
-          handleChange={(cache) => {
-            setCache({ ...cache });
-          }}
         />
       </Offcanvas.Body>
       <div>
-        <div className="card-footer col-12">
+        <div className="card-footer">
           <Button
-            className={"w-100"}
+            className={"mt-1 mb-1 w-100"}
             as="input"
             variant="primary"
             onClick={() => {
+              mergeCache();
               canvasToggle();
             }}
             type="submit"

@@ -3,7 +3,7 @@ import React from "react";
 export default function Select(props) {
   return (
     <select
-      className={"form-select"}
+      className={props.className}
       name={props.name}
       onChange={(e) => {
         props.onChange(e);
