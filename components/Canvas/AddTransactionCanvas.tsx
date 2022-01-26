@@ -1,8 +1,8 @@
 import { Button, Offcanvas } from "react-bootstrap";
-import TabInputs from "../Modals/TabInputs";
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import ErrorPage from "../ErrorPage";
+import CanvasInputs from "./CanvasInputs";
 
 export default function AddTransactionCanvas({ show, canvasToggle }) {
   const TRADING_ACCOUNTS_QUERY = gql`
@@ -13,13 +13,18 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
       }
     }
   `;
-  const [cache, setCache] = useState({ object: {} });
+  const [cache, setCache] = useState({ object: [] });
   const { data, error, loading } = useQuery(TRADING_ACCOUNTS_QUERY);
   if (loading) return null; // consider rendering canvas skeleton during load
   if (error) return <ErrorPage />;
 
   return (
-    <Offcanvas show={show} onHide={() => canvasToggle()} placement="end">
+    <Offcanvas
+      show={show}
+      onHide={() => canvasToggle()}
+      placement="end"
+      style={{ width: "500px" }}
+    >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Add Transaction</Offcanvas.Title>
       </Offcanvas.Header>
@@ -29,8 +34,7 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
           the entire transaction as a whole, enter the amount on any <b>one</b>{" "}
           leg only.
         </p>
-        <TabInputs
-          transaction={{}}
+        <CanvasInputs
           cache={cache}
           accounts={data.tradingAccounts}
           handleChange={(cache) => {

@@ -1,5 +1,0 @@
-mutation AddTransaction($object: TransactionsInput!) {
-  insertTransactionsOne(object: $object) {
-    id
-  }
-}
