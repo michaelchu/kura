@@ -8,7 +8,7 @@ import FETCH_TRANSACTIONS from "../api/queries/FetchTransactions.graphql";
 import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
 import DELETE_TRANSACTION from "../api/mutations/DeleteTransaction.graphql";
 import UPDATE_TRANSACTION from "../api/mutations/UpdateTransaction.graphql";
-import useModal from "../hooks/useModal";
+import useToggle from "../hooks/useToggle";
 import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import CustomToast from "../components/CustomToast";
 import dayjs from "dayjs";
@@ -17,11 +17,11 @@ import { TransactionsListCols } from "../components/Lists/ListColumns/Transactio
 import ErrorPage from "../components/ErrorPage";
 
 export default function Transactions() {
-  const { isShowing: isEditModalShowing, toggle: editModalToggle } = useModal();
-  const { isShowing: isFinishedToastShowing, toggle: showFinishedToastToggle } =
-    useModal();
-  const { isShowing: isErrorToastShowing, toggle: showErrorToastToggle } =
-    useModal();
+  const { isTrue: isEditModalShowing, toggle: editModalToggle } = useToggle();
+  const { isTrue: isFinishedToastShowing, toggle: showFinishedToastToggle } =
+    useToggle();
+  const { isTrue: isErrorToastShowing, toggle: showErrorToastToggle } =
+    useToggle();
 
   const [transaction, setTransaction] = useState({});
 

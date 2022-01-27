@@ -3,16 +3,16 @@ import Header from "./Header";
 import NavBar from "./NavBar";
 import React from "react";
 import Script from "next/script";
-import useModal from "../../hooks/useModal";
+import useToggle from "../../hooks/useToggle";
 import CustomToast from "../CustomToast";
 import AddTransactionCanvas from "../Canvas/AddTransactionCanvas";
 
 export default function Layout(props) {
-  const { isShowing: isCanvasShowing, toggle: CanvasToggle } = useModal();
-  const { isShowing: isFinishedToastShowing, toggle: showFinishedToastToggle } =
-    useModal();
-  const { isShowing: isErrorToastShowing, toggle: showErrorToastToggle } =
-    useModal();
+  const { isTrue: isCanvasShowing, toggle: CanvasToggle } = useToggle();
+  const { isTrue: isFinishedToastShowing, toggle: showFinishedToastToggle } =
+    useToggle();
+  const { isTrue: isErrorToastShowing, toggle: showErrorToastToggle } =
+    useToggle();
 
   return (
     <div>
