@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 
 export const actionTypes = [
-  { value: "BTO", label: "Buy" },
-  { value: "STO", label: "Sell" },
+  { value: "BUY", label: "Buy" },
+  { value: "SELL", label: "Sell" },
   { value: "EXP", label: "Expired" },
   { value: "ASG", label: "Assignment" },
 ];
