@@ -27,7 +27,7 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
       show={show}
       onHide={() => canvasToggle()}
       placement="end"
-      style={{ width: "375px" }}
+      style={{ width: "400px" }}
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Add Transaction</Offcanvas.Title>
