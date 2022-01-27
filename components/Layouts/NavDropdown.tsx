@@ -22,20 +22,20 @@ export default function NavDropdown({ signOut }) {
           Feedback
         </a>
         <div className="dropdown-divider" />
-        <div className="dropdown-item">
-          <span>Dark Mode</span>
-          <div className="form-check form-check-single form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              onChange={() => {
-                document.body.className == "theme-light"
-                  ? (document.body.className = "theme-dark")
-                  : (document.body.className = "theme-light");
-              }}
-            />
-          </div>
-        </div>
+        {/*<div className="dropdown-item">*/}
+        {/*  <span>Dark Mode</span>*/}
+        {/*  <div className="form-check form-check-single form-switch">*/}
+        {/*    <input*/}
+        {/*      className="form-check-input"*/}
+        {/*      type="checkbox"*/}
+        {/*      onChange={() => {*/}
+        {/*        document.body.className == "theme-light"*/}
+        {/*          ? (document.body.className = "theme-dark")*/}
+        {/*          : (document.body.className = "theme-light");*/}
+        {/*      }}*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*</div>*/}
         <a className="dropdown-item">Settings</a>
         <a
           className="dropdown-item"
