@@ -49,7 +49,7 @@ export default function Dashboard() {
                   onClick={canvasToggle}
                   className={"btn btn-pill btn-outline-teal btn-sm"}
                 >
-                  TRADE
+                  ADD TRADE
                 </a>
               )}
             </GlobalContext.Consumer>

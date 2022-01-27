@@ -48,7 +48,7 @@ export default function Nav({ router }) {
           >
             <Link href="/transactions">
               <a className="nav-link">
-                <span className="nav-link-title">Transactions</span>
+                <span className="nav-link-title">Import</span>
               </a>
             </Link>
           </li>
