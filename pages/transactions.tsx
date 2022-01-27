@@ -54,25 +54,43 @@ export default function Transactions() {
 
   return (
     <Layout>
-      <div className="page-body">
-        <div className="row row-cards">
-          <div className="col-12 d-none d-md-block">
-            <TransactionTable
-              cols={TransactionColumns}
-              data={data}
-              setTransaction={setTransaction}
-              editModalToggle={editModalToggle}
-            />
+      <div
+        className={"navbar-light sticky-top"}
+        style={{
+          alignItems: "stretch",
+          minHeight: "3.5rem",
+        }}
+      >
+        <div className="container-xl">
+          <div className={"d-table pt-3 pb-3"}>
+            <h2 className={"d-table-cell align-baseline"}>Transactions</h2>
+            <p className={"page-pretitle px-2 d-table-cell align-baseline"}>
+              As of {dayjs(new Date()).format("YYYY-MM-DD")}
+            </p>
           </div>
-          <div className="col-12 d-block d-md-none">
-            <ListGroup
-              title={"Transactions"}
-              data={data.transactions}
-              groupFunc={({ tradeDate }) => {
-                return dayjs(tradeDate).format("MMM YYYY");
-              }}
-              columns={TransactionsListCols}
-            />
+        </div>
+      </div>
+      <div className="container-xl">
+        <div className="page-body">
+          <div className="row row-cards">
+            <div className="col-12 d-none d-md-block">
+              <TransactionTable
+                cols={TransactionColumns}
+                data={data}
+                setTransaction={setTransaction}
+                editModalToggle={editModalToggle}
+              />
+            </div>
+            <div className="col-12 d-block d-md-none">
+              <ListGroup
+                title={"Transactions"}
+                data={data.transactions}
+                groupFunc={({ tradeDate }) => {
+                  return dayjs(tradeDate).format("MMM YYYY");
+                }}
+                columns={TransactionsListCols}
+              />
+            </div>
           </div>
         </div>
       </div>

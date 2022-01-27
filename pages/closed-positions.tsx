@@ -23,27 +23,45 @@ export default function ClosedPositions() {
 
   return (
     <Layout>
-      <div className="page-body">
-        <div className="row row-cards">
-          <div className="col-12 d-none d-md-block">
-            <Accordion
-              title={"Closed Positions"}
-              data={grouped_positions}
-              subComponent={{
-                component: GenericReactTable,
-                subProps: ClosedPositionColumns,
-              }}
-            />
+      <div
+        className={"navbar-light sticky-top"}
+        style={{
+          alignItems: "stretch",
+          minHeight: "3.5rem",
+        }}
+      >
+        <div className="container-xl">
+          <div className={"d-table pt-3 pb-3"}>
+            <h2 className={"d-table-cell align-baseline"}>Closed Positions</h2>
+            <p className={"page-pretitle px-2 d-table-cell align-baseline"}>
+              As of {dayjs(new Date()).format("YYYY-MM-DD")}
+            </p>
           </div>
-          <div className="col-12 d-block d-md-none">
-            <ListGroup
-              title={"Closed Positions"}
-              data={data.closedPositions}
-              groupFunc={({ exitDate }) => {
-                return dayjs(exitDate).format("MMM YYYY");
-              }}
-              columns={ClosedPositionsListCols}
-            />
+        </div>
+      </div>
+      <div className="container-xl">
+        <div className="page-body">
+          <div className="row row-cards">
+            <div className="col-12 d-none d-md-block">
+              <Accordion
+                title={"Closed Positions"}
+                data={grouped_positions}
+                subComponent={{
+                  component: GenericReactTable,
+                  subProps: ClosedPositionColumns,
+                }}
+              />
+            </div>
+            <div className="col-12 d-block d-md-none">
+              <ListGroup
+                title={"Closed Positions"}
+                data={data.closedPositions}
+                groupFunc={({ exitDate }) => {
+                  return dayjs(exitDate).format("MMM YYYY");
+                }}
+                columns={ClosedPositionsListCols}
+              />
+            </div>
           </div>
         </div>
       </div>

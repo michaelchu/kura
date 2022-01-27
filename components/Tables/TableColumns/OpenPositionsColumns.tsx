@@ -40,9 +40,13 @@ export const OpenPositionsColumns = [
         return (
           <div className="progress progress-separated">
             <div
-              className="progress-bar bg-info"
+              className="progress-bar"
               role="progressbar"
-              style={{ width: ratio + "%", height: "20px" }}
+              style={{
+                width: ratio + "%",
+                height: "20px",
+                background: "#2a9d8f",
+              }}
             />
           </div>
         );

@@ -2,6 +2,10 @@ body {
   font-family: "Rubik", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+a {
+  color: #2a9d8f;
+}
+
 .login-dark {
   background-color: #1e293b;
 }

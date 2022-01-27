@@ -13,7 +13,6 @@ import "../styles.css";
 export default function App({ Component, pageProps }: AppProps) {
   // Add your protected routes here
   const protectedRoutes = ["/dashboard", "/closed-positions", "/transactions"];
-
   const { getItem } = useStorage();
 
   const createApolloClient = () => {
