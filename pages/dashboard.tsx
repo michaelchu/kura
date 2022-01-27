@@ -39,7 +39,7 @@ export default function Dashboard() {
           <div className={"d-flex justify-content-between pt-3 pb-3"}>
             <div className={"d-table"}>
               <h2 className={"d-table-cell align-baseline"}>Overview</h2>
-              <p className={"page-pretitle px-2 d-table-cell align-baseline"}>
+              <p className={"header-pretitle px-2 d-table-cell align-baseline"}>
                 As of {dayjs(new Date()).format("YYYY-MM-DD")}
               </p>
             </div>

@@ -34,3 +34,16 @@ a {
 .theme-dark {
   color: #ffffffb3;
 }
+
+.navbar-dark {
+  background: #063349;
+}
+
+.header-pretitle {
+  font-size: .625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  color: darkgray;
+}
