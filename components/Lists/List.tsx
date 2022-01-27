@@ -4,7 +4,7 @@ import useToggle from "../../hooks/useToggle";
 import React, { useState } from "react";
 
 export default function List(props) {
-  const { isShowing: isModalShowing, toggle: ModalToggle } = useToggle();
+  const { isTrue: isModalShowing, toggle: ModalToggle } = useToggle();
   const [row, setRow] = useState({});
   return (
     <>
