@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Select from "../Select";
 import merge from "deepmerge";
-import dayjs from "dayjs";
+import {
+  actionTypes,
+  optionTypes,
+  getOptionByValue,
+  strategies,
+  formatSymbol,
+} from "../Helpers";
 
 export default function TabInputs({
   transaction,
@@ -26,46 +32,6 @@ export default function TabInputs({
       })
     );
   }, [root, strike, expiration, optionType]);
-
-  const actionTypes = [
-    { value: "BTO", label: "Buy to Open" },
-    { value: "BTC", label: "Buy to Close" },
-    { value: "STO", label: "Sell to Open" },
-    { value: "STC", label: "Sell to Close" },
-    { value: "EXP", label: "Expired" },
-    { value: "ASG", label: "Assignment" },
-  ];
-
-  const optionTypes = [
-    { value: "C", label: "Call" },
-    { value: "P", label: "Put" },
-  ];
-
-  const option_strategies = [
-    { value: "covered-stock", label: "Covered Stock" },
-    { value: "single", label: "Single Option" },
-  ];
-
-  const stock_strategies = [
-    { value: "stock", label: "Stock" },
-    { value: "covered-stock", label: "Covered Stock" },
-  ];
-
-  const getOptionByValue = (
-    options: { value: string; label: string }[],
-    value: string
-  ) => {
-    return options.find(
-      (opt: { label: string; value: string }) => opt.value === value
-    );
-  };
-
-  const formatSymbol = (root, expiration, strike, optionType) => {
-    if (expiration != "") {
-      expiration = dayjs(expiration).format("DD MMM YY");
-    }
-    return `${root} ${expiration} ${strike} ${optionType}`.trim();
-  };
 
   return (
     <div>
@@ -157,45 +123,24 @@ export default function TabInputs({
             </div>
           </div>
         )}
-        {transaction.assetType == "option" ? (
-          <div className="col-lg-12">
-            <div className="mt-2">
-              <label className="form-label">Strategy</label>
-              <Select
-                options={option_strategies}
-                name="strategy-selection"
-                defaultValue={getOptionByValue(
-                  option_strategies,
-                  transaction.strategyId
-                )}
-                onChange={(e) =>
-                  handleChange(
-                    merge(cache, { object: { strategyId: e.target.value } })
-                  )
-                }
-              />
-            </div>
+        <div className="col-lg-12">
+          <div className="mt-2">
+            <label className="form-label">Strategy</label>
+            <Select
+              options={strategies}
+              name="strategy-selection"
+              defaultValue={getOptionByValue(
+                strategies,
+                transaction.strategyId
+              )}
+              onChange={(e) =>
+                handleChange(
+                  merge(cache, { object: { strategyId: e.target.value } })
+                )
+              }
+            />
           </div>
-        ) : (
-          <div className="col-lg-12">
-            <div className="mt-2">
-              <label className="form-label">Strategy</label>
-              <Select
-                options={stock_strategies}
-                name="strategy-selection"
-                defaultValue={getOptionByValue(
-                  stock_strategies,
-                  transaction.strategyId
-                )}
-                onChange={(e) =>
-                  handleChange(
-                    merge(cache, { object: { strategyId: e.target.value } })
-                  )
-                }
-              />
-            </div>
-          </div>
-        )}
+        </div>
       </div>
       <div className="mt-3">
         <div className="dropdown-divider" />

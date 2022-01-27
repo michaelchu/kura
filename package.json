@@ -25,6 +25,7 @@
     "apexcharts": "^3.32.1",
     "apollo-boost": "^0.4.4",
     "bootstrap": "^4.5.3",
+    "classnames": "^2.3.1",
     "dayjs": "^1.10.7",
     "deepmerge": "^4.2.2",
     "graphql": "^14.7.0",
@@ -45,7 +46,8 @@
     "react-dom": "^17.0.2",
     "react-query": "^3.5.9",
     "react-select": "^3.1.1",
-    "react-table": "^7.7.0"
+    "react-table": "^7.7.0",
+    "underscore": "^1.13.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.177",

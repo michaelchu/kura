@@ -1,10 +1,10 @@
 import { ListGroup } from "react-bootstrap";
 import ListItem from "./ListItem";
-import useModal from "../../hooks/useModal";
+import useToggle from "../../hooks/useToggle";
 import React, { useState } from "react";
 
 export default function List(props) {
-  const { isShowing: isModalShowing, toggle: ModalToggle } = useModal();
+  const { isTrue: isModalShowing, toggle: ModalToggle } = useToggle();
   const [row, setRow] = useState({});
   return (
     <>
