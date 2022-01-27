@@ -28,10 +28,11 @@ export default function StrategyInputs(props) {
   });
 
   return (
-    <>
-      <label className="form-label col-form-label mt-2">
-        Leg {props.index}
-      </label>
+    <div className={"mt-2"}>
+      <div className={"d-flex align-items-center justify-content-between"}>
+        <h5 className="mt-2">Leg {props.index}</h5>
+        <button type="button" className={"btn-close"} />
+      </div>
       <div className={`container ${ctnBgClass} border rounded-3`}>
         {(side == "BUY" || side == "SELL") && (
           <>
@@ -123,6 +124,6 @@ export default function StrategyInputs(props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
