@@ -1,8 +1,17 @@
 import Select from "../Select";
 import React from "react";
-import { strategies } from "../Helpers";
 
-export default function CommonInputs(props) {
+export default function CommonInputs({
+  accounts,
+  strategies,
+  setTradingAccount,
+  setRoot,
+  setStrategy,
+  setTradeDate,
+  legs,
+  addLegs,
+  popLegs,
+}) {
   return (
     <div>
       <div className="form-group row mb-3">
@@ -11,8 +20,8 @@ export default function CommonInputs(props) {
           <Select
             name={"accounts-selection"}
             className={"form-select"}
-            options={props.accounts}
-            onChange={(e) => props.setTradingAccount(e.target.value)}
+            options={accounts}
+            onChange={(e) => setTradingAccount(e.target.value)}
           />
         </div>
       </div>
@@ -23,7 +32,7 @@ export default function CommonInputs(props) {
             type="text"
             className="form-control"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              props.setRoot(e.target.value)
+              setRoot(e.target.value)
             }
           />
         </div>
@@ -35,7 +44,7 @@ export default function CommonInputs(props) {
             name={"strategy-selection"}
             className={"form-select"}
             options={strategies}
-            onChange={(e) => props.setStrategy(e.target.value)}
+            onChange={(e) => setStrategy(e.target.value)}
           />
         </div>
       </div>
@@ -46,9 +55,38 @@ export default function CommonInputs(props) {
             type="date"
             className="form-control"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              props.setTradeDate(e.target.value)
+              setTradeDate(e.target.value)
             }
           />
+        </div>
+      </div>
+      <div className="form-group row mb-3">
+        <label className="form-label col-3 col-form-label">Legs</label>
+        <div className={"col"}>
+          <div className={"input-group input-group-sm w-100"}>
+            <button
+              className={"btn form-control"}
+              type={"button"}
+              onClick={addLegs}
+            >
+              +
+            </button>
+            <input
+              type="text"
+              className="form-control"
+              style={{ textAlign: "center" }}
+              value={legs.length}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {}}
+              readOnly
+            />
+            <button
+              className={"btn form-control"}
+              type={"button"}
+              onClick={popLegs}
+            >
+              -
+            </button>
+          </div>
         </div>
       </div>
     </div>

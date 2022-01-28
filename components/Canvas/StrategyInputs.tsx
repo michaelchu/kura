@@ -1,88 +1,66 @@
-import React, { useState } from "react";
-import { actionTypes } from "../Helpers";
+import React from "react";
+import { optionTypes, assetTypes } from "../Helpers";
 import Select from "../Select";
-import classNames from "classnames";
+import { buyBgClass, sellBgClass, ctnBgClass } from "../ClassNames";
 
-export default function StrategyInputs(props) {
-  const [side, setSide] = useState("BUY");
-  const [assetType, setAssetType] = useState("stock");
-
-  const ctnBgClass = classNames({
-    "bg-green-lt": side == "BUY",
-    "bg-red-lt": side == "SELL",
-    "bg-yellow-lt": side != "SELL" && side != "BUY",
-  });
-
-  const optionBgClass = classNames({
-    "btn-outline-teal": side == "BUY" && assetType != "option",
-    "btn-teal": side == "BUY" && assetType == "option",
-    "btn-outline-red": side == "SELL" && assetType != "option",
-    "btn-red": side == "SELL" && assetType == "option",
-  });
-
-  const stockBgClass = classNames({
-    "btn-outline-teal": side == "BUY" && assetType != "stock",
-    "btn-teal": side == "BUY" && assetType == "stock",
-    "btn-outline-red": side == "SELL" && assetType != "stock",
-    "btn-red": side == "SELL" && assetType == "stock",
-  });
-
+export default function StrategyInputs({
+  index,
+  element,
+  handleDelete,
+  handleChange,
+  handleReset,
+}) {
   return (
     <div className={"mt-2"}>
       <div className={"d-flex align-items-center justify-content-between"}>
-        <h5 className="mt-2">Leg {props.index}</h5>
-        <button type="button" className={"btn-close"} />
+        <h5 className="mt-2">Leg {index + 1}</h5>
+        <button
+          type="button"
+          className={"btn-close"}
+          onClick={() => handleDelete(index)}
+        />
       </div>
-      <div className={`container ${ctnBgClass} border rounded-3`}>
-        {(side == "BUY" || side == "SELL") && (
-          <>
-            <div className="row mt-3">
-              <div className={"col"}>
-                <div className={"btn-group w-100"}>
-                  <button
-                    type={"button"}
-                    className={`btn ${optionBgClass} btn-sm mt-1 btn-pill`}
-                    onClick={() => {
-                      setAssetType("option");
-                    }}
-                  >
-                    Option
-                  </button>
-                  <button
-                    type={"button"}
-                    className={`btn ${stockBgClass} btn-sm mt-1 btn-pill`}
-                    onClick={() => {
-                      setAssetType("stock");
-                    }}
-                  >
-                    Stock
-                  </button>
-                </div>
-              </div>
+      <div
+        className={`container ${ctnBgClass(element.action)} border rounded-3`}
+      >
+        <div className="row mt-3">
+          <div className={"col"}>
+            <div className={"btn-group w-100"}>
+              <button
+                type={"button"}
+                className={`btn ${buyBgClass(
+                  element.action
+                )} btn-sm mt-1 btn-pill`}
+                onClick={(e) => {
+                  handleChange(index, "action", "BUY");
+                }}
+              >
+                Buy
+              </button>
+              <button
+                type={"button"}
+                className={`btn ${sellBgClass(
+                  element.action
+                )} btn-sm mt-1 btn-pill`}
+                onClick={() => {
+                  handleChange(index, "action", "SELL");
+                }}
+              >
+                Sell
+              </button>
             </div>
-          </>
-        )}
-        <div className="form-group row mt-3">
-          <label className="form-label col-4 col-form-label">Expiration</label>
-          <div className="col">
-            <input
-              type="date"
-              className="form-control"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                props.setExpiration(e.target.value);
-              }}
-            />
           </div>
         </div>
         <div className="form-group row mt-3">
-          <label className="form-label col-4 col-form-label">Action</label>
+          <label className="form-label col-4 col-form-label">Asset Type</label>
           <div className="col">
             <Select
-              name={"accounts-selection"}
+              name={"assetType"}
               className={"form-select"}
-              options={actionTypes}
+              defaultValue={element.assetType}
+              options={assetTypes}
               onChange={(e) => {
-                setSide(e.target.value);
+                handleReset(index, e.target.value);
               }}
             />
           </div>
@@ -92,21 +70,75 @@ export default function StrategyInputs(props) {
           <div className="col">
             <input
               type="number"
+              name={"quantity"}
               className="form-control"
+              value={element.quantity}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                props.setQuantity(e.target.value)
+                handleChange(index, "quantity", e.target.value)
               }
             />
           </div>
         </div>
+        {element.assetType == "option" && (
+          <>
+            <div className="form-group row mt-3">
+              <label className="form-label col-4 col-form-label">
+                Option Type
+              </label>
+              <div className="col">
+                <Select
+                  name={"optionType"}
+                  className={"form-select"}
+                  options={optionTypes}
+                  defaultvalue={"C"}
+                  onChange={(e) => {
+                    handleChange(index, "optionType", e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="form-group row mt-3">
+              <label className="form-label col-4 col-form-label">
+                Expiration
+              </label>
+              <div className="col">
+                <input
+                  type="date"
+                  name={"expiration"}
+                  className="form-control"
+                  value={element.expiration || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(index, "expiration", e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="form-group row mt-3">
+              <label className="form-label col-4 col-form-label">Strike</label>
+              <div className="col">
+                <input
+                  type="number"
+                  name={"strike"}
+                  className="form-control"
+                  value={element.strike || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleChange(index, "strike", e.target.value)
+                  }
+                />
+              </div>
+            </div>
+          </>
+        )}
         <div className="form-group row mt-3">
           <label className="form-label col-4 col-form-label">Price</label>
           <div className="col">
             <input
               type="number"
+              name={"price"}
               className="form-control"
+              value={element.price || ""}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                props.setPrice(e.target.value)
+                handleChange(index, "price", e.target.value)
               }
             />
           </div>
@@ -116,9 +148,11 @@ export default function StrategyInputs(props) {
           <div className="col">
             <input
               type="number"
+              name={"fee"}
               className="form-control"
+              value={element.fee || ""}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                props.setFee(e.target.value)
+                handleChange(index, "fee", e.target.value)
               }
             />
           </div>
