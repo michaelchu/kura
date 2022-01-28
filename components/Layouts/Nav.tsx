@@ -19,14 +19,23 @@ export default function Nav({ router }) {
           </li>
           <li
             className={
-              router.pathname == "/closed-positions"
-                ? "nav-item active"
-                : "nav-item"
+              router.pathname == "/portfolios" ? "nav-item active" : "nav-item"
             }
           >
-            <Link href="/closed-positions">
+            <Link href="#">
               <a className="nav-link">
-                <span className="nav-link-title">Closed Positions</span>
+                <span className="nav-link-title">Portfolios</span>
+              </a>
+            </Link>
+          </li>
+          <li
+            className={
+              router.pathname == "/insights" ? "nav-item active" : "nav-item"
+            }
+          >
+            <Link href="#">
+              <a className="nav-link">
+                <span className="nav-link-title">Insights</span>
               </a>
             </Link>
           </li>
@@ -39,7 +48,7 @@ export default function Nav({ router }) {
           >
             <Link href="/transactions">
               <a className="nav-link">
-                <span className="nav-link-title">Transactions</span>
+                <span className="nav-link-title">Import</span>
               </a>
             </Link>
           </li>

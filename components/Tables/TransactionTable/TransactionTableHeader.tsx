@@ -5,7 +5,6 @@ export default function TransactionTableHeader({ filter, setFilter }) {
   return (
     <>
       <div className="card-header">
-        <h3 className="card-title">Transactions</h3>
         <div className="ms-auto text-muted">
           <div className="input-icon ms-2 d-inline-block">
             <input

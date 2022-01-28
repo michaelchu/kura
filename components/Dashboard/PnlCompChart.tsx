@@ -21,21 +21,21 @@ export default function PnlCompChart(props) {
                 {
                   y: 6500,
                   strokeDashArray: 5,
-                  borderColor: "#2a9d8f",
+                  borderColor: "#063349",
                   label: {
                     position: "left",
                     textAnchor: "front",
-                    borderColor: "#2a9d8f",
+                    borderColor: "#e9c46a",
                     style: {
-                      color: "#f8fafc",
-                      background: "#2a9d8f",
+                      color: "#063349",
+                      background: "#e9c46a",
                     },
                     text: "Income Goal: $6500",
                   },
                 },
               ],
             },
-            colors: ["#264653", "#2a9d8f"],
+            colors: ["#063349", "#2a9d8f"],
             chart: {
               animations: {
                 enabled: false,

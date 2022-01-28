@@ -3,9 +3,6 @@ import React from "react";
 export default function Accordion(props) {
   return (
     <div className="card">
-      <div className="card-header">
-        <h2 className="card-title">{props.title}</h2>
-      </div>
       <div className="accordion" id="open-positions-accordion">
         {Object.entries(props.data).map(
           ([key, value]: [string, any[]], idx) => {

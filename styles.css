@@ -2,6 +2,10 @@ body {
   font-family: "Rubik", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+a {
+  color: #2a9d8f;
+}
+
 .login-dark {
   background-color: #1e293b;
 }
@@ -29,4 +33,17 @@ body {
 
 .theme-dark {
   color: #ffffffb3;
+}
+
+.navbar-dark {
+  background: #063349;
+}
+
+.header-pretitle {
+  font-size: .625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  color: darkgray;
 }
