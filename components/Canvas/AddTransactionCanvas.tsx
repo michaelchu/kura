@@ -49,7 +49,7 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
           <Button
             className={"mt-1 mb-1 w-100"}
             as="input"
-            variant="primary"
+            variant="cyan"
             onClick={() => {
               mergeCache();
               canvasToggle();

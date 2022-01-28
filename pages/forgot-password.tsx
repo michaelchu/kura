@@ -30,7 +30,7 @@ export default function ForgotPassword() {
               />
             </div>
             <div className="form-footer">
-              <a href="#" className="btn btn-primary w-100">
+              <a href="#" className="btn btn-cyan w-100">
                 <IconMail />
                 Send me new password
               </a>
