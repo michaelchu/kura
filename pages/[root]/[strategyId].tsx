@@ -59,42 +59,44 @@ export default function StrategyDetail() {
 
   return (
     <Layout>
-      <div className="page-body">
-        <div className="row row-cards">
-          <div className="col-6 col-sm-4 col-lg-4">
-            <StatCard
-              title={"Current Cost Basis"}
-              value={accounting.formatMoney(cost_basis())}
-              pct_chg={-2.65}
-            />
-          </div>
-          <div className="col-6 col-sm-4 col-lg-4">
-            <StatCard
-              title={"Total Costs"}
-              value={accounting.formatMoney(total_costs())}
-              pct_chg={-5.25}
-            />
-          </div>
-          <div className="col-sm-4 col-lg-4">
-            <StatCard
-              title={"Total Fees"}
-              value={accounting.formatMoney(total_fees())}
-              pct_chg={4.34}
-            />
-          </div>
-          <div className="col-12">
-            <div className="card">
-              <div className="card-header">
-                <h3 className="card-title">
-                  Strategy Details for {root} {"("}
-                  {data.strategy.label}
-                  {")"}
-                </h3>
-              </div>
-              <GenericReactTable
-                subProps={StrategyDetailColumns}
-                data={data.strategyDetails}
+      <div className={"container-xl"}>
+        <div className="page-body">
+          <div className="row row-cards">
+            <div className="col-6 col-sm-4 col-lg-4">
+              <StatCard
+                title={"Current Cost Basis"}
+                value={accounting.formatMoney(cost_basis())}
+                pct_chg={-2.65}
               />
+            </div>
+            <div className="col-6 col-sm-4 col-lg-4">
+              <StatCard
+                title={"Total Costs"}
+                value={accounting.formatMoney(total_costs())}
+                pct_chg={-5.25}
+              />
+            </div>
+            <div className="col-sm-4 col-lg-4">
+              <StatCard
+                title={"Total Fees"}
+                value={accounting.formatMoney(total_fees())}
+                pct_chg={4.34}
+              />
+            </div>
+            <div className="col-12">
+              <div className="card">
+                <div className="card-header">
+                  <h3 className="card-title">
+                    Strategy Details for {root} {"("}
+                    {data.strategy.label}
+                    {")"}
+                  </h3>
+                </div>
+                <GenericReactTable
+                  subProps={StrategyDetailColumns}
+                  data={data.strategyDetails}
+                />
+              </div>
             </div>
           </div>
         </div>
