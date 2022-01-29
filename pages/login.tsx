@@ -99,8 +99,8 @@ export default function Login() {
                     type="submit"
                     className={
                       loading
-                        ? "btn btn-primary btn-loading w-100"
-                        : "btn btn-primary w-100"
+                        ? "btn btn-cyan btn-loading w-100"
+                        : "btn btn-cyan w-100"
                     }
                     disabled={loading}
                     onClick={() => login().then(() => client.resetStore())}

@@ -47,7 +47,7 @@ export default function Dashboard() {
               {({ canvasToggle }) => (
                 <a
                   onClick={canvasToggle}
-                  className={"btn btn-pill btn-outline-teal btn-sm"}
+                  className={"btn btn-pill btn-outline-cyan btn-sm"}
                 >
                   ADD TRADE
                 </a>

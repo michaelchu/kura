@@ -79,7 +79,7 @@ export default function SignUp() {
             <div className="form-footer">
               <button
                 type="submit"
-                className="btn btn-primary w-100"
+                className="btn btn-cyan w-100"
                 disabled={loading}
                 onClick={() => signUp()}
               >

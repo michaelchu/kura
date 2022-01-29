@@ -24,7 +24,6 @@ export default function Layout(props) {
         show={isCanvasShowing}
       />
       <Script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js" />
-      <Script src="https://cdn.jsdelivr.net/npm/litepicker@2.0.11/dist/litepicker.js" />
     </div>
   );
 }

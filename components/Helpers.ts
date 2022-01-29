@@ -12,10 +12,15 @@ export const optionTypes = [
   { value: "P", label: "Put" },
 ];
 
-export const strategies = [
-  { value: "covered-stock", label: "Covered Stock" },
-  { value: "single", label: "Single Option" },
+export const assetTypes = [
   { value: "stock", label: "Stock" },
+  { value: "option", label: "Option" },
+];
+
+export const strategies = [
+  { value: "stock", label: "Stock" },
+  { value: "single", label: "Single Option" },
+  { value: "covered-stock", label: "Covered Stock" },
 ];
 
 export const getOptionByValue = (

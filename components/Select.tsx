@@ -8,12 +8,11 @@ export default function Select(props) {
       onChange={(e) => {
         props.onChange(e);
       }}
+      value={props.defaultValue}
     >
-      {props.defaultValue?.value && <option value={""} selected />}
+      <option value={""}>{""}</option>
       {props.options.map(({ label, value }) => (
-        <option value={value} selected={value == props.defaultValue?.value}>
-          {label}
-        </option>
+        <option value={value}>{label}</option>
       ))}
     </select>
   );

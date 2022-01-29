@@ -45,7 +45,7 @@ export const OpenPositionsColumns = [
               style={{
                 width: ratio + "%",
                 height: "20px",
-                background: "#2a9d8f",
+                background: "#17a2b8",
               }}
             />
           </div>

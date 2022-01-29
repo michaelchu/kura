@@ -1,18 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommonInputs from "./CommonInputs";
 import StrategyInputs from "./StrategyInputs";
-import { range } from "underscore";
+import { strategies } from "../Helpers";
 
-export default function CanvasInputs({ accounts, commonCache, strategyCache }) {
+export default function CanvasInputs({ accounts, setCache }) {
+  const [legs, setLegs] = useState([
+    {
+      assetType: "stock",
+      action: "BUY",
+      quantity: 1,
+      price: "0.00",
+      fee: "0.00",
+    },
+  ]);
+
   const [root, setRoot] = useState("");
+  const [tradingAccountId, setTradingAccountId] = useState("");
+  const [tradeDate, setTradeDate] = useState("");
+  const [strategyId, setStrategyId] = useState("");
+
+  useEffect(() => {
+    setCache({ legs, root, tradingAccountId, tradeDate, strategyId });
+  }, [legs]);
+
   return (
     <>
-      <CommonInputs accounts={accounts} cache={commonCache} setRoot={setRoot} />
+      <CommonInputs
+        accounts={accounts}
+        strategies={strategies}
+        legs={legs}
+        setRoot={setRoot}
+        setLegs={setLegs}
+        setTradingAccountId={setTradingAccountId}
+        setTradeDate={setTradeDate}
+        setStrategyId={setStrategyId}
+      />
       <div className="mt-2">
         <div className="dropdown-divider" />
       </div>
-      {range(1, 3).map((i) => (
-        <StrategyInputs index={i} cache={strategyCache} root={root} />
+      {legs.map((element, i) => (
+        <StrategyInputs
+          index={i}
+          element={element}
+          legs={legs}
+          setLegs={setLegs}
+        />
       ))}
     </>
   );
