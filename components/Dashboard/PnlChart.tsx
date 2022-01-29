@@ -34,7 +34,7 @@ export default function PnlChart(props) {
         text: "Realized P/L",
       },
     },
-    colors: ["#063349", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"],
+    colors: ["#063349", "#17a2b8", "#e9c46a", "#f4a261", "#e76f51"],
   };
 
   return (

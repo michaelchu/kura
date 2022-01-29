@@ -35,7 +35,7 @@ export default function PnlCompChart(props) {
                 },
               ],
             },
-            colors: ["#063349", "#2a9d8f"],
+            colors: ["#063349", "#17a2b8"],
             chart: {
               animations: {
                 enabled: false,
