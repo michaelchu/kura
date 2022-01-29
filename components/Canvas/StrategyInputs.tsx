@@ -1,12 +1,18 @@
 import React from "react";
-import { optionTypes, assetTypes, formatSymbol } from "../Helpers";
+import { optionTypes, assetTypes } from "../Helpers";
 import Select from "../Select";
 import { buyBgClass, sellBgClass, ctnBgClass } from "../ClassNames";
 
 export default function StrategyInputs({ index, element, legs, setLegs }) {
   let handleReset = (i, assetType) => {
     let newLegs = [...legs];
-    newLegs[i] = { assetType, action: "BUY", quantity: "1" };
+    newLegs[i] = {
+      assetType,
+      action: "BUY",
+      quantity: 1,
+      price: "0.00",
+      fee: "0.00",
+    };
     setLegs(newLegs);
   };
 
@@ -86,7 +92,7 @@ export default function StrategyInputs({ index, element, legs, setLegs }) {
               className="form-control"
               value={element.quantity}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleChange(index, "quantity", e.target.value)
+                handleChange(index, "quantity", Number(e.target.value))
               }
             />
           </div>

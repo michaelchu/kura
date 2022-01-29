@@ -10,6 +10,7 @@ export default function Select(props) {
       }}
       value={props.defaultValue}
     >
+      <option value={""}>{""}</option>
       {props.options.map(({ label, value }) => (
         <option value={value}>{label}</option>
       ))}

@@ -5,16 +5,22 @@ import { strategies } from "../Helpers";
 
 export default function CanvasInputs({ accounts, setCache }) {
   const [legs, setLegs] = useState([
-    { assetType: "stock", action: "BUY", quantity: "1" },
-    { assetType: "option", action: "SELL", quantity: "1" },
-    { assetType: "stock", action: "BUY", quantity: "1" },
-    { assetType: "option", action: "SELL", quantity: "1" },
+    {
+      assetType: "stock",
+      action: "BUY",
+      quantity: 1,
+      price: "0.00",
+      fee: "0.00",
+    },
   ]);
 
   const [root, setRoot] = useState("");
+  const [tradingAccountId, setTradingAccountId] = useState("");
+  const [tradeDate, setTradeDate] = useState("");
+  const [strategyId, setStrategyId] = useState("");
 
   useEffect(() => {
-    setCache(legs);
+    setCache({ legs, root, tradingAccountId, tradeDate, strategyId });
   }, [legs]);
 
   return (
@@ -25,6 +31,9 @@ export default function CanvasInputs({ accounts, setCache }) {
         legs={legs}
         setRoot={setRoot}
         setLegs={setLegs}
+        setTradingAccountId={setTradingAccountId}
+        setTradeDate={setTradeDate}
+        setStrategyId={setStrategyId}
       />
       <div className="mt-2">
         <div className="dropdown-divider" />

@@ -1,5 +1,5 @@
 mutation insertTransactions($object: [TransactionsInput]!) {
     insertTransactions(object: $object) {
-        status
+        success
     }
 }

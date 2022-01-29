@@ -4,12 +4,24 @@ import React from "react";
 export default function CommonInputs({
   accounts,
   strategies,
-  setRoot,
   legs,
   setLegs,
+  setRoot,
+  setTradingAccountId,
+  setTradeDate,
+  setStrategyId,
 }) {
   let addLegs = () => {
-    setLegs([...legs, { assetType: "stock", action: "BUY", quantity: "1" }]);
+    setLegs([
+      ...legs,
+      {
+        assetType: "stock",
+        action: "BUY",
+        quantity: 1,
+        price: "0.00",
+        fee: "0.00",
+      },
+    ]);
   };
 
   let popLegs = () => {
@@ -38,7 +50,10 @@ export default function CommonInputs({
             name={"accounts-selection"}
             className={"form-select"}
             options={accounts}
-            onChange={(e) => handleChange("tradingAccountId", e.target.value)}
+            onChange={(e) => {
+              setTradingAccountId(e.target.value);
+              handleChange("tradingAccountId", e.target.value);
+            }}
           />
         </div>
       </div>
@@ -62,7 +77,10 @@ export default function CommonInputs({
             name={"strategy-selection"}
             className={"form-select"}
             options={strategies}
-            onChange={(e) => handleChange("strategyId", e.target.value)}
+            onChange={(e) => {
+              setStrategyId(e.target.value);
+              handleChange("strategyId", e.target.value);
+            }}
           />
         </div>
       </div>
@@ -72,9 +90,10 @@ export default function CommonInputs({
           <input
             type="date"
             className="form-control"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange("tradeDate", e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setTradeDate(e.target.value);
+              handleChange("tradeDate", e.target.value);
+            }}
           />
         </div>
       </div>

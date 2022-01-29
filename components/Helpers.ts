@@ -18,9 +18,9 @@ export const assetTypes = [
 ];
 
 export const strategies = [
-  { value: "covered-stock", label: "Covered Stock" },
-  { value: "single", label: "Single Option" },
   { value: "stock", label: "Stock" },
+  { value: "single", label: "Single Option" },
+  { value: "covered-stock", label: "Covered Stock" },
 ];
 
 export const getOptionByValue = (
