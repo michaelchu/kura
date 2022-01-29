@@ -13,10 +13,7 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
       }
     }
   `;
-  const [commonCache, setCommonCache] = useState({});
-  const [strategyCache, setStrategyCache] = useState({ object: [] });
-
-  const mergeCache = () => {};
+  const [cache, setCache] = useState({});
 
   const { data, error, loading } = useQuery(TRADING_ACCOUNTS_QUERY);
   if (loading) return null; // consider rendering canvas skeleton during load
@@ -38,11 +35,7 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
           the entire transaction as a whole, enter the amount on any <b>one</b>{" "}
           leg only.
         </p>
-        <CanvasInputs
-          commonCache={commonCache}
-          strategyCache={strategyCache}
-          accounts={data.tradingAccounts}
-        />
+        <CanvasInputs setCache={setCache} accounts={data.tradingAccounts} />
       </Offcanvas.Body>
       <div>
         <div className="card-footer">
@@ -51,7 +44,7 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
             as="input"
             variant="cyan"
             onClick={() => {
-              mergeCache();
+              console.log(cache);
               canvasToggle();
             }}
             type="submit"

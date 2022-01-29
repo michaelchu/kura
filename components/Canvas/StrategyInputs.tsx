@@ -1,15 +1,27 @@
 import React from "react";
-import { optionTypes, assetTypes } from "../Helpers";
+import { optionTypes, assetTypes, formatSymbol } from "../Helpers";
 import Select from "../Select";
 import { buyBgClass, sellBgClass, ctnBgClass } from "../ClassNames";
 
-export default function StrategyInputs({
-  index,
-  element,
-  handleDelete,
-  handleChange,
-  handleReset,
-}) {
+export default function StrategyInputs({ index, element, legs, setLegs }) {
+  let handleReset = (i, assetType) => {
+    let newLegs = [...legs];
+    newLegs[i] = { assetType, action: "BUY", quantity: "1" };
+    setLegs(newLegs);
+  };
+
+  let handleChange = (i, key, val) => {
+    let newLegs = [...legs];
+    newLegs[i][key] = val;
+    setLegs(newLegs);
+  };
+
+  let handleDelete = (i) => {
+    let newLegs = [...legs];
+    newLegs.splice(i, 1);
+    setLegs(newLegs);
+  };
+
   return (
     <div className={"mt-2"}>
       <div className={"d-flex align-items-center justify-content-between"}>

@@ -4,14 +4,31 @@ import React from "react";
 export default function CommonInputs({
   accounts,
   strategies,
-  setTradingAccount,
   setRoot,
-  setStrategy,
-  setTradeDate,
   legs,
-  addLegs,
-  popLegs,
+  setLegs,
 }) {
+  let addLegs = () => {
+    setLegs([...legs, { assetType: "stock", action: "BUY", quantity: "1" }]);
+  };
+
+  let popLegs = () => {
+    let newLegs = [...legs];
+    newLegs = newLegs.slice(0, -1);
+    setLegs(newLegs);
+  };
+
+  let handleChange = (key, val) => {
+    const newLegs = [...legs];
+
+    const mergedLegs = newLegs.map((leg) => {
+      const newLeg = {};
+      newLeg[key] = val;
+      return { ...leg, ...newLeg };
+    });
+    setLegs(mergedLegs);
+  };
+
   return (
     <div>
       <div className="form-group row mb-3">
@@ -21,7 +38,7 @@ export default function CommonInputs({
             name={"accounts-selection"}
             className={"form-select"}
             options={accounts}
-            onChange={(e) => setTradingAccount(e.target.value)}
+            onChange={(e) => handleChange("tradingAccountId", e.target.value)}
           />
         </div>
       </div>
@@ -31,9 +48,10 @@ export default function CommonInputs({
           <input
             type="text"
             className="form-control"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setRoot(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setRoot(e.target.value);
+              handleChange("symbol", e.target.value);
+            }}
           />
         </div>
       </div>
@@ -44,7 +62,7 @@ export default function CommonInputs({
             name={"strategy-selection"}
             className={"form-select"}
             options={strategies}
-            onChange={(e) => setStrategy(e.target.value)}
+            onChange={(e) => handleChange("strategyId", e.target.value)}
           />
         </div>
       </div>
@@ -55,7 +73,7 @@ export default function CommonInputs({
             type="date"
             className="form-control"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setTradeDate(e.target.value)
+              handleChange("tradeDate", e.target.value)
             }
           />
         </div>
