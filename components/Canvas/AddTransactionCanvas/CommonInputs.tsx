@@ -1,4 +1,4 @@
-import Select from "../Select";
+import Select from "../../Select";
 import React from "react";
 
 export default function CommonInputs({

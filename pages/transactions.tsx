@@ -1,52 +1,28 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import _ from "lodash";
+import { useQuery } from "@apollo/client";
 
 import Layout from "../components/Layouts/Layout";
 import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
 
 import FETCH_TRANSACTIONS from "../api/queries/FetchTransactions.graphql";
 import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
-import DELETE_TRANSACTION from "../api/mutations/DeleteTransaction.graphql";
-import UPDATE_TRANSACTION from "../api/mutations/UpdateTransaction.graphql";
 import useToggle from "../hooks/useToggle";
-import EditTransactionModal from "../components/Modals/EditTransactionModal";
 import CustomToast from "../components/CustomToast";
 import dayjs from "dayjs";
 import ListGroup from "../components/Lists/ListGroup";
 import { TransactionsListCols } from "../components/Lists/ListColumns/TransactionsListCols";
 import ErrorPage from "../components/ErrorPage";
+import EditTransactionCanvas from "../components/Canvas/EditTransactionCanvas/EditTransactionCanvas";
 
 export default function Transactions() {
-  const { isTrue: isEditModalShowing, toggle: editModalToggle } = useToggle();
+  const { isTrue: isEditCanvasShowing, toggle: canvasToggle } = useToggle();
   const { isTrue: isFinishedToastShowing, toggle: showFinishedToastToggle } =
     useToggle();
   const { isTrue: isErrorToastShowing, toggle: showErrorToastToggle } =
     useToggle();
 
   const [transaction, setTransaction] = useState({});
-
-  const [updateMutation, {}] = useMutation(UPDATE_TRANSACTION, {
-    onError: (err) => {
-      console.log(err);
-      showErrorToastToggle();
-    },
-    onCompleted: () => {
-      showFinishedToastToggle();
-    },
-    refetchQueries: [FETCH_TRANSACTIONS],
-    awaitRefetchQueries: true,
-  });
-
-  const [deleteMutation, {}] = useMutation(DELETE_TRANSACTION, {
-    onError: () => {
-      showErrorToastToggle();
-    },
-    onCompleted: () => {
-      showFinishedToastToggle();
-    },
-    refetchQueries: [FETCH_TRANSACTIONS],
-    awaitRefetchQueries: true,
-  });
 
   const { data, loading, error } = useQuery(FETCH_TRANSACTIONS);
   if (loading) return <Layout />;
@@ -78,7 +54,7 @@ export default function Transactions() {
                 cols={TransactionColumns}
                 data={data}
                 setTransaction={setTransaction}
-                editModalToggle={editModalToggle}
+                canvasToggle={canvasToggle}
               />
             </div>
             <div className="col-12 d-block d-md-none">
@@ -95,19 +71,11 @@ export default function Transactions() {
         </div>
       </div>
 
-      <EditTransactionModal
-        show={isEditModalShowing}
-        selectedTrans={transaction}
-        accounts={data.tradingAccounts}
-        handleClose={() => editModalToggle()}
-        handleCloseAndUpdate={(data) => {
-          editModalToggle();
-          updateMutation({ variables: data }).then();
-        }}
-        handleCloseAndDelete={(id) => {
-          editModalToggle();
-          deleteMutation({ variables: { id: id } }).then();
-        }}
+      <EditTransactionCanvas
+        canvasToggle={canvasToggle}
+        show={isEditCanvasShowing}
+        transaction={transaction}
+        setTransaction={setTransaction}
       />
 
       <CustomToast

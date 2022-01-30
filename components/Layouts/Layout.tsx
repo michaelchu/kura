@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import React from "react";
 import Script from "next/script";
 import useToggle from "../../hooks/useToggle";
-import AddTransactionCanvas from "../Canvas/AddTransactionCanvas";
+import AddTransactionCanvas from "../Canvas/AddTransactionCanvas/AddTransactionCanvas";
 import { GlobalContext } from "../../contexts/context";
 
 export default function Layout(props) {

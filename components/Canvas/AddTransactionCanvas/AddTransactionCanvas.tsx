@@ -1,12 +1,12 @@
 import { Button, Offcanvas } from "react-bootstrap";
 import React, { useState } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import ErrorPage from "../ErrorPage";
+import ErrorPage from "../../ErrorPage";
 import CanvasInputs from "./CanvasInputs";
-import { formatSymbol } from "../Helpers";
-import INSERT_TRANSACTIONS from "../../api/mutations/InsertTransactions.graphql";
-import FETCH_TRANSACTIONS from "../../api/queries/FetchTransactions.graphql";
-import DASHBOARD_QUERY from "../../api/queries/Dashboard.graphql";
+import { formatSymbol } from "../../Helpers";
+import INSERT_TRANSACTIONS from "../../../api/mutations/InsertTransactions.graphql";
+import FETCH_TRANSACTIONS from "../../../api/queries/FetchTransactions.graphql";
+import DASHBOARD_QUERY from "../../../api/queries/Dashboard.graphql";
 
 export default function AddTransactionCanvas({ show, canvasToggle }) {
   const TRADING_ACCOUNTS_QUERY = gql`

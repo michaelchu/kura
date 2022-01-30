@@ -15,7 +15,7 @@ export default function TransactionTable({
   cols,
   data,
   setTransaction,
-  editModalToggle,
+  canvasToggle,
 }) {
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(() => data.transactions, [data.transactions]);
@@ -105,7 +105,7 @@ export default function TransactionTable({
                     <a
                       onClick={() => {
                         setTransaction(row.original);
-                        editModalToggle();
+                        canvasToggle();
                       }}
                     >
                       {" "}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommonInputs from "./CommonInputs";
 import StrategyInputs from "./StrategyInputs";
-import { strategies } from "../Helpers";
+import { strategies } from "../../Helpers";
 
 export default function CanvasInputs({ accounts, setCache }) {
   const [legs, setLegs] = useState([
