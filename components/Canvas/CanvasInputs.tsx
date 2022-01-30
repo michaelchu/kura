@@ -34,6 +34,7 @@ export default function CanvasInputs({ accounts, setCache }) {
         setTradingAccountId={setTradingAccountId}
         setTradeDate={setTradeDate}
         setStrategyId={setStrategyId}
+        strategyId={strategyId}
       />
       <div className="mt-2">
         <div className="dropdown-divider" />

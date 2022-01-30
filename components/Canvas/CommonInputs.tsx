@@ -10,6 +10,7 @@ export default function CommonInputs({
   setTradingAccountId,
   setTradeDate,
   setStrategyId,
+  strategyId,
 }) {
   let addLegs = () => {
     setLegs([
@@ -97,35 +98,38 @@ export default function CommonInputs({
           />
         </div>
       </div>
-      <div className="form-group row mb-3">
-        <label className="form-label col-3 col-form-label">Legs</label>
-        <div className={"col"}>
-          <div className={"input-group input-group-sm w-100"}>
-            <button
-              className={"btn form-control"}
-              type={"button"}
-              onClick={addLegs}
-            >
-              +
-            </button>
-            <input
-              type="text"
-              className="form-control"
-              style={{ textAlign: "center" }}
-              value={legs.length}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {}}
-              readOnly
-            />
-            <button
-              className={"btn form-control"}
-              type={"button"}
-              onClick={popLegs}
-            >
-              -
-            </button>
+      {strategyId != "stock" && strategyId != "" && (
+        <div className="form-group row mb-3">
+          <label className="form-label col-3 col-form-label">Legs</label>
+          <div className={"col"}>
+            <div className={"input-group input-group-sm w-100"}>
+              <button
+                className={"btn form-control"}
+                type={"button"}
+                onClick={addLegs}
+              >
+                +
+              </button>
+              <input
+                type="text"
+                className="form-control"
+                style={{ textAlign: "center" }}
+                value={legs.length}
+                readOnly
+              />
+              <button
+                className={"btn form-control"}
+                type={"button"}
+                onClick={() => {
+                  legs.length > 1 ? popLegs() : null;
+                }}
+              >
+                -
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

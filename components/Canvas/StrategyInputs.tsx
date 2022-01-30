@@ -32,11 +32,13 @@ export default function StrategyInputs({ index, element, legs, setLegs }) {
     <div className={"mt-2"}>
       <div className={"d-flex align-items-center justify-content-between"}>
         <h5 className="mt-2">Leg {index + 1}</h5>
-        <button
-          type="button"
-          className={"btn-close"}
-          onClick={() => handleDelete(index)}
-        />
+        {legs.length != 1 && (
+          <button
+            type="button"
+            className={"btn-close"}
+            onClick={() => handleDelete(index)}
+          />
+        )}
       </div>
       <div
         className={`container ${ctnBgClass(element.action)} border rounded-3`}
