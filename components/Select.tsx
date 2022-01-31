@@ -11,13 +11,9 @@ export default function Select(props) {
       }}
       value={props.defaultValue}
     >
-      <option key={nanoid()} value={""}>
-        {""}
-      </option>
+      <option value={""}>{""}</option>
       {props.options.map(({ label, value }) => (
-        <option key={nanoid()} value={value}>
-          {label}
-        </option>
+        <option value={value}>{label}</option>
       ))}
     </select>
   );

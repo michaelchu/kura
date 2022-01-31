@@ -20,10 +20,12 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Rubik"
           />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <meta charSet="utf-8" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
           />
+          <title>Kura - Porfolio Tracker & Planner</title>
         </Head>
 
         <body className="theme-light">

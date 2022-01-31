@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { nanoid } from "nanoid";
 const render = (row, renderProps): JSX.Element => {
   if (!("accessor" in renderProps)) return <></>;
   const value = row[renderProps.accessor];
@@ -28,7 +29,7 @@ export default function ListGroup(props) {
                   return (
                     <>
                       <div className="list-group-item">
-                        <div className="row">
+                        <div className="row" key={nanoid()}>
                           {props.columns.map((col, index) => {
                             return (
                               <div className={col.width ? col.width : "col-4"}>
