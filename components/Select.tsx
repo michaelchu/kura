@@ -1,4 +1,5 @@
 import React from "react";
+import { nanoid } from "nanoid";
 
 export default function Select(props) {
   return (
@@ -10,9 +11,13 @@ export default function Select(props) {
       }}
       value={props.defaultValue}
     >
-      <option value={""}>{""}</option>
+      <option key={nanoid()} value={""}>
+        {""}
+      </option>
       {props.options.map(({ label, value }) => (
-        <option value={value}>{label}</option>
+        <option key={nanoid()} value={value}>
+          {label}
+        </option>
       ))}
     </select>
   );

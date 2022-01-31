@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommonInputs from "./CommonInputs";
 import StrategyInputs from "./StrategyInputs";
 import { strategies } from "../../Helpers";
+import { nanoid } from "nanoid";
 
 export default function CanvasInputs({ accounts, setCache }) {
   const [legs, setLegs] = useState([
@@ -42,6 +43,7 @@ export default function CanvasInputs({ accounts, setCache }) {
       {legs.map((element, i) => (
         <StrategyInputs
           index={i}
+          key={nanoid()}
           element={element}
           legs={legs}
           setLegs={setLegs}

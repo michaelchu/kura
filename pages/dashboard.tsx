@@ -59,12 +59,12 @@ export default function Dashboard() {
       <div className="container-xl">
         <div className="page-body">
           <div className="row row-deck row-cards">
-            {/*<StatsBoard*/}
-            {/*  total_fees={totalFees}*/}
-            {/*  total_pnl={totalPnl}*/}
-            {/*  monthly_pnl={monthlyPnl}*/}
-            {/*  win_rate={winRate}*/}
-            {/*/>*/}
+            <StatsBoard
+              total_fees={totalFees}
+              total_pnl={totalPnl}
+              monthly_pnl={monthlyPnl}
+              win_rate={winRate}
+            />
 
             <DashboardChart data={data} chart={Chart} />
 

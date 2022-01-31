@@ -2,6 +2,7 @@ import { ListGroup } from "react-bootstrap";
 import ListItem from "./ListItem";
 import useToggle from "../../hooks/useToggle";
 import React, { useState } from "react";
+import { nanoid } from "nanoid";
 
 export default function List(props) {
   const { isTrue: isModalShowing, toggle: ModalToggle } = useToggle();
@@ -15,6 +16,7 @@ export default function List(props) {
         <ListGroup variant={"flush"}>
           {props.data.map((row) => (
             <ListItem
+              key={nanoid()}
               row={row}
               columns={props.columns}
               onClick={(row) => {

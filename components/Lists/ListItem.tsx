@@ -1,4 +1,5 @@
 import { ListGroup } from "react-bootstrap";
+import { nanoid } from "nanoid";
 
 export default function ListItem(props) {
   const render = (row, renderProps): JSX.Element => {
@@ -18,7 +19,7 @@ export default function ListItem(props) {
       <div className="row">
         {props.columns.map((col, index) => {
           return (
-            <div className={col.width ? col.width : "col"}>
+            <div className={col.width ? col.width : "col"} key={nanoid()}>
               <div
                 className={
                   "text-body" + (props.columns[index + 1] ? "" : " text-end")
