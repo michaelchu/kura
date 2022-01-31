@@ -38,3 +38,11 @@ export const formatSymbol = (root, expiration, strike, optionType) => {
   }
   return `${root} ${expiration} ${strike} ${optionType}`.trim();
 };
+
+export const buyActions = (action) => {
+  return action == "BUY" || action == "BTO" || action == "BTC";
+};
+
+export const sellActions = (action) => {
+  return action == "SELL" || action == "STO" || action == "STC";
+};

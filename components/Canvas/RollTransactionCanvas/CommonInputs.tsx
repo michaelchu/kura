@@ -3,23 +3,33 @@ import React from "react";
 
 export default function CommonInputs({
   accounts,
-  element,
   strategies,
-  handleChange,
+  transactions,
+  setTransactions,
+  tradeDate,
+  setTradeDate,
 }) {
+  let handleChange = (key, val) => {
+    const newTransactions = [...transactions];
+
+    const mergedTransactions = newTransactions.map((leg) => {
+      const newLeg = {};
+      newLeg[key] = val;
+      return { ...leg, ...newLeg };
+    });
+    setTransactions(mergedTransactions);
+  };
   return (
     <div>
       <div className="form-group row mb-2">
         <label className="form-label col-3 col-form-label">Accounts</label>
         <div className={"col"}>
           <Select
-            name={"edit-accounts-selection"}
+            name={"roll-accounts-selection"}
             className={"form-select"}
             options={accounts}
-            defaultValue={element.tradingAccountId}
-            onChange={(e) => {
-              handleChange(1, "tradingAccountId", e.target.value);
-            }}
+            defaultValue={transactions[0].tradingAccountId}
+            disabled={true}
           />
         </div>
       </div>
@@ -29,24 +39,8 @@ export default function CommonInputs({
           <input
             type="text"
             className="form-control"
-            defaultValue={element.symbol.split(" ")[0]}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleChange(1, "symbol", e.target.value);
-            }}
-          />
-        </div>
-      </div>
-      <div className="form-group row mb-2">
-        <label className="form-label col-3 col-form-label">Strategy</label>
-        <div className={"col"}>
-          <Select
-            name={"edit-strategy-selection"}
-            className={"form-select"}
-            defaultValue={element.strategyId}
-            options={strategies}
-            onChange={(e) => {
-              handleChange(1, "strategyId", e.target.value);
-            }}
+            defaultValue={transactions[0].symbol.split(" ")[0]}
+            disabled={true}
           />
         </div>
       </div>
@@ -55,10 +49,11 @@ export default function CommonInputs({
         <div className={"col"}>
           <input
             type="date"
-            defaultValue={element.tradeDate}
             className="form-control"
+            defaultValue={tradeDate}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleChange(1, "tradeDate", e.target.value);
+              setTradeDate(e.target.value);
+              handleChange("tradeDate", e.target.value);
             }}
           />
         </div>

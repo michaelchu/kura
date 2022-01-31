@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import CommonInputs from "./CommonInputs";
 import StrategyInputs from "./StrategyInputs";
 import { strategies } from "../../Helpers";
-import { nanoid } from "nanoid";
 
 export default function CanvasInputs({ accounts, setCache }) {
-  const [legs, setLegs] = useState([
+  const [transactions, setTransactions] = useState([
     {
       assetType: "stock",
       action: "BUY",
       quantity: 1,
-      price: "0.00",
-      fee: "0.00",
     },
   ]);
 
@@ -21,17 +18,17 @@ export default function CanvasInputs({ accounts, setCache }) {
   const [strategyId, setStrategyId] = useState("");
 
   useEffect(() => {
-    setCache({ legs, root, tradingAccountId, tradeDate, strategyId });
-  }, [legs]);
+    setCache({ transactions, root, tradingAccountId, tradeDate, strategyId });
+  }, [transactions]);
 
   return (
     <>
       <CommonInputs
         accounts={accounts}
         strategies={strategies}
-        legs={legs}
+        transactions={transactions}
+        setTransactions={setTransactions}
         setRoot={setRoot}
-        setLegs={setLegs}
         setTradingAccountId={setTradingAccountId}
         setTradeDate={setTradeDate}
         setStrategyId={setStrategyId}
@@ -40,13 +37,13 @@ export default function CanvasInputs({ accounts, setCache }) {
       <div className="mt-2">
         <div className="dropdown-divider" />
       </div>
-      {legs.map((element, i) => (
+      {transactions.map((element, i) => (
         <StrategyInputs
           index={i}
-          key={nanoid()}
+          key={i}
           element={element}
-          legs={legs}
-          setLegs={setLegs}
+          transactions={transactions}
+          setTransactions={setTransactions}
         />
       ))}
     </>

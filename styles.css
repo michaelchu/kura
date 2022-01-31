@@ -38,6 +38,9 @@ a {
 .navbar-dark {
   background: #063349;
 }
+.alert {
+  background: #ffdede;
+}
 
 .header-pretitle {
   font-size: .625rem;

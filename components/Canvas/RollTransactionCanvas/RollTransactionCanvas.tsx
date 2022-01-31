@@ -1,19 +1,19 @@
-import { Alert, Button, Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas, Alert } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import ErrorPage from "../../ErrorPage";
 import CanvasInputs from "./CanvasInputs";
-import UPDATE_TRANSACTION from "../../../api/mutations/UpdateTransaction.graphql";
-import DELETE_TRANSACTION from "../../../api/mutations/DeleteTransaction.graphql";
-import FETCH_TRANSACTIONS from "../../../api/queries/FetchTransactions.graphql";
 import { formatSymbol } from "../../Helpers";
+import INSERT_TRANSACTIONS from "../../../api/mutations/InsertTransactions.graphql";
+import FETCH_TRANSACTIONS from "../../../api/queries/FetchTransactions.graphql";
+import DASHBOARD_QUERY from "../../../api/queries/Dashboard.graphql";
 import { btnSubmitClass } from "../../ClassNames";
+import DELETE_TRANSACTION from "../../../api/mutations/DeleteTransaction.graphql";
 
-export default function EditTransactionCanvas({
-  transaction,
-  setTransaction,
+export default function RollTransactionCanvas({
   show,
   canvasToggle,
+  transaction,
 }) {
   const TRADING_ACCOUNTS_QUERY = gql`
     query FetchTradingAccounts {
@@ -24,40 +24,31 @@ export default function EditTransactionCanvas({
     }
   `;
 
-  const processCache = ({ id, object }) => {
-    const symbol =
-      object.assetType == "stock"
-        ? object.symbol.split(" ")[0]
-        : formatSymbol(
-            object.symbol.split(" ")[0],
-            object.expiration,
-            object.strike,
-            object.optionType
-          );
-    const newObj = { ...object, ...{ symbol } };
-    return { id, object: newObj };
-  };
   const [
-    editMutation,
+    insertMutation,
     {
-      loading: editMutationLoading,
-      error: editMutationError,
-      reset: editReset,
+      loading: insertMutationLoading,
+      error: insertMutationError,
+      reset: insertReset,
     },
-  ] = useMutation(UPDATE_TRANSACTION, {
+  ] = useMutation(INSERT_TRANSACTIONS, {
     onError: (err) => {
       console.log(err);
     },
     onCompleted: () => {
       canvasToggle();
     },
-    refetchQueries: [FETCH_TRANSACTIONS],
+    refetchQueries: [DASHBOARD_QUERY, FETCH_TRANSACTIONS],
     awaitRefetchQueries: true,
   });
 
   const [
     deleteMutation,
-    { loading: deleteMutationLoading, reset: deleteReset },
+    {
+      loading: deleteMutationLoading,
+      error: deleteMutationError,
+      reset: deleteReset,
+    },
   ] = useMutation(DELETE_TRANSACTION, {
     onError: (err) => {
       console.log(err);
@@ -70,21 +61,37 @@ export default function EditTransactionCanvas({
   });
 
   const [cache, setCache] = useState({
-    id: "",
-    object: {},
+    transactions: [{}],
+    root: "",
+    tradingAccountId: "",
+    tradeDate: "",
+    strategyId: "",
   });
 
-  useEffect(() => {
-    const {
-      strategy,
-      id,
-      totalCost,
-      tradingAccountName,
-      __typename,
-      ...filtered
-    } = transaction;
-    setCache({ ...cache, ...{ id: transaction.id, object: filtered } });
-  }, [transaction]);
+  const processCache = ({
+    transactions,
+    root,
+    tradingAccountId,
+    tradeDate,
+    strategyId,
+  }) => {
+    const object = transactions.map((t) => {
+      const symbol =
+        t.assetType == "stock"
+          ? root
+          : formatSymbol(root, t.expiration, t.strike, t.optionType);
+      return {
+        ...t,
+        ...{
+          symbol,
+          tradingAccountId,
+          tradeDate,
+          strategyId,
+        },
+      };
+    });
+    return { object };
+  };
 
   const { data, error, loading } = useQuery(TRADING_ACCOUNTS_QUERY);
   if (loading) return null; // consider rendering canvas skeleton during load
@@ -93,26 +100,27 @@ export default function EditTransactionCanvas({
   return (
     <Offcanvas
       show={show}
-      onExited={() => {
-        editReset();
-        deleteReset();
-      }}
       onHide={() => canvasToggle()}
+      onExited={() => {
+        deleteReset();
+        insertReset();
+      }}
       placement="end"
       style={{ width: "400px" }}
     >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Edit Transaction</Offcanvas.Title>
+        <Offcanvas.Title>Roll Transaction</Offcanvas.Title>
       </Offcanvas.Header>
+
       <Offcanvas.Body>
-        {editMutationError && (
+        {(insertMutationError || deleteMutationError) && (
           <Alert variant="danger">
             There is something wrong, please try again!
           </Alert>
         )}
         <CanvasInputs
+          setCache={setCache}
           transaction={transaction}
-          setTransaction={setTransaction}
           accounts={data.tradingAccounts}
         />
       </Offcanvas.Body>
@@ -139,17 +147,16 @@ export default function EditTransactionCanvas({
             <div className="col">
               <Button
                 className={
-                  "mt-1 mb-1 " + btnSubmitClass(editMutationLoading, "cyan")
+                  "mt-1 mb-1 " + btnSubmitClass(insertMutationLoading, "cyan")
                 }
                 as="input"
                 variant="cyan"
                 onClick={() => {
-                  const data = processCache(cache);
-                  editMutation({ variables: data }).then();
+                  insertMutation({ variables: processCache(cache) }).then();
                 }}
                 type="submit"
-                value="Save"
-                disabled={editMutationLoading}
+                value="Roll"
+                disabled={insertMutationLoading}
               />
             </div>
           </div>

@@ -6,7 +6,7 @@ import { RecentTransListCols } from "../components/Lists/ListColumns/RecentTrans
 import { OpenPositionsListCols } from "../components/Lists/ListColumns/OpenPositionsListCols";
 import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import List from "../components/Lists/List";
 import StatsBoard from "../components/Dashboard/StatsBoard";
 import dynamic from "next/dynamic";
@@ -16,9 +16,14 @@ import OpenPosDetailsModal from "../components/Modals/OpenPosDetailsModal";
 import ErrorPage from "../components/ErrorPage";
 import dayjs from "dayjs";
 import { GlobalContext } from "../contexts/context";
+import OpenPositionsTable from "../components/Tables/OpenPositionsTable";
+import RollTransactionCanvas from "../components/Canvas/RollTransactionCanvas/RollTransactionCanvas";
+import useToggle from "../hooks/useToggle";
 
 export default function Dashboard() {
   const { loading, error, data } = useQuery(DASHBOARD_QUERY);
+  const { isTrue: isEditCanvasShowing, toggle: editCanvasToggle } = useToggle();
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
   if (loading) return <Layout />;
@@ -73,10 +78,11 @@ export default function Dashboard() {
                 <div className="card-header">
                   <h3 className="card-title">Open Positions</h3>
                 </div>
-                <GenericReactTable
-                  title={"Open Positions"}
-                  subProps={OpenPositionsColumns}
+                <OpenPositionsTable
+                  cols={OpenPositionsColumns}
                   data={data.openPositions}
+                  setSelectedTransaction={setSelectedTransaction}
+                  canvasToggle={editCanvasToggle}
                 />
               </div>
             </div>
@@ -112,6 +118,11 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      <RollTransactionCanvas
+        canvasToggle={editCanvasToggle}
+        show={isEditCanvasShowing}
+        transaction={selectedTransaction}
+      />
     </Layout>
   );
 }

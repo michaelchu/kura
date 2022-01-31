@@ -6,6 +6,7 @@ import { gql, useMutation } from "@apollo/client";
 import useStorage from "../hooks/useStorage";
 import useSession from "../hooks/useSession";
 import { ApolloConsumer } from "@apollo/client";
+import { btnSubmitClass } from "../components/ClassNames";
 
 export default function Login() {
   const LoginMutation = gql`
@@ -97,11 +98,7 @@ export default function Login() {
                 <div className="form-footer">
                   <button
                     type="submit"
-                    className={
-                      loading
-                        ? "btn btn-cyan btn-loading w-100"
-                        : "btn btn-cyan w-100"
-                    }
+                    className={btnSubmitClass(loading, "cyan")}
                     disabled={loading}
                     onClick={() => login().then(() => client.resetStore())}
                   >

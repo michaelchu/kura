@@ -23,16 +23,19 @@ export default function ListGroup(props) {
         {Object.entries(grouped_data).map(
           ([heading, rows]: [string, any[]]) => {
             return (
-              <>
+              <div key={nanoid()}>
                 <div className="list-group-header sticky-top">{heading}</div>
                 {rows.map((row) => {
                   return (
-                    <>
+                    <div key={nanoid()}>
                       <div className="list-group-item">
-                        <div className="row" key={nanoid()}>
+                        <div className="row">
                           {props.columns.map((col, index) => {
                             return (
-                              <div className={col.width ? col.width : "col-4"}>
+                              <div
+                                className={col.width ? col.width : "col-4"}
+                                key={nanoid()}
+                              >
                                 <div
                                   className={
                                     props.columns[index + 1]
@@ -56,10 +59,10 @@ export default function ListGroup(props) {
                           })}
                         </div>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
-              </>
+              </div>
             );
           }
         )}

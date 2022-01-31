@@ -4,16 +4,17 @@ import { nanoid } from "nanoid";
 export default function Select(props) {
   return (
     <select
-      className={props.className}
-      name={props.name}
       onChange={(e) => {
         props.onChange(e);
       }}
       value={props.defaultValue}
+      {...props}
     >
       <option value={""}>{""}</option>
-      {props.options.map(({ label, value }) => (
-        <option value={value}>{label}</option>
+      {props.options.map(({ label, value }, i) => (
+        <option key={i} value={value}>
+          {label}
+        </option>
       ))}
     </select>
   );

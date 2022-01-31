@@ -4,51 +4,48 @@ import React from "react";
 export default function CommonInputs({
   accounts,
   strategies,
-  legs,
-  setLegs,
+  transactions,
+  setTransactions,
   setRoot,
   setTradingAccountId,
   setTradeDate,
   setStrategyId,
   strategyId,
 }) {
-  let addLegs = () => {
-    setLegs([
-      ...legs,
+  let addTransactions = () => {
+    setTransactions([
+      ...transactions,
       {
         assetType: "stock",
         action: "BUY",
         quantity: 1,
-        price: "0.00",
-        fee: "0.00",
       },
     ]);
   };
 
-  let popLegs = () => {
-    let newLegs = [...legs];
-    newLegs = newLegs.slice(0, -1);
-    setLegs(newLegs);
+  let popTransaction = () => {
+    let newTransactions = [...transactions];
+    newTransactions = newTransactions.slice(0, -1);
+    setTransactions(newTransactions);
   };
 
   let handleChange = (key, val) => {
-    const newLegs = [...legs];
+    const newTransactions = [...transactions];
 
-    const mergedLegs = newLegs.map((leg) => {
+    const mergedTransactions = newTransactions.map((leg) => {
       const newLeg = {};
       newLeg[key] = val;
       return { ...leg, ...newLeg };
     });
-    setLegs(mergedLegs);
+    setTransactions(mergedTransactions);
   };
-
   return (
     <div>
-      <div className="form-group row mb-3">
+      <div className="form-group row mb-2">
         <label className="form-label col-3 col-form-label">Accounts</label>
         <div className={"col"}>
           <Select
-            name={"accounts-selection"}
+            name={"add-accounts-selection"}
             className={"form-select"}
             options={accounts}
             onChange={(e) => {
@@ -58,7 +55,7 @@ export default function CommonInputs({
           />
         </div>
       </div>
-      <div className="form-group row mb-3">
+      <div className="form-group row mb-2">
         <label className="form-label col-3 col-form-label">Symbol</label>
         <div className={"col"}>
           <input
@@ -71,11 +68,11 @@ export default function CommonInputs({
           />
         </div>
       </div>
-      <div className="form-group row mb-3">
+      <div className="form-group row mb-2">
         <label className="form-label col-3 col-form-label">Strategy</label>
         <div className={"col"}>
           <Select
-            name={"strategy-selection"}
+            name={"add-strategy-selection"}
             className={"form-select"}
             options={strategies}
             onChange={(e) => {
@@ -85,7 +82,7 @@ export default function CommonInputs({
           />
         </div>
       </div>
-      <div className="form-group row mb-3">
+      <div className="form-group row mb-2">
         <label className="form-label col-3 col-form-label">Date</label>
         <div className={"col"}>
           <input
@@ -106,7 +103,7 @@ export default function CommonInputs({
               <button
                 className={"btn form-control"}
                 type={"button"}
-                onClick={addLegs}
+                onClick={addTransactions}
               >
                 +
               </button>
@@ -114,14 +111,14 @@ export default function CommonInputs({
                 type="text"
                 className="form-control"
                 style={{ textAlign: "center" }}
-                value={legs.length}
+                value={transactions.length}
                 readOnly
               />
               <button
                 className={"btn form-control"}
                 type={"button"}
                 onClick={() => {
-                  legs.length > 1 ? popLegs() : null;
+                  transactions.length > 1 ? popTransaction() : null;
                 }}
               >
                 -

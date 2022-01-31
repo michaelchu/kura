@@ -1,4 +1,4 @@
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas, Alert } from "react-bootstrap";
 import React, { useState } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import ErrorPage from "../../ErrorPage";
@@ -7,6 +7,7 @@ import { formatSymbol } from "../../Helpers";
 import INSERT_TRANSACTIONS from "../../../api/mutations/InsertTransactions.graphql";
 import FETCH_TRANSACTIONS from "../../../api/queries/FetchTransactions.graphql";
 import DASHBOARD_QUERY from "../../../api/queries/Dashboard.graphql";
+import { btnSubmitClass } from "../../ClassNames";
 
 export default function AddTransactionCanvas({ show, canvasToggle }) {
   const TRADING_ACCOUNTS_QUERY = gql`
@@ -18,22 +19,22 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
     }
   `;
 
-  const [insertMutation, { loading: mutationLoading }] = useMutation(
-    INSERT_TRANSACTIONS,
-    {
-      onError: (err) => {
-        console.log(err);
-      },
-      onCompleted: () => {
-        canvasToggle();
-      },
-      refetchQueries: [DASHBOARD_QUERY, FETCH_TRANSACTIONS],
-      awaitRefetchQueries: true,
-    }
-  );
+  const [
+    insertMutation,
+    { loading: mutationLoading, error: mutationError, reset },
+  ] = useMutation(INSERT_TRANSACTIONS, {
+    onError: (err) => {
+      console.log(err);
+    },
+    onCompleted: () => {
+      canvasToggle();
+    },
+    refetchQueries: [DASHBOARD_QUERY, FETCH_TRANSACTIONS],
+    awaitRefetchQueries: true,
+  });
 
   const [cache, setCache] = useState({
-    legs: [],
+    transactions: [],
     root: "",
     tradingAccountId: "",
     tradeDate: "",
@@ -41,19 +42,19 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
   });
 
   const processCache = ({
-    legs,
+    transactions,
     root,
     tradingAccountId,
     tradeDate,
     strategyId,
   }) => {
-    const object = legs.map((leg) => {
+    const object = transactions.map((t) => {
       const symbol =
-        leg.assetType == "stock"
+        t.assetType == "stock"
           ? root
-          : formatSymbol(root, leg.expiration, leg.strike, leg.optionType);
+          : formatSymbol(root, t.expiration, t.strike, t.optionType);
       return {
-        ...leg,
+        ...t,
         ...{
           symbol,
           tradingAccountId,
@@ -73,13 +74,20 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
     <Offcanvas
       show={show}
       onHide={() => canvasToggle()}
+      onExited={() => reset()}
       placement="end"
       style={{ width: "400px" }}
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Add Transaction</Offcanvas.Title>
       </Offcanvas.Header>
+
       <Offcanvas.Body>
+        {mutationError && (
+          <Alert variant="danger">
+            There is something wrong, please try again!
+          </Alert>
+        )}
         <p>
           When entering multi-leg option strategies, if the fee was charged to
           the entire transaction as a whole, enter the amount on any <b>one</b>{" "}
@@ -90,21 +98,13 @@ export default function AddTransactionCanvas({ show, canvasToggle }) {
       <div>
         <div className="card-footer">
           <Button
-            className={
-              mutationLoading
-                ? "mt-1 mb-1 w-100 btn-loading"
-                : "mt-1 mb-1 w-100"
-            }
-            as="input"
-            variant="cyan"
-            onClick={() => {
-              const data = processCache(cache);
-              console.log(data);
-              insertMutation({ variables: data }).then();
+            className={"mt-1 mb-1 " + btnSubmitClass(mutationLoading, "cyan")}
+            onClick={(e) => {
+              insertMutation({ variables: processCache(cache) }).then();
             }}
-            type="submit"
-            value="Add Transaction"
-          />
+          >
+            Add Transaction
+          </Button>
         </div>
       </div>
     </Offcanvas>

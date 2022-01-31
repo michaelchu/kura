@@ -32,6 +32,7 @@ export default function CanvasInputs({
       <TransactionInput
         index={1}
         element={transaction}
+        hideMiscActions={false}
         handleChange={handleChange}
         handleReset={handleReset}
       />

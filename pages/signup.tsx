@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
 import Link from "next/link";
 import useStorage from "../hooks/useStorage";
+import { btnSubmitClass } from "../components/ClassNames";
 
 export default function SignUp() {
   const SignUpMutation = gql`
@@ -79,7 +80,7 @@ export default function SignUp() {
             <div className="form-footer">
               <button
                 type="submit"
-                className="btn btn-cyan w-100"
+                className={btnSubmitClass(loading, "cyan")}
                 disabled={loading}
                 onClick={() => signUp()}
               >
