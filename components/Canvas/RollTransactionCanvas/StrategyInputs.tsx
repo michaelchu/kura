@@ -12,6 +12,16 @@ export default function StrategyInputs({
     newTransactions[i][key] = val;
     setTransactions(newTransactions);
   };
+  
+  let handleReset = (i, assetType, action) => {
+    let newTransactions = [...transactions];
+    newTransactions[i] = {
+      assetType,
+      action,
+      quantity: 1,
+    };
+    setTransactions(newTransactions);
+  };
 
   return (
     <div className={"mt-2"}>
@@ -25,6 +35,7 @@ export default function StrategyInputs({
         element={element}
         hideMiscActions={index % 2 != 0}
         disableFromFields={index % 2 == 0}
+        handleReset={handleReset}
         handleChange={handleChange}
         rolling={true}
       />
