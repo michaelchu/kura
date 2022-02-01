@@ -31,7 +31,7 @@ export default function TransactionInput({
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 handleChange(index, "action", "BUY");
               }}
-              disabled={rolling && sellActions(element.action)}
+              disabled={rolling && sellActions(element.action) && disableFromFields}
             >
               Buy
             </button>
@@ -69,7 +69,7 @@ export default function TransactionInput({
               onClick={() => {
                 handleChange(index, "action", "SELL");
               }}
-              disabled={rolling && buyActions(element.action)}
+              disabled={rolling && buyActions(element.action) && disableFromFields}
             >
               Sell
             </button>
