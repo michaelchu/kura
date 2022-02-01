@@ -76,7 +76,7 @@ export default function TransactionInput({
           </div>
         </div>
       </div>
-      {disableFromFields && (
+      {!disableFromFields && (
         <>
           <div className="form-group row mt-2">
             <label className="form-label col-4 col-form-label">
