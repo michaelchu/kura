@@ -59,6 +59,7 @@ export default function PnlCompChart(props) {
                 text: "Realized P/L",
               },
             },
+            legend: { showForSingleSeries: true },
           }}
           series={formatted_series}
           type={"area"}
