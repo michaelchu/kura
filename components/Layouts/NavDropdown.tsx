@@ -1,5 +1,6 @@
 import React from "react";
 import { IconUser } from "@tabler/icons";
+import Link from "next/link";
 
 export default function NavDropdown({ signOut }) {
   return (
@@ -15,9 +16,6 @@ export default function NavDropdown({ signOut }) {
         </span>
       </a>
       <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-        <a href="#" className="dropdown-item">
-          Profile & account
-        </a>
         <a href="#" className="dropdown-item">
           Feedback
         </a>
@@ -36,7 +34,9 @@ export default function NavDropdown({ signOut }) {
         {/*    />*/}
         {/*  </div>*/}
         {/*</div>*/}
-        <a className="dropdown-item">Settings</a>
+        <Link href="/settings">
+          <a className="dropdown-item">Settings</a>
+        </Link>
         <a
           className="dropdown-item"
           onClick={() => {

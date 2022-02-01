@@ -13,6 +13,8 @@ import ListGroup from "../../components/Lists/ListGroup";
 import { TransactionsListCols } from "../../components/Lists/ListColumns/TransactionsListCols";
 import ErrorPage from "../../components/ErrorPage";
 import EditTransactionCanvas from "../../components/Canvas/EditTransactionCanvas/EditTransactionCanvas";
+import { GlobalContext } from "../../contexts/context";
+import { IconDownload, IconPlus } from "@tabler/icons";
 
 export default function Overview() {
   const { isTrue: isEditCanvasShowing, toggle: canvasToggle } = useToggle();
@@ -37,11 +39,35 @@ export default function Overview() {
         }}
       >
         <div className="container-xl">
-          <div className={"d-table pt-3 pb-3"}>
-            <h2 className={"d-table-cell align-baseline"}>Trade History</h2>
-            <p className={"page-pretitle px-2 d-table-cell align-baseline"}>
-              As of {dayjs(new Date()).format("YYYY-MM-DD")}
-            </p>
+          <div className={"d-flex justify-content-between pt-3 pb-3"}>
+            <div className={"d-table"}>
+              <h2 className={"d-table-cell align-baseline"}>Trade History</h2>
+              <p className={"header-pretitle px-2 d-table-cell align-baseline"}>
+                As of {dayjs(new Date()).format("YYYY-MM-DD")}
+              </p>
+            </div>
+            <GlobalContext.Consumer>
+              {({ canvasToggle }) => (
+                <div className={"d-grid gap-2 d-md-flex d-none d-md-block"}>
+                  <button
+                    type={"button"}
+                    onClick={canvasToggle}
+                    className={"btn btn-light mr-2"}
+                  >
+                    <IconDownload />
+                    Download CSV
+                  </button>
+                  <button
+                    type={"button"}
+                    onClick={canvasToggle}
+                    className={"btn btn-cyan ml-2"}
+                  >
+                    <IconPlus />
+                    Add Trade
+                  </button>
+                </div>
+              )}
+            </GlobalContext.Consumer>
           </div>
         </div>
       </div>
