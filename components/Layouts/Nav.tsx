@@ -19,10 +19,12 @@ export default function Nav({ router }) {
           </li>
           <li
             className={
-              router.pathname == "/portfolios" ? "nav-item active" : "nav-item"
+              router.pathname.includes("portfolios")
+                ? "nav-item active"
+                : "nav-item"
             }
           >
-            <Link href="#">
+            <Link href="/portfolios/overview">
               <a className="nav-link">
                 <span className="nav-link-title">Portfolios</span>
               </a>
@@ -36,19 +38,6 @@ export default function Nav({ router }) {
             <Link href="#">
               <a className="nav-link">
                 <span className="nav-link-title">Insights</span>
-              </a>
-            </Link>
-          </li>
-          <li
-            className={
-              router.pathname == "/transactions"
-                ? "nav-item active"
-                : "nav-item"
-            }
-          >
-            <Link href="/transactions">
-              <a className="nav-link">
-                <span className="nav-link-title">Import</span>
               </a>
             </Link>
           </li>

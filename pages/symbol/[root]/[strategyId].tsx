@@ -1,15 +1,15 @@
 import { useQuery } from "@apollo/client";
-import Layout from "../../components/Layouts/Layout";
-import STRATEGY_DETAIL from "../../api/queries/StrategyDetail.graphql";
+import Layout from "../../../components/Layouts/Layout";
+import STRATEGY_DETAIL from "../../../api/queries/StrategyDetail.graphql";
 import { useRouter } from "next/router";
-import { StrategyDetailColumns } from "../../components/Tables/TableColumns/StrategyDetailColumns";
-import { StrategyDetailSKColumns } from "../../components/Tables/TableColumns/StrategyDetailSkColumns";
-import GenericReactTable from "../../components/Tables/GenericReactTable";
-import SkeletonTable from "../../components/Tables/SkeletonTable";
+import { StrategyDetailColumns } from "../../../components/Tables/TableColumns/StrategyDetailColumns";
+import { StrategyDetailSKColumns } from "../../../components/Tables/TableColumns/StrategyDetailSkColumns";
+import GenericReactTable from "../../../components/Tables/GenericReactTable";
+import SkeletonTable from "../../../components/Tables/SkeletonTable";
 import React from "react";
 import _ from "lodash";
 import accounting from "accounting";
-import StatCard from "../../components/Dashboard/StatCard";
+import StatCard from "../../../components/Dashboard/StatCard";
 
 export default function StrategyDetail() {
   const router = useRouter();
@@ -46,7 +46,7 @@ export default function StrategyDetail() {
 
   const cost_basis = () => {
     let tc = total_costs();
-    if (data.strategy.id == "covered-stock") {
+    if (data.strategy?.id == "covered-stock") {
       const total_quantity = data.strategyDetails
         .filter(({ assetType }) => assetType == "stock")
         .reduce((acc, { quantity }) => quantity + acc, 0);
@@ -88,7 +88,7 @@ export default function StrategyDetail() {
                 <div className="card-header">
                   <h3 className="card-title">
                     Strategy Details for {root} {"("}
-                    {data.strategy.label}
+                    {data.strategy?.label}
                     {")"}
                   </h3>
                 </div>

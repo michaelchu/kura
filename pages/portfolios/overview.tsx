@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 
-import Layout from "../components/Layouts/Layout";
-import TransactionTable from "../components/Tables/TransactionTable/TransactionTable";
+import Layout from "../../components/Layouts/Layout";
+import TransactionTable from "../../components/Tables/TransactionTable/TransactionTable";
 
-import FETCH_TRANSACTIONS from "../api/queries/FetchTransactions.graphql";
-import { TransactionColumns } from "../components/Tables/TableColumns/TransactionColumns";
-import useToggle from "../hooks/useToggle";
-import CustomToast from "../components/CustomToast";
+import FETCH_TRANSACTIONS from "../../api/queries/FetchTransactions.graphql";
+import { TransactionColumns } from "../../components/Tables/TableColumns/TransactionColumns";
+import useToggle from "../../hooks/useToggle";
+import CustomToast from "../../components/CustomToast";
 import dayjs from "dayjs";
-import ListGroup from "../components/Lists/ListGroup";
-import { TransactionsListCols } from "../components/Lists/ListColumns/TransactionsListCols";
-import ErrorPage from "../components/ErrorPage";
-import EditTransactionCanvas from "../components/Canvas/EditTransactionCanvas/EditTransactionCanvas";
+import ListGroup from "../../components/Lists/ListGroup";
+import { TransactionsListCols } from "../../components/Lists/ListColumns/TransactionsListCols";
+import ErrorPage from "../../components/ErrorPage";
+import EditTransactionCanvas from "../../components/Canvas/EditTransactionCanvas/EditTransactionCanvas";
 
-export default function Transactions() {
+export default function Overview() {
   const { isTrue: isEditCanvasShowing, toggle: canvasToggle } = useToggle();
   const { isTrue: isFinishedToastShowing, toggle: showFinishedToastToggle } =
     useToggle();
@@ -38,7 +38,7 @@ export default function Transactions() {
       >
         <div className="container-xl">
           <div className={"d-table pt-3 pb-3"}>
-            <h2 className={"d-table-cell align-baseline"}>Transactions</h2>
+            <h2 className={"d-table-cell align-baseline"}>Trade History</h2>
             <p className={"page-pretitle px-2 d-table-cell align-baseline"}>
               As of {dayjs(new Date()).format("YYYY-MM-DD")}
             </p>

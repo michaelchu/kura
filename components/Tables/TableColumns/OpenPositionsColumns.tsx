@@ -22,7 +22,9 @@ export const OpenPositionsColumns = [
     accessor: "strategy",
     Cell: ({ value, row }) => (
       <div style={{ textAlign: "center" }}>
-        <Link href={row.original.root + "/" + row.original.strategyId}>
+        <Link
+          href={"symbol/" + row.original.root + "/" + row.original.strategyId}
+        >
           <a>{value}</a>
         </Link>
       </div>
