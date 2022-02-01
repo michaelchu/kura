@@ -35,6 +35,8 @@ export default function CanvasInputs({
         hideMiscActions={false}
         handleChange={handleChange}
         handleReset={handleReset}
+        disableFormFields={false}
+        rolling={false}
       />
     </>
   );
