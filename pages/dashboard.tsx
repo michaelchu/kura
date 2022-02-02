@@ -6,7 +6,7 @@ import { RecentTransListCols } from "../components/Lists/ListColumns/RecentTrans
 import { OpenPositionsListCols } from "../components/Lists/ListColumns/OpenPositionsListCols";
 import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import List from "../components/Lists/List";
 import StatsBoard from "../components/Dashboard/StatsBoard";
 import dynamic from "next/dynamic";
@@ -19,10 +19,13 @@ import { GlobalContext } from "../contexts/context";
 import OpenPositionsTable from "../components/Tables/OpenPositionsTable";
 import RollTransactionCanvas from "../components/Canvas/RollTransactionCanvas/RollTransactionCanvas";
 import useToggle from "../hooks/useToggle";
+import DeleteTransactionModal from "../components/Modals/DeleteTransactionModal";
 
 export default function Dashboard() {
   const { loading, error, data } = useQuery(DASHBOARD_QUERY);
   const { isTrue: isEditCanvasShowing, toggle: editCanvasToggle } = useToggle();
+  const { isTrue: isDeleteModalShowing, toggle: deleteModalToggle } =
+    useToggle();
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -83,6 +86,7 @@ export default function Dashboard() {
                   data={data.openPositions}
                   setSelectedTransaction={setSelectedTransaction}
                   canvasToggle={editCanvasToggle}
+                  modalToggle={deleteModalToggle}
                 />
               </div>
             </div>
@@ -121,6 +125,11 @@ export default function Dashboard() {
       <RollTransactionCanvas
         canvasToggle={editCanvasToggle}
         show={isEditCanvasShowing}
+        transaction={selectedTransaction}
+      />
+      <DeleteTransactionModal
+        modalToggle={deleteModalToggle}
+        show={isDeleteModalShowing}
         transaction={selectedTransaction}
       />
     </Layout>

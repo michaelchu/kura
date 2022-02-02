@@ -42,24 +42,6 @@ export default function RollTransactionCanvas({
     awaitRefetchQueries: true,
   });
 
-  const [
-    deleteMutation,
-    {
-      loading: deleteMutationLoading,
-      error: deleteMutationError,
-      reset: deleteReset,
-    },
-  ] = useMutation(DELETE_TRANSACTION, {
-    onError: (err) => {
-      console.log(err);
-    },
-    onCompleted: () => {
-      canvasToggle();
-    },
-    refetchQueries: [FETCH_TRANSACTIONS],
-    awaitRefetchQueries: true,
-  });
-
   const [cache, setCache] = useState({
     transactions: [{}],
     root: "",
@@ -102,7 +84,6 @@ export default function RollTransactionCanvas({
       show={show}
       onHide={() => canvasToggle()}
       onExited={() => {
-        deleteReset();
         insertReset();
       }}
       placement="end"
@@ -113,7 +94,7 @@ export default function RollTransactionCanvas({
       </Offcanvas.Header>
 
       <Offcanvas.Body>
-        {(insertMutationError || deleteMutationError) && (
+        {insertMutationError && (
           <Alert variant="danger">
             There is something wrong, please try again!
           </Alert>
@@ -127,23 +108,6 @@ export default function RollTransactionCanvas({
       <div>
         <div className="card-footer">
           <div className="row">
-            <div className="col">
-              <Button
-                className={
-                  "mt-1 mb-1 " + btnSubmitClass(deleteMutationLoading, "danger")
-                }
-                as="input"
-                variant="danger"
-                onClick={() => {
-                  deleteMutation({
-                    variables: { id: transaction.id },
-                  }).then();
-                }}
-                type="submit"
-                value="Delete"
-                disabled={deleteMutationLoading}
-              />
-            </div>
             <div className="col">
               <Button
                 className={
