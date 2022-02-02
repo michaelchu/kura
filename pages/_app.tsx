@@ -9,6 +9,7 @@ import {
 import PrivateRoute from "../components/PrivateRoute";
 import useStorage from "../hooks/useStorage";
 import "../styles.css";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   // Add your protected routes here
@@ -31,6 +32,14 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={createApolloClient()}>
       <PrivateRoute protectedRoutes={protectedRoutes}>
+        <Head>
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+          />
+          <title>Kura - Portfolio Tracker & Planner</title>
+        </Head>
         <Component {...pageProps} />
       </PrivateRoute>
     </ApolloProvider>
