@@ -31,7 +31,9 @@ export default function TransactionInput({
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 handleChange(index, "action", "BUY");
               }}
-              disabled={rolling && sellActions(element.action) && disableFromFields}
+              disabled={
+                rolling && sellActions(element.action) && disableFromFields
+              }
             >
               Buy
             </button>
@@ -69,7 +71,9 @@ export default function TransactionInput({
               onClick={() => {
                 handleChange(index, "action", "SELL");
               }}
-              disabled={rolling && buyActions(element.action) && disableFromFields}
+              disabled={
+                rolling && buyActions(element.action) && disableFromFields
+              }
             >
               Sell
             </button>
@@ -119,6 +123,9 @@ export default function TransactionInput({
         <div className="col">
           <input
             type="number"
+            min={"0"}
+            inputMode={"numeric"}
+            pattern={"[0-9]*"}
             name={"quantity"}
             className="form-control"
             defaultValue={element.quantity}
@@ -153,6 +160,8 @@ export default function TransactionInput({
               <input
                 type="number"
                 name={"strike"}
+                min={"0"}
+                inputMode={"decimal"}
                 className="form-control"
                 disabled={disableFromFields}
                 defaultValue={element.strike || ""}
@@ -170,6 +179,8 @@ export default function TransactionInput({
           <input
             type="number"
             name={"price"}
+            min={"0"}
+            inputMode={"decimal"}
             className="form-control"
             defaultValue={element.price || ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -184,6 +195,8 @@ export default function TransactionInput({
           <input
             type="number"
             name={"fee"}
+            min={"0"}
+            inputMode={"decimal"}
             className="form-control"
             defaultValue={element.fee || ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
