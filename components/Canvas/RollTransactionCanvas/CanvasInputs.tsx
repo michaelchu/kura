@@ -4,23 +4,13 @@ import StrategyInputs from "./StrategyInputs";
 import { strategies } from "../../Helpers";
 import dayjs from "dayjs";
 
-export default function CanvasInputs({ accounts, setCache, transaction }) {
-  const toggleAction = (quantity) => {
-    if (quantity < 0) {
-      return "BTC";
-    } else if (quantity > 0) {
-      return "STC";
-    }
-  };
-
-  const convertAction = (quantity) => {
-    if (quantity < 0) {
-      return "STO";
-    } else if (quantity > 0) {
-      return "BTO";
-    }
-  };
-
+export default function CanvasInputs({
+  accounts,
+  setCache,
+  transaction,
+  toggleAction,
+  convertAction,
+}) {
   let closingTrans = { ...transaction };
   closingTrans["action"] = toggleAction(closingTrans["quantity"]);
   closingTrans["quantity"] = closingTrans["quantity"] * -1;

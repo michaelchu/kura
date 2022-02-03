@@ -15,7 +15,6 @@ export default function OpenPositionsTable({
   data,
   setSelectedTransaction,
   canvasToggle,
-  modalToggle,
 }) {
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(() => data, [data]);
@@ -94,34 +93,14 @@ export default function OpenPositionsTable({
                 })}
                 <td>
                   {row.original["assetType"] == "option" && (
-                    <div className={"dropdown"}>
-                      <a data-bs-toggle={"dropdown"} aria-expanded={"false"}>
-                        <i
-                          className="ti ti-edit"
-                          style={{ fontSize: "1rem" }}
-                        />
-                      </a>
-                      <div className={"dropdown-menu dropdown-menu-end"}>
-                        <a
-                          className={"dropdown-item"}
-                          onClick={() => {
-                            setSelectedTransaction(row.original);
-                            canvasToggle();
-                          }}
-                        >
-                          Roll Position{" "}
-                        </a>
-                        <a
-                          className={"dropdown-item"}
-                          onClick={() => {
-                            setSelectedTransaction(row.original);
-                            modalToggle();
-                          }}
-                        >
-                          Close Position
-                        </a>
-                      </div>
-                    </div>
+                    <a
+                      onClick={() => {
+                        setSelectedTransaction(row.original);
+                        canvasToggle();
+                      }}
+                    >
+                      <i className="ti ti-edit" style={{ fontSize: "1rem" }} />
+                    </a>
                   )}
                 </td>
               </tr>
