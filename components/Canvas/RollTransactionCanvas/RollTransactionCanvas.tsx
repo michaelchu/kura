@@ -8,7 +8,6 @@ import INSERT_TRANSACTIONS from "../../../api/mutations/InsertTransactions.graph
 import FETCH_TRANSACTIONS from "../../../api/queries/FetchTransactions.graphql";
 import DASHBOARD_QUERY from "../../../api/queries/Dashboard.graphql";
 import { btnSubmitClass } from "../../ClassNames";
-import DELETE_TRANSACTION from "../../../api/mutations/DeleteTransaction.graphql";
 
 export default function RollTransactionCanvas({
   show,
@@ -39,24 +38,6 @@ export default function RollTransactionCanvas({
       canvasToggle();
     },
     refetchQueries: [DASHBOARD_QUERY, FETCH_TRANSACTIONS],
-    awaitRefetchQueries: true,
-  });
-
-  const [
-    deleteMutation,
-    {
-      loading: deleteMutationLoading,
-      error: deleteMutationError,
-      reset: deleteReset,
-    },
-  ] = useMutation(DELETE_TRANSACTION, {
-    onError: (err) => {
-      console.log(err);
-    },
-    onCompleted: () => {
-      canvasToggle();
-    },
-    refetchQueries: [FETCH_TRANSACTIONS],
     awaitRefetchQueries: true,
   });
 
@@ -93,6 +74,39 @@ export default function RollTransactionCanvas({
     return { object };
   };
 
+  const toggleAction = (quantity) => {
+    if (quantity < 0) {
+      return "BTC";
+    } else if (quantity > 0) {
+      return "STC";
+    }
+  };
+
+  const convertAction = (quantity) => {
+    if (quantity < 0) {
+      return "STO";
+    } else if (quantity > 0) {
+      return "BTO";
+    }
+  };
+
+  const createClosingTransaction = () => {
+    const {
+      __typename,
+      root,
+      avgPrice,
+      bookCost,
+      daysFromExpiration,
+      daysToExpiration,
+      strategy,
+      tradingAccountName,
+      ...closingTrans
+    } = transaction;
+    closingTrans["action"] = toggleAction(closingTrans["quantity"]);
+    closingTrans["quantity"] = closingTrans["quantity"] * -1;
+    return closingTrans;
+  };
+
   const { data, error, loading } = useQuery(TRADING_ACCOUNTS_QUERY);
   if (loading) return null; // consider rendering canvas skeleton during load
   if (error) return <ErrorPage />;
@@ -102,7 +116,6 @@ export default function RollTransactionCanvas({
       show={show}
       onHide={() => canvasToggle()}
       onExited={() => {
-        deleteReset();
         insertReset();
       }}
       placement="end"
@@ -113,7 +126,7 @@ export default function RollTransactionCanvas({
       </Offcanvas.Header>
 
       <Offcanvas.Body>
-        {(insertMutationError || deleteMutationError) && (
+        {insertMutationError && (
           <Alert variant="danger">
             There is something wrong, please try again!
           </Alert>
@@ -122,6 +135,8 @@ export default function RollTransactionCanvas({
           setCache={setCache}
           transaction={transaction}
           accounts={data.tradingAccounts}
+          toggleAction={toggleAction}
+          convertAction={convertAction}
         />
       </Offcanvas.Body>
       <div>
@@ -130,18 +145,21 @@ export default function RollTransactionCanvas({
             <div className="col">
               <Button
                 className={
-                  "mt-1 mb-1 " + btnSubmitClass(deleteMutationLoading, "danger")
+                  "mt-1 mb-1 " + btnSubmitClass(insertMutationLoading, "danger")
                 }
                 as="input"
                 variant="danger"
                 onClick={() => {
-                  deleteMutation({
-                    variables: { id: transaction.id },
+                  insertMutation({
+                    variables: {
+                      object: createClosingTransaction(),
+                    },
                   }).then();
+                  canvasToggle();
                 }}
                 type="submit"
-                value="Delete"
-                disabled={deleteMutationLoading}
+                value="Close Position"
+                disabled={insertMutationLoading}
               />
             </div>
             <div className="col">

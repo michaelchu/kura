@@ -6,7 +6,7 @@ import { RecentTransListCols } from "../components/Lists/ListColumns/RecentTrans
 import { OpenPositionsListCols } from "../components/Lists/ListColumns/OpenPositionsListCols";
 import DASHBOARD_QUERY from "../api/queries/Dashboard.graphql";
 import GenericReactTable from "../components/Tables/GenericReactTable";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import List from "../components/Lists/List";
 import StatsBoard from "../components/Dashboard/StatsBoard";
 import dynamic from "next/dynamic";

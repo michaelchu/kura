@@ -93,20 +93,14 @@ export default function OpenPositionsTable({
                 })}
                 <td>
                   {row.original["assetType"] == "option" && (
-                    <div>
-                      <a
-                        onClick={() => {
-                          setSelectedTransaction(row.original);
-                          canvasToggle();
-                        }}
-                      >
-                        {" "}
-                        <i
-                          className="ti ti-edit"
-                          style={{ fontSize: "1rem" }}
-                        />{" "}
-                      </a>
-                    </div>
+                    <a
+                      onClick={() => {
+                        setSelectedTransaction(row.original);
+                        canvasToggle();
+                      }}
+                    >
+                      <i className="ti ti-edit" style={{ fontSize: "1rem" }} />
+                    </a>
                   )}
                 </td>
               </tr>
