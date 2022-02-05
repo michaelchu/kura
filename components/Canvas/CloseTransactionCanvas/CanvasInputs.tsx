@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommonInputs from "./CommonInputs";
 import StrategyInputs from "./StrategyInputs";
-import { parseExpiration, strategies } from "../../Helpers";
+import { strategies, parseExpiration } from "../../Helpers";
 import dayjs from "dayjs";
 
 export default function CanvasInputs({
@@ -9,20 +9,13 @@ export default function CanvasInputs({
   setCache,
   transaction,
   toggleAction,
-  convertAction,
 }) {
   let closingTrans = { ...transaction };
   closingTrans["action"] = toggleAction(closingTrans["quantity"]);
   closingTrans["quantity"] = closingTrans["quantity"] * -1;
   closingTrans["expiration"] = parseExpiration(closingTrans["symbol"]);
 
-  let openingTrans = { ...transaction };
-  openingTrans["action"] = convertAction(openingTrans["quantity"]);
-
-  const [transactions, setTransactions] = useState([
-    closingTrans,
-    openingTrans,
-  ]);
+  const [transactions, setTransactions] = useState([closingTrans]);
   const [tradeDate, setTradeDate] = useState(
     dayjs(new Date()).format("YYYY-MM-DD")
   );

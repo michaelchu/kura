@@ -19,10 +19,14 @@ import { GlobalContext } from "../contexts/context";
 import OpenPositionsTable from "../components/Tables/OpenPositionsTable";
 import RollTransactionCanvas from "../components/Canvas/RollTransactionCanvas/RollTransactionCanvas";
 import useToggle from "../hooks/useToggle";
+import DeleteModal from "../components/Modals/DeleteModal";
+import CloseTransactionCanvas from "../components/Canvas/CloseTransactionCanvas/CloseTransactionCanvas";
 
 export default function Dashboard() {
   const { loading, error, data } = useQuery(DASHBOARD_QUERY);
   const { isTrue: isEditCanvasShowing, toggle: editCanvasToggle } = useToggle();
+  const { isTrue: isDeleteCanvasShowing, toggle: deleteCanvasToggle } =
+    useToggle();
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -82,7 +86,8 @@ export default function Dashboard() {
                   cols={OpenPositionsColumns}
                   data={data.openPositions}
                   setSelectedTransaction={setSelectedTransaction}
-                  canvasToggle={editCanvasToggle}
+                  editCanvasToggle={editCanvasToggle}
+                  deleteCanvasToggle={deleteCanvasToggle}
                 />
               </div>
             </div>
@@ -121,6 +126,11 @@ export default function Dashboard() {
       <RollTransactionCanvas
         canvasToggle={editCanvasToggle}
         show={isEditCanvasShowing}
+        transaction={selectedTransaction}
+      />
+      <CloseTransactionCanvas
+        canvasToggle={deleteCanvasToggle}
+        show={isDeleteCanvasShowing}
         transaction={selectedTransaction}
       />
     </Layout>
