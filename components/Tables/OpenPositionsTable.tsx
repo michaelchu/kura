@@ -6,7 +6,12 @@ import {
   usePagination,
 } from "react-table";
 import Table from "react-bootstrap/Table";
-import { IconChevronUp, IconChevronDown } from "@tabler/icons";
+import {
+  IconChevronUp,
+  IconChevronDown,
+  IconTrash,
+  IconEdit,
+} from "@tabler/icons";
 
 import TableFooter from "../Tables/TableFooter";
 
@@ -14,7 +19,8 @@ export default function OpenPositionsTable({
   cols,
   data,
   setSelectedTransaction,
-  canvasToggle,
+  editCanvasToggle,
+  deleteCanvasToggle,
 }) {
   const columns = useMemo(() => cols, [cols]);
   const dataRows = useMemo(() => data, [data]);
@@ -91,16 +97,26 @@ export default function OpenPositionsTable({
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
-                <td>
+                <td className={"text-nowrap"}>
                   {row.original["assetType"] == "option" && (
-                    <a
-                      onClick={() => {
-                        setSelectedTransaction(row.original);
-                        canvasToggle();
-                      }}
-                    >
-                      <i className="ti ti-edit" style={{ fontSize: "1rem" }} />
-                    </a>
+                    <>
+                      <a
+                        onClick={() => {
+                          setSelectedTransaction(row.original);
+                          editCanvasToggle();
+                        }}
+                      >
+                        <IconEdit />
+                      </a>
+                      <a
+                        onClick={() => {
+                          setSelectedTransaction(row.original);
+                          deleteCanvasToggle();
+                        }}
+                      >
+                        <IconTrash />
+                      </a>
+                    </>
                   )}
                 </td>
               </tr>

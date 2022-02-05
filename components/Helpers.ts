@@ -46,3 +46,18 @@ export const buyActions = (action) => {
 export const sellActions = (action) => {
   return action == "SELL" || action == "STO" || action == "STC";
 };
+
+export const parseExpiration = (symbol) => {
+  if (symbol == undefined) {
+    return "";
+  } else {
+    let parsed = symbol.split(" ");
+    if (parsed.length === 1) {
+      return "";
+    } else {
+      return dayjs(parsed.slice(1, 4).join(" "), "DD MMM YY").format(
+        "YYYY-MM-DD"
+      );
+    }
+  }
+};
