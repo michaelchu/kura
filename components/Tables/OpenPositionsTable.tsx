@@ -97,26 +97,28 @@ export default function OpenPositionsTable({
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
-                <td className={"text-nowrap"}>
+                <td>
                   {row.original["assetType"] == "option" && (
-                    <>
-                      <a
+                    <div className={"btn-group"}>
+                      <button
+                        className={"btn btn-ghost-yellow btn-sm"}
                         onClick={() => {
                           setSelectedTransaction(row.original);
                           editCanvasToggle();
                         }}
                       >
-                        <IconEdit />
-                      </a>
-                      <a
+                        Roll
+                      </button>
+                      <button
+                        className={"btn btn-ghost-red btn-sm"}
                         onClick={() => {
                           setSelectedTransaction(row.original);
                           deleteCanvasToggle();
                         }}
                       >
-                        <IconTrash />
-                      </a>
-                    </>
+                        Close
+                      </button>
+                    </div>
                   )}
                 </td>
               </tr>

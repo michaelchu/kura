@@ -129,7 +129,7 @@ export default function CloseTransactionCanvas({
                     insertMutation({ variables: processCache(cache) }).then();
                   }}
                   type="submit"
-                  value="Close Transaction"
+                  value="Close Position"
                   disabled={insertMutationLoading}
                 />
               </div>

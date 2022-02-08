@@ -122,7 +122,7 @@ export default function RollTransactionCanvas({
       style={{ width: "400px" }}
     >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Roll Transaction</Offcanvas.Title>
+        <Offcanvas.Title>Roll Position</Offcanvas.Title>
       </Offcanvas.Header>
 
       <Offcanvas.Body>
@@ -145,26 +145,6 @@ export default function RollTransactionCanvas({
             <div className="col">
               <Button
                 className={
-                  "mt-1 mb-1 " + btnSubmitClass(insertMutationLoading, "danger")
-                }
-                as="input"
-                variant="danger"
-                onClick={() => {
-                  insertMutation({
-                    variables: {
-                      object: createClosingTransaction(),
-                    },
-                  }).then();
-                  canvasToggle();
-                }}
-                type="submit"
-                value="Close Position"
-                disabled={insertMutationLoading}
-              />
-            </div>
-            <div className="col">
-              <Button
-                className={
                   "mt-1 mb-1 " + btnSubmitClass(insertMutationLoading, "cyan")
                 }
                 as="input"
@@ -173,7 +153,7 @@ export default function RollTransactionCanvas({
                   insertMutation({ variables: processCache(cache) }).then();
                 }}
                 type="submit"
-                value="Roll"
+                value="Roll Position"
                 disabled={insertMutationLoading}
               />
             </div>

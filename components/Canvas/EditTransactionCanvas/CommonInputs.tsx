@@ -10,7 +10,7 @@ export default function CommonInputs({
   return (
     <div>
       <div className="form-group row mb-2">
-        <label className="form-label col-3 col-form-label">Accounts</label>
+        <label className="form-label col-3 col-form-label">Account</label>
         <div className={"col"}>
           <Select
             name={"edit-accounts-selection"}
