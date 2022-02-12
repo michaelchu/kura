@@ -20,6 +20,11 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Rubik"
           />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <script
+            defer
+            data-domain="usekura.com"
+            src="https://plausible.io/js/plausible.js"
+          />
         </Head>
 
         <body className="theme-light">
