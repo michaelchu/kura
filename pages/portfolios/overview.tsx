@@ -25,9 +25,11 @@ export default function Overview() {
 
   const [transaction, setTransaction] = useState({});
 
-  const { data, loading, error } = useQuery(FETCH_TRANSACTIONS);
-  if (loading) return <Layout />;
-  if (error) return <ErrorPage />;
+  // const { data, loading, error } = useQuery(FETCH_TRANSACTIONS);
+  // if (loading) return <Layout />;
+  // if (error) return <ErrorPage />;
+
+  const data = { transactions: [] };
 
   return (
     <Layout>
@@ -96,12 +98,12 @@ export default function Overview() {
         </div>
       </div>
 
-      <EditTransactionCanvas
+      {/* <EditTransactionCanvas
         canvasToggle={canvasToggle}
         show={isEditCanvasShowing}
         transaction={transaction}
         setTransaction={setTransaction}
-      />
+      /> */}
 
       <CustomToast
         style={{ background: "#2fb344", color: "#fff", border: 0 }}

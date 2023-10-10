@@ -23,15 +23,28 @@ import DeleteModal from "../components/Modals/DeleteModal";
 import CloseTransactionCanvas from "../components/Canvas/CloseTransactionCanvas/CloseTransactionCanvas";
 
 export default function Dashboard() {
-  const { loading, error, data } = useQuery(DASHBOARD_QUERY);
+  // const { loading, error, data } = useQuery(DASHBOARD_QUERY);
   const { isTrue: isEditCanvasShowing, toggle: editCanvasToggle } = useToggle();
   const { isTrue: isDeleteCanvasShowing, toggle: deleteCanvasToggle } =
     useToggle();
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-  if (loading) return <Layout />;
-  if (error) return <ErrorPage />;
+  // if (loading) return <Layout />;
+  // if (error) return <ErrorPage />;
+
+  const data = {
+    openPositions: [],
+    transactions: [],
+    dashboardStats: {
+      totalPnl: 0,
+      totalFees: 0,
+      monthlyPnl: 0,
+      winRate: 0,
+    },
+    pnlCompChart: [],
+    pnlChart: [],
+  }
 
   const { totalPnl, totalFees, monthlyPnl, winRate } = data.dashboardStats;
 
@@ -123,7 +136,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <RollTransactionCanvas
+      {/* <RollTransactionCanvas
         canvasToggle={editCanvasToggle}
         show={isEditCanvasShowing}
         transaction={selectedTransaction}
@@ -132,7 +145,7 @@ export default function Dashboard() {
         canvasToggle={deleteCanvasToggle}
         show={isDeleteCanvasShowing}
         transaction={selectedTransaction}
-      />
+      /> */}
     </Layout>
   );
 }

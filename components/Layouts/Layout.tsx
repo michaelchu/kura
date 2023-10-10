@@ -17,10 +17,10 @@ export default function Layout(props) {
         </GlobalContext.Provider>
         <Footer />
       </div>
-      <AddTransactionCanvas
+      {/* <AddTransactionCanvas
         canvasToggle={CanvasToggle}
         show={isCanvasShowing}
-      />
+      /> */}
       <Script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js" />
     </div>
   );

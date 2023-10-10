@@ -13,7 +13,7 @@ import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   // Add your protected routes here
-  const protectedRoutes = ["/dashboard", "/closed-positions", "/transactions"];
+  const protectedRoutes = [];
   const { getItem } = useStorage();
 
   const createApolloClient = () => {
